@@ -13,6 +13,12 @@ processDirectoryContents(CHAPTERS_DIRECTORY, 'Core Rules', 1);
 function processDirectoryContents(directory, extension, depth) {
     let nextDepth = depth + 1;
     let text = "";
+
+    /** Add the proper number of pound symbols for the correct header type. */
+    for (let i = 0; i < nextDepth; i++) text += "#";
+    // Add the folder's name as the header text.
+    text += ` ${extension}\n`;
+
     // Get a list of files and folders in the directory.
     let contents = fs.readdirSync(directory, 'utf8');
 
@@ -25,10 +31,6 @@ function processDirectoryContents(directory, extension, depth) {
 
     contents.forEach(item => {
         if (item.includes(".")) return;
-        /** Add the proper number of pound symbols for the correct header type. */
-        for (let i = 0; i < nextDepth; i++) text += "#";
-        // Add the folder's name as the header text.
-        text += ` ${item}\n`;
         // Add the text for any children of the item.
         text += processDirectoryContents(path.resolve(__dirname, directory, item), item, nextDepth) + "\n";
 
