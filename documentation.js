@@ -36,7 +36,7 @@ function processDirectoryContents(directory, extension, depth) {
 
     });
     // Save each section to documentation as html.
-    documentation[extension] = marked(text);
+    documentation[extension.toLowerCase()] = marked(text);
 
     // Return text for use by parent.
     return text;
