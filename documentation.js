@@ -7,17 +7,18 @@ const CHAPTERS_DIRECTORY = path.resolve(__dirname, './documentation');
 // Scaffold documention object.
 let documentation = {};
 // Process the directory contents.
-processDirectoryContents(CHAPTERS_DIRECTORY, 'Core Rules', 1);
+processDirectoryContents(CHAPTERS_DIRECTORY, 'Core Rules', '', 1);
 
 // To process the directory.
-function processDirectoryContents(directory, extension, depth) {
+function processDirectoryContents(directory, sectionName, extension, depth) {
     let nextDepth = depth + 1;
     let text = "";
-    extension = stripNumbering(extension);
+    sectionName = stripNumbering(sectionName);
+    let sectionExtension = extension ? `${extension}/${sectionName}` : sectionName;
     /** Add the proper number of pound symbols for the correct header type. */
     for (let i = 0; i < nextDepth; i++) text += "#";
     // Add the folder's name as the header text.
-    text += ` ${extension}\n`;
+    text += ` ${sectionName}\n`;
 
     // Get a list of files and folders in the directory.
     let contents = fs.readdirSync(directory, 'utf8');
@@ -32,18 +33,21 @@ function processDirectoryContents(directory, extension, depth) {
     contents.forEach(item => {
         if (item.includes(".")) return;
         // Add the text for any children of the item.
-        text += processDirectoryContents(path.resolve(__dirname, directory, item), item, nextDepth) + "\n";
+        text += processDirectoryContents(path.resolve(__dirname, directory, item), item, sectionExtension, nextDepth) + "\n";
 
     });
-    // Save each section to documentation as html.
-    documentation[extension.toLowerCase()] = marked(text);
-
+    // Get documentation as html.
+    let markedText = marked(text);
+    // Save markedText to documentation.<sectionName>
+    documentation[sectionName.toLowerCase()] = markedText;
+    // Save markedText to documentation.<sectionExtension>
+    documentation[sectionExtension.toLowerCase()] = markedText;
     // Return text for use by parent.
     return text;
 }
 
-function stripNumbering(extension) {
-    return extension.replace(/[^a-z ]/gi, "").trim();
+function stripNumbering(sectionName) {
+    return sectionName.replace(/[^a-z ]/gi, "").trim();
 }
 
 module.exports = documentation;
