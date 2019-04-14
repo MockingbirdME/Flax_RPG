@@ -46,11 +46,6 @@ class App extends Component {
         // If no location is provided assume a default.
         if (!location) location = 'Core Rules';
 
-        // If the location is multiple levels deep grab the last one.
-        // TODO update the documentation so this isn't needed.
-        location = location.split('/')
-        location = location[location.length -1]
-
         return this.state.documentation[location];
     }
 
