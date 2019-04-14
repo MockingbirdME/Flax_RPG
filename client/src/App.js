@@ -38,7 +38,7 @@ class App extends Component {
         // If documentation isn't loaded, return.
         if (typeof this.state.documentation === 'string') return;
         // Otherwise get the location.
-        let location = this.props.location.pathname;
+        let location = this.props.location.pathname.toLowerCase();
         // Remove the leading '/' from the location.
         location = location.slice(1);
         // If the location has a trailing '/' remove it too.
