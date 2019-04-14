@@ -11,14 +11,15 @@ library.add(faChevronDown, faChevronUp, faChevronRight)
 
 class App extends Component {
     state = {
-        data: null
+        documentation: null
     };
 
     componentDidMount() {
         // Call our fetch function below once the component mounts
         this.callDocumentationAPI()
         .then(res => {
-            this.setState({ documentation: res.DOCUMENTATION })
+            this.setState({ documentation: res.DOCUMENTATION });
+            console.log(this.state.documentation);
         })
         .catch(err => console.log(err));
     }
@@ -50,7 +51,7 @@ class App extends Component {
                 Learn React
                 </a>
                 </header>
-                <p className="App-intro">{this.state.data}</p>
+                <p className="App-intro">{JSON.stringify(this.state.documentation)}</p>
             </div>
         );
     }
