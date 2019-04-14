@@ -1,0 +1,35 @@
+.topNav {
+    background: dimgrey;
+    color: white;
+    margin-top: 0;
+    text-align: left;
+    padding-left: 20VW;
+    padding-right: 20VW;
+}
+
+.topNav__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+.topNav__list li {
+    cursor: pointer;
+    margin-right: 2rem;
+}
+
+.topNav__list a {
+    text-decoration: none;
+    color: white;
+    padding-right: .5rem;
+}
+
+.extendedNav__container {
+    height: 15rem;
+}
+
+.hidden {
+    display: none;
+}
