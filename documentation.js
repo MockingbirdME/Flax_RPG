@@ -13,7 +13,7 @@ processDirectoryContents(CHAPTERS_DIRECTORY, 'Core Rules', 1);
 function processDirectoryContents(directory, extension, depth) {
     let nextDepth = depth + 1;
     let text = "";
-
+    extension = stripNumbering(extension);
     /** Add the proper number of pound symbols for the correct header type. */
     for (let i = 0; i < nextDepth; i++) text += "#";
     // Add the folder's name as the header text.
@@ -40,6 +40,10 @@ function processDirectoryContents(directory, extension, depth) {
 
     // Return text for use by parent.
     return text;
+}
+
+function stripNumbering(extension) {
+    return extension.replace(/[^a-z ]/gi, "").trim();
 }
 
 module.exports = documentation;
