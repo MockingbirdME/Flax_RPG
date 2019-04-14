@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import Header from './header/header.js';
@@ -11,7 +12,7 @@ library.add(faChevronDown, faChevronUp, faChevronRight)
 
 class App extends Component {
     state = {
-        documentation: null
+        documentation: "Documentation did not load correctly."
     };
 
     componentDidMount() {
@@ -33,12 +34,31 @@ class App extends Component {
         return body;
     };
 
+    renderedDoc = () => {
+        // If documentation isn't loaded, return.
+        if (typeof this.state.documentation === 'string') return;
+        // Otherwise get the location.
+        let location = this.props.location.pathname;
+        // Remove the leading '/' from the location.
+        location = location.slice(1);
+        // If the location has a trailing '/' remove it too.
+        if (location[location.length-1] === '/') location = location.substring(0, location.length - 1);
+        // If no location is provided assume a default.
+        if (!location) location = 'Core Rules';
+
+        // If the location is multiple levels deep grab the last one.
+        // TODO update the documentation so this isn't needed.
+        location = location.split('/')
+        location = location[location.length -1]
+
+        return this.state.documentation[location];
+    }
+
     render() {
         return (
             <div className="App">
                 <Header />
                 <TopNav />
-
                 <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>test text.</p>
@@ -51,10 +71,10 @@ class App extends Component {
                 Learn React
                 </a>
                 </header>
-                <p className="App-intro">{JSON.stringify(this.state.documentation)}</p>
+                <div dangerouslySetInnerHTML={{__html: this.renderedDoc()}} />
             </div>
         );
     }
 }
 
-export default App;
+export default withRouter(App);
