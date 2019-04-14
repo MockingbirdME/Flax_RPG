@@ -28,14 +28,14 @@ class TopNav extends Component {
                         onHover={this.onHover}
                     />
                     <NavLink
-                        title="game_rules"
+                        title="game_rules_two"
                         onHover={this.onHover}
                      />
                 </ul>
                 <ExtendedNav
                     hoverDisplay={this.state.hoverDisplay}
                     onHover={this.onHover}
-                    title={"Place Holder Title"}
+                    title={"Game Rules"}
                 />
             </div>
         )

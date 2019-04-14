@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class ExtendedNav extends Component {
     render() {
-        let hoveredClass = this.props.hoverDisplay ? "extendedNav__container" : "hidden"
+        let hoveredClass = this.props.hoverDisplay === this.props.title ? "extendedNav__container" : "hidden"
 
         return (
             <div
