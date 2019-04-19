@@ -35,7 +35,7 @@ class TopNav extends Component {
                 <ExtendedNav
                     hoverDisplay={this.state.hoverDisplay}
                     onHover={this.onHover}
-                    title={"Game Rules"}
+                    title={"Core Rules"}
                 />
             </div>
         )
