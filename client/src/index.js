@@ -8,16 +8,21 @@ import Header from './header/header.js';
 import TopNav from './topNav/topNav.js';
 import App from './App';
 
+import { Provider } from "mobx-react";
+import rootStore from "./stores/rootStore.js";
+
 import './index.css';
 
 
 ReactDOM.render(
-    <Router basename={'/'}>
-        <Header />
-        <TopNav />
-        <Routes />
-        <App />
-    </Router>,
+    <Provider rootStore={rootStore}>
+        <Router basename={'/'}>
+            <Header />
+            <TopNav />
+            <Routes />
+            <App />
+        </Router>
+    </Provider>,
     document.getElementById('root')
 );
 
