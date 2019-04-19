@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import Routes from './routes.js'
 import Header from './header/header.js';
 import TopNav from './topNav/topNav.js';
-import App from './App';
 
 import { Provider } from "mobx-react";
 import rootStore from "./stores/rootStore.js";
@@ -20,7 +19,6 @@ ReactDOM.render(
             <Header />
             <TopNav />
             <Routes />
-            <App />
         </Router>
     </Provider>,
     document.getElementById('root')
