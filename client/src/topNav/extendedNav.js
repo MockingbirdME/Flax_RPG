@@ -4,10 +4,9 @@ import RulesTools from './rulesTools.js';
 
 class ExtendedNav extends Component {
     render() {
-        console.log(this.props.hoverDisplay, this.props.hoverDisplay === this.props.title);
         let hoveredClass = this.props.hoverDisplay === this.props.title ? "extendedNav__container" : "hidden";
         hoveredClass = 'extendedNav__container'
-        console.log('class:', hoveredClass);
+
         return (
             <div
                 className={hoveredClass}
