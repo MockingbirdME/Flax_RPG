@@ -38,9 +38,7 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
     });
     // Get documentation as html.
     let markedText = marked(text);
-    // Save markedText to documentation.<sectionName>
-    if (documentation[sectionName]) console.error(`Section Name: ${sectionName} has duplicate documentation.`);
-    documentation[sectionName.toLowerCase()] = markedText;
+
     // Save markedText to documentation.<sectionExtension>
     if (documentation[sectionExtension]) console.error(`Section Extension: ${sectionExtension} has duplicate documentation.`);
     documentation[sectionExtension.toLowerCase()] = markedText;
