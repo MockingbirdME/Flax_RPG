@@ -28,7 +28,7 @@ class TopNav extends Component {
                         onHover={this.onHover}
                     />
                     <NavLink
-                        title="game_rules_two"
+                        title="Other Rules"
                         onHover={this.onHover}
                      />
                 </ul>
