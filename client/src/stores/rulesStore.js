@@ -6,6 +6,7 @@ class RulesStore {
         this.callDocumentationAPI();
     }
     rawDocs = {};
+    chapters = [];
     test = "THIS IS A TEST STRING."
 
     // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
@@ -18,6 +19,14 @@ class RulesStore {
         this.rawDocs = body.DOCUMENTATION;
         this.chapterList = this.parseChapters(body.DOCUMENTATION)
     };
+
+    parseChapters = documention => {
+        return Object.keys(documention)
+        .filter(key => key.split('/').length === 2)
+        .map(key => key.split('/')[1].split(" ")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
+    )
+}
 
 }
 
