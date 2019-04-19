@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import Header from './header/header.js';
-import TopNav from './topNav/topNav.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -52,8 +50,6 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Header />
-                <TopNav />
                 <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>test text.</p>
