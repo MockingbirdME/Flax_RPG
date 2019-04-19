@@ -57,11 +57,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props);
-        console.log(this.props.rootStore); console.log(this.props.rootStore.rulesStore.rawDocs);
-        console.log(Object.keys(this.props.rootStore.rulesStore.rawDocs));
-        const test = this.props.rootStore.rulesStore.test || "";
-        console.log(test);
         return (
             <div className="App">
                 <header className="App-header">
