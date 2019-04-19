@@ -6,7 +6,7 @@ class RulesStore {
         this.callDocumentationAPI();
     }
     rawDocs = {};
-    chapters = [];
+    chapterList = [];
     test = "THIS IS A TEST STRING."
 
     // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
@@ -31,6 +31,7 @@ class RulesStore {
 }
 
 export default decorate(RulesStore, {
+    chapterList: observable,
     rawDocs: observable,
     test: observable
 });
