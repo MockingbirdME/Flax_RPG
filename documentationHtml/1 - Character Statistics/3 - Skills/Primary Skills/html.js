@@ -1,0 +1,1 @@
+module.exports = "<p>Primary skills are broad categories of learned or trained abilities a character has accumulated. A character's rank in a primary skill is used to help determine the level of advantage added to a skill check; some attributes are also affected by the number of ranks a character possesses in certain primary skills.</p>";
