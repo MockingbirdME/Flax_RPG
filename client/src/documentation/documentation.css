@@ -3,3 +3,13 @@
     max-width: 60vw;
     margin: auto;
 }
+
+.skills_list h4{
+    margin-bottom: 0;
+}
+.skills_list p {
+    margin: .5rem 0 0;
+}
+.skills_list ul {
+    margin: 0;
+}
