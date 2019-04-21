@@ -1,6 +1,6 @@
 let data = require('../../../../data/skills.js');
 
-let html = `<div>`;
+let html = `<div class="rules_list">`;
 
 for (let skillKey in data) {
     let skill = data[skillKey];
