@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // The parent directory for all documentaiton to be processed.
-const CHAPTERS_DIRECTORY = path.resolve(__dirname, './documentationHtml');
+const CHAPTERS_DIRECTORY = path.resolve(__dirname, './documentation');
 // Scaffold documention object.
 let documentation = {};
 // Process the directory contents.
