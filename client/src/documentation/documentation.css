@@ -4,12 +4,15 @@
     margin: auto;
 }
 
-.skills_list h4{
+.rules_list h4{
     margin-bottom: 0;
 }
-.skills_list p {
+.rules_list h3{
+    margin-bottom: .5rem;
+}
+.rules_list p {
     margin: .5rem 0 0;
 }
-.skills_list ul {
+.rules_list ul {
     margin: 0;
 }
