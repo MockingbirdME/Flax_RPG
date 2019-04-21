@@ -4,7 +4,7 @@ let html = `<div>`;
 
 for (let skillKey in data) {
     let skill = data[skillKey];
-    html += `<div className="skillList__${skillKey}"><h4>${skill.displayName}</h4><p>${skill.description}</p><p><b>Secondary Skills:</b></p><ul>`;
+    html += `<div class="skillList__${skillKey}"><h4>${skill.displayName}</h4><p>${skill.description}</p><p><b>Secondary Skills:</b></p><ul>`;
 
     for (let secondarySkillKey in skill.secondarySkills) {
         let secondarySkill = skill.secondarySkills[secondarySkillKey];
@@ -12,7 +12,7 @@ for (let skillKey in data) {
             html += `<li><b>${secondarySkill.displayName} - </b>${secondarySkill.description}</li>`;
         }
     }
-    html += `</ul>`;
+    html += `</ul></div>`;
 }
 
 
