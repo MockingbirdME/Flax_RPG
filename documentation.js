@@ -6,7 +6,7 @@ const CHAPTERS_DIRECTORY = path.resolve(__dirname, './documentation');
 // Scaffold documention object.
 let documentation = {};
 // Process the directory contents.
-processDirectoryContents(CHAPTERS_DIRECTORY, 'Core Rules', '', 1);
+processDirectoryContents(CHAPTERS_DIRECTORY, 'Core Rules', '', 0);
 
 // To process the directory.
 function processDirectoryContents(directory, sectionName, extension, depth) {
@@ -20,7 +20,7 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
 
 
     /** Add the proper header with the section title. */
-    html += `<h${depth}>${sectionName}</h${depth}>`;
+    if (depth) html += `<h${depth}>${sectionName}</h${depth}>`;
 
 
     // Get a list of files and folders in the directory.
@@ -51,5 +51,5 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
 function stripNumbering(sectionName) {
     return sectionName.replace(/[^a-z ]/gi, "").trim();
 }
-console.log(documentation);
+
 module.exports = documentation;
