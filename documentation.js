@@ -14,7 +14,7 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
 
     sectionName = stripNumbering(sectionName);
 
-    let html = `<div className="section__${sectionName.replace(" ", "_").toLowerCase()}">`;
+    let html = `<div class="${sectionName.replace(" ", "_").toLowerCase()}">`;
 
     let sectionExtension = extension ? `${extension}/${sectionName}` : sectionName;
 
