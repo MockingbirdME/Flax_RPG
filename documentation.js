@@ -16,7 +16,7 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
     sectionName = stripNumbering(sectionName);
     let sectionExtension = extension ? `${extension}/${sectionName}` : sectionName;
     /** Add the proper number of pound symbols for the correct header type. */
-    for (let i = 0; i < nextDepth; i++) text += "#";
+    for (let i = 1; i < nextDepth; i++) text += "#";
     // Add the folder's name as the header text.
     text += ` ${sectionName}\n`;
 
