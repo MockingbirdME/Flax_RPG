@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class NavLink extends Component {
     render() {
@@ -8,7 +7,6 @@ class NavLink extends Component {
         return (
             <li onMouseOver={() => this.props.onHover(title)}
               onMouseOut={() => this.props.onHover(null)}><a href={link}>{title}</a>
-              <FontAwesomeIcon icon="chevron-down" />
             </li>
         )
     }
