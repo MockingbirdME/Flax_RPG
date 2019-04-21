@@ -20,7 +20,7 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
 
 
     /** Add the proper header with the section title. */
-    if (depth) html += `<h${depth}>${sectionName}</h${depth}>`;
+    if (depth) html += `<h${depth}><a href="/${sectionExtension}">${sectionName}</a></h${depth}>`;
 
 
     // Get a list of files and folders in the directory.
