@@ -47,6 +47,7 @@
     margin-left: -.5rem;
     padding: .5rem;
     width: 10rem;
+    border-radius: 20%
 }
 
 .chapterLink:hover {
@@ -67,6 +68,26 @@
 }
 
 .rulesToolsContainer {
-    background: blue;
     width: 60%;
+}
+
+.toolButton {
+    cursor: pointer;
+    width: 45%;
+    min-width: 10rem;
+    display: inline-block;
+    margin: 2%;
+    text-align: center;
+    border: solid 2px dimgray;
+    border-radius: 20%
+}
+
+.toolButton a{
+    text-decoration: none;
+    color: white;
+}
+
+.toolButton:hover {
+    background-color: midnightblue;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
 }
