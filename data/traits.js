@@ -388,169 +388,169 @@ let traitsData = {
         keywords: ["Heroic"],
         description: "When the character spends their reaction to grant disadvantage to one or more attacks by their dueling opponent they gain one level of advantage on their next eligible attack against their dueling opponent before the end of their next turn."
     },
-    traitName: {
-        displayName: "name",
+    fastReflexes: {
+        displayName: "Fast Reflexes",
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
         keywords: [],
-        description: "text"
+        description: "For each time a character has this trait they gain a +1 bonus to their initiative."
     },
-    traitName: {
-        displayName: "name",
+    fueledByPain: {
+        displayName: "Fueled by Pain",
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
         keywords: [],
-        description: "text"
+        description: "Each time the character suffers at least one wound, they recover one stamina."
     },
-    traitName: {
-        displayName: "name",
+    fueledByPainAdvanced: {
+        displayName: "Fueled by Pain, Advanced",
+        type: "Combat",
+        requirements: ["Fueled by Pain"],
+        requirementsDescription: "Fueled by Pain",
+        keywords: ["Advanced"],
+        description: "Increase the number of stamina the character recovers from the Fueled by Pain trait to 2."
+    },
+    fueledByPainHeroic: {
+        displayName: "Fueled by Pain",
+        type: "Combat",
+        requirements: ["Fueled by Pain, Advanced"],
+        requirementsDescription: "Advanced Fueled by Pain",
+        keywords: ["Heroic"],
+        description: "Increase the number of wounds the character recovers from the Fueled by Pain trait to 2 + the character's body."
+    },
+    hardToKill: {
+        displayName: "Hard to Kill",
+        type: "Combat",
+        requirements: [],
+        requirementsDescription: "",
+        keywords: ["Heroic"],
+        description: "Once per scene the character may spend their reaction to suffer no damage from one attack. The controlling player may decide to use this ability after they know the damage the character would take."
+    },
+    mobileCombatant: {
+        displayName: "Mobile Combatant",
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
         keywords: [],
-        description: "text"
+        description: "The character gains a mobile combat defense bonus against free attacks provided they have not taken the disengage action this turn, this bonus is equal to their melee defense bonus."
     },
-    traitName: {
-        displayName: "name",
+    mobileCombatantAdvanced: {
+        displayName: "Mobile Combatant, Advanced",
+        type: "Combat",
+        requirements: ["Mobile Combatant"],
+        requirementsDescription: "Mobile Combatant",
+        keywords: ["Advanced"],
+        description: "The character gains their mobile combatant defense bonus to free attacks even if they've taken the disengage action this turn."
+    },
+    mobileCombatantHeroic: {
+        displayName: "Mobile Combatant, Heroic",
+        type: "Combat",
+        requirements: ["Mobile Combatant, Advanced"],
+        requirementsDescription: "Advanced Mobile Combatant",
+        keywords: ["Heroic"],
+        description: "The first free attack the character provokes each turn automatically misses."
+    },
+    mobileCombatantEpic: {
+        displayName: "Mobile Combatant, Epic",
+        type: "Combat",
+        requirements: ["Mobile Combatant, Heroic"],
+        requirementsDescription: "Heroic Mobile Combatant",
+        keywords: ["Epic"],
+        description: "The character no longer provokes free attacks."
+    },
+    multiAttack: {
+        displayName: "Multi-Attack",
+        type: "Combat",
+        requirements: ["custom"],
+        requirementsDescription: "Any _Heroic_ combat trait, at least rank 2 in *Melee Combat*, *Ranged Combat*, or *Magical Aptitude*.",
+        keywords: ["Epic"],
+        description: "The first time the character would receive disadvantage to an attack skill check as a result of their multi-attack penalty reduce that penalty by one."
+    },
+    multiAttackMeleeExpert: {
+        displayName: "Multi-Attack, Melee Expert",
+        type: "Combat",
+        requirements: ["custom"],
+        requirementsDescription: "Multi-Attack, at least rank 3 in *Melee Combat*.",
+        keywords: ["Epic"],
+        description: "Each time the character would receive disadvantage to a melee attack skill check as a result of their multi-attack penalty reduce that penalty by one."
+    },
+    multiAttackRangedExpert: {
+        displayName: "Multi-Attack, Ranged Expert",
+        type: "Combat",
+        requirements: ["custom"],
+        requirementsDescription: "Multi-Attack, at least rank 3 in *Ranged Combat*.",
+        keywords: ["Epic"],
+        description: "Each time the character would receive disadvantage to a ranged attack skill check as a result of their multi-attack penalty reduce that penalty by one."
+    },
+    pushTheBody: {
+        displayName: "Push the Body",
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
         keywords: [],
-        description: "text"
+        description: "Once per turn the character may recover up to 3 *stamina* and suffer one *fatigue*."
     },
-    traitName: {
-        displayName: "name",
+    pushTheBodyAdvanced: {
+        displayName: "Push the Body, Advanced",
+        type: "Combat",
+        requirements: ["Push the Body"],
+        requirementsDescription: "Push the Body",
+        keywords: ["Advanced"],
+        description: "Increase the stamina regained when the character uses Push the Body by their body stat."
+    },
+    quickDraw: {
+        displayName: "Quick Draw",
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
         keywords: [],
-        description: "text"
+        description: "The first *ready/stow item* action the character takes each turn has an action point cost of 0."
     },
-    traitName: {
-        displayName: "name",
+    quickDrawAdvanced: {
+        displayName: "Quick Draw, Advanced",
+        type: "Combat",
+        requirements: ["Quick Draw"],
+        requirementsDescription: "Quick Draw",
+        keywords: ["Advanced"],
+        description: "The first two *ready/stow item* actions the character takes each turn has an action point cost of 0."
+    },
+    quickDrawHeroic: {
+        displayName: "Quick Draw",
+        type: "Combat",
+        requirements: ["Quick Draw, Advanced"],
+        requirementsDescription: "Advanced Quick Draw",
+        keywords: ["Heroic"],
+        description: "The character may ready or stow the weapon used in any weapon attack they make."
+    },
+    twoWeaponFighting: {
+        displayName: "Two Weapon Fighting",
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
         keywords: [],
-        description: "text"
+        description: "The character does not suffer the normal level of disadvantage when performing an attack with their off-hand and they may make *Off-Hand Attack* actions with *one-handed* weapons but gain a level of disadvantage when doing so."
+    },
+    twoWeaponFightingAdvanced: {
+        displayName: "Two Weapon Fighting, Advanced",
+        type: "Combat",
+        requirements: ["Two Weapon Fighting"],
+        requirementsDescription: "Two Weapon Fighting",
+        keywords: ["Advanced"],
+        description: "The character does not suffer disadvantage for performing *Off-Hand Attack* actions with *one-handed* weapons and may make them with *hand-and-a-half* weapons but gain a level of disadvantage when doing so, additionally if they have already taken an attack action on their turn with their primary hand or a weapon wielded in it, the first *Off-Hand Attack* action they make on this turn does not cost an action point."
+    },
+    twoWeaponFightingHeroic: {
+        displayName: "Two Weapon Fighting, Heroic",
+        type: "Combat",
+        requirements: ["Two Weapon Fighting, Advanced"],
+        requirementsDescription: "Advanced Two Weapon Fighting",
+        keywords: ["Heroic"],
+        description: "If the character has already taken an attack action on their turn with their primary hand or a weapon wielded in it, the first *Off-Hand Attack* action they make on this turn may be treated as a *Bash*, *Disarm*, *Distracting Attack*, *Power Attack*, *Reckless Attack*, *Throw*, or *Loose, Shoot, Fire* action performed with the character's off-hand or ready weapon wielded in their off-hand; this attack costs an additional stamina and must otherwise be eligible for the attack type being made."
     },
     traitName: {
         displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
-    },
-    traitName: {
-        displayName: "name",
-        type: "Combat",
+        type: "",
         requirements: [],
         requirementsDescription: "",
         keywords: [],
