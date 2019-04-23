@@ -12,8 +12,11 @@ class ExtendedNav extends Component {
                 onMouseOver={() => this.props.onHover(this.props.title)}
                 onMouseOut={() => this.props.onHover(null)}
             >
-                <ChapterList />
-                <RulesTools />
+                <div className="extendedNav__items__container">
+                    <ChapterList />
+                    <RulesTools />
+                </div>
+
             </div>
         )
     }
