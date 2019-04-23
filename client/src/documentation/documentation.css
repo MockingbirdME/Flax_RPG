@@ -1,7 +1,22 @@
 
+.coreRules__Container {
+    width: 80vw;
+    margin: 0 10VW;
+    display: inline-flex;
+}
+
+.sideBar {
+    top: 2rem;
+    position: sticky;
+    border: 1px solid black;
+    margin: 2rem 2rem 2rem 0;
+    min-width: calc(40VW - 20rem);
+    height: 25rem;
+    text-align: center;
+}
+
 .coreRules {
-    max-width: 80vw;
-    margin: auto;
+    max-width: 40rem;
 }
 
 .rules_list h4{
