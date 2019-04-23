@@ -15,13 +15,12 @@ class ChapterList extends Component {
         this.props.rootStore.rulesStore.chapterList.forEach((title, index) => {
             let link = `/core rules/${title}`;
             let returnValue = (
-                <div
-                    key={title}
-                    className="chapterLink"
-                    onClick={() => this.props.onHover(null)}
-                >
-                    <Link to={link} >{title}</Link>
-                </div>
+                <Link to={link} key={title}
+                className="chapterLink"
+                onClick={() => this.props.onHover(null)}>
+
+                    {title}
+                </Link>
             )
             if (index < chapterNumberCutOff)  chaptersFirstHalf.push(returnValue);
             else chaptersSecondHalf.push(returnValue);
