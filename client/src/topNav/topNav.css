@@ -32,6 +32,11 @@
     padding: 0 20VW;
 }
 
+.extendedNav__items__container {
+    display: inline-flex;
+    width: 100%;
+}
+
 .hidden {
     display: none;
 }
@@ -57,4 +62,11 @@
 
 .chapterSectionsContainer {
     display: inline-flex;
+    width: 40%;
+    min-width: 21rem;
+}
+
+.rulesToolsContainer {
+    background: blue;
+    width: 60%;
 }
