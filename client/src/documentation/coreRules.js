@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import './documentation.css';
+import SideBar from './sideBar.js';
 
 import { observer, inject } from "mobx-react";
 
@@ -20,8 +21,9 @@ class CoreRules extends Component {
 
     render() {
         return (
-            <div className="coreRules">
-                <div dangerouslySetInnerHTML={{__html: this.renderedDoc()}} />
+            <div className="coreRules__Container">
+                <SideBar />
+                <div className="coreRules" dangerouslySetInnerHTML={{__html: this.renderedDoc()}} />
             </div>
         );
     }
