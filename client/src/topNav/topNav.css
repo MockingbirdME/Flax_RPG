@@ -54,3 +54,7 @@
     color: white;
     padding-right: .5rem;
 }
+
+.chapterSectionsContainer {
+    display: inline-flex;
+}
