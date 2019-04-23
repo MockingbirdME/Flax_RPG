@@ -8,32 +8,32 @@ class RulesTools extends Component {
             <div className="rulesToolsContainer">
                 <ToolButton
                     onHover={this.props.onHover}
-                    name="TEST 1"
+                    name="Strains"
                     link="/test1"
                 />
                 <ToolButton
                     onHover={this.props.onHover}
-                    name="TEST 2"
+                    name="Traits"
                     link="/test2"
                 />
                 <ToolButton
                     onHover={this.props.onHover}
-                    name="TEST 3"
+                    name="Skill Checks"
                     link="/test3"
                 />
                 <ToolButton
                     onHover={this.props.onHover}
-                    name="TEST 4"
+                    name="Combat Actions"
                     link=""
                 />
                 <ToolButton
                     onHover={this.props.onHover}
-                    name="TEST 4"
+                    name="Equipment"
                     link=""
                 />
                 <ToolButton
                     onHover={this.props.onHover}
-                    name="TEST 4"
+                    name="Arcane Powers"
                     link=""
                 />
             </div>
