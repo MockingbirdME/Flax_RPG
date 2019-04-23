@@ -8,7 +8,7 @@ class ToolButton extends Component {
     render() {
 
         return (
-            <div className="toolButton" onClick={this.onClick}>
+            <div className="toolButton" onClick={() => this.props.onHover(this.props.title)}>
                 <Link to={this.props.link}>
                     <h3>
                         {this.props.name}
