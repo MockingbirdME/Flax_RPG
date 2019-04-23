@@ -16,7 +16,7 @@ class ChapterList extends Component {
             let link = `/core rules/${title}`;
             let returnValue = (
                 <Link to={link} key={title}
-                className="chapterLink"
+                className="chapterLink hoverableNav"
                 onClick={() => this.props.onHover(null)}>
 
                     {title}

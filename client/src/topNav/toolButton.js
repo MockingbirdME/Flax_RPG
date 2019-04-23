@@ -8,13 +8,11 @@ class ToolButton extends Component {
     render() {
 
         return (
-            <div className="toolButton" onClick={() => this.props.onHover(this.props.title)}>
-                <Link to={this.props.link}>
+                <Link to={this.props.link} className="toolButton hoverableNav" onClick={() => this.props.onHover(this.props.title)}>
                     <h3>
                         {this.props.name}
                     </h3>
                 </Link>
-            </div>
         )
     }
 }

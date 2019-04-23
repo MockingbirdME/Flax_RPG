@@ -26,6 +26,16 @@ class RulesTools extends Component {
                     name="TEST 4"
                     link=""
                 />
+                <ToolButton
+                    onHover={this.props.onHover}
+                    name="TEST 4"
+                    link=""
+                />
+                <ToolButton
+                    onHover={this.props.onHover}
+                    name="TEST 4"
+                    link=""
+                />
             </div>
         )
     }

@@ -8,7 +8,7 @@
     display: flex;
     list-style: none;
     margin: 0;
-    padding: .3rem 20VW;
+    padding: .3rem 10VW;
     font-size: 1.1rem;
     text-align: left;
 }
@@ -29,7 +29,7 @@
     background: #26282a;
     border-top: solid grey 1px;
     text-align: left;
-    padding: 0 20VW;
+    padding: 0 10VW;
 }
 
 .extendedNav__items__container {
@@ -54,38 +54,30 @@
     padding-right: .5rem;
 }
 
-.chapterLink:hover {
+.hoverableNav:hover {
     background-color: midnightblue;
     box-shadow: inset 0px 0px 5px #c1c1c1;
 }
 
 .chapterSectionsContainer {
     display: inline-flex;
-    width: 40%;
     min-width: 21rem;
 }
 
 .rulesToolsContainer {
-    width: 60%;
+    max-width: 50rem;
+    min-width: 25rem;
 }
 
 .toolButton {
+    text-decoration: none;
+    color: white;
     cursor: pointer;
-    width: 45%;
+    width: 30%;
     min-width: 10rem;
     display: inline-block;
-    margin: 2%;
+    margin: 1%;
     text-align: center;
     border: solid 2px dimgray;
     border-radius: 20%
-}
-
-.toolButton a{
-    text-decoration: none;
-    color: white;
-}
-
-.toolButton:hover {
-    background-color: midnightblue;
-    box-shadow: inset 0px 0px 5px #c1c1c1;
 }
