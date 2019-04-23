@@ -49,7 +49,7 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
 }
 
 function stripNumbering(sectionName) {
-    return sectionName.replace(/[^a-z ]/gi, "").trim();
+    return sectionName.replace(/[^a-z &]/gi, "").trim();
 }
 
 module.exports = documentation;
