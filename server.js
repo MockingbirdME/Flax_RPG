@@ -1,4 +1,5 @@
 const DOCUMENTATION = require('./documentation.js');
+const Traits = require('./data/traits.js');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,4 +15,8 @@ app.get('/express_backend', (req, res) => {
 
 app.get('/documentation', (req, res) => {
     res.send({DOCUMENTATION});
+});
+
+app.get('/traits', (req, res) => {
+    res.send({Traits});
 });
