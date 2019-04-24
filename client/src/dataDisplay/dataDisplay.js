@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom';
 import './dataDisplay.css';
 import DataDisplayTitleSection from './dataDisplayTitleSection.js';
 import DataDisplayFilterSection from './dataDisplayFilterSection.js';
+import DataDisplayListSection from './dataDisplayListSection.js';
 
 import { observer, inject } from "mobx-react";
 
@@ -20,8 +21,7 @@ class CoreRules extends Component {
                     nameSingular={this.props.nameSingular}
                     namePlural={this.props.namePlural}
                 />
-                <div className="dataDisplay__list__Container">
-                </div>
+            <DataDisplayListSection />
             </div>
         );
     }
