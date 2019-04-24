@@ -29,12 +29,36 @@
     margin: .2rem;
 }
 
-.sideBar {
-    top: 2rem;
-    position: sticky;
-    border: 1px solid black;
-    margin: 2rem 2rem 2rem 0;
-    min-width: calc(40VW - 20rem);
-    height: 25rem;
+.dataDisplay__filter__container {
+    display: inline-flex;
+    background: darkgrey;
+    width: 100%;
+}
+.dataDisplay__filter__container > div {
+    width: 25%;
+    margin: 1rem;
+}
+.dataDisplay__filter__container > div > h4,h5 {
+    margin: 0;
+}
+
+.dataDisplay__filter__name__input {
+    height: 3rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+    margin-top: .5rem;
+}
+
+.dataDisplay__filter__button {
+    background: #1c1d1e;
+    color: white;
+    cursor: pointer;
+    width: 8rem;
     text-align: center;
+    border-radius: 20%;
+    padding: 1rem;
+}
+
+.dataDisplay__filter__button * {
+    margin: 0;
 }
