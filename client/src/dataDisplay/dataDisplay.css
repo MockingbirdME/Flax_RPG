@@ -1,0 +1,40 @@
+
+.dataDisplay__container {
+    width: 80vw;
+    margin: auto;
+
+}
+
+.dataDisplay__title__container {
+    border-bottom: 3px black solid;
+    padding: 2rem 0;
+    height: 2rem;
+}
+.dataDisplay__title {
+    float: left;
+    margin: 0;
+}
+
+.dataDisplay__docLink {
+    float: right;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    border: solid 2px dimgray;
+    border-radius: 20%;
+    margin: 1rem;
+}
+
+.dataDisplay__docLink * {
+    margin: .2rem;
+}
+
+.sideBar {
+    top: 2rem;
+    position: sticky;
+    border: 1px solid black;
+    margin: 2rem 2rem 2rem 0;
+    min-width: calc(40VW - 20rem);
+    height: 25rem;
+    text-align: center;
+}
