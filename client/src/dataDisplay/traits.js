@@ -7,6 +7,7 @@ class Traits extends Component {
         return (
             <DataDisplay
                 name="Traits"
+                rulesLink="/core rules/traits"
             />
         )
     }
