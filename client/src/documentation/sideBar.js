@@ -6,7 +6,7 @@ class SideBar extends Component {
 
         return (
             <div className="sideBar">
-            <div style={{"margin-top": "50%"}}>
+            <div style={{"marginTop": "50%"}}>
             <p>Nothing Here Yet,</p>
             <p>Content Coming Soon.</p>
             </div>
