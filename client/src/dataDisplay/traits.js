@@ -6,7 +6,8 @@ class Traits extends Component {
 
         return (
             <DataDisplay
-                name="Traits"
+                namePlural="Traits"
+                nameSingular="Trait"
                 rulesLink="/core rules/traits"
             />
         )
