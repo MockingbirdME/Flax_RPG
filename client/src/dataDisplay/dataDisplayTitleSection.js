@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-class Traits extends Component {
+class DataDisplayTitleSection extends Component {
     render() {
 
         return (
@@ -15,4 +15,4 @@ class Traits extends Component {
     }
 }
 
-export default Traits;
+export default DataDisplayTitleSection;
