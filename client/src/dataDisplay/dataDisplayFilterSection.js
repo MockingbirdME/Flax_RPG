@@ -12,6 +12,9 @@ class DataDisplayFilterSection extends Component {
     onChange(value) {
         this.setState({searchedName: value});
     }
+    resetFilters() {
+        this.setState({searchedName: ""});
+    }
     render() {
 
         return (
@@ -36,6 +39,12 @@ class DataDisplayFilterSection extends Component {
                     <div  className="dataDisplay__filter__button">
                         <h5>Filter {this.props.namePlural}</h5>
                     </div>
+                    <h6
+                    className="resetFilters__button"
+                    onClick={ev => this.resetFilters()}
+                    >
+                    Reset All Filters
+                    </h6>
                 </div>
             </div>
         )
