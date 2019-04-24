@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {withRouter, Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import './dataDisplay.css';
 import DataDisplayTitleSection from './dataDisplayTitleSection.js';
 import DataDisplayFilterSection from './dataDisplayFilterSection.js';

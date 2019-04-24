@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 
 class DataDisplayFilterSection extends Component {
     constructor(props) {
