@@ -20,10 +20,10 @@
     width: 30%;
 }
 .dataDisplay__list__table__row *:nth-of-type(2) {
-    width: 10%;
+    width: 12%;
 }
 .dataDisplay__list__table__row *:nth-of-type(3) {
-    width: 15%;
+    width: 13%;
 }
 .dataDisplay__list__table__row *:nth-of-type(4) {
     width: 40%;
@@ -110,7 +110,7 @@
 }
 
 .resetFilters__button {
-    padding-left: 1.5rem;
+    padding: .5rem 0 0 1.5rem;
     color: #660066;
     cursor: pointer;
 }
