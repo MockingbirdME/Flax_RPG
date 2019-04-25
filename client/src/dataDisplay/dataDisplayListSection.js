@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import { observer, inject } from "mobx-react";
 import DataDisplayListItem from './dataDisplayListItem.js';
 
 
-const DataDisplayListSection = inject("rootStore")(observer(
 class DataDisplayListSection extends Component {
     constructor(props) {
         super(props);
@@ -11,21 +9,32 @@ class DataDisplayListSection extends Component {
          };
     }
 
-    getTraits = () => {
-        if (this.props.rootStore.traitsStore.traits) return this.props.rootStore.traitsStore.traits;
+    sorter(a, b) {
+        let data = this.props.data;
+        let stringA = data[a].displayName.toLowerCase();
+        let stringB = data[b].displayName.toLowerCase();
+
+        if (stringA < stringB) {
+          return -1;
+        }
+        if (stringA > stringB) {
+          return 1;
+        }
+      return 0;
     }
 
     render() {
         let list = () => {
-            let traits = this.getTraits();
-            if (!traits) return "test";
+            let data = this.props.data;
+            if (!data) return "test";
 
-            let listHtml = Object.keys(traits);
+            let listHtml = Object.keys(data);
+            listHtml.sort((a, b) => this.sorter(a, b));
             listHtml = listHtml.map(traitKey => {
                return (
                    <DataDisplayListItem
                        key={traitKey}
-                       trait={traits[traitKey]}
+                       trait={data[traitKey]}
                    />
                );
 
@@ -46,6 +55,5 @@ class DataDisplayListSection extends Component {
         )
     }
 }
-))
 
 export default DataDisplayListSection;
