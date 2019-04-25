@@ -6,7 +6,7 @@
 }
 
 .dataDisplay__title__container {
-    border-bottom: 3px black solid;
+    border-bottom: 3px #660066 solid;
     padding: 2rem 0;
     height: 2rem;
 }
@@ -31,6 +31,7 @@
 .dataDisplay__list__table__row *:nth-of-type(5) {
     width: 5%;
     cursor: pointer;
+    color: #660066;
 }
 .dataDisplay__list__header {
     margin-left: 1rem;
@@ -44,7 +45,7 @@
     list-style: none;
     padding: .5rem;
     margin: .5rem;
-    border: 1px solid black;
+    border: 1px solid #660066;
     border-radius: 20%;
 }
 .dataDisplay__list__item div {
@@ -52,15 +53,22 @@
     text-align: left;
 }
 
+.expandedListDisplay {
+    border: 1px solid #660066;
+    border-top: none;
+    padding: 1rem 3rem;
+    margin: -1rem .5rem 0;
+}
+
 
 .dataDisplay__docLink {
     float: right;
     text-decoration: none;
-    color: black;
+    color: white;
+    background-color: #1c1d1e;
     cursor: pointer;
-    border: solid 2px dimgray;
     border-radius: 20%;
-    margin: 1rem;
+    margin: -1.5rem 0rem;
 }
 
 .dataDisplay__docLink * {
@@ -88,7 +96,7 @@
 }
 
 .dataDisplay__filter__button {
-    background: #1c1d1e;
+    background: #660066;;
     color: white;
     cursor: pointer;
     width: 8rem;
@@ -102,5 +110,7 @@
 }
 
 .resetFilters__button {
+    padding-left: 1.5rem;
+    color: #660066;
     cursor: pointer;
 }

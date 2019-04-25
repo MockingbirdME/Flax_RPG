@@ -17,17 +17,24 @@ class DataDisplayListItem extends Component {
     }
 
     render() {
-
+        let expandedClass = this.state.expanded ? "expandedListDisplay" : "hidden";
         let plusMinus = this.state.expanded ? (faMinus) : (faPlus);
+        let expandedContent = this.props.trait.description || "";
         return (
-            <li
-                className="dataDisplay__list__table__row dataDisplay__list__item">
-                <div>{this.props.trait.displayName}</div>
-                <div>{this.props.trait.type || "N/A"}</div>
-                <div>{this.props.trait.keywords}</div>
-                <div>{this.props.trait.requirementsDescription || "None"}</div>
-                <div onClick={ev => this.toggleExpanded()}><FontAwesomeIcon icon={plusMinus} /></div>
-            </li>
+            <div>
+                <li
+                    className="dataDisplay__list__table__row dataDisplay__list__item">
+                    <div>{this.props.trait.displayName}</div>
+                    <div>{this.props.trait.type || "N/A"}</div>
+                    <div>{this.props.trait.keywords}</div>
+                    <div>{this.props.trait.requirementsDescription || "None"}</div>
+                    <div onClick={ev => this.toggleExpanded()}><FontAwesomeIcon icon={plusMinus} /></div>
+                </li>
+                <div className={expandedClass}
+                >
+                    <p dangerouslySetInnerHTML={{__html: expandedContent}} />
+                </div>
+            </div>
         )
     }
 }
