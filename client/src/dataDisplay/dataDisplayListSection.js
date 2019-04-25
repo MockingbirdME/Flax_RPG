@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import { observer, inject } from "mobx-react";
+import DataDisplayListItem from './dataDisplayListItem.js';
+
 
 const DataDisplayListSection = inject("rootStore")(observer(
 class DataDisplayListSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            traits: null
          };
     }
 
@@ -14,33 +15,18 @@ class DataDisplayListSection extends Component {
         if (this.props.rootStore.traitsStore.traits) return this.props.rootStore.traitsStore.traits;
     }
 
-    componentWillMount() {
-        console.log(this.props);
-        if (this.props.rootStore.traitsStore&& this.props.rootStore.traitsStore.traits) this.setState({traits: this.props.rootStore.traitsStore.traits});
-    }
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-    }
-
-
-
-
     render() {
         let list = () => {
-            let test = this.getTraits();
-            if (!test) return "test";
+            let traits = this.getTraits();
+            if (!traits) return "test";
 
-            let listHtml = Object.keys(test);
+            let listHtml = Object.keys(traits);
             listHtml = listHtml.map(traitKey => {
-               let trait = test[traitKey];
                return (
-                   <li key={traitKey}
-                       className="dataDisplay__list__table__row">
-                       <div>{trait.displayName}</div>
-                       <div>{trait.type}</div>
-                       <div>{trait.keywords}</div>
-                       <div>{trait.requirementsDescription}</div>
-                   </li>
+                   <DataDisplayListItem
+                       key={traitKey}
+                       trait={traits[traitKey]}
+                   />
                );
 
            });
@@ -49,7 +35,7 @@ class DataDisplayListSection extends Component {
 
         return (
             <div className="dataDisplay__list__container">
-                <div className="dataDisplay__list__table__header">
+                <div className="dataDisplay__list__table__row dataDisplay__list__header">
                     <h5>Name</h5>
                     <h5>Type</h5>
                     <h5>Keywords</h5>

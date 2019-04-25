@@ -14,42 +14,44 @@
     float: left;
     margin: 0;
 }
-.dataDisplay__list__table__header {
+
+/** TODO make these variable based on view width */
+.dataDisplay__list__table__row *:first-of-type {
+    width: 30%;
+}
+.dataDisplay__list__table__row *:nth-of-type(2) {
+    width: 10%;
+}
+.dataDisplay__list__table__row *:nth-of-type(3) {
+    width: 15%;
+}
+.dataDisplay__list__table__row *:nth-of-type(4) {
+    width: 40%;
+}
+.dataDisplay__list__table__row *:nth-of-type(5) {
+    width: 5%;
+    cursor: pointer;
+}
+.dataDisplay__list__header {
     margin-left: 1rem;
 }
-.dataDisplay__list__table__header h5 {
+.dataDisplay__list__header h5 {
     display: inline-block;
     padding: 1rem 0;
-    min-width: 10rem;
 }
-.dataDisplay__list__table__header h5:first-of-type {
-    width: 33%;
-}
-.dataDisplay__list__table__row {
+.dataDisplay__list__item {
     text-align: left;
     list-style: none;
     padding: .5rem;
     margin: .5rem;
     border: 1px solid black;
     border-radius: 20%;
-    min-width: 10rem;
 }
-.dataDisplay__list__table__row div {
+.dataDisplay__list__item div {
     display: inline-flex;
-    min-width: 10rem;
     text-align: left;
 }
 
-.dataDisplay__list__table__row div:first-of-type {
-    min-width: 33%;
-}
-
-.dataDisplay__list__table__name {
-    width: 33%;
-}
-.dataDisplay__list__table__other {
-    min-width: 10rem;
-}
 
 .dataDisplay__docLink {
     float: right;
