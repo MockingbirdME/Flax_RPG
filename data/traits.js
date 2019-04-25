@@ -383,8 +383,8 @@ let traitsData = {
     duelistHeroic: {
         displayName: "Duelist, Heroic",
         type: "Combat",
-        requirements: ["Duelist and either Defensive Duelist, Distance Duelist, or Melee Duelist"],
-        requirementsDescription: "Duelist and either Defensive Duelist, Distance Duelist, or Melee Duelist",
+        requirements: ["Two Dualist Traits"],
+        requirementsDescription: "Two Dualist Traits",
         keywords: ["Heroic"],
         description: "When the character spends their reaction to grant disadvantage to one or more attacks by their dueling opponent they gain one level of advantage on their next eligible attack against their dueling opponent before the end of their next turn."
     },
@@ -464,7 +464,7 @@ let traitsData = {
         displayName: "Multi-Attack",
         type: "Combat",
         requirements: ["custom"],
-        requirementsDescription: "Any _Heroic_ combat trait, at least rank 2 in *Melee Combat*, *Ranged Combat*, or *Magical Aptitude*.",
+        requirementsDescription: "Any _Heroic_ combat trait",
         keywords: ["Epic"],
         description: "The first time the character would receive disadvantage to an attack skill check as a result of their multi-attack penalty reduce that penalty by one."
     },
