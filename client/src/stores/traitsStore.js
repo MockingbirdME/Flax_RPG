@@ -15,10 +15,9 @@ class RulesStore {
             throw Error(body.message)
         }
         this.traits = body.Traits;
-        console.log(this.traits);
     };
 }
 
 export default decorate(RulesStore, {
-    rawDocs: observable
+    traits: observable
 });
