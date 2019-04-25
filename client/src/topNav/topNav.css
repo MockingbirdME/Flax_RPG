@@ -37,10 +37,6 @@
     width: 100%;
 }
 
-.hidden {
-    display: none;
-}
-
 .chapterLink {
     display: block;
     cursor: pointer;
