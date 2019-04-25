@@ -21,7 +21,9 @@ class CoreRules extends Component {
                     nameSingular={this.props.nameSingular}
                     namePlural={this.props.namePlural}
                 />
-            <DataDisplayListSection />
+                <DataDisplayListSection
+                    data={this.props.data}
+                />
             </div>
         );
     }
