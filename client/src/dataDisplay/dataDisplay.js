@@ -23,6 +23,7 @@ class CoreRules extends Component {
                 />
                 <DataDisplayListSection
                     data={this.props.data}
+                    fields={this.props.sortableFields}
                 />
             </div>
         );
