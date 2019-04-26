@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DataDisplayListItem from './dataDisplayListItem.js';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSort } from '@fortawesome/free-solid-svg-icons';
 
 class DataDisplayListSection extends Component {
     constructor(props) {
@@ -58,15 +59,17 @@ class DataDisplayListSection extends Component {
            });
            return listHtml;
         }
+        let fields = [{name: `Name`, sort: `displayName`}].concat(this.props.fields).map(field => (<h5 key={field.name}>{field.name}<FontAwesomeIcon icon={faSort} className="sortIcon" onClick={ev => this.sortBy(field.sort)}/></h5>));
+
+        let headerRow = (
+            <div className="dataDisplay__list__table__row dataDisplay__list__header">
+                {fields}
+            </div>
+        )
 
         return (
             <div className="dataDisplay__list__container">
-                <div className="dataDisplay__list__table__row dataDisplay__list__header">
-                    <h5>Name</h5>
-                    <h5>Type</h5>
-                    <h5>Keywords</h5>
-                    <h5>Requirements</h5>
-                </div>
+                {headerRow}
                 {list()}
             </div>
         )

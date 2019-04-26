@@ -114,3 +114,8 @@
     color: #660066;
     cursor: pointer;
 }
+
+.sortIcon {
+    max-width: 2rem;
+    cursor: pointer;
+}
