@@ -12,6 +12,8 @@ class Traits extends Component {
                 namePlural="Traits"
                 nameSingular="Trait"
                 rulesLink="/core rules/traits"
+                sortableFields={[{name: "Type", sort: "type"}, {name: "Keywords", sort: "keywords"}, {name: "Requirements", sort: "requirementsDescription"}]}
+                filterableFields={[{name: "Type", sort: "type"}, {name: "Keywords", sort: "keywords"}]}
             />
         )
     }
