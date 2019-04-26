@@ -20,6 +20,7 @@ class DataDisplayListItem extends Component {
         let expandedClass = this.state.expanded ? "expandedListDisplay" : "hidden";
         let plusMinus = this.state.expanded ? (faMinus) : (faPlus);
         let expandedContent = this.props.trait.description || "";
+
         return (
             <div>
                 <li

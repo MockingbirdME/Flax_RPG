@@ -6,14 +6,24 @@ class DataDisplayListSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            sortBy: "displayName",
+            sortAssending: true
          };
     }
 
     sorter(a, b) {
         let data = this.props.data;
-        let stringA = data[a].displayName.toLowerCase();
-        let stringB = data[b].displayName.toLowerCase();
-
+        let fieldA = data[a][this.state.sortBy];
+        if (Array.isArray(fieldA)) fieldA = fieldA.join(" ");
+        let fieldB = data[b][this.state.sortBy];
+        if (Array.isArray(fieldB)) fieldB = fieldB.join(" ");
+        let stringA = fieldA ? fieldA.toLowerCase() : "";
+        let stringB = fieldB ? fieldB.toLowerCase() : "";
+        if (!this.state.sortAssending) {
+            let placeholderA = stringA;
+            stringA = stringB;
+            stringB = placeholderA;
+        }
         if (stringA < stringB) {
           return -1;
         }
@@ -23,13 +33,20 @@ class DataDisplayListSection extends Component {
       return 0;
     }
 
+    sortBy(field) {
+        console.log(field);
+        if (field === this.state.sortBy) this.setState({sortAssending: !this.state.sortAssending});
+        else this.setState({sortBy: field, sortAssending: true});
+    }
+
     render() {
         let list = () => {
             let data = this.props.data;
-            if (!data) return "test";
+            if (!data) return "No Data Loaded.";
 
             let listHtml = Object.keys(data);
             listHtml.sort((a, b) => this.sorter(a, b));
+
             listHtml = listHtml.map(traitKey => {
                return (
                    <DataDisplayListItem
