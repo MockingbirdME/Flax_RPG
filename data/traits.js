@@ -547,14 +547,6 @@ let traitsData = {
         requirementsDescription: "Advanced Two Weapon Fighting",
         keywords: ["Heroic"],
         description: "If the character has already taken an attack action on their turn with their primary hand or a weapon wielded in it, the first *Off-Hand Attack* action they make on this turn may be treated as a *Bash*, *Disarm*, *Distracting Attack*, *Power Attack*, *Reckless Attack*, *Throw*, or *Loose, Shoot, Fire* action performed with the character's off-hand or ready weapon wielded in their off-hand; this attack costs an additional stamina and must otherwise be eligible for the attack type being made."
-    },
-    traitName: {
-        displayName: "name",
-        type: "",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "text"
     }
 };
 
