@@ -81,7 +81,6 @@
     width: 100%;
 }
 .dataDisplay__filter__container > div {
-    width: 25%;
     margin: 1rem;
 }
 .dataDisplay__filter__container > div > h4,h5,h6 {
@@ -118,4 +117,12 @@
 .sortIcon {
     max-width: 2rem;
     cursor: pointer;
+}
+
+.checkmark__container {
+    display: inline-flex;
+}
+
+.checkmark__container > div {
+    margin-right: 1rem;
 }
