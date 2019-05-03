@@ -28,12 +28,16 @@ class DataDisplayFilterSection extends Component {
             let keys = Object.keys(data);
             keys.forEach(key => {
                 if (data[key][field] && data[key][field].length) {
-                    if (typeof data[key][field] === 'string') data[key][field] = [data[key][field]]
+                    if (typeof data[key][field] === 'string') data[key][field] = [data[key][field]];
 
                     data[key][field].forEach(item => {
                         if (array.indexOf(item) !== -1) return;
                         array.push(item);
                     });
+                }
+                else {
+                    if (array.indexOf("none") !== -1) return;
+                    array.unshift("none");
                 }
             });
         }
@@ -49,8 +53,10 @@ class DataDisplayFilterSection extends Component {
     }
 
     render() {
+        let width = 100 / (this.props.filterableFields.length + 1);
         let filterFields = this.props.filterableFields.map(field => {
             return (<FilterField
+                width={`${width}%`}
                 key={field.name}
                 name={field.name}
                 sort={field.sort}
@@ -60,9 +66,14 @@ class DataDisplayFilterSection extends Component {
                 />)
             });
 
+
+
             return (
                 <div className="dataDisplay__filter__container">
-                    <div className="dataDisplay__filter__name">
+                    <div
+                        className="dataDisplay__filter__name"
+                        style={{width: `${width}%`}}
+                        >
                         <h5>{this.props.nameSingular} Name</h5>
                         <input
                             className="dataDisplay__filter__name__input"
