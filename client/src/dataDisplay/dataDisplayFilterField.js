@@ -20,7 +20,6 @@ class DataDisplayFilterField extends Component {
     }
 
     render() {
-        console.log(this.props.test);
         let options = !this.props.fields ? [] : (
             this.props.fields.map((field, index) => <div key={index}><input type="checkbox" value={field} onChange={ev => this.changeFilter({field})} checked={this.shouldBeChecked(field)}/>{field}<br /></div>)
         )

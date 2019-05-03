@@ -13,8 +13,8 @@ class DataDisplayFilterSection extends Component {
     onChange(value) {
         this.setState({searchedName: value}, () => this.props.updateFilters(this.state.searchedName));
     }
+
     resetFilters() {
-        console.log('resetting filters');
         this.setState({searchedName: "", filters: {}}, () => {
             this.props.updateFilters(this.state.searchedName)
             this.props.updateFilters(this.state.filters)
