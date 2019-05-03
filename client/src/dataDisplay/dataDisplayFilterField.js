@@ -12,9 +12,17 @@ class DataDisplayFilterField extends Component {
         this.props.selectCheckmark(field);
     }
 
+    shouldBeChecked(field) {
+        let filters = this.props.filters;
+        if (!filters[this.props.sort]) return false;
+        if (!filters[this.props.sort].some(elm => elm === field)) return false;
+        return true;
+    }
+
     render() {
+        console.log(this.props.test);
         let options = !this.props.fields ? [] : (
-            this.props.fields.map((field, index) => <div key={index}><input type="checkbox" value={field} onClick={ev => this.changeFilter({field})} />{field}<br /></div>)
+            this.props.fields.map((field, index) => <div key={index}><input type="checkbox" value={field} onChange={ev => this.changeFilter({field})} checked={this.shouldBeChecked(field)}/>{field}<br /></div>)
         )
 
         return (
