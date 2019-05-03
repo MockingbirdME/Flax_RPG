@@ -55,33 +55,29 @@ class DataDisplayFilterSection extends Component {
                  />)
         });
 
-        return (
-            <div className="dataDisplay__filter__container">
-                <div className="dataDisplay__filter__name">
-                    <h5>{this.props.nameSingular} Name</h5>
-                    <input
-                      className="dataDisplay__filter__name__input"
-                      type={"text"}
-                      placeholder={"placeholder text"}
-                      value={this.state.searchedName}
-                      onChange={ev => this.onChange(ev.target.value)}
-                    />
-                </div>
-                {filterFields}
-                <div>
-                    <div  className="dataDisplay__filter__button">
-                        <h5>Filter {this.props.namePlural}</h5>
+            return (
+                <div className="dataDisplay__filter__container">
+                    <div className="dataDisplay__filter__name">
+                        <h5>{this.props.nameSingular} Name</h5>
+                        <input
+                            className="dataDisplay__filter__name__input"
+                            type={"text"}
+                            placeholder={"placeholder text"}
+                            value={this.state.searchedName}
+                            onChange={ev => this.onChange(ev.target.value)}
+                            />
+                        <h6
+                            className="resetFilters__button"
+                            onClick={ev => this.resetFilters()}
+                            >
+                            Reset All Filters
+                        </h6>
                     </div>
-                    <h6
-                    className="resetFilters__button"
-                    onClick={ev => this.resetFilters()}
-                    >
-                    Reset All Filters
-                    </h6>
+                    {filterFields}
+
                 </div>
-            </div>
-        )
+            )
+        }
     }
-}
 
 export default DataDisplayFilterSection;
