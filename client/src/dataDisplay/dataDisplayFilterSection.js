@@ -14,7 +14,11 @@ class DataDisplayFilterSection extends Component {
         this.setState({searchedName: value}, () => this.props.updateFilters(this.state.searchedName));
     }
     resetFilters() {
-        this.setState({searchedName: ""});
+        console.log('resetting filters');
+        this.setState({searchedName: "", filters: {}}, () => {
+            this.props.updateFilters(this.state.searchedName)
+            this.props.updateFilters(this.state.filters)
+        });
     }
 
     getFields(field) {
@@ -47,13 +51,14 @@ class DataDisplayFilterSection extends Component {
     render() {
         let filterFields = this.props.filterableFields.map(field => {
             return (<FilterField
-                    key={field.name}
-                    name={field.name}
-                    sort={field.sort}
-                    fields={this.getFields(field.sort)}
-                    selectCheckmark={ev => this.selectCheckmark(ev, field.sort)}
-                 />)
-        });
+                key={field.name}
+                name={field.name}
+                sort={field.sort}
+                fields={this.getFields(field.sort)}
+                filters={this.state.filters}
+                selectCheckmark={ev => this.selectCheckmark(ev, field.sort)}
+                />)
+            });
 
             return (
                 <div className="dataDisplay__filter__container">
@@ -80,4 +85,4 @@ class DataDisplayFilterSection extends Component {
         }
     }
 
-export default DataDisplayFilterSection;
+    export default DataDisplayFilterSection;
