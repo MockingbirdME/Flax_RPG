@@ -35,9 +35,25 @@ class DataDisplayListSection extends Component {
     }
 
     sortBy(field) {
-        console.log(field);
         if (field === this.state.sortBy) this.setState({sortAssending: !this.state.sortAssending});
         else this.setState({sortBy: field, sortAssending: true});
+    }
+
+    applyFilters(list) {
+        return list.filter(itemKey => {
+            let item = this.props.data[itemKey];
+            let filterFields = this.props.filterFields;
+            let filterName = this.props.filterName;
+            if (filterName &&
+                !item.displayName.toLowerCase().includes(filterName)) {
+                    return false;
+            }
+            for (let field in filterFields) {
+                if (!item[field] || !filterFields[field].length) continue;
+                if (!item[field].some(elm => filterFields[field].includes(elm))) return false;
+            }
+            return true;
+        })
     }
 
     render() {
@@ -46,6 +62,9 @@ class DataDisplayListSection extends Component {
             if (!data) return "No Data Loaded.";
 
             let listHtml = Object.keys(data);
+
+            listHtml = this.applyFilters(listHtml);
+
             listHtml.sort((a, b) => this.sorter(a, b));
 
             listHtml = listHtml.map(traitKey => {
