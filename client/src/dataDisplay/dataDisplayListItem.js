@@ -12,7 +12,6 @@ class DataDisplayListItem extends Component {
     }
 
     toggleExpanded = () => {
-        console.log('toggling');
         this.setState({expanded: !this.state.expanded});
     }
 
