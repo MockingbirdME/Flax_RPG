@@ -53,19 +53,19 @@
 
 /** TODO make these variable based on view width */
 .dataDisplay__list__container__5 .dataDisplay__list__table__row svg:first-of-type {
-    width: 30%;
+    width: 25%;
 }
 .dataDisplay__list__container__5 .dataDisplay__list__table__row > *:first-of-type {
-    width: 30%;
+    width: 25%;
 }
 .dataDisplay__list__container__5 .dataDisplay__list__table__row > *:nth-of-type(2) {
-    width: 12%;
+    width: 20%;
 }
 .dataDisplay__list__container__5 .dataDisplay__list__table__row > *:nth-of-type(3) {
-    width: 13%;
+    width: 20%;
 }
 .dataDisplay__list__container__5 .dataDisplay__list__table__row > *:nth-of-type(4) {
-    width: 40%;
+    width: 30%;
 }
 .dataDisplay__list__container__5 .dataDisplay__list__table__row > *:nth-of-type(5) {
     width: 5%;
