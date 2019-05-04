@@ -43,7 +43,7 @@ class DataDisplayListSection extends Component {
         return list.filter(itemKey => {
             let item = this.props.data[itemKey];
             let filterFields = this.props.filterFields;
-            let filterName = this.props.filterName;
+            let filterName = this.props.filterName.toLowerCase();
             if (filterName &&
                 !item.displayName.toLowerCase().includes(filterName)) {
                     return false;
@@ -66,12 +66,12 @@ class DataDisplayListSection extends Component {
             listHtml = this.applyFilters(listHtml);
 
             listHtml.sort((a, b) => this.sorter(a, b));
-
-            listHtml = listHtml.map(traitKey => {
+            listHtml = listHtml.map(dataKey => {
                return (
                    <DataDisplayListItem
-                       key={traitKey}
-                       trait={data[traitKey]}
+                       key={dataKey}
+                       data={data[dataKey]}
+                       fields={this.props.fields}
                    />
                );
 

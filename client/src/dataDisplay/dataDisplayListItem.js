@@ -18,16 +18,19 @@ class DataDisplayListItem extends Component {
     render() {
         let expandedClass = this.state.expanded ? "expandedListDisplay" : "hidden";
         let plusMinus = this.state.expanded ? (faMinus) : (faPlus);
-        let expandedContent = this.props.trait.description || "";
-
+        let expandedContent = this.props.data.description || "";
+        let display = this.props.fields.map(field => {
+            console.log(this.props.data, field);
+            return (
+                <div>{this.props.data[field.sort]}</div>
+            )
+        })
+        display.unshift(<div>{this.props.data.displayName}</div>)
         return (
             <div>
                 <li
                     className="dataDisplay__list__table__row dataDisplay__list__item">
-                    <div>{this.props.trait.displayName}</div>
-                    <div>{this.props.trait.type || "N/A"}</div>
-                    <div>{this.props.trait.keywords}</div>
-                    <div>{this.props.trait.requirementsDescription || "None"}</div>
+                    {display}
                     <div onClick={ev => this.toggleExpanded()}><FontAwesomeIcon icon={plusMinus} /></div>
                 </li>
                 <div className={expandedClass}
