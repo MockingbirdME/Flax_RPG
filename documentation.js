@@ -30,7 +30,14 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
     let textIndex = contents.indexOf('html.js');
     if (textIndex !== -1) {
         contents.splice(textIndex, 1);
-        html += require(path.resolve(__dirname, directory, "html.js"));
+        let response = require(path.resolve(__dirname, directory, "html.js"));
+        if (typeof response === 'string') html += response;
+        else {
+            html += response.html;
+            for (let chapter in response.subChapters) {
+                documentation[`${sectionExtension.toLowerCase()}/${chapter}`] = response.subChapters[chapter];
+            }
+        }
     }
 
     contents.forEach(item => {
@@ -44,6 +51,7 @@ function processDirectoryContents(directory, sectionName, extension, depth) {
     // Save markedText to documentation.<sectionExtension>
     if (documentation[sectionExtension]) console.error(`Section Extension: ${sectionExtension} has duplicate documentation.`);
     documentation[sectionExtension.toLowerCase()] = html;
+
     // Return text for use by parent.
     return html;
 }
