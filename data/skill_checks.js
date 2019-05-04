@@ -254,8 +254,23 @@ let primaryAttributesData = {
         completeSuccess: "the character regains one plus their secondary skill rank stamina.",
         additionalSuccesses: "the character regains an additional point of stamina for each additional success."
     },
-    skillCheck: {
-        displayName: "",
+    searchArea: {
+        displayName: "Search Area",
+        primaryAttribute: ["Perception"],
+        primarySkill: ["Awareness"],
+        relevantSecondarySkills: ["Search"],
+        aidingOthers: "Multiple character's can work together allowing for one skill check to be made by the character with the highest skill and treat their secondary skill rank as one higher than the character with the highest rank.",
+        description: "the character searches an area for money, valuables, other specific items of interest, or hiding characters.",
+        difficulty: "set by the GM based on how difficult the items/characters that could be found are to find.",
+        requiredSuccesses: "if there's more than one potential item/loot/character to find the GM will set a number of required successes for various additional searched for things.",
+        criticalFailure: "not only was nothing found, but one item was damaged or lost during the course of the search; the character may not try again without additional help.",
+        failure: "no item was found, the character may not try again without additional help.",
+        nearSuccess: "N/A, while this skill check does have required successes they are for determining additional found items/characters.",
+        completeSuccess: "the easiest to find item/characters was discovered by the character. Add the character's secondary skill rank as extra successes for finding additional items/characters.",
+        additionalSuccesses: "the number of additional successes will determine how many additional items/characters are found."
+    },
+    senseMotive: {
+        displayName: "Sense Motive",
         primaryAttribute: [""],
         primarySkill: [""],
         relevantSecondarySkills: [""],
@@ -269,50 +284,50 @@ let primaryAttributesData = {
         completeSuccess: "",
         additionalSuccesses: ""
     },
-    skillCheck: {
-        displayName: "",
-        primaryAttribute: [""],
-        primarySkill: [""],
-        relevantSecondarySkills: [""],
-        aidingOthers: "",
-        description: "",
-        difficulty: "",
-        requiredSuccesses: "",
-        criticalFailure: "",
-        failure: "",
-        nearSuccess: "",
-        completeSuccess: "",
-        additionalSuccesses: ""
+    sprint: {
+        displayName: "Sprint",
+        primaryAttribute: ["Body", "Reflexes"],
+        primarySkill: ["Personal Movement"],
+        relevantSecondarySkills: ["Run"],
+        aidingOthers: "none, multiple characters participating in a pursuit must each make separate flee/pursuit skill checks.",
+        description: "when a character is attempting to cover a large distance as quickly as possible they are likely to need to make this skill check. Each point of movement increase from this skill check is equal to whatever unit of measurement the character is already moving in when the skill check is made.",
+        difficulty: "11",
+        requiredSuccesses: "0-10+ depending on terrain.",
+        criticalFailure: "the character trips and falls, becoming prone.",
+        failure: "the character gains no extra movement.",
+        nearSuccess: "the character increases their movement by their secondary skill rank.",
+        completeSuccess: "the character increases their movement by one, plus their secondary skill rank.",
+        additionalSuccesses: "increases the character's movement by one per additional success."
     },
-    skillCheck: {
-        displayName: "",
-        primaryAttribute: [""],
-        primarySkill: [""],
-        relevantSecondarySkills: [""],
-        aidingOthers: "",
-        description: "",
-        difficulty: "",
-        requiredSuccesses: "",
-        criticalFailure: "",
-        failure: "",
-        nearSuccess: "",
-        completeSuccess: "",
-        additionalSuccesses: ""
+    swim: {
+        displayName: "Swim",
+        primaryAttribute: ["Body"],
+        primarySkill: ["Personal Movement"],
+        relevantSecondarySkills: ["Swim"],
+        aidingOthers: "a character can assist another by allowing the second character to use their rank in the secondary skill however both character's only move at the rate of the slower of the two. A character can not assist more than one other character at a time.",
+        description: "making headway through water and, more importantly, not drowning.",
+        difficulty: "8-20+ depending on the downward pull in the water, riptides, storms, and magic can all increase this difficulty.",
+        requiredSuccesses: "0-5 depending on the movement of the water, increased by current, non-submerging whirlpools, and heavy winds.",
+        criticalFailure: "the character starts breathing in water; they lose 5 stamina and risking passing out and drowning if their stamina reaches zero.",
+        failure: "the character makes no progress towards their goal and looses 5 stamina.",
+        nearSuccess: "the character treads water and is able to move a number of hexes equal to their secondary skill rank, they also lose 1 stamina.",
+        completeSuccess: "the character moves up to one plus their rank in the secondary skill hexes.",
+        additionalSuccesses: "increase the distance the character swims by up to one hex."
     },
-    skillCheck: {
-        displayName: "",
-        primaryAttribute: [""],
-        primarySkill: [""],
-        relevantSecondarySkills: [""],
-        aidingOthers: "",
-        description: "",
-        difficulty: "",
-        requiredSuccesses: "",
-        criticalFailure: "",
-        failure: "",
-        nearSuccess: "",
-        completeSuccess: "",
-        additionalSuccesses: ""
+    tumble: {
+        displayName: "Tumble",
+        primaryAttribute: ["Reflexes"],
+        primarySkill: ["Personal Movement"],
+        relevantSecondarySkills: ["Tumbling"],
+        aidingOthers: "none, character's make this skill check on their own.",
+        description: "damage from falling from a great height or tumbling down a slope may be reduced with a successful skill check.",
+        difficulty: "8",
+        requiredSuccesses: "N/A",
+        criticalFailure: "the character takes full damage and effects from the fall/tumble.",
+        failure: "the character gains their rank in the secondary skill damage resistance to the falling damage and raises their toughness by an equal amount for resolving the same damage.",
+        nearSuccess: "N/A",
+        completeSuccess: "the character gains one plus their rank in the secondary skill damage resistance to the falling damage and raises their toughness by an equal amount for resolving the same damage; if the character suffers one or less damage they may end the fall/tumble kneeling instead of prone.",
+        additionalSuccesses: "the character increases their damage resistance to the fall damage by one per additional success; if the character suffers no damage they may end the fall/tumble standing instead of prone."
     }
 };
 
