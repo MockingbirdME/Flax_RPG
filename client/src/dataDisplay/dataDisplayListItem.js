@@ -22,10 +22,10 @@ class DataDisplayListItem extends Component {
         let display = this.props.fields.map(field => {
             console.log(this.props.data, field);
             return (
-                <div>{this.props.data[field.sort]}</div>
+                <div key={field.sort} >{this.props.data[field.sort]}</div>
             )
         })
-        display.unshift(<div>{this.props.data.displayName}</div>)
+        display.unshift(<div key="displayName">{this.props.data.displayName}</div>)
         return (
             <div>
                 <li
