@@ -41,6 +41,7 @@ class DataDisplay extends Component {
                     fields={this.props.sortableFields}
                     filterName={this.state.filterName}
                     filterFields={this.state.filterFields}
+                    documentationExtension={this.props.documentationExtension}
                 />
             </div>
         );
