@@ -19,7 +19,7 @@ class RulesTools extends Component {
                 <ToolButton
                     onHover={this.props.onHover}
                     name="Skill Checks"
-                    link="/test3"
+                    link="/skill checks"
                 />
                 <ToolButton
                     onHover={this.props.onHover}
