@@ -69,8 +69,9 @@ class DataDisplayListSection extends Component {
 
     renderedDisplay() {
         console.log(this.state.displayDocumentation);
+        let className = this.props.fields.length > 2 ? "hidden" : "placeholderText"
         if (this.state.displayDocumentation) return this.props.rootStore.rulesStore.rawDocs[this.state.displayDocumentation];
-        else return `<p class="placeholderText">Please select an option from the left to display.</p>`;
+        else return `<p class="${className}">Please select an option from the left to display.</p>`;
 
     }
     render() {
