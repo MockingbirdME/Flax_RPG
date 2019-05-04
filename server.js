@@ -1,4 +1,5 @@
 const DOCUMENTATION = require('./documentation.js');
+const Strains = require('./data/strains.js');
 const Traits = require('./data/traits.js');
 const express = require('express');
 const app = express();
@@ -18,6 +19,10 @@ app.get('/express_backend', (req, res) => {
 
 app.get('/documentation', (req, res) => {
     res.send({DOCUMENTATION});
+});
+
+app.get('/strains', (req, res) => {
+    res.send({Strains});
 });
 
 app.get('/traits', (req, res) => {
