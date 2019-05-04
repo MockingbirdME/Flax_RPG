@@ -1,4 +1,5 @@
 const DOCUMENTATION = require('./documentation.js');
+const SkillChecks = require('./data/skill_checks.js');
 const Strains = require('./data/strains.js');
 const Traits = require('./data/traits.js');
 const express = require('express');
@@ -19,6 +20,10 @@ app.get('/express_backend', (req, res) => {
 
 app.get('/documentation', (req, res) => {
     res.send({DOCUMENTATION});
+});
+
+app.get('/skillchecks', (req, res) => {
+    res.send({SkillChecks});
 });
 
 app.get('/strains', (req, res) => {
