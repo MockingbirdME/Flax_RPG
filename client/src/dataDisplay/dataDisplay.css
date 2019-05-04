@@ -15,24 +15,59 @@
     margin: 0;
 }
 
+
+
+.dataDisplay__list__container sgv {
+    min-width: 2rem;
+}
+
+
+.dataDisplay__list__container__2 .dataDisplay__list__content__container {
+    display: flex;
+}
+.dataDisplay__list__container__2 .dataDisplay__list__content__container > div:first-of-type {
+    min-width: 10rem;
+    width: calc(40VW - 20rem);
+}
+.dataDisplay__list__container__2 .dataDisplay__list__content__container > div:nth-of-type(2) {
+    border: 1px solid;
+    width: calc(80% - 3rem);
+    max-width: 40rem;
+    padding: 1rem;
+    margin: -1rem auto;
+}
+.dataDisplay__list__container__2 .dataDisplay__list__content__container > div:nth-of-type(2) h1,h2,h3,h4,h5,h6 {
+    margin-top: 0;
+}
+.dataDisplay__list__container__2 .dataDisplay__list__table__row > *:nth-of-type(2) {
+    float: right;
+    cursor: pointer;
+    color: #660066;
+}
+
+
 /** TODO make these variable based on view width */
-.dataDisplay__list__table__row *:first-of-type {
+.dataDisplay__list__container__5 .dataDisplay__list__table__row svg:first-of-type {
     width: 30%;
 }
-.dataDisplay__list__table__row *:nth-of-type(2) {
+.dataDisplay__list__container__5 .dataDisplay__list__table__row > *:first-of-type {
+    width: 30%;
+}
+.dataDisplay__list__container__5 .dataDisplay__list__table__row > *:nth-of-type(2) {
     width: 12%;
 }
-.dataDisplay__list__table__row *:nth-of-type(3) {
+.dataDisplay__list__container__5 .dataDisplay__list__table__row > *:nth-of-type(3) {
     width: 13%;
 }
-.dataDisplay__list__table__row *:nth-of-type(4) {
+.dataDisplay__list__container__5 .dataDisplay__list__table__row > *:nth-of-type(4) {
     width: 40%;
 }
-.dataDisplay__list__table__row *:nth-of-type(5) {
+.dataDisplay__list__container__5 .dataDisplay__list__table__row > *:nth-of-type(5) {
     width: 5%;
     cursor: pointer;
     color: #660066;
 }
+
 .dataDisplay__list__header {
     margin-left: 1rem;
 }
