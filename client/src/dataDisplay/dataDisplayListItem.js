@@ -21,8 +21,10 @@ class DataDisplayListItem extends Component {
         let plusMinus = this.state.expanded ? (faMinus) : (faPlus);
         let expandedContent = this.props.data.description || "";
         let display = this.props.fields.map(field => {
+            let displayString = this.props.data[field.sort];
+            if (Array.isArray(displayString)) displayString = displayString.join(" or ");
             return (
-                <div key={field.sort} >{this.props.data[field.sort]}</div>
+                <div key={field.sort} >{displayString}</div>
             )
         })
         display.unshift(<div key="displayName">{this.props.data.displayName}</div>)
