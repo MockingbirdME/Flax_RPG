@@ -126,3 +126,7 @@
 .checkmark__container > div {
     margin-right: 1rem;
 }
+
+.dataDisplay__filter__checkBox {
+    margin: auto;
+}

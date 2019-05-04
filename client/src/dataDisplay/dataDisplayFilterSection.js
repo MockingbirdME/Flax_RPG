@@ -53,7 +53,7 @@ class DataDisplayFilterSection extends Component {
     }
 
     render() {
-        let width = 100 / (this.props.filterableFields.length + 1);
+        let width = 75 / this.props.filterableFields.length;
         let filterFields = this.props.filterableFields.map(field => {
             return (<FilterField
                 width={`${width}%`}
@@ -72,7 +72,7 @@ class DataDisplayFilterSection extends Component {
                 <div className="dataDisplay__filter__container">
                     <div
                         className="dataDisplay__filter__name"
-                        style={{width: `${width}%`}}
+                        style={{width: `25%`}}
                         >
                         <h5>{this.props.nameSingular} Name</h5>
                         <input

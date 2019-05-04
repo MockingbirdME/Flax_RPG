@@ -27,21 +27,22 @@ class DataDisplayFilterField extends Component {
         let divCount = Math.ceil(options.length / 4);
         if (divCount > 3) divCount = 3;
         let divCountLength = options.length/divCount;
-        console.log(divCount);
+
         let optionDivs = [];
         for (let i = 0; i < divCount; i++) {
-            optionDivs.push(<div key={i}>
+            optionDivs.push(<div key={i} style={{width: `calc(100% / ${divCount})`, minWidth: `fit-content`}}>
                 {options.splice(0, divCountLength)}
             </div>)
         }
-        console.log(optionDivs);
+
+        let padding = (10 * divCount + divCount) / 2;
         return (
             <div
                 className="dataDisplay__filter__checkBox"
                 style={{width: this.props.width}}
                 >
-                <h5>{this.props.name}</h5>
-                <div className="checkmark__container">{optionDivs}</div>
+                <h5 style={{paddingLeft: `calc(50% - ${padding}rem)`}}>{this.props.name}</h5>
+                <div className="checkmark__container" style={{paddingLeft: `calc(50% - ${padding}rem)`}}>{optionDivs}</div>
             </div>
         )
     }
