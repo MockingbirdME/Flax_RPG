@@ -62,14 +62,15 @@ class DataDisplayListSection extends Component {
 
     renderSelected(item) {
         let extension = `${this.props.documentationExtension}${item}`;
-        if (this.state.displayDocumentation === extension) this.setState({displayDocumentation: "extension"});
+        if (this.state.displayDocumentation === extension) this.setState({displayDocumentation: ""});
         else  this.setState({displayDocumentation: extension});
 
     }
 
     renderedDisplay() {
+        console.log(this.state.displayDocumentation);
         if (this.state.displayDocumentation) return this.props.rootStore.rulesStore.rawDocs[this.state.displayDocumentation];
-        else return "";
+        else return `<p class="placeholderText">Please select an option from the left to display.</p>`;
 
     }
     render() {
