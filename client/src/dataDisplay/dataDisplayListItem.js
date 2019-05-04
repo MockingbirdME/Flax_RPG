@@ -12,7 +12,8 @@ class DataDisplayListItem extends Component {
     }
 
     toggleExpanded = () => {
-        this.setState({expanded: !this.state.expanded});
+        if (this.props.expandInPlace) this.setState({expanded: !this.state.expanded});
+        else this.props.renderSelected(this.props.name);
     }
 
     render() {
@@ -20,7 +21,6 @@ class DataDisplayListItem extends Component {
         let plusMinus = this.state.expanded ? (faMinus) : (faPlus);
         let expandedContent = this.props.data.description || "";
         let display = this.props.fields.map(field => {
-            console.log(this.props.data, field);
             return (
                 <div key={field.sort} >{this.props.data[field.sort]}</div>
             )
