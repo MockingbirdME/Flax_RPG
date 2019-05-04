@@ -14,6 +14,7 @@ class Strains extends Component {
                 rulesLink="/core rules/strains"
                 sortableFields={[]}
                 filterableFields={[]}
+                documentationExtension="core rules/strains/"
             />
         )
     }
