@@ -82,6 +82,7 @@
     margin: .5rem;
     border: 1px solid #660066;
     border-radius: 20%;
+    font-weight: bold;
 }
 .dataDisplay__list__item div {
     display: inline-flex;
@@ -93,6 +94,16 @@
     border-top: none;
     padding: 1rem 3rem;
     margin: -1rem .5rem 0;
+}
+
+.expandedListContent {
+    max-width: 40rem;
+    margin: 1rem auto 0;
+}
+
+.expandedListContent *:last-child {
+    margin-bottom: 0;
+    font-size: 1rem;
 }
 
 

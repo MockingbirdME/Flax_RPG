@@ -35,7 +35,7 @@ class DataDisplayListItem extends Component {
                 </li>
                 <div className={expandedClass}
                 >
-                    <p dangerouslySetInnerHTML={{__html: expandedContent}} />
+                    <div className="expandedListContent" dangerouslySetInnerHTML={{__html: expandedContent}} />
                 </div>
             </div>
         )
