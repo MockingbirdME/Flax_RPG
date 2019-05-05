@@ -95,6 +95,7 @@ class DataDisplayListSection extends Component {
                        fields={this.props.fields}
                        expandInPlace={this.props.fields.length > 1}
                        renderSelected={ev => this.renderSelected(ev)}
+                       renderedContent={this.renderedDisplay()}
                    />
                );
 
