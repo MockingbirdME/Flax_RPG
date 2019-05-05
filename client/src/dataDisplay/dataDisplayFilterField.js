@@ -20,13 +20,18 @@ class DataDisplayFilterField extends Component {
     }
 
     render() {
-        let options = !this.props.fields ? [] : (
-            this.props.fields.map((field, index) => <div key={index}><input type="checkbox" value={field} onChange={ev => this.changeFilter({field})} checked={this.shouldBeChecked(field)}/>{field}<br /></div>)
+        let fieldsList = !this.props.fields ? "" : (this.props.fields.filter(item => !!item).sort());
+
+        let options = !fieldsList ? [] : (
+            fieldsList.map((field, index) => {
+                return <div key={index}><input type="checkbox" value={field} onChange={ev => this.changeFilter({field})} checked={this.shouldBeChecked(field)}/>{field}<br /></div>
+            })
         )
+        console.log(options);
 
         let divCount = Math.ceil(options.length / 4);
         if (divCount > 3) divCount = 3;
-        let divCountLength = options.length/divCount;
+        let divCountLength = Math.ceil(options.length/divCount);
 
         let optionDivs = [];
         for (let i = 0; i < divCount; i++) {
