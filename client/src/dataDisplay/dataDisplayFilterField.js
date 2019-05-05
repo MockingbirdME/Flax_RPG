@@ -35,11 +35,11 @@ class DataDisplayFilterField extends Component {
             </div>)
         }
 
-        let padding = (10 * divCount + divCount) / 2;
+        let padding = (10 * divCount + 2 * divCount) / 2;
         return (
             <div
                 className="dataDisplay__filter__checkBox"
-                style={{width: this.props.width}}
+                style={{width: this.props.width, minWidth: `fit-content`}}
                 >
                 <h5 style={{paddingLeft: `calc(50% - ${padding}rem)`}}>{this.props.name}</h5>
                 <div className="checkmark__container" style={{paddingLeft: `calc(50% - ${padding}rem)`}}>{optionDivs}</div>
