@@ -15,7 +15,6 @@ class SkillChecksStore {
             throw Error(body.message)
         }
         this.skillChecks = body.SkillChecks;
-        console.log(body.SkillChecks);
     };
 }
 

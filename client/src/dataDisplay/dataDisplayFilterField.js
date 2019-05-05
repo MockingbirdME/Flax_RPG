@@ -27,7 +27,6 @@ class DataDisplayFilterField extends Component {
                 return <div key={index}><input type="checkbox" value={field} onChange={ev => this.changeFilter({field})} checked={this.shouldBeChecked(field)}/>{field}<br /></div>
             })
         )
-        console.log(options);
 
         let divCount = Math.ceil(options.length / 4);
         if (divCount > 3) divCount = 3;
