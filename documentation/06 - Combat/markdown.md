@@ -10,7 +10,7 @@ A character's turn follows the following steps:
 
 ## Actions
 ### Multi-Attack Penalty
-Some actions, or reactions, are attack (re)actions, these require either a melee attack, ranged attack, or magical attack skill check; each time a character performs one of these skill checks they increase their multi-attack penalty by one, unless the action they took specifically states otherwise. Each attack skill check a character makes gains a level of disadvantage equal to their multi-attack penalty. A character's multi attack penalty is reset to zero at the begining and end of each of their turns.  
+Some actions, or reactions, are attack (re)actions, these require either a melee attack, ranged attack, or magical attack skill check; each time a character performs one of these skill checks they increase their multi-attack penalty by one, unless the action they took specifically states otherwise. Each attack skill check a character makes gains a level of disadvantage equal to their multi-attack penalty. A character's multi attack penalty is reset to zero at the beginning and end of each of their turns.  
 
 ## Actions by type
 
