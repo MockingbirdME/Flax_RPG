@@ -16,6 +16,10 @@ class DataDisplayListSection extends Component {
          };
     }
 
+    shouldComponentUpdate(nextprops, nextstate) {
+        return true;
+    }
+
     sorter(a, b) {
         let data = this.props.data;
         let fieldA = data[a][this.state.sortBy];
@@ -74,9 +78,6 @@ class DataDisplayListSection extends Component {
 
     }
     render() {
-
-
-
         let list = () => {
             let data = this.props.data;
             if (!data) return "No Data Loaded.";
@@ -102,6 +103,7 @@ class DataDisplayListSection extends Component {
            });
            return listHtml;
         }
+
         let fields = [{name: `Name`, sort: `displayName`}].concat(this.props.fields).map(field => (<h5 key={field.name}>{field.name}<FontAwesomeIcon icon={faSort} className="sortIcon" onClick={ev => this.sortBy(field.sort)}/></h5>));
 
         let headerRow = (
