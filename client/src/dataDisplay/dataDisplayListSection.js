@@ -101,7 +101,8 @@ class DataDisplayListSection extends Component {
                );
 
            });
-           return listHtml;
+           if (listHtml.length) return listHtml;
+           else return (<p>Oh no! It looks like there are no results that match your filter selections.</p>)
         }
 
         let fields = [{name: `Name`, sort: `displayName`}].concat(this.props.fields).map(field => (<h5 key={field.name}>{field.name}<FontAwesomeIcon icon={faSort} className="sortIcon" onClick={ev => this.sortBy(field.sort)}/></h5>));
