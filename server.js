@@ -1,4 +1,5 @@
 const DOCUMENTATION = require('./documentation.js');
+const CombatActions = require('./data/combat_actions.js');
 const SkillChecks = require('./data/skill_checks.js');
 const Strains = require('./data/strains.js');
 const Traits = require('./data/traits.js');
@@ -20,6 +21,10 @@ app.get('/express_backend', (req, res) => {
 
 app.get('/documentation', (req, res) => {
     res.send({DOCUMENTATION});
+});
+
+app.get('/combatactions', (req, res) => {
+    res.send({CombatActions});
 });
 
 app.get('/skillchecks', (req, res) => {
