@@ -24,7 +24,7 @@ class RulesTools extends Component {
                 <ToolButton
                     onHover={this.props.onHover}
                     name="Combat Actions"
-                    link=""
+                    link="/combat actions"
                 />
                 <ToolButton
                     onHover={this.props.onHover}
