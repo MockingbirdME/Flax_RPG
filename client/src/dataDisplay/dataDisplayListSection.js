@@ -22,9 +22,9 @@ class DataDisplayListSection extends Component {
 
     sorter(a, b) {
         let data = this.props.data;
-        let fieldA = data[a][this.state.sortBy];
+        let fieldA = data[a][this.state.sortBy].toString();
         if (Array.isArray(fieldA)) fieldA = fieldA.join(" ");
-        let fieldB = data[b][this.state.sortBy];
+        let fieldB = data[b][this.state.sortBy].toString();
         if (Array.isArray(fieldB)) fieldB = fieldB.join(" ");
         let stringA = fieldA ? fieldA.toLowerCase() : "";
         let stringB = fieldB ? fieldB.toLowerCase() : "";
