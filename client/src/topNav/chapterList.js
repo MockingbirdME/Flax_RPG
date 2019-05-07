@@ -13,7 +13,7 @@ class ChapterList extends Component {
         let chaptersSecondHalf = [];
 
         this.props.rootStore.rulesStore.chapterList.forEach((title, index) => {
-            let link = `/core rules/${title}`;
+            let link = `/rules/${title}`;
             let returnValue = (
                 <Link to={link} key={title}
                 className="chapterLink hoverableNav"

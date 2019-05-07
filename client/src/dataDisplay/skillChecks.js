@@ -11,10 +11,10 @@ class SkillChecks extends Component {
                 data={data}
                 namePlural="Skill Checks"
                 nameSingular="Skill Check"
-                rulesLink="/core rules/skill checks"
+                rulesLink="/rules/skill checks"
                 sortableFields={[{name: "Primary Attribute", sort: "primaryAttribute"}, {name: "Primary Skill", sort: "primarySkill"}, {name: "Relevant Secondary Skills", sort: "relevantSecondarySkills"}]}
                 filterableFields={[{name: "Primary Attribute", sort: "primaryAttribute"}, {name: "Primary Skill", sort: "primarySkill"}]}
-                documentationExtension="core rules/skill checks/"
+                documentationExtension="rules/skill checks/"
             />
         )
     }

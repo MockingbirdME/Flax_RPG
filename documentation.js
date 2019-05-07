@@ -6,7 +6,7 @@ const CHAPTERS_DIRECTORY = path.resolve(__dirname, './documentation');
 // Scaffold documention object.
 let documentation = {};
 // Process the directory contents.
-processDirectoryContents(CHAPTERS_DIRECTORY, 'Core Rules', '', 0);
+processDirectoryContents(CHAPTERS_DIRECTORY, 'Rules', '', 0);
 
 // To process the directory.
 function processDirectoryContents(directory, sectionName, extension, depth) {

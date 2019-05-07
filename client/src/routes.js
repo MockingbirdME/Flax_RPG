@@ -12,7 +12,7 @@ class Routes extends Component {
         return(
             <div id="route-controller" >
                 <Switch>
-                    <Route path="/core rules" component={CoreRules} />
+                    <Route path="/rules" component={CoreRules} />
                     <Route path="/skill checks" component={SkillChecks} />
                     <Route path="/combat actions" component={CombatActions} />
                     <Route path="/strains" component={Strains} />

@@ -11,10 +11,10 @@ class Strains extends Component {
                 data={data}
                 namePlural="Strains"
                 nameSingular="Strain"
-                rulesLink="/core rules/strains"
+                rulesLink="/rules/strains"
                 sortableFields={[]}
                 filterableFields={[]}
-                documentationExtension="core rules/strains/"
+                documentationExtension="rules/strains/"
             />
         )
     }
