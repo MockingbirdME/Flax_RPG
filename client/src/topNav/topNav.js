@@ -24,11 +24,11 @@ class TopNav extends Component {
             <div className="topNav" >
                 <ul className="topNav__list">
                     <NavLink
-                        title="Core Rules"
+                        title="Rules"
                         onHover={this.onHover}
                     />
                     <NavLink
-                        title="Other Rules"
+                        title="Coming Soon"
                         onHover={this.onHover}
                      />
                 </ul>
