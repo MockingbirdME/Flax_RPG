@@ -2,6 +2,17 @@ Damage system + defense/stamina/wound refactor:
 
 Defense - resource that is lowered by number of wounds the character has and by distracting attacks.
 
+    Starting defense should range from 8-16
+    Base Defense - 8 + ref + perc + size (possible range of 7 - 11 for size zero characters)
+    Type specific defense based on one primary and one secondary skill (max +5) this seems potentially to high.
+        - Melee: melee combat + ???
+        - Ranged: awareness + dodge?
+        - Magic: discipline + magical aptitude?
+    Equipment specific bonuses
+        - parry: vs melee only
+        - shield: vs melee and range
+
+
 Stamina - starts at 10, instead of adding to it increase regen with stamina/endurance skills.
 
 Fatigue - character can take a point of fatigue to regain all stamina, happens automatically if they reduce themselves to zero stamina. Fatigue reduces a character's max stamina.
@@ -21,4 +32,4 @@ ex. a character with +0 body and three wounds takes 18 days to fully recover (9 
 
 Damage - damage reduces stamina, if stamina hits zero inflicts a wound and refreshes stamina.
 
-weapon damage should be ~3-6 + twice body stat + amount attack exceeded defense. 
+weapon damage should be ~3-6 + twice body stat + amount attack exceeded defense.
