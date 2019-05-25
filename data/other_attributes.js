@@ -12,17 +12,17 @@ let otherAttributesData = {
     defenseBonusMagic: {
         displayName: "Defense Bonus, Magic",
         description: "A value added to a character’s defense against arcanely targeted attacks.",
-        baseValue: "ranks in Discipline + ranks in magical aptitude."
+        baseValue: "ranks in Discipline."
     },
     defenseBonusMelee: {
         displayName: "Defense Bonus, Melee",
         description: "A value added to a character’s defense against melee attacks they are aware of.",
-        baseValue: "ranks in melee combat + equipment bonuses."
+        baseValue: "ranks in melee combat."
     },
     defenseBonusRanged: {
         displayName: "Defense Bonus, Ranged",
         description: "A value added to a character’s defense against ranged attacks they are aware of.",
-        baseValue: "ranks in awareness + ranks in dodge secondary skill (personal defense)."
+        baseValue: "ranks in awareness."
     },
     initiative: {
         displayName: "Initiative",
@@ -37,7 +37,7 @@ let otherAttributesData = {
     resistanceConcussive: {
         displayName: "Resistance (concussive)",
         description: "The amount by which concusive damage is reduced when suffered by this character.",
-        baseValue: "0 + body if positive."
+        baseValue: "0 + body if positive + size if positive."
     },
     resistanceDamageType: {
         displayName: "Resistance (damage type)",
@@ -57,17 +57,12 @@ let otherAttributesData = {
     staminaMax: {
         displayName: "Stamina, Max",
         description: "The total number of stamina a character may spend before suffering fatigue.",
-        baseValue: "10 + body stat + ranks in endurance + ranks in stamina (endurance)."
-    },
-    toughness: {
-        displayName: "Toughness",
-        description: "Some characters are so tough they all but ignore minor wounds.",
-        baseValue: "1"
+        baseValue: "set by the character's _character type_ trait, for adventurers 10."
     },
     woundsMax: {
         displayName: "Wounds, Max",
         description: "The total number of wounds a character may suffer before they are in danger of dying from them.",
-        baseValue: "5 + size, if positive, + body stat."
+        baseValue: "set by the character's _character type_ trait, for adventurers 4."
     }
 };
 
