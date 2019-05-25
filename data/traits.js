@@ -7,6 +7,7 @@ let traitsData = {
         keywords: ["Character Type"],
         description: `The character:
         <ul>
+        <li>Start with 10 stamina and 4 max wounds</li>
         <li>chooses 5 skills to gain rank one (novice) in and for each of them one secondary skill associated with that skill to gain rank one in.</li>
         <li>chooses one of their skills at rank one to increase to rank two (skilled).</li>
         <li>learn one spoken language as chosen by the GM.</li>
