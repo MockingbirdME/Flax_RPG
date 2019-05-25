@@ -36,9 +36,7 @@ ex. a character with +0 body and three wounds takes 18 days to fully recover (9 
 
 
 Damage - damage reduces stamina, if stamina hits zero inflicts a wound and refreshes stamina.
-    - all-weapons: damage 4 + twice the wielder's body stat. If wielded two handed treat the wielder's body stat as if it were one higher.
-
-weapon damage should be ~3-6 + twice body stat + amount attack exceeded defense.
+    - all-weapons: damage 4 + twice the wielder's body stat. If wielded two handed treat the wielder's body stat as if it were one higher. Reach 0-2;
 
 
 Melee weapons have traits:
@@ -49,14 +47,15 @@ one of - Quality:
 
 one of - balance:
     - balanced: parrying weapon.
-    - light: can be wielded off-handed, -1 damage or melee defense bonus.
-    - protective: can be wielded off-handed, parrying weapon, -3 damage.
-    - weighted: add wielder's body stat if positive to damage.
+    - light: can be wielded off-handed, - 1 damage, melee defense bonus (if any), and max reach.
+    - pole-arm: +1 max reach one handed, +2 max reach if hand-and-a-half, double min and max reach if two-handed.
+    - protective: can be wielded off-handed, parrying weapon, -3 damage, -1 max reach.
+    - weighted: add wielder's body stat if positive to damage, -1 max reach.
 
 one of - Size:
-    - one-handed: + 2 melee defense bonus, cannot be wielded two-handed.
-    - hand-and-a-half: + 1 melee defense when wielded one handed, + 1 damage when wielded two handed, may be wielded two handed.
-    - two-handed: + 2 damage, must be wielded two-handed.
+    - one-handed: + 1 melee defense bonus, cannot be wielded two-handed.
+    - hand-and-a-half: may be wielded two handed.
+    - two-handed: + 1 damage, must be wielded two-handed, + 1 min and max reach.
 
 one of - type or custom:
     - *axe*
@@ -66,13 +65,13 @@ one of - type or custom:
         - Additional Success Uses: one damage and one APV.
     - *blade, small*
         - Damage Type: penetrating
-        - APV: 3
+        - APV: 2
         - Restrictions: size one-handed only.
         - Special Rules: if its damage is converted to concussive if it would inflict a wound, instead leave the target at one stamina.
         - Additional Success Uses: one damage, or two armor piercing value.
     - *blade, long*
         - Damage Type: penetrating
-        - APV: 4
+        - APV: 3
         - Special Rules: treat the wielder's rank in the parry secondary skill as one higher than it is.
         - Additional Success Uses: one damage, or one armor piercing value.
     - *bludgeoning*
@@ -83,16 +82,22 @@ one of - type or custom:
     - *shield*
         - Damage Type: concussive
         - APV: N/A
-        - Restrictions: cannot be two-handed or pole-arm.
+        - Restrictions: cannot be two-handed.
         - Special Rules: provides shield bonus (+2) to melee defense bonus and ranged defense bonus against attacks they are aware of.
         - Additional Success Uses: one damage.
+    - *spear*
+        - Damage Type: penetrating
+        - APV: 3
+        - Special Rules: TBD
+        - Additional Success Uses: one damage and one APV.
+
 zero or more of - special:
     - *armor piercing(x)* this style of weapon is especially good at penetrating or finding gaps in armor, increase the weapons APV by x.
     - *bash* can be used to make the *bash* melee combat action.
     - *exotic* attacks with this weapon add a level of disadvantage to the attack's skill check.
     - *heavy(x)* a character without with a body attribute of less than x gains levels of disadvantage equal to the difference when attacking with this weapon, can not make free attacks with it, and cannot benefit from its parry or shield stats; if the character would gain more than two levels of disadvantage as a result of this trait they cannot attack with it at all.
     - *martial(x)* characters without at least x ranks in the melee combat skill gain a level of disadvantage on skill checks with this weapon.
-    - *reach(range)* the number of hexes away the weapon can be used to attack, a range that includes 0 can be used to attack targets that share a hex with the character.
+    - *reach(x, y)* increase the weapon's min reach by x and max reach by y.
     - *sap* can be used to make the *sap* melee combat action.
     - *thrown(X + Y)* the weapon is ranged, it has a close range and range increment of X + Y times body stat hexes. If a target is far enough away that the attack would gain 4 levels of disadvantage from range the attack automatically fails.
     - *trip* can be used to make the *trip* melee combat action.
