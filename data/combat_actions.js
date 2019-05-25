@@ -194,34 +194,30 @@ let combatActionsData = {
     defensiveStance: {
         displayName: "Defensive Stance",
         type: "Defensive",
-        requirements: "Cannot be taken on a turn the character performs an attack.",
         actionPointCost: 1,
         staminaCost: 0,
-        description: "The character readies themselves to continue an extended melee. They make a regain composure skill check to regain defense and double their melee defense bonus until their next turn."
+        description: "The character readies themselves to continue an extended melee. They gain a + 1 bonus to their melee defense until the begining of their next turn, this bonus is increased by their rank in the *parry secondary skill(personal defense)* if they are wielded a parrying weapon."
     },
     disengage: {
         displayName: "Disengage",
         type: "Defensive",
-        requirements: "Cannot be taken on a turn the character performs an attack.",
         actionPointCost: 1,
         staminaCost: 0,
-        description: "The character carefully disengages from their opponent and moves carefully through the battlefield. They make a regain composure skill check to regain defense and gain a situational 10 defense bonus against any free attacks until their next turn."
+        description: "The character carefully disengages from their opponent and moves carefully through the battlefield. All melee attacks made agasint the character gain two levels of disadvantage until the end of the character's turn."
     },
     dodge: {
         displayName: "Dodge",
         type: "Defensive",
-        requirements: "Cannot be taken on a turn the character performs an attack.",
         actionPointCost: 1,
         staminaCost: 0,
-        description: "The character bobs and weaves, zig zags, and generally makes themselves a difficult target for ranged attacks. They make a regain composure skill check to regain defense, double their ranged defense bonus (not including any cover bonuses) and gain a situational defense bonus equal to the number of stamina spent on move actions this turn until their next turn."
+        description: "The character bobs and weaves, zig zags, and generally makes themselves a difficult target for ranged attacks. They gain a + 1 bonus to their ranged defense until the begining of their next turn, this bonus is increased by their rank in the *dodge secondary skill(personal defense)*."
     },
     restorationAction: {
         displayName: "Restoration Action",
         type: "Defensive",
-        requirements: "Cannot be taken on a turn the character performs an attack.",
         actionPointCost: 1,
         staminaCost: 0,
-        description: "The character does their best to catch their breath and reposition themselves. They make a restoration skill check to regain stamina."
+        description: "The character does their best to catch their breath and reposition themselves. They regain 2 plus the sum of their ranks in the *endurance primary skill* and the *stamina secondary skill (endurance)* stamina."
     },
     readyStowItem: {
         displayName: "Ready Stow Item",
