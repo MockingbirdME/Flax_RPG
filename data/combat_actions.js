@@ -45,74 +45,64 @@ let combatActionsData = {
         displayName: "Basic Attack",
         type: "Melee",
         actionPointCost: 1,
-        staminaCost: 0,
+        staminaCost: 1,
         description: "Make an attack with a readied melee weapon. The character makes a *melee attack skill check* and applies the results."
     },
     bash: {
         displayName: "Bash",
         type: "Melee",
-        requirements: "Weapon/attack with the *Bash* keyword that deals concussive damage.",
         actionPointCost: 1,
-        staminaCost: 1,
-        description: "Make an attack with a readied melee weapon. The character makes a *melee attack skill check* and applies the results. The skill check gains a level of disadvantage if the character does not have at least one rank in the *bash secondary skill (melee combat)*. If the attack hits the target back one hex, and the first X additional successes must be spent to knock the target prone where X is equal to one plus the target's *size*, if positive, plus the targets *body* and minus the attacker's rank in the *bash secondary skill (melee combat)*. If the character succeeds in knocking their target back one hex they may advance one hex as part of this action."
+        staminaCost: 2,
+        description: "Make an attack with a readied melee weapon with the bash keyword. The character makes a *melee attack skill check*. The skill check gains a level of disadvantage if the character does not have at least one rank in the *bash secondary skill (melee combat)*. If the attack hits the target suffers its damage, converted to concussive it if would have been otherwise, and the target is pushed back X hexes, where X is equal to the attacker's rank in the *bash secondary skill (melee combat)* hexes. Additional successes may each be spent to knock the target back an additional hex. The total distance the target is knocked back is reduced by the sum of the target's *size*, if positive, and *body* stat. If the target was knocked back at least one plus their reflexes stat hexes they are rendered prone at the end of the knock back movement."
     },
     bullRush: {
         displayName: "Bull Rush",
         type: "Melee",
-        requirements: "*body* of at least +1.",
         actionPointCost: 1,
-        staminaCost: 1,
-        description: "Make a brawling attack or attack with an equipped shield attempting to push the target back. The character makes a *melee attack skill check* and applies the results. The skill check uses *body* instead of *reflexes* as the primary attribute, gains one level of disadvantage if the character does not have at least one rank in the *bull rush secondary skill (melee combat)* and the target's *melee defense bonus* does not benefit from any shield(s) they may be wielding. On a hit the target is pushed back one hex per rank the character has in the bull rush secondary skill (melee combat), and unless the target is pinned against a wall or other hard surface the first X additional successes must be spent to increase the distance the target is pushed by one hex where X is equal to the sum of the target's *body* and *size* (minimum one) after the first X successes have been spent each additional success increases the distance pushed by one hex; if the target is pushed into a wall or other hard surface increase the damage inflicted by the attack by the number of hexes the target was pushed and any remaining successes can be spent to increase the damage by two. The attacker moves with the target as they are pushed but may choose to stop a number of hexes, equal to their *body* attribute, short; doing so prevents them from using additional successes for extra damage."
+        staminaCost: 2,
+        description: "Make a brawling attack or attack with an equipped shield attempting to push the target back. The character makes a *melee attack skill check* and applies the results. The skill check uses *body* instead of *reflexes* as the primary attribute, gains one level of disadvantage if the character does not have at least one rank in the *bull rush secondary skill (melee combat)* and the target's *melee defense bonus* does not benefit from any shield(s) they may be wielding. If the attack hits the target is pushed back X hexes, where X is equal to the attacker's rank in the *bull rush secondary skill (melee combat)* hexes. Additional successes may only be spent to knock the target back an additional hex unless the movement has caused the target to hit a solid surface, such as a wall, in which case additional successes can be used to increase the attack's damage by one. The total distance the target is knocked back is reduced by the sum of the target's *size*, if positive, and *body* stat. If the target was knocked back at least one plus their reflexes stat hexes they are rendered prone at the end of the knock back movement. The attacker travels with the target as they are knocked back and may, if they choose, end their movement up to their body stat hexes before the target does."
     },
     brawling: {
         displayName: "Brawling",
         type: "Melee",
         actionPointCost: 1,
-        staminaCost: 0,
-        description: "Make an attack with the character's fists, feet, or natural weapon. The character makes a *melee attack skill check* and applies the results, on a complete success add a number of additional successes to the result equal to the character's rank in the *brawling secondary skill (melee combat)*."
+        staminaCost: 1,
+        description: "Make an attack with the character's fists, feet, or natural weapon. The character makes a *melee attack skill check* and applies the results. Increase this attacks damage by the character's rank in the *brawling secondary skill (melee combat)*."
     },
     disarm: {
         displayName: "Disarm",
         type: "Melee",
         actionPointCost: 1,
-        staminaCost: 1,
-        description: "Make a brawling attack or an attack with a readied melee weapon with the aim to disarm the target rather than harm them. The character makes a *melee attack skill check* and applies the results. The skill check gains a level of disadvantage if the character doesn't have at least one rank in the *disarm secondary skill (melee combat)*, an additional level of disadvantage if the character is unarmed unless they have at least two ranks in the *disarm secondary skill (melee combat)*, and an additional level of disadvantage if the target is wielding their weapon in two hands. If the attack was performed unarmed and the skill check failed the attacker suffers the effects of being hit by the weapon they were attempting to disarm as if the attacker had a *body* of 0. If the skill check succeeds instead of inflicting damage the target's weapon (attacker's choice if wielding more than one) is knocked to the ground at their feet, each additional success may be used to knock the disarmed weapon an additional hex away from the target and 5 minus the character's rank in the *disarm secondary skill (melee combat)* additional successes may be spent to allow a character in the same hex as the weapon to ready it provided they have a free hand."
+        staminaCost: 2,
+        description: "Make a brawling attack or an attack with a readied melee weapon with the aim to disarm the target rather than harm them. The character makes a *melee attack skill check*. The skill check gains a level of disadvantage if the character doesn't have at least one rank in the *disarm secondary skill (melee combat)*, an additional level of disadvantage if the character is unarmed unless they have at least two ranks in the *disarm secondary skill (melee combat)*, and an additional level of disadvantage if the target is wielding their weapon in two hands. If the attack was performed unarmed and the skill check failed the attacker suffers the effects of being hit by the weapon they were attempting to disarm as if the attacker had a *body* of 0 and no extra successes on the attack skill check. If the skill check succeeds it deals 0 damage and the targeted weapon is knocked to the ground at the target's feet, additional successes may be used to knock the disarmed weapon an additional hex away from the target, 5 minus the character's rank in the *disarm secondary skill (melee combat)* additional successes may be spent to allow a character in the same hex as the weapon to ready it provided they have a free hand, if the character readying the weapon is not the same character making this attack they must spend their reaction to ready it. Note that the attack can still have extra successes spent to increase its damage as usual."
     },
     distractingAttack: {
         displayName: "Distracting Attack",
         type: "Melee",
-        requirements: "at least one rank in the *distracting attack secondary skill (melee combat)*.",
         actionPointCost: 1,
-        staminaCost: 1,
-        description: "Make a brawling attack or an attack with a readied melee weapon designed to distract the target more than harm them. The character makes a *melee attack skill check* and applies the results. The skill check has two levels of disadvantage added to it, reduced by the character's rank in the *distracting attack secondary skill (melee combat)*. On a near success or greater result for the skill check reduce the target's defense by an additional amount equal to the character's rank in the *distracting attack secondary skill (melee combat)*, then ignore any additional successes."
+        staminaCost: 2,
+        description: "Make a brawling attack or an attack with a readied meleey weapon designed to distract the target more than harm them. The character makes a *melee attack skill check* and applies the results. The skill check gains a level of disadvantage if the character doesn't have at least one rank in the *distracting attack secondary skill (melee combat)*. On a near or complete success reduce the target's defense by one plus the character's rank in the *distracting attack secondary skill (melee combat)* against the next attack made against them before the begining of the attacker's next turn. If this attack would inflict a wound instead the target remains at one stamina."
     },
     flurryOfBlows: {
         displayName: "Flurry of Blows",
         type: "Melee",
         actionPointCost: 1,
-        staminaCost: 1,
-        description: "Make a brawling attack or an attack with a readied melee weapon. The character makes a *melee attack skill check* and applies the results. The skill check gains one level of advantage. Ignore any additional successes to the skill check but resolve the effects of the attack one plus the character's rank in the *flurry of blows secondary skill (melee combat)* times."
+        staminaCost: 2,
+        description: "Make a brawling attack or an attack with a readied melee weapon. The character makes a *melee attack skill check*. The skill check gains one level of advantage. If this attack hits ignore the character's body stat, if it's positive, for purposes of calculating damage. Ignore any additional successes from this skill check in excess of the character's rank in the *flurry of blows secondary skill (melee combat)*."
     },
     offHandAttack: {
         displayName: "Off-Hand Attack",
         type: "Melee",
         actionPointCost: 1,
         staminaCost: 1,
-        description: "Make a brawling attack or an attack with a readied melee weapon with the *small* keyword in the character's off-hand. The character makes a *melee attack skill check* and applies the results. This skill check gains one level of disadvantage unless the character has at least one rank in the *off-hand attack secondary skill (melee combat)*, this is in addition to the penalty die gained for performing an attack with the character's off-hand. Ignore any additional successes on this skill check in excess of the character's rank in the *off-hand attack secondary skill (melee combat)*. If the character has taken a different melee action already turn, the first time they take this action they may ignore all levels of disadvantage generated for having already taken melee actions this turn."
+        description: "Make a brawling attack or an attack with a readied melee weapon in the character's off-hand. The character makes a *melee attack skill check* and applies the results. This skill check gains one level of disadvantage unless the character has at least one rank in the *off-hand attack secondary skill (melee combat)*. Ignore any additional successes on this skill check in excess of the character's rank in the *off-hand attack secondary skill (melee combat)*. If the character has taken a different melee action already this turn, the first time they take this action they may ignore all levels of disadvantage generated for having already taken melee actions this turn."
     },
     powerAttack: {
         displayName: "Power Attack",
         type: "Melee",
         actionPointCost: 1,
-        staminaCost: 1,
-        description: "Make a brawling attack or an attack with a readied melee weapon. The character makes a *melee attack skill check* and applies the results. This skill check has one level of disadvantage added to it if the character does not have at least one rank in the *power attack secondary skill (melee combat)*. If the attack hits it deals one plus the character's rank in the *power attack secondary skill (melee combat)* extra damage, double the extra damage if the character already performed a dash action this turn."
-    },
-    recklessAttack: {
-        displayName: "Reckless Attack",
-        type: "Melee",
-        actionPointCost: 1,
-        staminaCost: 1,
-        description: "Make a brawling attack or an attack with a readied melee weapon. The character makes a *melee attack skill check* and applies the results. The skill check gains one level of advantage. All melee attacks against the character gain one level of advantage until the beginning of the character's next turn."
+        staminaCost: 2,
+        description: "Make a brawling attack or an attack with a readied melee weapon. The character makes a *melee attack skill check*. This skill check has one level of disadvantage added to it if the character does not have at least one rank in the *power attack secondary skill (melee combat)* and one level of disadvantage added to it unless the character performed a dash action this turn immediately before making this attack. If the attack hits treat the character's body stat as one plus the character's rank in the *power attack secondary skill (melee combat)* higher than it is."
     },
     aim: {
         displayName: "Aim",
