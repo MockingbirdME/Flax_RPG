@@ -525,6 +525,22 @@ let traitsData = {
         keywords: ["Heroic"],
         description: "The character may ready or stow the weapon used in any weapon attack they make."
     },
+    recklessAttacker: {
+            displayName: "Reckless Attacker",
+            type: "Combat",
+            requirements: [],
+            requirementsDescription: "",
+            keywords: [],
+            description: "The character may choose to spend one stamina before making a basic or brawling attack on their turn, if they do they gain a level of advantage to the melee attack skill check on this attack. If a character uses this ability one or more times on their turn all melee attacks made against them until the begining of their next turn gain a level of advantage on their skill checks."
+    },
+    recklessAttackerAdvanced: {
+            displayName: "Reckless Attacker, Advanced",
+            type: "Combat",
+            requirements: ["Reckless Attacker"],
+            requirementsDescription: "Reckless Attacker",
+            keywords: ["Advanced"],
+            description: "The character may choose to trigger their reckless attack trait on bash, bull rush, or power attacks."
+    },
     twoWeaponFighting: {
         displayName: "Two Weapon Fighting",
         type: "Combat",
