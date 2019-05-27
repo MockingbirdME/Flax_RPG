@@ -29,7 +29,7 @@ let traitsData = {
         requirements: [],
         requirementsDescription: "",
         keywords: [],
-        description: "Each time a character takes this trait they increase their max wounds by one plus their body stat, minimum of two total max wounds. The increase to max wounds granted by this trait is recalculated if the character's body attribute changes."
+        description: "Each time a character takes this trait they increase their max stamina by two."
     },
     largeSmallSize: {
         displayName: "Large/Small Size",
@@ -38,14 +38,6 @@ let traitsData = {
         requirementsDescription: "",
         keywords: ["Starting"],
         description: "Increase or decrease the character's size by one."
-    },
-    leftHanded: {
-        displayName: "Left Handed",
-        type: "General",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: ["Starting"],
-        description: "Target's of your melee attacks performed only with your primary (left) hand do not benefit from the *balanced* or *parrying* traits on any weapon readied in their primary hand."
     },
     linguist: {
         displayName: "Linguist",
@@ -61,7 +53,7 @@ let traitsData = {
         requirements: [],
         requirementsDescription: "",
         keywords: ["Advanced"],
-        description: "Each time a character takes this trait, increase their toughness by one."
+        description: "Each time a character takes this trait, increase their damage resistances by one."
     },
     trainingSpecializedNovice: {
         displayName: "Training, Specialized Novice",
@@ -69,14 +61,14 @@ let traitsData = {
         requirements: [],
         requirementsDescription: "",
         keywords: [],
-        description: "The character gains rank one in two different secondary skills."
+        description: "The character gains rank one in a secondary skill."
     },
     trainingSpecializedSkilled: {
         displayName: "Training, Specialized Skilled",
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: [],
+        keywords: ["Advanced"],
         description: "The character increases a secondary skill from rank one to rank two."
     },
     trainingSpecializedExpert: {
@@ -84,7 +76,7 @@ let traitsData = {
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description: "The character increases a secondary skill from rank two to rank three."
     },
     trainingSpecializedMaster: {
@@ -92,31 +84,23 @@ let traitsData = {
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: ["Heroic"],
-        description: "The character increases a secondary skill from rank three to rank four."
-    },
-    trainingSpecializedLegendary: {
-        displayName: "Training, Specialized Legendary",
-        type: "General",
-        requirements: [],
-        requirementsDescription: "",
         keywords: ["Epic"],
-        description: "The character increases a secondary skill from rank four to rank five."
+        description: "The character increases a secondary skill from rank three to rank four."
     },
     trainingNovice: {
         displayName: "Training, Novice",
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: [],
-        description: "The character gains rank one in a new skill and one rank in one of that skills secondary skills."
+        keywords: ["Advanced"],
+        description: "The character gains rank one in a new skill."
     },
     trainingSkilled: {
         displayName: "Training, Skilled",
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description: "The character increases a skill from rank one to rank two."
     },
     trainingExpert: {
@@ -126,14 +110,6 @@ let traitsData = {
         requirementsDescription: "",
         keywords: ["Epic"],
         description: "The character increases one skill from rank two to rank three."
-    },
-    trainingMaster: {
-        displayName: "Training, Master",
-        type: "General",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: ["Epic"],
-        description: "The character increases one skill from rank three to rank four."
     },
     heroicAttribute: {
         displayName: "Heroic Attribute",
@@ -379,7 +355,7 @@ let traitsData = {
         requirements: ["Duelist"],
         requirementsDescription: "Duelist",
         keywords: ["Advanced"],
-        description: "The character no longer requires that no other character is within melee range of them to use their reaction for to gain benefits from duelist traits."
+        description: "The character no longer requires that no other character is within melee range of them to use their reaction to gain benefits from duelist traits."
     },
     duelistHeroic: {
         displayName: "Duelist, Heroic",
@@ -402,24 +378,8 @@ let traitsData = {
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
-        keywords: [],
-        description: "Each time the character suffers at least one wound, they recover one stamina."
-    },
-    fueledByPainAdvanced: {
-        displayName: "Fueled by Pain, Advanced",
-        type: "Combat",
-        requirements: ["Fueled by Pain"],
-        requirementsDescription: "Fueled by Pain",
         keywords: ["Advanced"],
-        description: "Increase the number of stamina the character recovers from the Fueled by Pain trait to 2."
-    },
-    fueledByPainHeroic: {
-        displayName: "Fueled by Pain",
-        type: "Combat",
-        requirements: ["Fueled by Pain, Advanced"],
-        requirementsDescription: "Advanced Fueled by Pain",
-        keywords: ["Heroic"],
-        description: "Increase the number of wounds the character recovers from the Fueled by Pain trait to 2 + the character's body."
+        description: "If a character suffers one or more wounds after fully resolving the damage they regain all missing stamina."
     },
     hardToKill: {
         displayName: "Hard to Kill",
@@ -451,21 +411,13 @@ let traitsData = {
         requirements: ["Mobile Combatant, Advanced"],
         requirementsDescription: "Advanced Mobile Combatant",
         keywords: ["Heroic"],
-        description: "The first free attack the character provokes each turn automatically misses."
-    },
-    mobileCombatantEpic: {
-        displayName: "Mobile Combatant, Epic",
-        type: "Combat",
-        requirements: ["Mobile Combatant, Heroic"],
-        requirementsDescription: "Heroic Mobile Combatant",
-        keywords: ["Epic"],
         description: "The character no longer provokes free attacks."
     },
     multiAttack: {
         displayName: "Multi-Attack",
         type: "Combat",
         requirements: ["custom"],
-        requirementsDescription: "Any _Heroic_ combat trait",
+        requirementsDescription: "",
         keywords: ["Epic"],
         description: "The first time the character would receive disadvantage to an attack skill check as a result of their multi-attack penalty reduce that penalty by one."
     },
@@ -484,22 +436,6 @@ let traitsData = {
         requirementsDescription: "Multi-Attack, at least rank 3 in *Ranged Combat*.",
         keywords: ["Epic"],
         description: "Each time the character would receive disadvantage to a ranged attack skill check as a result of their multi-attack penalty reduce that penalty by one."
-    },
-    pushTheBody: {
-        displayName: "Push the Body",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "Once per turn the character may recover up to 3 *stamina* and suffer one *fatigue*."
-    },
-    pushTheBodyAdvanced: {
-        displayName: "Push the Body, Advanced",
-        type: "Combat",
-        requirements: ["Push the Body"],
-        requirementsDescription: "Push the Body",
-        keywords: ["Advanced"],
-        description: "Increase the stamina regained when the character uses Push the Body by their body stat."
     },
     quickDraw: {
         displayName: "Quick Draw",
