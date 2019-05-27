@@ -193,7 +193,7 @@ let combatActionsData = {
         type: "Defensive",
         actionPointCost: 1,
         staminaCost: 0,
-        description: "The character carefully disengages from their opponent and moves carefully through the battlefield. All melee attacks made agasint the character gain two levels of disadvantage until the end of the character's turn."
+        description: "The character carefully disengages from their opponent and moves carefully through the battlefield. All melee attacks made agasint the character gain a level of disadvantage until the end of the character's turn."
     },
     dodge: {
         displayName: "Dodge",
