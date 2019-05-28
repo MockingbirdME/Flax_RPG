@@ -116,7 +116,7 @@ let traitsData = {
         type: "Mage",
         requirements: ["Dependent Mage", "Learned Mage", "Natural Mage"],
         requirementsDescription: "Dependent Mage, Learned Mage, or Natural Mage.",
-        keywords: [],
+        keywords: ["advanced"],
         description: "Before making a skill check for casting a spell, gathering arcane energy, or crafting arcane energy the caster may choose to add their body, along with their mind, to the skill check; if they do so they lose stamina equal to twice their body stat, if positive, before making the affected skill check."
     },
     cantripCasterPowerful: {
