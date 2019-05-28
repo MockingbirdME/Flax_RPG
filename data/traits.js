@@ -176,7 +176,7 @@ let traitsData = {
         requirements: ["Learned Mage"],
         requirementsDescription: "Learned Mage",
         keywords: [],
-        description: "The character chooses one arcane theme secondary skill they have access to that skill can be increased by one rank (Note: this trait does not increase the rank of the selected skill, it only allows other traits/effects to increase it)."
+        description: "The character chooses one arcane theme secondary skill they have access to, that skill can be increased by one rank (Note: this trait does not increase the rank of the selected skill, it only allows other traits/effects to increase it)."
     },
     learnedMageExpandedLearning: {
         displayName: "Learned Mage, Expanded Learning",
@@ -184,7 +184,7 @@ let traitsData = {
         requirements: ["Learned Mage"],
         requirementsDescription: "Learned Mage",
         keywords: ["Advanced"],
-        description: "The character gains access to one arcane theme secondary skill that skill cannot be above rank two and cannot be increased beyond rank two."
+        description: "The character gains access to one arcane theme secondary skill that skill cannot be above rank one and cannot be increased beyond rank one."
     },
     naturalMage: {
         displayName: "Natural Mage",
@@ -203,7 +203,7 @@ let traitsData = {
         requirements: ["Natural Mage"],
         requirementsDescription: "Natural Mage",
         keywords: [],
-        description: "The character chooses one arcane power secondary skill to gain access to, that skill cannot be above rank one and cannot have their rank increased beyond one."
+        description: "The character chooses one arcane power secondary skill to gain access to, that skill cannot be above rank one and cannot have its rank increased beyond one."
     },
     sneakySpellCaster: {
         displayName: "Sneaky Spell Caster",
