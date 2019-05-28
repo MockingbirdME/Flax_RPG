@@ -28,7 +28,7 @@ let traitsData = {
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: [],
+        keywords: ["advanced"],
         description: "Each time a character takes this trait they increase their max stamina by two."
     },
     largeSmallSize: {
@@ -53,7 +53,7 @@ let traitsData = {
         requirements: [],
         requirementsDescription: "",
         keywords: ["Advanced"],
-        description: "Each time a character takes this trait, increase their damage resistances by one."
+        description: "Each time a character takes this trait, increase their general damage resistances by one."
     },
     trainingSpecializedNovice: {
         displayName: "Training, Specialized Novice",
@@ -325,6 +325,14 @@ let traitsData = {
         keywords: ["Heroic"],
         description: "The character may act on rounds when they are surprised, if their initiative would be before all non-surprised enemies they act after the enemy with the highest initiative."
     },
+    dualWeilder: {
+        displayName: "Dual Weilder",
+        type: "Combat",
+        requirements: [],
+        requirementsDescription: "",
+        keywords: [],
+        description: "The character can wield one handed weapons in their off hand and make off handed attacks with them."
+    },
     duelist: {
         displayName: "Duelist",
         type: "Combat",
@@ -476,30 +484,6 @@ let traitsData = {
             requirementsDescription: "Reckless Attacker",
             keywords: ["Advanced"],
             description: "The character may choose to trigger their reckless attack trait on bash, bull rush, or power attacks."
-    },
-    twoWeaponFighting: {
-        displayName: "Two Weapon Fighting",
-        type: "Combat",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: [],
-        description: "The character does not suffer the normal level of disadvantage when performing an attack with their off-hand and they may make *Off-Hand Attack* actions with *one-handed* weapons but gain a level of disadvantage when doing so."
-    },
-    twoWeaponFightingAdvanced: {
-        displayName: "Two Weapon Fighting, Advanced",
-        type: "Combat",
-        requirements: ["Two Weapon Fighting"],
-        requirementsDescription: "Two Weapon Fighting",
-        keywords: ["Advanced"],
-        description: "The character does not suffer disadvantage for performing *Off-Hand Attack* actions with *one-handed* weapons and may make them with *hand-and-a-half* weapons but gain a level of disadvantage when doing so, additionally if they have already taken an attack action on their turn with their primary hand or a weapon wielded in it, the first *Off-Hand Attack* action they make on this turn does not cost an action point."
-    },
-    twoWeaponFightingHeroic: {
-        displayName: "Two Weapon Fighting, Heroic",
-        type: "Combat",
-        requirements: ["Two Weapon Fighting, Advanced"],
-        requirementsDescription: "Advanced Two Weapon Fighting",
-        keywords: ["Heroic"],
-        description: "If the character has already taken an attack action on their turn with their primary hand or a weapon wielded in it, the first *Off-Hand Attack* action they make on this turn may be treated as a *Bash*, *Disarm*, *Distracting Attack*, *Power Attack*, *Reckless Attack*, *Throw*, or *Loose, Shoot, Fire* action performed with the character's off-hand or ready weapon wielded in their off-hand; this attack costs an additional stamina and must otherwise be eligible for the attack type being made."
     }
 };
 
