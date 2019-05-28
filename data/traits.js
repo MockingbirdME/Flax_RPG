@@ -429,22 +429,6 @@ let traitsData = {
         keywords: ["Epic"],
         description: "The first time the character would receive disadvantage to an attack skill check as a result of their multi-attack penalty reduce that penalty by one."
     },
-    multiAttackMeleeExpert: {
-        displayName: "Multi-Attack, Melee Expert",
-        type: "Combat",
-        requirements: ["custom"],
-        requirementsDescription: "Multi-Attack, at least rank 3 in *Melee Combat*.",
-        keywords: ["Epic"],
-        description: "Each time the character would receive disadvantage to a melee attack skill check as a result of their multi-attack penalty reduce that penalty by one."
-    },
-    multiAttackRangedExpert: {
-        displayName: "Multi-Attack, Ranged Expert",
-        type: "Combat",
-        requirements: ["custom"],
-        requirementsDescription: "Multi-Attack, at least rank 3 in *Ranged Combat*.",
-        keywords: ["Epic"],
-        description: "Each time the character would receive disadvantage to a ranged attack skill check as a result of their multi-attack penalty reduce that penalty by one."
-    },
     quickDraw: {
         displayName: "Quick Draw",
         type: "Combat",
