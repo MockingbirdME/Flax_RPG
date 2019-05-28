@@ -20,7 +20,7 @@ let traitsData = {
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: [],
+        keywords: ["advanced"],
         description: "The character gains advantage on rolls to resist illness and poisons."
     },
     healthy: {
