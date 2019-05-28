@@ -31,14 +31,6 @@ let traitsData = {
         keywords: ["advanced"],
         description: "Each time a character takes this trait they increase their max stamina by two."
     },
-    largeSmallSize: {
-        displayName: "Large/Small Size",
-        type: "General",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: ["Starting"],
-        description: "Increase or decrease the character's size by one."
-    },
     linguist: {
         displayName: "Linguist",
         type: "General",
