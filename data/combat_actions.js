@@ -186,7 +186,7 @@ let combatActionsData = {
         type: "Defensive",
         actionPointCost: 1,
         staminaCost: 0,
-        description: "The character readies themselves to continue an extended melee. They gain a + 1 bonus to their melee defense until the begining of their next turn, this bonus is increased by their rank in the *parry secondary skill(personal defense)* if they are wielded a parrying weapon."
+        description: "The character readies themselves to continue an extended melee. They gain a bonus to their melee defense until the begining of their next turn, this bonus is equal to their rank in the *parry secondary skill(personal defense)* if they are wielded a parrying weapon."
     },
     disengage: {
         displayName: "Disengage",
