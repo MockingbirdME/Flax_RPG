@@ -11,30 +11,30 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.get('/', (req, res) => {
-    res.send(`You've reached Flax's server, there's no UI here.`);
+  res.send(`You've reached Flax's server, there's no UI here.`);
 });
 
 // create a GET route
 app.get('/express_backend', (req, res) => {
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT booyah' });
+  res.send({express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT booyah'});
 });
 
 app.get('/documentation', (req, res) => {
-    res.send({DOCUMENTATION});
+  res.send({DOCUMENTATION});
 });
 
 app.get('/combatactions', (req, res) => {
-    res.send({CombatActions});
+  res.send({CombatActions});
 });
 
 app.get('/skillchecks', (req, res) => {
-    res.send({SkillChecks});
+  res.send({SkillChecks});
 });
 
 app.get('/strains', (req, res) => {
-    res.send({Strains});
+  res.send({Strains});
 });
 
 app.get('/traits', (req, res) => {
-    res.send({Traits});
+  res.send({Traits});
 });
