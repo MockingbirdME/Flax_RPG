@@ -107,16 +107,18 @@ const traitsData = {
     trainingNovice: {
         displayName: "Training, Novice",
         type: "General",
-        requirements: [],
-        requirementsDescription: "",
+        requirements: ["At least one associated secondary skill at rank one."],
+        requirementsDescription:
+      "At least one associated secondary skill at rank one.",
         keywords: ["Advanced"],
         description: "The character gains rank one in a new skill."
     },
     trainingSkilled: {
         displayName: "Training, Skilled",
         type: "General",
-        requirements: [],
-        requirementsDescription: "",
+        requirements: ["At least two associated secondary skill at rank two."],
+        requirementsDescription:
+      "At least two associated secondary skill at rank two.",
         keywords: ["Heroic"],
         description: "The character increases a skill from rank one to rank two."
     },
