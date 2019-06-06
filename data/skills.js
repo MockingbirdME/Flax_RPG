@@ -3,10 +3,6 @@ let skillsData = {
         displayName: "Animal Handling",
         description: "How familiar is the character with animals, particularly domestic ones. This skill should be used when dealing with an animal that has a chance of being controlled or calmed.",
         secondarySkills: {
-            animalType: {
-                displayName: "Animal Type",
-                description: ""
-            },
             befriend: {
                 displayName: "Befriend",
                 description: ""
