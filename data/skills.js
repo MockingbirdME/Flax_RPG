@@ -139,10 +139,6 @@ let skillsData = {
                 displayName: "Hold Breath",
                 description: ""
             },
-            lifing: {
-                displayName: "Lifting",
-                description: ""
-            },
             remainConscious: {
                 displayName: "Remain Conscious",
                 description: ""
