@@ -115,8 +115,8 @@ let primaryAttributesData = {
         requiredSuccesses: "none",
         failure: "the character gasps, breathing in whatever substance is around them.",
         nearSuccess: "N/A",
-        completeSuccess: "the character holds their breath and does not need to make another check for 1 plus their secondary skill rank turns, reduced by one turn each time they suffer 5 for more stamina damage or spend more than 3 stamina in one turn.",
-        additionalSuccesses: "each additional success increases the number of rounds before the character needs to check again."
+        completeSuccess: "the character holds their breath for 1 plus their secondary skill rank turns, reduced by one turn each time they suffer 5 for more stamina damage or spend more than 3 stamina in one turn.",
+        additionalSuccesses: "each additional success increases the number of rounds the character can hold their breath for."
     },
     investigateArea: {
         displayName: "Investigate Area",
