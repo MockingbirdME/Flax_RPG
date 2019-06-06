@@ -135,17 +135,17 @@ let skillsData = {
         displayName: "Endurance",
         description: "A measure of a character’s resistance to exhaustion. The skill should be used when a character is avoiding or resisting an effect such as fatigue or poison as well as when recovering from injury or illness.",
         secondarySkills: {
-            hold: {
+            holdBreath: {
                 displayName: "Hold Breath",
-                description: ""
+                description: "operating with limited air is important under water and when dealing with noxious fumes or a spray of spores, it is the relevant secondary skill for the hold breath skill check."
             },
             remainConscious: {
                 displayName: "Remain Conscious",
-                description: ""
+                description: "gritting ones teeth and shaking off the pain, blow to the head, or lack of oxygen, it is the relevant secondary skill for the remain concious skill check."
             },
             stamina: {
                 displayName: "Stamina",
-                description: ""
+                description: "maintaining performance without taking a break, this secondary skill is used in the calcuation of the restoration action."
             }
         }
     },
