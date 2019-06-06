@@ -179,21 +179,6 @@ let primaryAttributesData = {
         completeSuccess: "the target is hit, the target loses one defense and apply the effects of a hit with the attack/weapon.",
         additionalSuccesses: "the target suffers additional effects based on the attack/weapon."
     },
-    regainComposure: {
-        displayName: "Regain Composure",
-        primaryAttribute: ["Reflexes", "Perception"],
-        primarySkill: ["Personal Defense"],
-        relevantSecondarySkills: ["Regain Composure"],
-        aidingOthers: "none, character's make this skill check on their own.",
-        description: "the character steadies themselves and takes stock of their surroundings.",
-        difficulty: "12",
-        requiredSuccesses: "none",
-        criticalFailure: "the character recovers no defense.",
-        failure: "the character recovers defense equal to their secondary skill rank.",
-        nearSuccess: "N/A",
-        completeSuccess: "the character regains one plus their secondary skill rank defense.",
-        additionalSuccesses: "the character regains an additional point of defense for each additional success."
-    },
     remainConscious: {
         displayName: "Remain Conscious",
         primaryAttribute: ["Body"],
@@ -238,21 +223,6 @@ let primaryAttributesData = {
         nearSuccess: "",
         completeSuccess: "",
         additionalSuccesses: ""
-    },
-    restoration: {
-        displayName: "Restoration",
-        primaryAttribute: ["Body"],
-        primarySkill: ["Endurance"],
-        relevantSecondarySkills: ["Stamina"],
-        aidingOthers: "none, character's make this skill check on their own.",
-        description: "the character catches their breath to be able to continue pushing themselves.",
-        difficulty: "12",
-        requiredSuccesses: "none",
-        criticalFailure: "the character recovers no stamina.",
-        failure: "the character recovers stamina equal to their secondary skill rank.",
-        nearSuccess: "N/A",
-        completeSuccess: "the character regains one plus their secondary skill rank stamina.",
-        additionalSuccesses: "the character regains an additional point of stamina for each additional success."
     },
     searchArea: {
         displayName: "Search Area",
