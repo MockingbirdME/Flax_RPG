@@ -104,6 +104,20 @@ let primaryAttributesData = {
         completeSuccess: "the character is not noticed.",
         additionalSuccesses: "the character does not need to make a stealth check for one additional round to stay hidden provided their situation does not change (they don't take another action that might draw attention to themselves and no other character draws attention to them)."
     },
+    holdBreath: {
+        displayName: "Hold Breath",
+        primaryAttribute: ["Body"],
+        primarySkill: ["Endurance"],
+        relevantSecondarySkills: ["Hold Breatjh"],
+        aidingOthers: "none, character's make this skill check on their own.",
+        description: "the character is under water or otherwise unable to freely take breaths this skill check details how long they have before they can't fight the gasping reflex any longer.",
+        difficulty: "10",
+        requiredSuccesses: "none",
+        failure: "the character gasps, breathing in whatever substance is around them.",
+        nearSuccess: "N/A",
+        completeSuccess: "the character holds their breath and does not need to make another check for 1 plus their secondary skill rank turns, reduced by one turn each time they suffer 5 for more stamina damage or spend more than 3 stamina in one turn.",
+        additionalSuccesses: "each additional success increases the number of rounds before the character needs to check again."
+    },
     investigateArea: {
         displayName: "Investigate Area",
         primaryAttribute: ["Perception"],
