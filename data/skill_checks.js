@@ -241,9 +241,9 @@ let primaryAttributesData = {
     },
     senseMotive: {
         displayName: "Sense Motive",
-        primaryAttribute: [""],
-        primarySkill: [""],
-        relevantSecondarySkills: [""],
+        primaryAttribute: ["Perception", "Mind"],
+        primarySkill: ["Awareness"],
+        relevantSecondarySkills: ["Sense Motive"],
         aidingOthers: "",
         description: "",
         difficulty: "",
