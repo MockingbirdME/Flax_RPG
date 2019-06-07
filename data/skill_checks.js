@@ -279,6 +279,20 @@ let primaryAttributesData = {
         completeSuccess: "",
         additionalSuccesses: ""
     },
+    slightOfHand: {
+        displayName: "Slight of Hand",
+        primaryAttribute: ["Reflexes"],
+        primarySkill: ["Legerdemain"],
+        relevantSecondarySkills: ["Slight of Hand"],
+        aidingOthers: "a character can help misdirect a target's attention reducing the difficulty for the light of hand skill check by one plus the assisting character's rank legerdemain; a GM may increase this bonus based on how the aiding character roleplays the distraction.",
+        description: "moving faster than the eye can see, or moving where the eye isn't looking, this skill check can be used to pickpocket a tartet, quickly hide an object, or otherwise perform simple trickery.",
+        difficulty: "1-15 depending on the the task at hand and reduced by their rank in the secondary skill and modified by the target's reflexes and perception stats.",
+        requiredSuccesses: "equal to the sum of the target's ranks in the awareness primary skill and alertness secondary skill (awareness).",
+        failure: "the character fails to achieve their result and the target knows they tried.",
+        nearSuccess: "the character achieves their desired result but he target is aware of it.",
+        completeSuccess: "the character achieves their desired result and characters other than the target who were paying attention may make an alertness skill check with a difficulty equal to the sum of this skill check's difficulty and requried successes to see if they noticed the slight of hand.",
+        additionalSuccesses: "increase the difficulty of the prompted alertness check by one for each additional success."
+    },
     sprint: {
         displayName: "Sprint",
         primaryAttribute: ["Body", "Reflexes"],
