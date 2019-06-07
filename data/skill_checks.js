@@ -24,8 +24,22 @@ let primaryAttributesData = {
         requiredSuccesses: "N/A",
         failure: "the character falls forcing any allies helping them to make an additional check to stay up.",
         nearSuccess: "N/A",
-        completeSuccess: "The character is able to move no more than their rank in the secondary skill hexes while still affected by what caused this skill check. If the character can move 0 hexes they are rendered prone if this is the first time they've made this skill check from the same effect.",
-        additionalSuccesses: "Increase the max distance moved by one hex per additional success."
+        completeSuccess: "the character is able to move no more than their rank in the secondary skill hexes while still affected by what caused this skill check. If the character can move 0 hexes they are rendered prone if this is the first time they've made this skill check from the same effect.",
+        additionalSuccesses: "increase the max distance moved by one hex per additional success."
+    },
+    befriendAnimal: {
+        displayName: "Befriend Animal",
+        primaryAttribute: ["Mind"],
+        primarySkill: ["Animal Handling"],
+        relevantSecondarySkills: ["Befriend"],
+        aidingOthers: "none, character's make this skill check on their own.",
+        description: "The character has encountered an animal that is not already friendly to them and has not already attacked them or fleed from them, this skill check is used to attempt to make the animal friendly to the character.",
+        difficulty: "8-20+ depending on the animal in question, this should take into account the animal's temperment and social inteligence.",
+        requiredSuccesses: "5-10 reduced by the character's rank in the secondary skill depending on the temperment of the animal.",
+        failure: "the character upsets the animal, it either flees or attacks.",
+        nearSuccess: "the animal remains nutral towards the character, any further attempts to befriend it have the required successes reduced by one plus the character's rank in the secondary skill",
+        completeSuccess: "the animal has become friendly towards the character and will remain so for one hour.",
+        additionalSuccesses: "increse the duration for how long the animal will remain friendly for by an hour per additional success. An animal that has been friendly towards the character for a number of days equal to the initial required successes to befriend it has become tamed, no further skill checks required to ensure it stays friendly to the character."
     },
     climb: {
         displayName: "Climb",
