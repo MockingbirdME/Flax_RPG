@@ -14,10 +14,6 @@ let skillsData = {
             ride: {
                 displayName: "Ride",
                 description: ""
-            },
-            train: {
-                displayName: "Train",
-                description: ""
             }
         }
     },
