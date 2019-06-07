@@ -13,7 +13,7 @@ let skillsData = {
             },
             ride: {
                 displayName: "Ride",
-                description: ""
+                description: "charging on a warhorse or getting a donkey to willingly traverse a swaying bridge the ride skill is used to determine what animals will obey your command and can be used in place in the balance and trian/command animals skill checks in place of their normal secondary skills for riding related tasks."
             }
         }
     },
