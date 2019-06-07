@@ -293,6 +293,20 @@ let primaryAttributesData = {
         completeSuccess: "the character moves up to one plus their rank in the secondary skill hexes.",
         additionalSuccesses: "increase the distance the character swims by up to one hex."
     },
+    trainCommandAnimal: {
+        displayName: "Train/Command Animal",
+        primaryAttribute: ["Mind"],
+        primarySkill: ["Animal Handling"],
+        relevantSecondarySkills: ["command"],
+        aidingOthers: "two or more characters can work together to train, but not command, an animal; when doing so the character making this skill check may use the highest primary attribte, primary skill rank, and secondary skill rank of all characters participating.",
+        description: "the character is attempting to train an animal to obey a specific command or attempting to command an animal to perform an action that it has not been fully trained to perform. A character attempting a command skill check takes one action point or a few seconds, while a character attempting to train an animal must spend at least an hour per command they are trying to train. ",
+        difficulty: "8-20+ depending on the animal in question, this should take into account the animal's temperment and social inteligence.",
+        requiredSuccesses: "5-10 reduced by the character's rank in the secondary skill depending on the temperment of the animal.",
+        failure: "the character trains bad behavior into the animal, adding a penalty die to all attempts to train or command the desired behavior until the animal is trained in the same behavior is trained with a completeSuccess.",
+        nearSuccess: "the animal is begining to understand the command, any further attempts to train this command or command it have the required successes reduced by one plus the character's rank in the secondary skill",
+        completeSuccess: "the animal has become familiar with the command and no skill check is required to get them to perform it for one day.",
+        additionalSuccesses: "increse the duration for how long the animal will retain the trained command for by a day per additional success. An animal that has been trained in a command for a number of days equal to the initial required successes to befriend it has become permenently trained and no further command skill checks are required unless there's specific circumstances that would cause the animal to not obey, like issuing the 'sic' command at a person the animal is friendly with, or the 'come' command while the animal is currently being given treats."
+    },
     tumble: {
         displayName: "Tumble",
         primaryAttribute: ["Reflexes"],
