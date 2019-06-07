@@ -9,7 +9,7 @@ let skillsData = {
             },
             command: {
                 displayName: "Command",
-                description: ""
+                description: "training and commanding animals to act as the character wishes, this is the relevant secondary skill for the train/command animals skill check."
             },
             ride: {
                 displayName: "Ride",
