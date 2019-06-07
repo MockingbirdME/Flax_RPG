@@ -279,10 +279,6 @@ let skillsData = {
                 displayName: "Parry",
                 description: ""
             },
-            regainComposure: {
-                displayName: "Regain Composure",
-                description: ""
-            },
             shields: {
                 displayName: "Shields",
                 description: ""
