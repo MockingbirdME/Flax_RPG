@@ -195,6 +195,20 @@ let primaryAttributesData = {
         completeSuccess: "the target is hit, the target loses one defense and apply the effects of a hit with the attack/weapon.",
         additionalSuccesses: "the target suffers additional effects based on the attack/weapon."
     },
+    pickLocks: {
+        displayName: "Pick Locks",
+        primaryAttribute: ["Perception", "Mind"],
+        primarySkill: ["Legerdemain"],
+        relevantSecondarySkills: ["Pick Locks"],
+        aidingOthers: "none, character's make this skill check on their own.",
+        description: "using a set of lockpicks to try and get a lock to open up without its key.",
+        difficulty: "1-15 depending on the lock and reduced by their rank in the secondary skill.",
+        requiredSuccesses: "10",
+        failure: "the character can not pick this lock, they may not try again for one full day.",
+        nearSuccess: "the character fails to pick the lock after 10 rounds but may try again reducing the skill check's required successes by their rank in the secondary skill to a minimum of zero.",
+        completeSuccess: "the character succsefully picks the lock after 10 rounds.",
+        additionalSuccesses: "reduce the number of rounds it took the character to pick the lock by one."
+    },
     remainConscious: {
         displayName: "Remain Conscious",
         primaryAttribute: ["Body"],
