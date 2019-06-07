@@ -5,7 +5,7 @@ let skillsData = {
         secondarySkills: {
             befriend: {
                 displayName: "Befriend",
-                description: ""
+                description: "coaxing animals to be friendly towards the character and potentially even taming them, this is the relevant secondary skill for the befriend animal skill check."
             },
             command: {
                 displayName: "Command",
