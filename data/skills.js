@@ -173,10 +173,6 @@ let skillsData = {
                 displayName: "Picklocks",
                 description: ""
             },
-            pickpockets: {
-                displayName: "Pickpockets",
-                description: ""
-            },
             slightOfHand: {
                 displayName: "Slight of Hand",
                 description: ""
