@@ -171,7 +171,7 @@ let skillsData = {
         secondarySkills: {
             picklocks: {
                 displayName: "Picklocks",
-                description: ""
+                description: "opening or relocking doors, chests, or padlocks that the character does not have a key for, it is the primary secondary skill for the pick locks skill check."
             },
             slightOfHand: {
                 displayName: "Slight of Hand",
