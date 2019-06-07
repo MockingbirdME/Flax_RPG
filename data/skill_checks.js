@@ -297,7 +297,7 @@ let primaryAttributesData = {
         displayName: "Train/Command Animal",
         primaryAttribute: ["Mind"],
         primarySkill: ["Animal Handling"],
-        relevantSecondarySkills: ["Command", "Ride"],
+        relevantSecondarySkills: ["Train", "Ride"],
         aidingOthers: "two or more characters can work together to train, but not command, an animal; when doing so the character making this skill check may use the highest primary attribte, primary skill rank, and secondary skill rank of all characters participating.",
         description: "the character is attempting to train an animal to obey a specific command or attempting to command an animal to perform an action that it has not been fully trained to perform. A character attempting a command skill check takes one action point or a few seconds, while a character attempting to train an animal must spend at least an hour per command they are trying to train. If this skill check is made to command a mount the character is riding they may use their ride secondary skill.",
         difficulty: "8-20+ depending on the animal in question, this should take into account the animal's temperment and social inteligence.",
