@@ -18,13 +18,13 @@
 }
 
 .character_sheet__body {
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
 .character_sheet__body__attributes {
-  max-width: 8rem;
+  max-width: 10%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,43 +59,18 @@
  margin: .5rem 0;
 }
 
-.character_sheet__body__defense {
-  display: flex;
-  justify-content: flex-start;
-  border: 1px solid;
-  margin-top: 1rem;
-  flex-direction: column;
-  padding-bottom: .25rem;
-}
-
-.character_sheet__body__defense > h5, .character_sheet__body__defense__stat {
-  margin: .25rem 1rem;
-}
-
-.character_sheet__body__defense__bonuses__container {
+.character_sheet__body__content {
   display: flex;
   justify-content: space-between;
-  margin: 0 .5rem;
+  width: 90%; /* TODO MAKE THIS WORK BETTER */
 }
 
-.character_sheet__body__defense__bonuses__container > .character_sheet__attribute_box__container {
-  margin: 0 .5rem;
-}
-
-.character_sheet__body__stamina {
+.character_sheet__body__resources {
   display: flex;
-  justify-content: flex-start;
-  border: 1px solid;
-  margin-top: 1rem;
-  flex-direction: column;
-  padding-bottom: .25rem;
+  justify-content: space-between;
+  width: 100%;
 }
-
-.character_sheet__body__stamina > h5, .character_sheet__body__stamina__stat {
-  margin: .25rem 1rem;
-}
-
-.character_sheet__body__wounds {
+.character_sheet__body__resource {
   display: flex;
   justify-content: flex-start;
   border: 1px solid;
@@ -104,30 +79,40 @@
   padding-bottom: .25rem;
 }
 
-.character_sheet__body__wounds > * {
+.character_sheet__body__resource > * {
   margin: .25rem 1rem;
 }
 
-.character_sheet__body__wounds__levels {
+.character_sheet__body__resource__levels {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.character_sheet__body__wounds__levels > .character_sheet__body__wounds__levels__level {
+.character_sheet__body__resource__levels > .character_sheet__body__resource__levels__level {
   display: flex;
   justify-content: space-between;
 }
 
-.character_sheet__body__wounds__levels > .character_sheet__body__wounds__levels__level > h6 {
+.character_sheet__body__resource__levels > .character_sheet__body__resource__levels__level > h6 {
   align-self: center;
 }
 
-.character_sheet__body__wounds__levels input[type='checkbox'] {
+.character_sheet__body__resource__levels input[type='checkbox'] {
     -webkit-appearance:none;
     width:30px;
     height:30px;
     background:white;
     border-radius:5px;
     border:2px solid #555;
+}
+
+.character_sheet__body__resource__levels input[type='text'] {
+    -webkit-appearance:none;
+    width:44px;
+    height:24px;
+    background:white;
+    border-radius:2px;
+    border:2px solid #555;
+    margin-left: .5rem;
 }
