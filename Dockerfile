@@ -17,7 +17,7 @@ RUN npm run client-install
 # Copy and build the client
 COPY client client
 RUN npm run client-build
-RUN npm -rf client/src client/node_modules && apk del .gyp
+RUN rm -rf client/src client/node_modules && apk del .gyp
 
 # Get the rest of the code
 COPY . .
