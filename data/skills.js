@@ -187,10 +187,6 @@ let skillsData = {
         displayName: "Medicine",
         description: "Court physicians to midwifes and witch doctors all use their skills to heal the sick and prevent medical misfortune.",
         secondarySkills: {
-            diagnoses: {
-                displayName: "Diagnoses",
-                description: ""
-            },
             firstAid: {
                 displayName: "First Aid",
                 description: ""
@@ -201,10 +197,6 @@ let skillsData = {
             },
             surgery: {
                 displayName: "Surgery",
-                description: ""
-            },
-            woundType: {
-                displayName: "Wound Type",
                 description: ""
             }
         }
