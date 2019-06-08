@@ -22,7 +22,6 @@ for (let skillCheckKey in data) {
     skillCheckHtml += `<li><b>Description</b> - ${skillCheck.description}</li>`;
     skillCheckHtml += `<li><b>Difficulty</b> - ${skillCheck.difficulty}</li>`;
     skillCheckHtml += `<li><b>Required Successes</b> - ${skillCheck.requiredSuccesses}</li>`;
-    skillCheckHtml += `<li><b>Critical Failure</b> - ${skillCheck.criticalFailure}</li>`;
     skillCheckHtml += `<li><b>Failure</b> - ${skillCheck.failure}</li>`;
     skillCheckHtml += `<li><b>Near Success</b> - ${skillCheck.nearSuccess}</li>`;
     skillCheckHtml += `<li><b>Complete Success</b> - ${skillCheck.completeSuccess}</li>`;
