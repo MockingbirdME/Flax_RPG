@@ -83,6 +83,12 @@
   margin: .25rem 1rem;
 }
 
+.character_sheet__body__resource__stat > h4 {
+  border: 1px solid;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
 .character_sheet__body__resource__levels {
   display: flex;
   justify-content: space-between;
