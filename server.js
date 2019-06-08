@@ -11,16 +11,7 @@ const port = process.env.PORT || 5000;
 // Console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.get("/", (req, res) => {
-    res.send(`You've reached Flax's server, there's no UI here.`);
-});
-
 app.use(express.static('client/build', {index: false}));
-
-// Create a GET route
-app.get("/express_backend", (req, res) => {
-    res.send({express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT booyah"});
-});
 
 app.get("/documentation", (req, res) => {
     res.send({DOCUMENTATION});
