@@ -1,17 +1,18 @@
-let marked = require('marked');
-let fs = require('fs');
-let path = require('path');
-let data = require('../../data/skill_checks.js');
+const marked = require('marked');
+const fs = require('fs');
+const path = require('path');
+const data = require('../../data/skill_checks.js');
 
-let response = {
+const response = {
     subChapters: {}
 };
 
 let html = marked(fs.readFileSync(path.resolve(__dirname, 'markdown.md'), 'utf8'));
 
 html += `<div class="skill_check_container rules_list">`;
-for (let skillCheckKey in data) {
-    let skillCheck = data[skillCheckKey];
+for (const skillCheckKey in data) {
+    if (!data.hasOwnProperty(skillCheckKey)) continue;
+    const skillCheck = data[skillCheckKey];
     let skillCheckHtml = `<div class="skill_check_container_${skillCheckKey}">`;
 
     skillCheckHtml += `<h4>${skillCheck.displayName}</h4> <ul>`;
