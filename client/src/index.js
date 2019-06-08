@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 
-import Routes from './routes.js'
+import Routes from './routes.js';
 import Header from './header/header.js';
 import TopNav from './topNav/topNav.js';
 
-import { Provider } from "mobx-react";
+import {Provider} from "mobx-react";
 import rootStore from "./stores/rootStore.js";
 
 import './index.css';
