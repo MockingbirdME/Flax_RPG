@@ -20,7 +20,7 @@ staff - two-handed, balanced, bludgeoning, bash, trip
 
 
 shield - one-handed, protective, shield, bash
-
+ 
 
 javelin - one-handed, pole-arm, spear, reach 0-3, thrown (6 + 2Body)
 short spear - hand-and-a-half, pole-arm, spear, martial(1), reach 0-4, thrown (4 + 1Body), trip
