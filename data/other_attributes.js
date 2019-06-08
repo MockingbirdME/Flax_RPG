@@ -29,6 +29,11 @@ let otherAttributesData = {
         description: "A measure of how quickly the character acts.",
         baseValue: "sum of the character's reflexes, perception, and mind."
     },
+    reach: {
+        displayName: "Reach",
+        description: "",
+        baseValue: "0 + size if positive."
+    },
     resistanceConcussive: {
         displayName: "Resistance (concussive)",
         description: "The amount by which concusive damage is reduced when suffered by this character.",
@@ -38,6 +43,11 @@ let otherAttributesData = {
         displayName: "Resistance (damage type)",
         description: "The amount by which the specified damage type is reduced when suffered by this character.",
         baseValue: "0 for each other damage type."
+    },
+    size: {
+        displayName: "Size",
+        description: "How large the character is.",
+        baseValue: "set by the character's strain."
     },
     speed: {
         displayName: "Speed",
