@@ -27,7 +27,7 @@ let otherAttributesData = {
     initiative: {
         displayName: "Initiative",
         description: "A measure of how quickly the character acts.",
-        baseValue: "sum of the character's current defense and current stamina."
+        baseValue: "sum of the character's reflexes, perception, and mind."
     },
     reach: {
         displayName: "Reach",
