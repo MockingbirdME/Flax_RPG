@@ -1,7 +1,7 @@
 
 .coreRules__Container {
     width: 80vw;
-    margin: 0 10VW;
+    margin: 0 10vw;
     display: inline-flex;
 }
 
@@ -10,7 +10,7 @@
     position: sticky;
     border: 1px solid black;
     margin: 2rem 2rem 2rem 0;
-    min-width: calc(40VW - 20rem);
+    min-width: calc(40vw - 20rem);
     height: 25rem;
     text-align: center;
 }
