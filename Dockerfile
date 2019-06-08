@@ -12,7 +12,7 @@ RUN npm install --production
 
 # Install client dependencies
 Copy client/package*.json client/
-RUN npm install client-install
+RUN npm run client-install
 
 # Copy and build the client
 COPY client client
