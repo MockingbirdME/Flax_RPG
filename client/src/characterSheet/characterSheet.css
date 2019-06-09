@@ -16,8 +16,6 @@
 }
 
 .character_sheet__header {
-  /* width: 50%; */
-  /* border-left: 1px solid black; */
   border-bottom: 1px solid black;
 }
 
@@ -71,7 +69,6 @@
   display: flex;
   justify-content: space-between;
   width: 27%;
-  /* flex-grow: 1; */
 }
 
 .character_sheet__body__group_attributes {
@@ -89,8 +86,6 @@
   margin-top: 1rem;
   padding: .25rem 1rem;
   width: 100%;
-  /* flex-grow: 1; */
-  /* min-width: 17rem; */
 }
 
 .character_sheet__body__resource_name {
@@ -148,7 +143,7 @@
 }
 
 .character_sheet__body__primary_skill {
-  /* border-bottom: 1px solid; */
+
 }
 
 .character_sheet__body__secondary_skill {
