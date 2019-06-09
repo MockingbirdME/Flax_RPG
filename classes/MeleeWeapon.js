@@ -1,20 +1,36 @@
+const BASE_STATS = {
+  _damage: 4,
+  _offHanded: false,
+  _penaltyDice: 0,
+  _twoHandedOption: false,
+  _twoHandedRequired: false
+};
+
+const QUALITY_ENUM = ["crude", "simple", "standard"];
 
 // TODO import all weapon data items and convert them for export.
 
 class MeleeWeapon {
 
   constructor({name, quality = 'standard', balance, size, type, options = {}}) {
+    // Initialize Melee Weapon Base Stats.
+    Object.keys(BASE_STATS).forEach(key => this[key] = BASE_STATS.key);
 
     // TODO throw errors if not all needed values are passed.
+
+    // If name is missing or invalid throw an error, otherwise set it.
+    if (!name || typeof name !== "string") throw new Error("name is a required property and must be a non-empty string.");
     this._name = name;
+
+    if (QUALITY_ENUM.indexOf(quality.toLowerCase()) === -1) throw new Error(`Quality property must be left blank of be one of: [${QUALITY_ENUM.join(", ")}].`);
     this._quality = quality;
+    // TODO apply quality to weapon.
+
     this._balance = balance;
     this._size = size;
     this._type = type;
     this._options = options;
 
-    // TODO calculate Damage
-    this._damage = "???";
 
     // TODO additional successes
     this._additionalSuccesses = "???";
@@ -39,6 +55,15 @@ class MeleeWeapon {
 
     // TODO calculate reach
     this._reach = ["???", "???"];
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  set name(name) {
+    // TODO validate param.
+    this._name = name;
   }
 
 }
