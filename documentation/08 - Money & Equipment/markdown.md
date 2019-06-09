@@ -34,6 +34,8 @@ Suits of armor have a number of properties:
     - Resistance (Cold): 2
     - Required Training: 3
     - Perception Penalty: 1
+
+    
 ### Weapons
 Weapons have a number of keywords as follows:
 **Balance:** all melee weapon's, and ranged weapons that can be used as such, have one of the following balance traits.
