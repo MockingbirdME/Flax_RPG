@@ -24,7 +24,7 @@ let strainsData = {
             },
             clawsWebbedFeetTail: {
                 displayName: "Claws, Webbed Feet, and Tail",
-                description: "the character gains advantage on swim and climb skill checks."
+                description: "the character gains a bonus die on swim and climb skill checks."
             },
             glidingMembrain: {
                 displayName: "Gliding Membrain",
@@ -61,7 +61,7 @@ let strainsData = {
         strainTraits: {
             coolTemperament: {
                 displayName: "Cool Temperament",
-                description: "the character gains advantage on all checks to resist fear."
+                description: "the character gains a bonus die on all checks to resist fear."
             },
             greatStrength: {
                 displayName: "Great Strength",

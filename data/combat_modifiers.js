@@ -1,11 +1,11 @@
 let primaryAttributesData = {
     kneeling: {
         displayName: "Kneeling",
-        description: "Targeting a kneeling character with a ranged attack grants one level of disadvantage, targeting a kneeling character with a melee attack grants one level of advantage."
+        description: "Targeting a kneeling character with a ranged attack grants one penalty die, targeting a kneeling character with a melee attack grants one bonus die."
     },
     prone: {
         displayName: "Prone",
-        description: "Targeting a prone character with a ranged attack grants two levels of disadvantage, targeting a prone character with a melee attack grants two levels of advantage."
+        description: "Targeting a prone character with a ranged attack grants two penalty dice, targeting a prone character with a melee attack grants two bonus dice."
     },
     cover: {
         displayName: "Cover",
@@ -17,11 +17,11 @@ let primaryAttributesData = {
     },
     flanked: {
         displayName: "Flanked",
-        description: "A character is flanked if they have enemies on either side of them who are in range to make melee attacks agains the character. All melee attacks agains a flanked character gain a level of advantage."
+        description: "A character is flanked if they have enemies on either side of them who are in range to make melee attacks agains the character. All melee attacks agains a flanked character gain a a bonus die."
     },
     flatFooted: {
         displayName: "Flat Footed",
-        description: "A flat footed target is in no way prepared for combat, in addition to being surprised all attacks against a flat footed character gain one level of advantage."
+        description: "A flat footed target is in no way prepared for combat, in addition to being surprised all attacks against a flat footed character gain one bonus die."
     },
     surprised: {
         displayName: "Surprised",

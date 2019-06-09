@@ -22,7 +22,7 @@ const traitsData = {
         requirementsDescription: "",
         keywords: ["Advanced"],
         description:
-      "The character gains advantage on rolls to resist illness and poisons."
+      "The character gains a bonus die on rolls to resist illness and poisons."
     },
     hardToKillHealthy: {
         displayName: "Hard to Kill, Healthy",
@@ -180,7 +180,7 @@ const traitsData = {
           <ul>
           <li>They can know up to one cantrip and up to two spells.</li>
           <li>They gains access to a number of arcane power secondary skills equal to one plus their rank in the magical aptitude secondary skill, if the character later increases their rank in the magical aptitude primary skill they may recalculate the number of arcane power secondary skills they have access to; these secondary skills can not have a rank of more than one greater than their rank in the magical aptitude primary skill.</li>
-          <li>They suffers one level of disadvantage to all skill checks to cast spells, gather, or shape arcane energy if they have no arcane essence in their system.</li>
+          <li>They suffers one penalty die to all skill checks to cast spells, gather, or shape arcane energy if they have no arcane essence in their system.</li>
           <li>They cannot make skill checks to cast spells, gather, or shape arcane energy if they have not consumed arcane essence in the last 24 hours.</li>
           <li>They cannot cast cantrips if they have not consumed arcane essence in the last span of days.</li>
           <li>They can burn the arcane essence in their system to reduce one instance of arcane dues they suffer by half.</li></ul>`
@@ -389,7 +389,7 @@ const traitsData = {
         requirementsDescription: "",
         keywords: ["Simple"],
         description:
-      "The character may spend one action point on their turn to choose one character within this trait's range of 10 hexes to be their dueling opponent. The character may spend their reaction to add one level of disadvantage to an attack's skill check against them made by their dueling opponent provided the attack was made from within range and no other character is within melee range of them. A character ceases to be a dueling opponent if another character is made a dueling opponent or if they leave the character's sight for a full round."
+      "The character may spend one action point on their turn to choose one character within this trait's range of 10 hexes to be their dueling opponent. The character may spend their reaction to add one penalty die to an attack's skill check against them made by their dueling opponent provided the attack was made from within range and no other character is within melee range of them. A character ceases to be a dueling opponent if another character is made a dueling opponent or if they leave the character's sight for a full round."
     },
     duelistDefensive: {
         displayName: "Duelist, Defensive",
@@ -398,7 +398,7 @@ const traitsData = {
         requirementsDescription: "Duelist",
         keywords: ["Advanced"],
         description:
-      "When the character spends their reaction to add a level of disadvantage to their dueling opponent they now add one level of disadvantage to all eligible attacks from their opponent until the character's next turn."
+      "When the character spends their reaction to add a penalty die to their dueling opponent they now add one penalty die to all eligible attacks from their opponent until the character's next turn."
     },
     duelistDistance: {
         displayName: "Duelist, Distance",
@@ -424,7 +424,7 @@ const traitsData = {
         requirementsDescription: "Two Dualist Traits",
         keywords: ["Heroic"],
         description:
-      "When the character spends their reaction to grant disadvantage to one or more attacks by their dueling opponent they gain one level of advantage on their next eligible attack against their dueling opponent before the end of their next turn."
+      "When the character spends their reaction to grant a penalty die to one or more attacks by their dueling opponent they gain one bonus die on their next eligible attack against their dueling opponent before the end of their next turn."
     },
     fastReflexes: {
         displayName: "Fast Reflexes",
@@ -477,7 +477,7 @@ const traitsData = {
         requirementsDescription: "",
         keywords: ["Epic"],
         description:
-      "The first time the character would receive disadvantage to an attack skill check as a result of their multi-attack penalty reduce that penalty by one."
+      "The first time the character would receive a penalty die to an attack skill check as a result of their multi-attack penalty reduce that penalty by one."
     },
     quickDraw: {
         displayName: "Quick Draw",
@@ -513,7 +513,7 @@ const traitsData = {
         requirementsDescription: "",
         keywords: ["Simple"],
         description:
-      "The character may choose to spend one stamina before making a basic or brawling attack on their turn, if they do they gain a level of advantage to the melee attack skill check on this attack. If a character uses this ability one or more times on their turn all melee attacks made against them until the begining of their next turn gain a level of advantage on their skill checks."
+      "The character may choose to spend one stamina before making a basic or brawling attack on their turn, if they do they gain a a bonus die to the melee attack skill check on this attack. If a character uses this ability one or more times on their turn all melee attacks made against them until the begining of their next turn gain a a bonus die on their skill checks."
     },
     recklessAttackerAdvanced: {
         displayName: "Reckless Attacker, Advanced",

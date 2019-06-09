@@ -129,7 +129,7 @@ These Effects are all gained from the arcane power they are named for and linked
 - *Freeze Creature (3)*
   - Limitations: none.
   - Theme(s): cold
-  - Description: the target suffers X plus one per additional arcane cost spent on this power cold damage, if the target suffers at least one wound from this effect they gain a level of disadvantage to all skill checks on their turn that use body or reflexes as the primary attribute.
+  - Description: the target suffers X plus one per additional arcane cost spent on this power cold damage, if the target suffers at least one wound from this effect they gain a penalty die to all skill checks on their turn that use body or reflexes as the primary attribute.
 - *Freeze Liquid (2)*
   - Limitations: none.
   - Theme(s): cold

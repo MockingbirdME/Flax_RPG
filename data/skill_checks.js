@@ -103,7 +103,7 @@ let primaryAttributesData = {
         primarySkill: ["Stealth"],
         relevantSecondarySkills: ["Hide", "Sneak"],
         aidingOthers: "none, characters make this skill check on their own.",
-        description: "keeping oneself hidden from prying eyes and keen ears, a character attempting to move while sneaking gains a level of disadvantage to this skill check unless they move at half speed or less.",
+        description: "keeping oneself hidden from prying eyes and keen ears, a character attempting to move while sneaking gains a penalty die to this skill check unless they move at half speed or less.",
         difficulty: "10 + a bonus equal to the *perception* plus rank in the *awareness skill* plus rank in the *alertness secondary skill (awareness)*. This number of successes needed is compared individually for every character that may notice the sneaking character all using the same skill check.",
         requiredSuccesses: "none",
         failure: "the character accidentally draws attention to themselves being noticed immediately.",

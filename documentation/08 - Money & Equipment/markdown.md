@@ -4,8 +4,8 @@
 Suits of armor have a number of properties:
   - **Armor Value:** The character may use the armor value of his equipped armor, if a character has multiple armor value options (such as from natural armor and from worn armor) they use the highest value and increase it by one for each additional source of armor.
   - **Resistance (type):** Most armor provides resistance to concussive and penetrating damage and some armor provides resistance to additional types as well. A character who receives resistance of a given type from multiple sources adds those values together to gain the full resistance value for that damage type.
-  - **Required Training:** How difficult the armor is to be comfortable moving in, if the character wearing the armor doesn't have ranks in the *armor secondary skill (personal defense)* they receive one level of disadvantage to all skill checks where reflexes is the primary attribute.
-  - **Perception Penalty:** Helms only, the character wearing the armor suffers the armor's penalty levels of disadvantage on all perception skill checks while wearing the helmet portion of the armor.
+  - **Required Training:** How difficult the armor is to be comfortable moving in, if the character wearing the armor doesn't have ranks in the *armor secondary skill (personal defense)* they receive one penalty die to all skill checks where reflexes is the primary attribute.
+  - **Perception Penalty:** Helms only, the character wearing the armor suffers the armor's penalty in penalty dice on all perception skill checks while wearing the helmet portion of the armor.
 
 #### Sample Armor:
   - **Gambeson, light** Thin cloth armor easy available to any town guard or would be adventurer.
@@ -38,7 +38,7 @@ Suits of armor have a number of properties:
 Weapons have a number of keywords as follows:
 **Balance:** all melee weapon's, and ranged weapons that can be used as such, have one of the following balance traits.
     - *balanced* if wielded in the user's primary hand or two handed they gain a parry bonus to their melee defense bonus equal to half, round down, their rank in the *parry secondary skill (personal defense)* (a character's total parry bonus can not exceed their rank in the *parry secondary skill (personal defense)*).
-    - *crude* the weapon's base damage is reduced by one and all attacks made with the weapon gain one level of disadvantage.
+    - *crude* the weapon's base damage is reduced by one and all attacks made with the weapon gain one penalty die.
     - *parrying* the weapon's base damage is reduced by one and a character wielding this weapon gains a parry bonus to their melee defense bonus equal to half, round up, their rank in the *parry secondary skill (personal defense)* (a character's total parry bonus can not exceed their rank in the *parry secondary skill (personal defense)*).
     - *pole-arm* A character wielding this weapon two-handed gains a parry bonus to their melee defense bonus equal to one plus half, round up, their rank in the *parry secondary skill (personal defense)* (a character's total parry bonus can not exceed their rank in the *parry secondary skill (personal defense)*).
     - *weighted* the weapon's base damage and max body damage bonus are increased by one.
@@ -62,7 +62,7 @@ Weapons have a number of keywords as follows:
     - *two-handed*
         - Base Damage: 5
         - Max Body Damage Bonus: +4
-        - Two-Handed: designed to be wielded two-handed, a character attempting to wield it one handed gains two levels of disadvantage to all attacks made with it, does not benefit from any defense bonuses from it, reduces both its base damage and its max body damage bonus by 2.
+        - Two-Handed: designed to be wielded two-handed, a character attempting to wield it one handed gains two penalty dice to all attacks made with it, does not benefit from any defense bonuses from it, reduces both its base damage and its max body damage bonus by 2.
 **Type, Melee:** a melee weapon's type dictates its specific rules, if a weapon has multiple types the character chooses which type they are using each time they make an attack with it.
     - *axe*
         - Damage Type: penetrating
@@ -103,8 +103,8 @@ Weapons have a number of keywords as follows:
       - Reload Rules: loading a bow with a ready arrow requires one action point and no stamina, a character may hold up to their rank in the *bows secondary skill (ranged combat)* arrows ready while using the weapon.
       - Base Close Range: twenty plus twice the weapon's *heavy* value hexes.
       - Base Range Increment: twenty plus twice the weapon's *heavy* value hexes.
-      - Base Damage: equal to one plus the level of its *heavy* trait, if the character wielding it suffers any level of disadvantage due to the *heavy* trait reduce the base damage by the same amount.
-      - Base Armor Piercing Value: equal to the level of its *heavy* trait minus one, if the character wielding it suffers any level of disadvantage due to the *heavy* trait reduce the base armor piercing value by the same amount.
+      - Base Damage: equal to one plus the level of its *heavy* trait, if the character wielding it suffers any number of penalty dice due to the *heavy* trait reduce the base damage by the same amount.
+      - Base Armor Piercing Value: equal to the level of its *heavy* trait minus one, if the character wielding it suffers any number of penalty dice due to the *heavy* trait reduce the base armor piercing value by the same amount.
       - Additional Success Uses: one damage or minus one damage and plus one armor piercing value.
     - *crossbow*
       - Weapon Strength: all crossbows have the strength trait, usually between 4 and 10, many of its other stats are derived from the value of these traits.
@@ -120,7 +120,7 @@ Weapons have a number of keywords as follows:
       - Additional Success Uses: one damage or minus one damage and plus one armor piercing value.
     - *crossbow, hand*
       - Weapon Strength: all hand crossbows have the strength trait, usually between 2 and 4, many of its other stats are derived from the value of these traits.
-      - One Handed: hand crossbows can be fired one handed gaining a level of disadvantage, are treated as *hand-and-a-half* weapons for the purposes of two weapon fighting, and require two hands to reload.
+      - One Handed: hand crossbows can be fired one handed gaining a penalty die, are treated as *hand-and-a-half* weapons for the purposes of two weapon fighting, and require two hands to reload.
       - Reload Rules: loading a hand crossbow requires first hand cranking its string taut requiring no stamina and a number of action points equal to its strength trait's value, these action points need not be taken in succession as a hand crossbow's screw cranking mechanism holds its tautness until fired, the character must then, after readying a hand crossbow bolt, spend one action point and no stamina to load it.
       - Base Close Range: twice the weapon's *strength* value.
       - Base Range Increment: twice the weapon's *strength* value.
@@ -145,12 +145,12 @@ Weapons have a number of keywords as follows:
   - *bash* can be used to make the *bash* melee combat action.
   - *exotic(x)*
   - *strength(x)* the weapon has a strength of x (only relevant for certain ranged weapons).
-  - *heavy(x)* a character without with a body attribute of less than x gains levels of disadvantage equal to the difference when attacking with this weapon, can not make free attacks with it, and does not benefit from any defense bonuses from it; if the character would gain more than two levels of disadvantage as a result of this trait they cannot attack with it at all.
-  - *ranged(close range, range increment)* the weapon is ranged, it can be used with no penalty at up to its close range hexes away and gains a level of disadvantage for every additional range increment of hexes away the target is. If a target is far enough away that the attack would gain 4 levels of disadvantage from range the attack automatically fails. The weapon does not gain a damage bonus from the character's body stat though some weapons will use it for its x and y calculations.
+  - *heavy(x)* a character without with a body attribute of less than x gains penalty dice equal to the difference when attacking with this weapon, can not make free attacks with it, and does not benefit from any defense bonuses from it; if the character would gain more than two penalty dice as a result of this trait they cannot attack with it at all.
+  - *ranged(close range, range increment)* the weapon is ranged, it can be used with no penalty at up to its close range hexes away and gains a penalty die for every additional range increment of hexes away the target is. If a target is far enough away that the attack would gain 4 penalty dice from range the attack automatically fails. The weapon does not gain a damage bonus from the character's body stat though some weapons will use it for its x and y calculations.
   - *reach(range)* the number of hexes away the weapon can be used to attack, a range that includes 0 can be used to attack targets that share a hex with the character.
   - *sap* can be used to make the *sap* melee combat action.
-  - *size, large* the weapon is designed for character's with a size of greater than 0, the weapon has its max body damage bonus increased by the character's size; additionally characters of size less than zero suffer one level of disadvantage when making an attack skill check with this weapon.
-  - *size, small* the weapon is designed for character's with a size of less than 0, the weapon has its base damage and max body damage bonus both reduced by 1; additionally characters of size greater than zero suffer one level of disadvantage when making an attack skill check with this weapon.
+  - *size, large* the weapon is designed for character's with a size of greater than 0, the weapon has its max body damage bonus increased by the character's size; additionally characters of size less than zero suffer one penalty die when making an attack skill check with this weapon.
+  - *size, small* the weapon is designed for character's with a size of less than 0, the weapon has its base damage and max body damage bonus both reduced by 1; additionally characters of size greater than zero suffer one penalty die when making an attack skill check with this weapon.
   - *thrown* this weapon with the ranged trait still has its damage modified by the character's body stat (following all other rules for the weapon).
   - *trip* can be used to make the *trip* melee combat action.
 

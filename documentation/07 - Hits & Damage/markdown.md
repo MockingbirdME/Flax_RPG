@@ -8,8 +8,8 @@ When a character suffers damage from some attack or effect follow the steps belo
 
 ## Effects of being wounded
 * **Lightly Wounded -** each time a character suffers a wound reduce their defense and max stamina by one until that wound is healed.
-* **Wounded -** if a character has suffered at least half their *max wounds* they gain one level of disadvantage to each of their skill checks.
-* **Badly Wounded -** if a character has suffered a number of wounds equal to their *max wounds* they suffer two levels of disadvantage to each of their skill checks.
+* **Wounded -** if a character has suffered at least half their *max wounds* they gain one penalty die to each of their skill checks.
+* **Badly Wounded -** if a character has suffered a number of wounds equal to their *max wounds* they suffer two penalty dice to each of their skill checks.
 * **Dying -** if a character has suffered more wounds than their *max wounds* they can not take actions or perform skill checks and they will soon die without medical attention.
 
 ## Permanent Injuries

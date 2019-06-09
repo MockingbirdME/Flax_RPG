@@ -13,7 +13,7 @@ Defense - resource that is lowered by number of wounds the character has and by 
         - shield: vs melee and range (always active)
     Actions can grant temporary bonuses
         - defensiveStance: bonus vs melee attacks based on the parry secondary skill and equipped weapons.
-        - disengage: all free attacks made against you until the beginning of your next turn are made two two levels of disadvantage.
+        - disengage: all free attacks made against you until the beginning of your next turn are made two two penalty dice.
         - dodge: bonus vs ranged attacks based on dodge secondary skill and movement?
 
 
@@ -41,7 +41,7 @@ Damage - damage reduces stamina, if stamina hits zero inflicts a wound and refre
 
 Melee weapons have traits:
 one of - Quality:
-    - crude: -1 damage, 1 level of disadvantage on attacks, looses parrying trait.
+    - crude: -1 damage, 1 penalty die on attacks, looses parrying trait.
     - simple: -1 damage.
     - standard: no effect, assumed if no quality is listed.
 
@@ -94,12 +94,12 @@ one of - type or custom:
 zero or more of - special:
     - *armor piercing(x)* this style of weapon is especially good at penetrating or finding gaps in armor, increase the weapons APV by x.
     - *bash* can be used to make the *bash* melee combat action.
-    - *exotic* attacks with this weapon add a level of disadvantage to the attack's skill check.
-    - *heavy(x)* a character without with a body attribute of less than x gains levels of disadvantage equal to the difference when attacking with this weapon, can not make free attacks with it, and cannot benefit from its parry or shield stats; if the character would gain more than two levels of disadvantage as a result of this trait they cannot attack with it at all.
-    - *martial(x)* characters without at least x ranks in the melee combat skill gain a level of disadvantage on skill checks with this weapon.
+    - *exotic* attacks with this weapon add a penalty die to the attack's skill check.
+    - *heavy(x)* a character without with a body attribute of less than x gains penalty dice equal to the difference when attacking with this weapon, can not make free attacks with it, and cannot benefit from its parry or shield stats; if the character would gain more than two penalty dice as a result of this trait they cannot attack with it at all.
+    - *martial(x)* characters without at least x ranks in the melee combat skill gain a penalty die on skill checks with this weapon.
     - *reach(x, y)* increase the weapon's min reach by x and max reach by y.
     - *sap* can be used to make the *sap* melee combat action.
-    - *thrown(X + Y)* the weapon is ranged, it has a close range and range increment of X + Y times body stat hexes. If a target is far enough away that the attack would gain 4 levels of disadvantage from range the attack automatically fails.
+    - *thrown(X + Y)* the weapon is ranged, it has a close range and range increment of X + Y times body stat hexes. If a target is far enough away that the attack would gain 4 penalty dice from range the attack automatically fails.
     - *trip* can be used to make the *trip* melee combat action.
 
 Armor
