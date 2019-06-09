@@ -11,6 +11,10 @@
   color: lightgrey;
 }
 
+.character_sheet__hidden_text {
+  color: white;
+}
+
 .character_sheet__header {
   /* width: 50%; */
   /* border-left: 1px solid black; */

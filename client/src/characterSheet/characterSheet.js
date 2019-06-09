@@ -107,11 +107,11 @@ class CharacterSheet extends Component {
                         ___
                       </span>
                       /
-                      <span className="character_sheet__background_text">
+                      <span className="character_sheet__hidden_text">
                         ___
                       </span>
                       (
-                      <span className="character_sheet__background_text">
+                      <span className="character_sheet__hidden_text">
                         ___
                       </span>
                       )
@@ -120,7 +120,7 @@ class CharacterSheet extends Component {
                   <h5 className="character_sheet__body__resource_name character_sheet__body__resource_name_additional" >Initiative</h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
-                      <span className="character_sheet__background_text">
+                      <span className="character_sheet__hidden_text">
                         ____
                       </span>
                     </h4>
@@ -140,11 +140,11 @@ class CharacterSheet extends Component {
                   <h5 className="character_sheet__body__resource_name" >Wounds</h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
-                      <span className="character_sheet__background_text">
+                      <span className="character_sheet__hidden_text">
                         ____
                       </span>
                       /
-                      <span className="character_sheet__background_text">
+                      <span className="character_sheet__hidden_text">
                         ____
                       </span>
                     </h4>
