@@ -153,6 +153,7 @@
 .character_sheet__notes {
   flex-grow: 1;
   border: 1px solid;
+  border-top: 0;
 }
 
 .paper {
