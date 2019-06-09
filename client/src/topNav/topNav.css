@@ -4,6 +4,12 @@
     margin-top: 0;
 }
 
+@media print {
+  .topNav {
+    display: none;
+  }
+}
+
 .topNav__list {
     display: flex;
     list-style: none;

@@ -17,40 +17,29 @@ class CharacterSheet extends Component {
           <h3>Name:</h3>
         </div>
         <div className="character_sheet__body">
-          {
-            // Attributes and skills.
-          }
-          <div className="character_sheet__body__content">
-            {
-              // Attributes column
-            }
-            <div className="character_sheet__body__group character_sheet__body__group_attributes">
-              <div className="character_sheet__body__attributes">
-                <AttributeBox name="body" value={1} modifier={true} />
-                <AttributeBox name="reflexes" value={0} modifier={true} />
-                <AttributeBox name="perception" value={0} modifier={true} />
-                <AttributeBox name="mind" value={-1} modifier={true} />
+          <div className="character_sheet__body__attributes">
+            <AttributeBox name="body" value={1} modifier={true} />
+            <AttributeBox name="reflexes" value={0} modifier={true} />
+            <AttributeBox name="perception" value={0} modifier={true} />
+            <AttributeBox name="mind" value={-1} modifier={true} />
 
-                <AttributeBox name="speed" value={5} />
-                <AttributeBox name="size" value={0} modifier={true} />
-                <AttributeBox name="reach" value={0} modifier={true} />
-              </div>
-            </div>
-            {
-              // Defense column
-            }
-            <div className="character_sheet__body__group   character_sheet__body__group_wrap">
+            <AttributeBox name="speed" value={5} />
+            <AttributeBox name="size" value={0} modifier={true} />
+            <AttributeBox name="reach" value={0} modifier={true} />
+          </div>
+          <div className="character_sheet__body__content">
+            <div className="character_sheet__body__group">
               <div className="character_sheet__body__group__item">
                 <div className="character_sheet__body__group__item__tracker">
-                  <h5 className="character_sheet__body__resource_name" >Defense</h5>
+                  <h5>Defense</h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
                       <span className="character_sheet__background_text">
-                        ____
+                        current
                       </span>
                       (
                       <span className="character_sheet__background_text">
-                        ____
+                        max
                       </span>
                       )
                     </h4>
@@ -69,83 +58,42 @@ class CharacterSheet extends Component {
                     <h6>Magic Bonus</h6>
                     <input type="text" />
                   </div>
-                  <div className="character_sheet__body__group__item__levels">
-                    <div className="character_sheet__body__group__item__levels__level">
-                      <h6>Armor Value</h6>
-                      <input type="text" />
-                    </div>
-                    <h5 className="character_sheet__body__resource_name_secondary" >Resistances:</h5>
-                    <div className="character_sheet__body__group__item__levels__level">
-                      <h6>All Damage</h6>
-                      <input type="text" />
-                    </div>
-                    <div className="character_sheet__body__group__item__levels__level">
-                      <h6>Bludgeoning</h6>
-                      <input type="text" />
-                    </div>
-                    <div className="character_sheet__body__group__item__levels__level">
-                      <h6>Penetrating</h6>
-                      <input type="text" />
-                    </div>
-                  </div>
                 </div>
               </div>
-
-              <SkillBox secondarySkillCount={2} />
-              <SkillBox secondarySkillCount={2} />
-            </div>
-            {
-              // Stamina column
-            }
-            <div className="character_sheet__body__group character_sheet__body__group_wrap">
               <div className="character_sheet__body__group__item">
                 <div className="character_sheet__body__group__item__tracker">
-                  <h5 className="character_sheet__body__resource_name" >Stamina</h5>
+                  <h5>Stamina</h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
                       <span className="character_sheet__background_text">
-                        ___
+                        remaining
                       </span>
                       /
                       <span className="character_sheet__background_text">
-                        ___
+                        {" "}
+                        out of{" "}
                       </span>
                       (
                       <span className="character_sheet__background_text">
-                        ___
+                        max
                       </span>
                       )
                     </h4>
                   </div>
-                  <h5 className="character_sheet__body__resource_name character_sheet__body__resource_name_additional" >Initiative</h5>
-                  <div className="character_sheet__body__group__item__stat">
-                    <h4>
-                      <span className="character_sheet__background_text">
-                        ____
-                      </span>
-                    </h4>
-                  </div>
                 </div>
               </div>
-              <SkillBox secondarySkillCount={3} />
-              <SkillBox secondarySkillCount={2} />
-              <SkillBox secondarySkillCount={2} />
-            </div>
-            {
-              // Wounds column
-            }
-            <div className="character_sheet__body__group character_sheet__body__group_wrap">
               <div className="character_sheet__body__group__item">
                 <div className="character_sheet__body__group__item__tracker">
-                  <h5 className="character_sheet__body__resource_name" >Wounds</h5>
+                  <h5>Wounds</h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
                       <span className="character_sheet__background_text">
-                        ____
+                        remaining
                       </span>
                       /
                       <span className="character_sheet__background_text">
-                        ____
+                        {" "}
+                        max{" "}
                       </span>
                     </h4>
                   </div>
@@ -165,11 +113,40 @@ class CharacterSheet extends Component {
                   </div>
                 </div>
               </div>
-
-              <SkillBox secondarySkillCount={3} />
-              <SkillBox secondarySkillCount={2} />
-              <SkillBox secondarySkillCount={2} />
             </div>
+
+            <div className="character_sheet__body__group">
+              <div className="character_sheet__body__group__item">
+                <div className="character_sheet__body__group__item__levels">
+                  <div className="character_sheet__body__group__item__levels__level">
+                    <h6>Armor Value</h6>
+                    <input type="text" />
+                  </div>
+                  <div className="character_sheet__body__group__item__levels__level">
+                    <h6>Resistance, All</h6>
+                    <input type="text" />
+                  </div>
+                  <div className="character_sheet__body__group__item__levels__level">
+                    <h6>Resistance, Bludgeoning</h6>
+                    <input type="text" />
+                  </div>
+                  <div className="character_sheet__body__group__item__levels__level">
+                    <h6>Resistance, Penetrating</h6>
+                    <input type="text" />
+                  </div>
+                </div>
+              </div>
+              <SkillBox secondarySkillCount={3}/>
+              <SkillBox secondarySkillCount={3}/>
+              <SkillBox secondarySkillCount={3}/>
+              <SkillBox secondarySkillCount={2}/>
+              <SkillBox secondarySkillCount={2}/>
+              <SkillBox secondarySkillCount={2}/>
+              <SkillBox secondarySkillCount={2}/>
+
+
+            </div>
+
           </div>
         </div>
       </div>

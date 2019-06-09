@@ -11,3 +11,9 @@
     margin: 0;
     padding: .67rem 0;
 }
+
+@media print {
+  .header {
+    display: none;
+  }
+}
