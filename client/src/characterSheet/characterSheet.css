@@ -154,3 +154,25 @@
 .character_sheet__body__secondary_skill {
 
 }
+
+.character_sheet__notes {
+  flex-grow: 1;
+  border: 1px solid;
+}
+
+.paper {
+  background: #fff;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+  background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -moz-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  -webkit-background-size: 100% 23px;
+  -moz-background-size: 100% 23px;
+  -ms-background-size: 100% 23px;
+  -o-background-size: 100% 23px;
+  background-size: 100% 23px;
+
+  height: 100%;
+}

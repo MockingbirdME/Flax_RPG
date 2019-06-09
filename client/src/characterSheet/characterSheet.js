@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./characterSheet.css";
 
 import AttributeBox from "./attributeBox.js";
+import CharacterSheetHeader from "./characterSheetHeader.js";
 import SkillBox from "./skillBox.js";
 
 class CharacterSheet extends Component {
@@ -13,9 +14,7 @@ class CharacterSheet extends Component {
   render() {
     return (
       <div className="character_sheet__container">
-        <div className="character_sheet__header">
-          <h3>Name:</h3>
-        </div>
+        <CharacterSheetHeader />
         <div className="character_sheet__body">
           {
             // Attributes and skills.
@@ -170,6 +169,10 @@ class CharacterSheet extends Component {
               <SkillBox secondarySkillCount={2} />
               <SkillBox secondarySkillCount={2} />
             </div>
+          </div>
+        </div>
+        <div className="character_sheet__notes" >
+          <div className="paper">
           </div>
         </div>
       </div>
