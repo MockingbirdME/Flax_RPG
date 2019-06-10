@@ -41,14 +41,16 @@ class CharacterSheet extends Component {
             <div className="character_sheet__body__group   character_sheet__body__group_wrap">
               <div className="character_sheet__body__group__item">
                 <div className="character_sheet__body__group__item__tracker">
-                  <h5 className="character_sheet__body__resource_name" >Defense</h5>
+                  <h5 className="character_sheet__body__resource_name">
+                    Defense
+                  </h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
-                      <span className="character_sheet__background_text">
+                      <span className="character_sheet__hidden_text">
                         ____
                       </span>
                       (
-                      <span className="character_sheet__background_text">
+                      <span className="character_sheet__hidden_text">
                         ____
                       </span>
                       )
@@ -73,7 +75,9 @@ class CharacterSheet extends Component {
                       <h6>Armor Value</h6>
                       <input type="text" />
                     </div>
-                    <h5 className="character_sheet__body__resource_name_secondary" >Resistances:</h5>
+                    <h5 className="character_sheet__body__resource_name_secondary">
+                      Resistances:
+                    </h5>
                     <div className="character_sheet__body__group__item__levels__level">
                       <h6>All Damage</h6>
                       <input type="text" />
@@ -99,29 +103,26 @@ class CharacterSheet extends Component {
             <div className="character_sheet__body__group character_sheet__body__group_wrap">
               <div className="character_sheet__body__group__item">
                 <div className="character_sheet__body__group__item__tracker">
-                  <h5 className="character_sheet__body__resource_name" >Stamina</h5>
+                  <h5 className="character_sheet__body__resource_name">
+                    Stamina
+                  </h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
-                      <span className="character_sheet__background_text">
+                      <span className="character_sheet__hidden_text">
                         ___
                       </span>
                       /
-                      <span className="character_sheet__hidden_text">
-                        ___
-                      </span>
-                      (
-                      <span className="character_sheet__hidden_text">
-                        ___
-                      </span>
+                      <span className="character_sheet__hidden_text">___</span>
+                      (<span className="character_sheet__hidden_text">___</span>
                       )
                     </h4>
                   </div>
-                  <h5 className="character_sheet__body__resource_name character_sheet__body__resource_name_additional" >Initiative</h5>
+                  <h5 className="character_sheet__body__resource_name character_sheet__body__resource_name_additional">
+                    Initiative
+                  </h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
-                      <span className="character_sheet__hidden_text">
-                        ____
-                      </span>
+                      <span className="character_sheet__hidden_text">____</span>
                     </h4>
                   </div>
                 </div>
@@ -136,16 +137,14 @@ class CharacterSheet extends Component {
             <div className="character_sheet__body__group character_sheet__body__group_wrap">
               <div className="character_sheet__body__group__item">
                 <div className="character_sheet__body__group__item__tracker">
-                  <h5 className="character_sheet__body__resource_name" >Wounds</h5>
+                  <h5 className="character_sheet__body__resource_name">
+                    Wounds
+                  </h5>
                   <div className="character_sheet__body__group__item__stat">
                     <h4>
-                      <span className="character_sheet__hidden_text">
-                        ____
-                      </span>
+                      <span className="character_sheet__hidden_text">____</span>
                       /
-                      <span className="character_sheet__hidden_text">
-                        ____
-                      </span>
+                      <span className="character_sheet__hidden_text">____</span>
                     </h4>
                   </div>
                 </div>
@@ -171,9 +170,8 @@ class CharacterSheet extends Component {
             </div>
           </div>
         </div>
-        <div className="character_sheet__notes" >
-          <div className="paper">
-          </div>
+        <div className="character_sheet__notes">
+          <div className="paper" />
         </div>
       </div>
     );

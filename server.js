@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 // Console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.use(express.static('client/build', {index: false}));
+app.use(express.static("client/build", {index: false}));
 
 app.get("/documentation", (req, res) => {
     res.send({DOCUMENTATION});
@@ -35,5 +35,5 @@ app.get("/traits", (req, res) => {
 
 // For any other request, let React handle it.
 app.use((req, res) => {
-    res.sendFile(path.resolve(__dirname, './client/build/index.html'));
+    res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
 });
