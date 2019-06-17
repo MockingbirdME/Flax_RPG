@@ -7,8 +7,8 @@ const traitsData = {
         keywords: ["Character Type"],
         description: `The character:
         <ul>
-        <li>Start with 10 stamina and 4 max wounds</li>
-        <li>chooses 5 skills to gain rank one (novice) in and for each of them one secondary skill associated with that skill to gain rank one in.</li>
+        <li>Start with 10 stamina and 3 max wounds</li>
+        <li>chooses 5 skills to gain rank one (novice) in and for each of them two secondary skills associated with that skill to gain rank one in.</li>
         <li>chooses one of their skills at rank one to increase to rank two (skilled).</li>
         <li>learn one spoken language as chosen by the GM.</li>
         <li>Gain 5 traits of the character's choice following the standard rules for gaining traits.</li>
@@ -20,7 +20,7 @@ const traitsData = {
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "The character gains a bonus die on rolls to resist illness and poisons."
     },
@@ -31,19 +31,10 @@ const traitsData = {
         requirementsDescription: "",
         keywords: ["Simple"],
         description:
-      "Each time a character takes this trait they increase their max stamina by two."
+      "Each time a character takes this trait they increase their max stamina by one."
     },
     hardToKillTough: {
         displayName: "Hard to Kill, Tough",
-        type: "General",
-        requirements: [],
-        requirementsDescription: "",
-        keywords: ["Advanced"],
-        description:
-      "Each time a character takes this trait, increase their general damage resistances by one."
-    },
-    hardToKillStalwart: {
-        displayName: "Hard to Kill, Stalwart",
         type: "General",
         requirements: [],
         requirementsDescription: "",
@@ -82,7 +73,7 @@ const traitsData = {
         type: "General",
         requirements: [],
         requirementsDescription: "",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "The character increases a secondary skill from rank one to rank two."
     },
@@ -107,20 +98,30 @@ const traitsData = {
     trainingNovice: {
         displayName: "Training, Novice",
         type: "General",
-        requirements: ["At least one associated secondary skill at rank one."],
+        requirements: ["At least two associated secondary skills at rank one or higher."],
         requirementsDescription:
-      "At least one associated secondary skill at rank one.",
-        keywords: ["Advanced"],
+      "At least two associated secondary skills at rank one or higher.",
+        keywords: ["Simple"],
         description: "The character gains rank one in a new skill."
     },
     trainingSkilled: {
         displayName: "Training, Skilled",
         type: "General",
-        requirements: ["At least two associated secondary skill at rank two."],
+        requirements: ["At least one associated secondary skill at rank two or higher."],
         requirementsDescription:
-      "At least two associated secondary skill at rank two.",
+      "At least one associated secondary skill at rank two or higher.",
         keywords: ["Heroic"],
         description: "The character increases a skill from rank one to rank two."
+    },
+    trainingExpert: {
+        displayName: "Training, Expert",
+        type: "General",
+        requirements: ["At least one associated secondary skill at rank three or higher."],
+        requirementsDescription:
+      "At least one associated secondary skill at rank three or higher.",
+        keywords: ["Epic"],
+        description:
+      "The character increases a skill from rank two to rank three."
     },
     heroicAttribute: {
         displayName: "Heroic Attribute",
@@ -140,7 +141,7 @@ const traitsData = {
             "Natural Mage"
         ],
         requirementsDescription: "Dependent Mage, Learned Mage, or Natural Mage.",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description:
       "Before making a skill check for casting a spell, gathering arcane energy, or crafting arcane energy the caster may choose to add their body, along with their mind, to the skill check; if they do so they lose stamina equal to twice their body stat, if positive, before making the affected skill check."
     },
@@ -166,7 +167,7 @@ const traitsData = {
             "Natural Mage"
         ],
         requirementsDescription: "Dependent Mage, Learned Mage, or Natural Mage.",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description:
       "The first cantrip the character casts each turn does not count against the limit of one magic action per turn."
     },
@@ -175,7 +176,7 @@ const traitsData = {
         type: "Mage",
         requirements: ["No other mage traits"],
         requirementsDescription: "No other mage traits",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description: `The character is a dependent mage gaining the following benefits:
           <ul>
           <li>They can know up to one cantrip and up to two spells.</li>
@@ -201,13 +202,13 @@ const traitsData = {
     learnedMage: {
         displayName: "Learned Mage",
         type: "Mage",
-        requirements: ["No other mage traits"],
-        requirementsDescription: "No other mage traits",
-        keywords: ["Advanced"],
+        requirements: ["No other mage traits, at least rank one in both the discipline and magical aptitude skills."],
+        requirementsDescription: "No other mage traits, at least rank one in both the discipline and magical aptitude skills.",
+        keywords: ["Simple"],
         description: `The character is a learned mage gaining the following benefits:
             <ul>
           <li>They can know up to one cantrip and up to two spells.</li>
-          <li>They gains access to two arcane theme secondary skills, those skills cannot be above rank two and cannot be increased beyond rank two.</li>
+          <li>They gains access to two arcane theme secondary skills, those skills cannot be above rank one and cannot be increased beyond rank one.</li>
           <li>They gain access to learned mage specific arcane effects.</li></ul>`
     },
     learnedMageAdvancedLearning: {
@@ -224,16 +225,16 @@ const traitsData = {
         type: "Mage",
         requirements: ["Learned Mage"],
         requirementsDescription: "Learned Mage",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description:
-      "The character gains access to one arcane theme secondary skill that skill cannot be above rank one and cannot be increased beyond rank one."
+      "The character gains access to one arcane theme secondary skill that skill cannot be above rank zero and cannot be increased beyond rank zero."
     },
     naturalMage: {
         displayName: "Natural Mage",
         type: "Mage",
         requirements: ["No other mage traits"],
         requirementsDescription: "No other mage traits",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description: `The character is a natural mage gaining the following benefits:
         <ul>
           <li>They can know up to one cantrip and up to two spells.</li>
@@ -253,7 +254,7 @@ const traitsData = {
         type: "Mage",
         requirements: ["Dependent Mage, Learned Mage, or Natural Mage."],
         requirementsDescription: "Dependent Mage, Learned Mage, or Natural Mage.",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description:
       "This trait may be taken any number of times. Reduce the cost of component effects the caster adds to spells and cantrips by one per instance of this trait they have; this can not reduce an effect's arcane cost below zero."
     },
@@ -262,7 +263,7 @@ const traitsData = {
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
-        keywords: ["Simple"],
+        keywords: ["Heroic"],
         description:
       "The character gains an ambush damage bonus that they can apply to eligible attacks, the damage bonus is equal to 3; once a character has applied their ambush bonus damage to a target they cannot apply it to that target again until their next turn. Additionally, the character may apply their ambush bonus when making a melee attack against a flat-footed foe."
     },
@@ -271,7 +272,7 @@ const traitsData = {
         type: "Combat",
         requirements: ["Ambusher, Backstab"],
         requirementsDescription: "Backstab Ambusher",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "The character may apply their ambush bonus when making a melee attack against a flat footed or surprised foe."
     },
@@ -280,7 +281,7 @@ const traitsData = {
         type: "Combat",
         requirements: ["Sneak Attack Ambusher"],
         requirementsDescription: "Sneak Attack Ambusher",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "The character may apply their ambush bonus when making a melee attack against a foe who is unaware of the character's presence, or unaware that they are a threat."
     },
@@ -298,7 +299,7 @@ const traitsData = {
         type: "Combat",
         requirements: ["Ambusher, Backstab"],
         requirementsDescription: "Backstab Ambusher",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "The character may apply their ambush bonus when making a ranged attack at close range provided they meet their other requirements to apply this bonus."
     },
@@ -310,6 +311,15 @@ const traitsData = {
         keywords: ["Heroic"],
         description:
       "The character may apply their ambush bonus when making a ranged attack at any range provided they meet their other requirements to apply this bonus."
+    },
+    ambusherSkilled: {
+        displayName: "Ambusher, Skilled",
+        type: "Combat",
+        requirements: ["Ambusher, Backstab"],
+        requirementsDescription: "Backstab Ambusher",
+        keywords: ["Simple"],
+        description:
+      "Increase the character's ambush damage bonus by 1, this trait may be taken multiple times."
     },
     ambusherAssassin: {
         displayName: "Ambusher, Assassin",
@@ -329,20 +339,20 @@ const traitsData = {
         description:
       "The character gains a second reaction each turn, this reaction can only be used to make a free attack."
     },
-    combatReflexesAdvanced: {
-        displayName: "Combat Reflexes, Advanced",
+    combatReflexesImproved: {
+        displayName: "Combat Reflexes, Improved",
         type: "Combat",
         requirements: ["Combat Reflexes"],
         requirementsDescription: "Combat Reflexes",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "The additional reaction gained from *combat reflexes* can now be used for any reaction."
     },
     combatReflexesHeroic: {
         displayName: "Combat Reflexes, Heroic",
         type: "Combat",
-        requirements: ["Combat Reflexes, Advanced"],
-        requirementsDescription: "Advanced Combat Reflexes",
+        requirements: ["Combat Reflexes, Improved"],
+        requirementsDescription: "Improved Combat Reflexes",
         keywords: ["Heroic"],
         description: "Gain a third reaction each turn."
     },
@@ -355,20 +365,20 @@ const traitsData = {
         description:
       "The character is never *flat footed* when conscious and unrestrained."
     },
-    dangerSenseAdvanced: {
-        displayName: "Danger Sense, Advanced",
+    dangerSenseImproved: {
+        displayName: "Danger Sense, Improved",
         type: "Combat",
         requirements: ["Danger Sense"],
         requirementsDescription: "Danger Sense",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description:
       "The character still benefits from their melee, ranged, and magic defense bonuses when *surprised*, conscious, and unrestrained."
     },
     dangerSenseHeroic: {
         displayName: "Danger Sense, Heroic",
         type: "Combat",
-        requirements: ["Danger Sense, Advanced"],
-        requirementsDescription: "Advanced Danger Sense",
+        requirements: ["Danger Sense, Improved"],
+        requirementsDescription: "Improved Danger Sense",
         keywords: ["Heroic"],
         description:
       "The character may act on rounds when they are surprised, if their initiative would be before all non-surprised enemies they act after the enemy with the highest initiative."
@@ -396,7 +406,7 @@ const traitsData = {
         type: "Combat",
         requirements: ["Duelist"],
         requirementsDescription: "Duelist",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "When the character spends their reaction to add a penalty die to their dueling opponent they now add one penalty die to all eligible attacks from their opponent until the character's next turn."
     },
@@ -405,7 +415,7 @@ const traitsData = {
         type: "Combat",
         requirements: ["Duelist"],
         requirementsDescription: "Duelist",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description: "The range for Duelist's effects is increased to 30 hexes."
     },
     duelistMelee: {
@@ -413,7 +423,7 @@ const traitsData = {
         type: "Combat",
         requirements: ["Duelist"],
         requirementsDescription: "Duelist",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "The character no longer requires that no other character is within melee range of them to use their reaction to gain benefits from duelist traits."
     },
@@ -440,7 +450,7 @@ const traitsData = {
         type: "Combat",
         requirements: [],
         requirementsDescription: "",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description:
       "If a character suffers one or more wounds after fully resolving the damage they regain all missing stamina and all non-magic actions they take on their next turn have a stamina cost of 0."
     },
@@ -453,20 +463,20 @@ const traitsData = {
         description:
       "The character gains a mobile combat defense bonus against free attacks provided they have not taken the disengage action this turn, this bonus is equal to their melee defense bonus."
     },
-    mobileCombatantAdvanced: {
-        displayName: "Mobile Combatant, Advanced",
+    mobileCombatantImproved: {
+        displayName: "Mobile Combatant, Improved",
         type: "Combat",
         requirements: ["Mobile Combatant"],
         requirementsDescription: "Mobile Combatant",
-        keywords: ["Advanced"],
+        keywords: ["Simple"],
         description:
       "The character gains their mobile combatant defense bonus to free attacks even if they've taken the disengage action this turn."
     },
     mobileCombatantHeroic: {
         displayName: "Mobile Combatant, Heroic",
         type: "Combat",
-        requirements: ["Mobile Combatant, Advanced"],
-        requirementsDescription: "Advanced Mobile Combatant",
+        requirements: ["Mobile Combatant, Improved"],
+        requirementsDescription: "Improved Mobile Combatant",
         keywords: ["Heroic"],
         description: "The character no longer provokes free attacks."
     },
@@ -475,7 +485,7 @@ const traitsData = {
         type: "Combat",
         requirements: ["custom"],
         requirementsDescription: "",
-        keywords: ["Epic"],
+        keywords: ["Heroic"],
         description:
       "The first time the character would receive a penalty die to an attack skill check as a result of their multi-attack penalty reduce that penalty by one."
     },
@@ -488,20 +498,11 @@ const traitsData = {
         description:
       "The first *ready/stow item* action the character takes each turn has an action point cost of 0."
     },
-    quickDrawAdvanced: {
-        displayName: "Quick Draw, Advanced",
-        type: "Combat",
-        requirements: ["Quick Draw"],
-        requirementsDescription: "Quick Draw",
-        keywords: ["Advanced"],
-        description:
-      "The first two *ready/stow item* actions the character takes each turn has an action point cost of 0."
-    },
     quickDrawHeroic: {
         displayName: "Quick Draw, Heroic",
         type: "Combat",
-        requirements: ["Quick Draw, Advanced"],
-        requirementsDescription: "Advanced Quick Draw",
+        requirements: ["Quick Draw, Improved"],
+        requirementsDescription: "Improved Quick Draw",
         keywords: ["Heroic"],
         description:
       "The character may ready or stow the weapon used in any weapon attack they make."
@@ -513,16 +514,16 @@ const traitsData = {
         requirementsDescription: "",
         keywords: ["Simple"],
         description:
-      "The character may choose to spend one stamina before making a basic or brawling attack on their turn, if they do they gain a a bonus die to the melee attack skill check on this attack. If a character uses this ability one or more times on their turn all melee attacks made against them until the begining of their next turn gain a a bonus die on their skill checks."
+      "The character may choose to spend one stamina before making a basic or brawling attack on their turn, if they do they gain a a bonus die to the melee attack skill check related to this attack. If a character uses this ability one or more times on their turn all melee attacks made against them until the begining of their next turn gain a a bonus die on their skill checks."
     },
-    recklessAttackerAdvanced: {
-        displayName: "Reckless Attacker, Advanced",
+    recklessAttackerImproved: {
+        displayName: "Reckless Attacker, Improved",
         type: "Combat",
         requirements: ["Reckless Attacker"],
         requirementsDescription: "Reckless Attacker",
-        keywords: ["Advanced"],
+        keywords: ["Heroic"],
         description:
-      "The character may choose to trigger their reckless attack trait on bash, bull rush, or power attacks."
+      "The character may choose to trigger their reckless attack trait on any melee attack action, not just basic and brawing attacks."
     }
 };
 
