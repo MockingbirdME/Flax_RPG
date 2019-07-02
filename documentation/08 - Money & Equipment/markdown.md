@@ -35,69 +35,79 @@ Suits of armor have a number of properties:
     - Required Training: 3
     - Perception Penalty: 1
 
-    
-### Weapons
-Weapons have a number of keywords as follows:
-**Balance:** all melee weapon's, and ranged weapons that can be used as such, have one of the following balance traits.
-    - *balanced* if wielded in the user's primary hand or two handed they gain a parry bonus to their melee defense bonus equal to half, round down, their rank in the *parry secondary skill (personal defense)* (a character's total parry bonus can not exceed their rank in the *parry secondary skill (personal defense)*).
-    - *crude* the weapon's base damage is reduced by one and all attacks made with the weapon gain one penalty die.
-    - *parrying* the weapon's base damage is reduced by one and a character wielding this weapon gains a parry bonus to their melee defense bonus equal to half, round up, their rank in the *parry secondary skill (personal defense)* (a character's total parry bonus can not exceed their rank in the *parry secondary skill (personal defense)*).
-    - *pole-arm* A character wielding this weapon two-handed gains a parry bonus to their melee defense bonus equal to one plus half, round up, their rank in the *parry secondary skill (personal defense)* (a character's total parry bonus can not exceed their rank in the *parry secondary skill (personal defense)*).
-    - *weighted* the weapon's base damage and max body damage bonus are increased by one.
-**Size:** a melee weapon's size determines the starting value for its base damage and max body damage bonus, as well as details on the rules for wielding it two handed.
-    - *brawling*
-        - Base Damage: 1
-        - Max Body Damage Bonus: +1
-        - Two-Handed: gains no benefit from being wielded two-handed.
-    - *small*
-        - Base Damage: 2
-        - Max Body Damage Bonus: +1
-        - Two-Handed: gains no benefit from being wielded two-handed.
-    - *one-handed*
-        - Base Damage: 3
-        - Max Body Damage Bonus: +1
-        - Two-Handed: increase the weapon's base damage by one.
-    - *hand-and-a-half*
-        - Base Damage: 3
-        - Max Body Damage Bonus: +2
-        - Two-Handed: increase the weapon's damage and max body damage bonus by one.
-    - *two-handed*
-        - Base Damage: 5
-        - Max Body Damage Bonus: +4
-        - Two-Handed: designed to be wielded two-handed, a character attempting to wield it one handed gains two penalty dice to all attacks made with it, does not benefit from any defense bonuses from it, reduces both its base damage and its max body damage bonus by 2.
-**Type, Melee:** a melee weapon's type dictates its specific rules, if a weapon has multiple types the character chooses which type they are using each time they make an attack with it.
+
+### Melee Weapons
+All melee weapons start with the same base stats that are then modified by the various traits they possess.
+**Base Stats:**
+    - *damage:* 4 damage plus twice the wielder's body stat, treat their body stat as one higher than it normally is if the weapon is wielded two handed.
+
+#### Melee Weapon Traits
+All melee weapons have one each of the following Traits
+**Quality:**
+    - *crude:* -1 damage, 1 penalty die on attacks, looses parrying trait.
+    - *simple:* -1 damage.
+    - *standard:* no effect, assumed if no quality is listed.
+
+
+
+**Balance:**
+    - *balanced:* parrying weapon.
+    - *light:* can be wielded off-handed, - 1 damage, melee defense bonus (if any), and max reach.
+    - *pole-arm:* +1 max reach one handed, +2 max reach if hand-and-a-half, double min and max reach if two-handed.
+    - *protective:* can be wielded off-handed, parrying weapon, -3 damage, -1 max reach.
+    - *weighted:* add wielder's body stat if positive to damage, -1 max reach.
+**Size:**
+    - *one-handed:* + 1 melee defense bonus, cannot be wielded two-handed.
+    - *hand-and-a-half:* may be wielded two handed.
+    - *two-handed:* + 1 damage, must be wielded two-handed, + 1 min and max reach.
+**Type:**
     - *axe*
         - Damage Type: penetrating
-        - Special Rules: if its damage is converted to concussive reduced its damage by one.
-        - Additional Success Uses: one damage.
-    - *beak*
+        - APV: 0
+        - Special Rules: once per attack if this weapon would inflict a wound deal increase the attack's damage by 50%, round up.
+        - Additional Success Uses: one damage and one APV.
+    - *blade, small*
         - Damage Type: penetrating
-        - Special Rules: if its damage is converted to concussive reduced its damage by one and ignore any damage gained from additional successes.
-        - Additional Success Uses: one damage and two armor piercing value.
-    - *blade, short*
-        - Damage Type: penetrating
-        - Special Rules: if its damage is converted to concussive reduced its damage by three.
+        - APV: 2
+        - Restrictions: size one-handed only.
+        - Special Rules: if its damage is converted to concussive if it would inflict a wound, instead leave the target at one stamina.
         - Additional Success Uses: one damage, or two armor piercing value.
     - *blade, long*
         - Damage Type: penetrating
-        - Special Rules: if its damage is converted to concussive reduced its damage by two.
+        - APV: 3
+        - Special Rules: treat the wielder's rank in the parry secondary skill as one higher than it is.
         - Additional Success Uses: one damage, or one armor piercing value.
     - *bludgeoning*
         - Damage Type: concussive
-        - Special Rules:  
+        - APV: N/A
+        - Special Rules: add the wielder's strength to this weapon's damage an additional time, if it would increase its damage.
         - Additional Success Uses: one damage.
-    - *brawling*
+    - *shield*
         - Damage Type: concussive
-        - Special Rules: increases damage and max body damage bonus by the character's rank in the *brawling secondary skill (melee combat)*.
+        - APV: N/A
+        - Restrictions: cannot be two-handed.
+        - Special Rules: provides shield bonus (+2) to melee defense bonus and ranged defense bonus against attacks they are aware of.
         - Additional Success Uses: one damage.
-    - *shield(x)*
-        - Damage Type: concussive
-        - Special Rules: shields have their damage reduced by 1 and provide a shield bonus to the character's melee and ranged defense bonuses equal to x (a character's total shield bonus can not exceed one plus their rank in the *shields secondary skill (personal defense)*).
-        - Additional Success Uses: half a damage (must be spent in groups of two successes).
     - *spear*
         - Damage Type: penetrating
-        - Special Rules: if its damage is converted to concussive reduced its damage by three.
-        - Additional Success Uses: one damage and one armor piercing value.
+        - APV: 3
+        - Special Rules: TBD
+        - Additional Success Uses: one damage and one APV.
+
+Additionally a melee weapon may have one or more of the following traits:
+    - *armor piercing(x)* this style of weapon is especially good at penetrating or finding gaps in armor, increase the weapons APV by x.
+    - *bash* can be used to make the *bash* melee combat action.
+    - *exotic* attacks with this weapon add a penalty die to the attack's skill check.
+    - *heavy(x)* a character without with a body attribute of less than x gains penalty dice equal to the difference when attacking with this weapon, can not make free attacks with it, and cannot benefit from its parry or shield stats; if the character would gain more than two penalty dice as a result of this trait they cannot attack with it at all.
+    - *martial(x)* characters without at least x ranks in the melee combat skill gain a penalty die on skill checks with this weapon.
+    - *reach(x, y)* increase the weapon's min reach by x and max reach by y.
+    - *sap* can be used to make the *sap* melee combat action.
+    - *thrown(X + Y)* the weapon is ranged, it has a close range and range increment of X + Y times body stat hexes. If a target is far enough away that the attack would gain 4 penalty dice from range the attack automatically fails.
+    - *trip* can be used to make the *trip* melee combat action.
+
+
+
+        <!-- TODO Update Range Weapons  -->
 **Type, Ranged:** like melee weapon's ranged weapons have a number of traits that determine their stats, range weapon's often require ammunition that further modify their stats.
     - *bow*
       - Require skill and strength: all bows have the heavy trait many of its other stats are derived from the value of these traits. Additionally when resolving the effects of the weapon's heavy trait they may add their rank in the *bows secondary skill (ranged combat)* to their body stat.
