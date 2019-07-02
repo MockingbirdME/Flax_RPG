@@ -171,26 +171,6 @@ Additionally a melee weapon may have one or more of the following traits:
   - Damage: one-handed damage/two-handed damage (max body damage bonus) damage type.
   - Special Rules:
   - Additional Success Uses:
-- **Arming Sword:** *Balanced*, *Hand-and-a-Half*, *Long Blade*, *Armor Piercing(3)*, *Reach(1)*
-  - Damage: 3/4 (+1) penetrating.
-  - Special Rules: if its damage is converted to concussive reduced its damage by two.
-  - Additional Success Uses: one damage, or one armor piercing value.
-- **Battle Axe:** *Weighted*, *One-Handed*, *Axe*, *Armor Piercing(Body+1)*, *Heavy(0)*, *Reach(1)*, *Trip*
-  - Damage: 4/5 (+2) penetrating.
-  - Special Rules: if its damage is converted to concussive reduced its damage by one.
-  - Additional Success Uses: one damage.
-- **Truncheon:** *Weighted*, *Small*, *Bludgeoning*, *Bash*, *Reach(0-1)*, *Ranged(3+Body, 1+Body)*
-  - Damage: 3/- (+2) penetrating.
-  - Special Rules: none.
-  - Additional Success Uses: one damage.
-- **Dagger:** *Parrying*, *Small*, *Short Blade*, *Armor Piercing (2)*, *Ranged(5+Body, 2+Body)*, *Reach(0-1)*
-  - Damage:  2/- (+1) penetrating.
-  - Special Rules: if its damage is converted to concussive reduced its damage by three.
-  - Additional Success Uses: one damage, or two armor piercing value.
-- **Short Spear:** *Pole-arm*, *One-Handed*, *Spear*, *Armor Piercing(2)*, *Reach(1-2)*, *Trip*
-  - Damage:  3/4 (+1) penetrating.
-  - Special Rules: if its damage is converted to concussive reduced its damage by three.
-  - Additional Success Uses: one damage and one armor piercing value.
 
 ## Adventuring Gear
 ## Arcane Essence and Essence Items
