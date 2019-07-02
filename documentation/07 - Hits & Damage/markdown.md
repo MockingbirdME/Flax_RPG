@@ -17,3 +17,5 @@ When a character suffers damage from some attack or effect follow the steps belo
 ## Dying
 
 ## Recovering from Injuries
+recovering one wound takes three times the total number of wounds the character has - character's body days while they are resting and twice as long if they are being active (minimum one); medical attention and magic may reduce this time.
+ex. a character with +0 body and three wounds takes 18 days to fully recover (9 for the first wound while the character has three wounds, 6 for the second, and 3 for the last) while a character with a +2 body takes only 12 days (7 for the first wound, 4 for the second, and only 1 for the last).
