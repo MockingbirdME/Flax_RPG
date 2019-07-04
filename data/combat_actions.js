@@ -1,4 +1,4 @@
-let combatActionsData = {
+const combatActionsData = {
     walk: {
         displayName: "Walk",
         type: "Movement",
