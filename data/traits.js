@@ -390,7 +390,16 @@ const traitsData = {
         requirementsDescription: "",
         keywords: ["Simple"],
         description:
-      "The character can wield weapons with the *balanced* trait in their off hand and make off handed attacks with them."
+      "The character can wield weapons with the *light* or *balanced* trait and the *one-handed* or *hand-and-a-half* in their off hand and make off handed attacks with them."
+    },
+    dualWeilderHeavy: {
+        displayName: "Dual Weilder, Heavy",
+        type: "Combat",
+        requirements: ["Dual Weilder"],
+        requirementsDescription: "Dual Weilder",
+        keywords: ["Simple"],
+        description:
+      "The character can wield any weapon without the *two-handed* trait in their off hand and make off handed attacks with them."
     },
     duelist: {
         displayName: "Duelist",
