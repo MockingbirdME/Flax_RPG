@@ -19,7 +19,7 @@ let primaryAttributesData = {
         primarySkill: ["Personal Movement"],
         relevantSecondarySkills: ["Balance, Ride"],
         aidingOthers: "a character can assist another by allowing the second character to use their rank in the secondary skill however both character's only move at the rate of the slower of the two. A character can not assist more than one other character at a time. A character can not assist another if the skill check is not taken because of the character's, and their allies, action.",
-        description: "The character is at risk of falling or otherwise loosing their balance if they do not succeed this skill check. A character making this check in order to stay mounted may choose to use their ride secondary skill (animal handling) instead of their balance secondary skill (personal movement).",
+        description: "The character is at risk of falling or otherwise losing their balance if they do not succeed this skill check. A character making this check in order to stay mounted may choose to use their ride secondary skill (animal handling) instead of their balance secondary skill (personal movement).",
         difficulty: "8-20+ depending on the effect.",
         requiredSuccesses: "N/A",
         failure: "the character falls forcing any allies helping them to make an additional check to stay up.",
@@ -178,7 +178,7 @@ let primaryAttributesData = {
         requiredSuccesses: "equal to the target's magic defense bonus.",
         failure: "the attack misses, if there is one or more other characters in melee with the defender or behind the defender and in range of the attack randomize between them and roll 2d10 if the result is equal to or greater than their defense they are struck by the attack as if it hit them with no additional successes.",
         nearSuccess: "the attack was resisted by the target with no further effect.",
-        completeSuccess: "the target is affected by the spell, the target loses one defense and apply the effects of the manifested spell.",
+        completeSuccess: "the target is affected by the spell, apply the effects of the manifested spell.",
         additionalSuccesses: "the target suffers additional effects based on the spell."
     },
     meleeAttack: {
@@ -191,8 +191,8 @@ let primaryAttributesData = {
         difficulty: "equal to the target's defense.",
         requiredSuccesses: "equal to the target's melee defense bonus.",
         failure: "the attack misses.",
-        nearSuccess: "the attack was parried, dodged, or blocked; the attack deals no damage but the defender loses one point of defense.",
-        completeSuccess: "the target is hit, the target loses one defense and apply the effects of a hit with the attack/weapon.",
+        nearSuccess: "the attack was parried, dodged, or blocked; the attack deals no damage but the defender suffers one point of damage (this damage can not inflict a wound, instead leaving the character at one stamina if that would normally occur).",
+        completeSuccess: "the target is hit, apply the effects of a hit with the attack/weapon.",
         additionalSuccesses: "the target suffers additional effects based on the attack/weapon."
     },
     pickLocks: {
@@ -234,7 +234,7 @@ let primaryAttributesData = {
         requiredSuccesses: "equal to the target's ranged defense bonus.",
         failure: "the attack misses, if there is one or more other characters in melee with the defender or behind the defender and in range of the attack randomize between them and roll 2d10 if the result is equal to or greater than their defense they are struck by the attack as if it hit them with no additional successes.",
         nearSuccess: "the attack was avoided by the target's with no further effect.",
-        completeSuccess: "the target is hit, the target loses one defense and apply the effects of a hit with the attack/weapon.",
+        completeSuccess: "the target is hit, apply the effects of a hit with the attack/weapon.",
         additionalSuccesses: "the target suffers additional effects based on the attack/weapon."
     },
     repair: {
@@ -316,7 +316,7 @@ let primaryAttributesData = {
         description: "making headway through water and, more importantly, not drowning.",
         difficulty: "8-20+ depending on the downward pull in the water, riptides, storms, and magic can all increase this difficulty.",
         requiredSuccesses: "0-5 depending on the movement of the water, increased by current, non-submerging whirlpools, and heavy winds.",
-        failure: "the character makes no progress towards their goal and looses 5 stamina.",
+        failure: "the character makes no progress towards their goal and loses 5 stamina.",
         nearSuccess: "the character treads water and is able to move a number of hexes equal to their secondary skill rank, they also lose 1 stamina.",
         completeSuccess: "the character moves up to one plus their rank in the secondary skill hexes.",
         additionalSuccesses: "increase the distance the character swims by up to one hex."
