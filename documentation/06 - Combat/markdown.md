@@ -3,7 +3,7 @@
 ## Character Turn
 A character's turn follows the following steps:
 1. Recover one stamina.
-2. Gain 3 Action Points.
+2. Gain a number of Action Points based on their character type trait (3 for adventurer).
 3. Take any number of actions provided the character has action points remaining.
 4. Remove any unspent action points.
 5. Move to the next character's turn in initiative order.
