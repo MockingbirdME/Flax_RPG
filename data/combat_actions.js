@@ -4,21 +4,21 @@ let combatActionsData = {
         type: "Movement",
         actionPointCost: 1,
         staminaCost: 0,
-        description: "Move up to 3 hexes."
+        description: "Move up to 3 hexes, this movement provokes free attacks when the character moves from a hex that is threatened by an enemy to one that is not."
     },
     dash: {
         displayName: "Dash",
         type: "Movement",
         actionPointCost: 1,
         staminaCost: 1,
-        description: "Move up to the character's speed in hexes."
+        description: "Move up to the character's speed in hexes, this movement provokes free attacks when the character moves out of a threatened hex."
     },
-    spring: {
-        displayName: "Spring",
+    sprint: {
+        displayName: "Sprint",
         type: "Movement",
         actionPointCost: 3,
         staminaCost: 3,
-        description: "Move up to the three times the character's speed in hexes then make a *sprint* skill check and move up to one additional hex for every point by which the skill check increased their movement."
+        description: "Move up to the three times the character's speed in hexes then make a *sprint* skill check and move up to one additional hex for every point by which the skill check increased their movement, this movement provokes free attacks when the character moves into or out of of a threatened hex."
     },
     climb: {
         displayName: "Climb",
