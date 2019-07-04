@@ -15,9 +15,7 @@ Armor
 
 
 
-
-
-  Magic - Have a focus check that's required when a character takes damage from an outside source or wounds from any source. Consider something like difficulty 11 or the total amount of damage inflicted, or 5 plus damage inflicted, or something like that, where a success lets the caster choose one ongoing effect (with a duration success in it) to keep going, additional successes allow an extra success each to be up-kept.
+Magic - Have a focus check that's required when a character takes damage from an outside source or wounds from any source. Consider something like difficulty 11 or the total amount of damage inflicted, or 5 plus damage inflicted, or something like that, where a success lets the caster choose one ongoing effect (with a duration success in it) to keep going, additional successes allow an extra success each to be up-kept.
 
 
 Action refactor:

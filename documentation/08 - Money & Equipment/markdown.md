@@ -47,9 +47,6 @@ All melee weapons have one each of the following Traits
     - *crude:* -1 damage, 1 penalty die on attacks, looses parrying trait.
     - *simple:* -1 damage.
     - *standard:* no effect, assumed if no quality is listed.
-
-
-
 **Balance:**
     - *balanced:* parrying weapon.
     - *light:* can be wielded off-handed, - 1 damage, melee defense bonus (if any), and max reach.
