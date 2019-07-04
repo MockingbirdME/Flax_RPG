@@ -10,11 +10,6 @@ Defense - resource that is lowered by number of wounds the character has and by 
         - shield: vs melee and range (always active)
 
 
-
-Fatigue - character can take a point of fatigue to regain all stamina, happens automatically if they reduce themselves to zero stamina. Fatigue reduces a character's max stamina.
-recovering a fatigue takes two hours of rest, recovers twice as fast while sleeping.
-
-
 Armor
   - Armor value: compared to APV
 
