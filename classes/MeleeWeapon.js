@@ -3,9 +3,11 @@ const BASE_STATS = {
   _offHanded: false,
   _penaltyDice: 0,
   _twoHandedOption: false,
-  _twoHandedRequired: false
+  _twoHandedRequired: false,
+  _traits: []
 };
 
+const BALANCE_ENUM = ["balanced", "light", "pole-arm", "protective", "weighted"];
 const QUALITY_ENUM = ["crude", "simple", "standard"];
 
 // TODO import all weapon data items and convert them for export.
@@ -24,7 +26,11 @@ class MeleeWeapon {
 
     if (QUALITY_ENUM.indexOf(quality.toLowerCase()) === -1) throw new Error(`Quality property must be left blank of be one of: [${QUALITY_ENUM.join(", ")}].`);
     this._quality = quality;
-    // TODO apply quality to weapon.
+    this._traits.push(quality);
+
+    if (BALANCE_ENUM.indexOf(quality.toLowerCase()) === -1) throw new Error(`Balance property must be left blank of be one of: [${BALANCE_ENUM.join(", ")}].`);
+    this._balance = balance;
+    this._traits.push(balance);
 
     this._balance = balance;
     this._size = size;
@@ -64,6 +70,20 @@ class MeleeWeapon {
   set name(name) {
     // TODO validate param.
     this._name = name;
+  }
+
+  get damage() {
+    return this._damage;
+  }
+
+  get penaltyDice() {
+    return this._penaltyDice;
+  }
+
+  get parrying() {
+    if (this.quality === 'crude') return false;
+
+    return false;
   }
 
 }
