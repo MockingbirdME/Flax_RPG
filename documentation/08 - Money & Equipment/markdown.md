@@ -49,9 +49,9 @@ All melee weapons have one each of the following Traits
     - *standard:* no effect, assumed if no quality is listed.
 **Balance:**
     - *balanced:* parrying weapon.
-    - *light:* can be wielded off-handed, - 1 damage, melee defense bonus (if any), and max reach.
+    - *light:* - 1 damage, melee defense bonus (if any), and max reach.
     - *pole-arm:* +1 max reach one handed, +2 max reach if hand-and-a-half, double min and max reach if two-handed.
-    - *protective:* can be wielded off-handed, parrying weapon, -3 damage, -1 max reach.
+    - *protective:* parrying weapon, -3 damage, -1 max reach.
     - *weighted:* add wielder's body stat if positive to damage, -1 max reach.
 **Size:**
     - *one-handed:* + 1 melee defense bonus, cannot be wielded two-handed.

@@ -95,7 +95,7 @@ const combatActionsData = {
         type: "Melee",
         actionPointCost: 1,
         staminaCost: 1,
-        description: "Make a brawling attack or an attack with a readied melee weapon with the *light* and *one-handed* traits in the character's off-hand. The character makes a *melee attack skill check* and applies the results. This skill check gains one penalty die unless the character has at least one rank in the *off-hand attack secondary skill (melee combat)*. Ignore any additional successes on this skill check in excess of the character's rank in the *off-hand attack secondary skill (melee combat)*. If the character has taken a different melee action already this turn with a weapon wielded in their other hand, the first time they take this action they may ignore all penalty dice generated for having already taken melee actions this turn."
+        description: "Make a brawling attack or an attack with a readied weapon with both the *light* and *one-handed* traits that the chararcter has not attacked with yet this turn. The character makes a *melee or ranged attack skill check* as appropriate to the weapon and applies the results. This skill check gains one penalty die unless the character has at least one rank in the *off-hand attack secondary skill (melee combat)* and ignores any penalty dice the character would have as a result of a multi-action penalty. Ignore any additional successes on this skill check in excess of the character's rank in the *off-hand attack secondary skill (melee combat)*. Limit once per turn."
     },
     powerAttack: {
         displayName: "Power Attack",
