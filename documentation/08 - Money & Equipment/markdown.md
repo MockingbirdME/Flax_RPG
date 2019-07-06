@@ -50,18 +50,18 @@ All melee weapons have one each of the following Traits
 **Balance:**
     - *balanced:* parrying weapon.
     - *light:* - 1 damage, melee defense bonus (if any), and max reach.
-    - *pole-arm:* +1 max reach one handed, +2 max reach if hand-and-a-half, double min and max reach if two-handed.
+    - *pole-arm:* +1 max reach one handed, +1 min reach and +2 max reach if hand-and-a-half, +2 min reach and +3 max reach if two-handed.
     - *protective:* parrying weapon, -3 damage, -1 max reach.
     - *weighted:* add wielder's body stat if positive to damage, -1 max reach.
 **Size:**
     - *one-handed:* + 1 melee defense bonus, cannot be wielded two-handed.
     - *hand-and-a-half:* may be wielded two handed.
-    - *two-handed:* + 1 damage, must be wielded two-handed, + 1 min and max reach.
+    - *two-handed:* + 1 damage, must be wielded two-handed.
 **Type:**
     - *axe*
         - Damage Type: penetrating
         - APV: 0
-        - Special Rules: once per attack if this weapon would inflict a wound deal increase the attack's damage by 50%, round up.
+        - Special Rules: once per attack if this weapon would inflict a wound deal additional damage equal to 3 plus the character's body stat.
         - Additional Success Uses: one damage and one APV.
     - *blade, small*
         - Damage Type: penetrating
@@ -82,7 +82,6 @@ All melee weapons have one each of the following Traits
     - *shield*
         - Damage Type: concussive
         - APV: N/A
-        - Restrictions: cannot be two-handed.
         - Special Rules: provides shield bonus (+2) to melee defense bonus and ranged defense bonus against attacks they are aware of.
         - Additional Success Uses: one damage.
     - *spear*
