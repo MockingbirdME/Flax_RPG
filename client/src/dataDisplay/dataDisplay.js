@@ -9,44 +9,45 @@ import { observer, inject } from "mobx-react";
 
 const DataDisplay = inject("rootStore")(observer(
 class DataDisplay extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filterName: "",
-            filterFields: {}
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterName: "",
+      filterFields: {}
+    };
+  }
 
-    updateFilters(data) {
-        if (typeof data === "string") this.setState({filterName: data});
-        else this.setState({filterFields: data});
-    }
+  updateFilters(data) {
+    if (typeof data === "string") this.setState({filterName: data});
+    else this.setState({filterFields: data});
+  }
 
-    render() {
-        return (
-            <div className="dataDisplay__container">
-                <DataDisplayTitleSection
-                    name={this.props.namePlural}
-                    rulesLink={this.props.rulesLink}
-                />
-                <DataDisplayFilterSection
-                    nameSingular={this.props.nameSingular}
-                    namePlural={this.props.namePlural}
-                    filterableFields={this.props.filterableFields}
-                    data={this.props.data}
-                    updateFilters={ev => this.updateFilters(ev)}
-                />
-                <DataDisplayListSection
-                    data={this.props.data}
-                    fields={this.props.sortableFields}
-                    filterName={this.state.filterName}
-                    filterFields={this.state.filterFields}
-                    documentationExtension={this.props.documentationExtension}
-                />
-            </div>
-        );
-    }
-}
-))
+  render() {
+    const filterDisplay = this.props.hideFilter ? "" : <DataDisplayFilterSection
+        nameSingular={this.props.nameSingular}
+        namePlural={this.props.namePlural}
+        filterableFields={this.props.filterableFields}
+        data={this.props.data}
+        updateFilters={ev => this.updateFilters(ev)}
+      />;
+
+    return (
+      <div className="dataDisplay__container">
+        <DataDisplayTitleSection
+          name={this.props.namePlural}
+          rulesLink={this.props.rulesLink}
+        />
+      {filterDisplay}
+        <DataDisplayListSection
+          data={this.props.data}
+          fields={this.props.sortableFields}
+          filterName={this.state.filterName}
+          filterFields={this.state.filterFields}
+          documentationExtension={this.props.documentationExtension}
+        />
+      </div>
+    );
+  }
+}));
 
 export default withRouter(DataDisplay);
