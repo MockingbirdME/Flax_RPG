@@ -8,7 +8,7 @@ const traitsData = {
         description: `The character:
         <ul>
         <li>Start with 10 stamina and 3 max wounds, and gain 3 actions points per round in combat</li>
-        <li>chooses 5 skills to gain rank one (novice) in and for each of them two secondary skills associated with that skill to gain rank one in.</li>
+        <li>chooses 3 skills to gain rank one (novice) in and for each of them two secondary skills associated with that skill to gain rank one in.</li>
         <li>chooses one of their skills at rank one to increase to rank two (skilled).</li>
         <li>learn one spoken language as chosen by the GM.</li>
         <li>Gain 5 traits of the character's choice following the standard rules for gaining traits.</li>
@@ -49,7 +49,7 @@ const traitsData = {
         requirementsDescription: "",
         keywords: ["Epic"],
         description:
-      "Once per scene the character may spend their reaction to suffer no damage from one attack. The controlling player may decide to use this ability after they know the damage the character would take."
+      "Once per scene per instance of this trait the character has they may spend their reaction to suffer no damage from one attack. The controlling player may decide to use this ability after they know the damage the character would take."
     },
     linguist: {
         displayName: "Linguist",
@@ -107,18 +107,18 @@ const traitsData = {
     trainingSkilled: {
         displayName: "Training, Skilled",
         type: "General",
-        requirements: ["At least one associated secondary skill at rank two or higher."],
+        requirements: ["At least three total ranks in associated secondary skills."],
         requirementsDescription:
-      "At least one associated secondary skill at rank two or higher.",
+      "At least three total ranks in associated secondary skills.",
         keywords: ["Heroic"],
         description: "The character increases a skill from rank one to rank two."
     },
     trainingExpert: {
         displayName: "Training, Expert",
         type: "General",
-        requirements: ["At least one associated secondary skill at rank three or higher."],
+        requirements: ["At least five total ranks in associated secondary skills."],
         requirementsDescription:
-      "At least one associated secondary skill at rank three or higher.",
+      "At least five total ranks in associated secondary skills.",
         keywords: ["Epic"],
         description:
       "The character increases a skill from rank two to rank three."
