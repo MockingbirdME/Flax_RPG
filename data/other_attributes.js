@@ -7,22 +7,22 @@ let otherAttributesData = {
     defenseMax: {
         displayName: "Defense, Max",
         description: "The base difficulty for how hard a character is to hit, can be reduced or recovered by various effects.",
-        baseValue: "8 + reflexes stat + perception stat + ranks in the personal defense skill - size."
+        baseValue: "8 + perception stat + ranks in the personal defense skill."
     },
-    defenseBonusMagic: {
-        displayName: "Defense Bonus, Magic",
-        description: "A value added to a character’s defense against arcanely targeted attacks.",
-        baseValue: "ranks in Discipline."
+    defenseBonusMental: {
+        displayName: "Defense Bonus, Mental",
+        description: "A value added to a character’s defense against arcanely targeted attacks and other mind altering effects.",
+        baseValue: "mind stat + ranks in Discipline."
     },
     defenseBonusMelee: {
         displayName: "Defense Bonus, Melee",
         description: "A value added to a character’s defense against melee attacks they are aware of.",
-        baseValue: "ranks in melee combat."
+        baseValue: "reflexes stat + ranks in melee combat - size."
     },
     defenseBonusRanged: {
         displayName: "Defense Bonus, Ranged",
-        description: "A value added to a character’s defense against ranged attacks they are aware of.",
-        baseValue: "ranks in awareness."
+        description: "A value added to a character’s defense against ranged attacks and other projectiles they are aware of.",
+        baseValue: "reflexes stat + ranks in awareness - size."
     },
     initiative: {
         displayName: "Initiative",
@@ -62,7 +62,7 @@ let otherAttributesData = {
     woundsMax: {
         displayName: "Wounds, Max",
         description: "The total number of wounds a character may suffer before they are in danger of dying from them.",
-        baseValue: "set by the character's _character type_ trait, for adventurers 4."
+        baseValue: "set by the character's _character type_ trait, for adventurers 3."
     }
 };
 
