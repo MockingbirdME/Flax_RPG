@@ -1,10 +1,10 @@
 const traitsData = {
     adventurer: {
         displayName: "Adventurer",
-        type: "General",
+        type: "Character Type",
         requirements: [],
         requirementsDescription: "",
-        keywords: ["Character Type"],
+        keywords: ["Starting"],
         description: `The character:
         <ul>
         <li>Start with 10 stamina and 3 max wounds, and gain 3 actions points per round in combat</li>
