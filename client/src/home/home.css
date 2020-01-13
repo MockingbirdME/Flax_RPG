@@ -3,7 +3,7 @@
     padding: 3rem;
     text-align: left;
     max-width: 40rem;
-    min-height: calc(100VH - 17rem);
+    min-height: calc(100vh - 17rem);
     border: 2px #660066 solid;
 }
 
