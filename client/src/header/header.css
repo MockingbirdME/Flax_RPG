@@ -1,6 +1,5 @@
 .header {
     background: linear-gradient(180deg, #660066,  #9900CB, #660066);
-    color: white;
     margin-top: 0;
     text-align: left;
     padding-left: 10vw;
@@ -10,6 +9,11 @@
 .header__title {
     margin: 0;
     padding: .67rem 0;
+}
+
+.header__link {
+  color: white;
+  text-decoration: none;
 }
 
 @media print {
