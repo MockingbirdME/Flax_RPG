@@ -1,0 +1,14 @@
+.home {
+    margin: 2rem auto;
+    padding: 3rem;
+    text-align: left;
+    max-width: 40rem;
+    min-height: calc(100VH - 17rem);
+    border: 2px black solid;
+}
+
+.home p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
