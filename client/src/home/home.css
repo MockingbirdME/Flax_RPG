@@ -4,7 +4,7 @@
     text-align: left;
     max-width: 40rem;
     min-height: calc(100VH - 17rem);
-    border: 2px black solid;
+    border: 2px #660066 solid;
 }
 
 .home p {
