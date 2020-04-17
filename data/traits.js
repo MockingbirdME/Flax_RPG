@@ -13,7 +13,39 @@ const traitsData = {
         <li>learn one spoken language as chosen by the GM.</li>
         <li>Gain 5 traits of the character's choice following the standard rules for gaining traits.</li>
         </ul>
-        `
+        `,
+    apply: (character, optionString) => {
+      // Add 10 max stamina.
+      character._variables.staminaMaxAdjustment = character._variables.staminaMaxAdjustment
+        ? character._variables.staminaMaxAdjustment += 10
+        : 10;
+      // Add 3 max wounds.
+      character._variables.woundsMaxAdjustment = character._variables.woundsMaxAdjustment
+        ? character._variables.woundsMaxAdjustment += 3
+        : 3;
+      // Add 3 action points.
+      character._variables.actionPointsAdjustment = character._variables.actionPointsAdjustment
+        ? character._variables.actionPointsAdjustment += 3
+        : 3;
+      // Add 5 entitled traits.
+      character._variables.extraEntitledTraits = character._variables.extraEntitledTraits
+        ? character._variables.extraEntitledTraits += 5
+        : 5;
+      // Add initial skill ranks. TODO do this better: 
+      const options = optionString.split(',');
+      for (const index of [0, 3, 6]) {
+        character._skills[options[index]].rank = 1;
+        for (const indexAdjustment of [1, 2]) {
+          if (!character._skills[options[index]].secondarySkills[options[index + indexAdjustment]]) character._skills[options[index]].secondarySkills[options[index + indexAdjustment]] = {rank: 0};
+          character._skills[options[index]].secondarySkills[options[index + indexAdjustment]].rank += 1; 
+        }
+      }
+      character._skills[options[9]].rank = 2;
+      
+      
+      // TODO gain a language 
+         
+        }
     },
     hardy: {
         displayName: "Hardy",
