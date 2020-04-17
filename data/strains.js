@@ -95,7 +95,15 @@ let strainsData = {
         strainTraits: {
             highlyAdaptive: {
                 displayName: "Highly Adaptive",
-                description: "the character gains one additional trait during the _assign traits_ step of creation and can have one more _advanced_ trait than they could otherwise."
+                description: "the character gains one additional trait during the _assign traits_ step of creation and can have one more _advanced_ trait than they could otherwise.",
+                apply: character => {
+                  character._variables.extraEntitledTraits 
+                  ? character._variables.extraEntitledTraits += 1
+                  : character._variables.extraEntitledTraits = 1;
+                  character._variables.extraEntitledHeroicTraits 
+                  ? character._variables.extraEntitledHeroicTraits += 1
+                  : character._variables.extraEntitledHeroicTraits = 1;
+                }
             }
         }
     },
