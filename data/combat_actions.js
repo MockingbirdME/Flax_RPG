@@ -209,6 +209,13 @@ const combatActionsData = {
         staminaCost: 0,
         description: "The character does their best to catch their breath and reposition themselves. They regain 2 plus the product of one plus their ranks in the *endurance primary skill* and thir rank in the *stamina secondary skill (endurance)* stamina."
     },
+    DelayTurn: {
+        displayName: "Delay Turn",
+        type: "Other",
+        actionPointCost: "All",
+        staminaCost: 0,
+        description: "This action can only be taken if the character has taken no other actions this turn and costs all of their action points. The character may reset their initiative to any value 1-10, if there are already one or more characters acting at that initiative they may choose where in the turn order amongs those characters they will act."
+    },
     Prepare: {
         displayName: "Prepare",
         type: "Other",
