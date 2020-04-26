@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "devon",
+    "password": null,
+    "database": "flax_db",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
