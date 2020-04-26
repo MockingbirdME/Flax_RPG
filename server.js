@@ -7,23 +7,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const port = process.env.PORT || 5000;
-const { Client } = require('pg');
 const createError = require('http-errors');
-
-// const client = new Client({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: true
-// });
-
-// client.connect();
-// 
-// client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-//   if (err) throw err;
-//   for (const row of res.rows) {
-//     console.log(JSON.stringify(row));
-//   }
-//   client.end();
-// });
 
 // Parse queries and parameters.
 const PAYLOAD_LIMIT = '5mb';
@@ -31,7 +15,8 @@ app.use(express.json({limit: PAYLOAD_LIMIT}));
 app.use(express.urlencoded({extended: false, limit: PAYLOAD_LIMIT}));
 
 // Console.log that your server is up and running
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// db.sequelize.sync().then(() => http.createServer(app).listen(app.get('port'), () => console.log(`Listening on port ${port} TEST`)));
+app.listen(port, () => console.log(`Listening on port ${port} TEST`));
 
 app.use(express.static("client/build", {index: false}));
 
