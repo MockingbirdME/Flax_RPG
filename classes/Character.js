@@ -1,5 +1,8 @@
 const uuidv4 = require('uuid').v4;
 const util = require('util');
+const db = require('../models/index.js');
+
+const createError = require("http-errors");
 
 const Strains = require('../data/strains');
 
@@ -35,45 +38,53 @@ Object.keys(Skills).forEach(skill => {
 
 
 class Character {
+  
+  static async load(id) {
+    return db.Character.findOne({where: {id}})
+      .then(response => response);
+  }
 
-  constructor({uid, name, level, strain, traitsList, baseAttributeModifiers}) {
+  constructor({id, name, level, strain, traitsList, baseAttributeModifiers}) {
+    if (baseAttributeModifiers && typeof baseAttributeModifiers != 'object') throw createError(400, 'baseAttributeModifiers must be an object or undefined.');
+    this._baseAttributeModifiers = baseAttributeModifiers || {};
+  
     // Initialize all primary attributes based on the passed baseAttributeModifiers.
-    this._primaryAttributes = PRIMARY_ATTRIBUTES.reduce((acc, attribute) => ({...acc, [attribute]: baseAttributeModifiers[attribute] || 0}), {});
-    
+    this._primaryAttributes = PRIMARY_ATTRIBUTES.reduce((acc, attribute) => ({...acc, [attribute]: this._baseAttributeModifiers[attribute] || 0}), {});
+
     // Set initial skills object.
     this._skills = DEFAULT_SKILLS;
-    
+
     // Store variables for use elsewhere.
     this._variables = {};
-    
+
     // TODO validate data for all params.
     
     // If no UID is passed this is a new character, generate a UUID for them.
-    if (!uid) uid = uuidv4();
-    this._uid = uid;
-    
+    if (!id) id = uuidv4();
+    this._id = id;
+
     // If name is missing or invalid default it. TODO eventually have this reflect the user as well (this enhancement is why we don't just default in the parameters). 
     if (!name || typeof name !== "string") name = 'unnamed character';
     this._name = name;
-    
+
     // Set the character's level.
     this._level = level;
 
     // Store the traits list and apply each trait. 
     this._traitsList = traitsList || [];
-    for (const traitName of traitsList) {
+    for (const traitName of this._traitsList) {
       this.applyTrait(traitName);
     }
-    
+
     // Apply the character's strain.
     this.strain = strain || 'unknown';
-  
+    
     // TODO Apply traits. 
     // this.applyTraits()
   }
   
-  get uid() {
-    return this._uid;
+  get id() {
+    return this._id;
   }
 
   get name() {
@@ -121,12 +132,12 @@ class Character {
   }
   
   get traitEntitlements() {
-    const totalAlotments = this._level + this.getVariable('extraEntitledTraits');
-    const totalConsumed = this._traits.length;
+    const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
+    const totalConsumed = this.traits.length;
     const heroicAlotments = 1 + Math.floor(this._level / 5) + this.getVariable('extraEntitledHeroicTraits');
-    const heroicConsumed = this._traits.filter(trait => trait.keywords.includes('Heroic')).length;
-    const epicAlotments = Math.floor(this._level / 25) + this.getVariable('extraEntitledEpicTraits');
-    const epicConsumed = this._traits.filter(trait => trait.keywords.includes('Epic')).length;
+    const heroicConsumed = this.traits.filter(trait => trait.keywords.includes('Heroic')).length;
+    const epicAlotments = Math.floor(this.level / 25) + this.getVariable('extraEntitledEpicTraits');
+    const epicConsumed = this.traits.filter(trait => trait.keywords.includes('Epic')).length;
     return {
       total: {allotted: totalAlotments, consumed: totalConsumed, available: totalAlotments - totalConsumed}, 
       heroic: {allotted: heroicAlotments, consumed: heroicConsumed, available: heroicAlotments - heroicConsumed},  
@@ -137,6 +148,10 @@ class Character {
   get traitsList() {
     // TODO add the character's strain traits to the traits list. 
     return this._traitsList;
+  }
+  
+  get traits() {
+    return this._traits || [];
   }
   
   applyTrait(traitName) {
@@ -257,8 +272,21 @@ class Character {
    * @return {object}
    */
   toJSON() {
-    const {uid, name, strain, level, traitEntitlements, traitsList, primaryAttributes, otherAttributes, skills} = this;
-    return {uid, name, strain, level, traitEntitlements, traitsList, primaryAttributes, otherAttributes, skills};
+    const {id, name, strain, level, traitEntitlements, traitsList, traits, primaryAttributes, otherAttributes, skills} = this;
+    return {id, name, strain, level, traitEntitlements, traitsList, traits, primaryAttributes, otherAttributes, skills};
+  }
+  
+  async save() {
+    const [characterBaseData] = await db.Character.findOrCreate({where: {id: this.id}});
+    
+    characterBaseData.name = this.name;
+    characterBaseData.level = this.level;
+    characterBaseData.strain = this.strain.name;
+    characterBaseData.traitsList = this.traitsList;
+    characterBaseData.baseAttributeModifiers = this._baseAttributeModifiers;
+    
+    await characterBaseData.save();
+    return this;
   }
 
   /**
