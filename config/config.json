@@ -6,5 +6,14 @@
     "host": "localhost",
     "dialect": "postgres",
     "operatorsAliases": false
+  },
+  "production": {
+    "username": "devon",
+    "password": null,
+    "database": "flax_db",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false,
+    "use_env_variable": "DATABASE_URL"
   }
 }
