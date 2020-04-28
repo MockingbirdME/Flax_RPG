@@ -1,0 +1,228 @@
+openapi: 3.0.0
+
+info:
+  version: 0.1.0
+  title: Flax RPG API
+  description: The API for Flax RPG's webapp.
+  contact:
+    name: Devon Henegar
+    email: devon.henegar@gmail.com
+    url:  https://flaxrpg.herokuapp.com/api/v1/
+
+servers:
+  - url: /api/v1
+
+tags:
+  - name: API
+  - name: Character
+
+paths:
+  /info:
+    get:
+      operationId: getApiInfo
+      summary: Get basic information about the API.
+      tags: [API]
+      responses:
+        200:
+          description: General information about the api.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: a generic welcome message.
+                  apiVersion:
+                    type: string
+                    description: Current version of the API ("V1").
+                  apiBaseUrl:
+                    type: string
+                    description: Base URL which should be appended to all other API requests.
+        401:
+          $ref: "#/components/responses/unauthorized"
+
+  /spec:
+    get:
+      operationId: getApiSpec
+      summary: Get the API specification or Swagger UI.
+      tags: [API]
+      responses:
+        200:
+          description: Either the Swagger UI or raw specification, depending on `Accept` header.
+          content:
+            text/html:
+              schema:
+                description: A Swagger UI for the API spec.
+            application/json:
+              schema:
+                description: The API spec in JSON format.
+            application/yaml:
+              schema:
+                description: The API spec in YAML format.
+        401:
+          $ref: "#/components/responses/unauthorized"
+        501:
+          description: API Spec not yet available in the requested format.
+
+  /characters:
+    post:
+      operationId: createCharacter
+      summary: Create a new character
+      tags: [Character]
+      requestBody:
+        description: Information used to build a new character.
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CharacterBaseData"
+      responses:
+        201:
+          description: The details of the created character.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Character"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+
+  /characters/{characterId}:
+    parameters:
+      - $ref: "#/components/parameters/characterId"
+
+    get:
+      operationId: loadCharacter
+      summary: Get a single character.
+      tags: [Character]
+      responses:
+        200:
+          description: The requested character.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Character"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/notFound"
+
+    post:
+      operationId: updateCharacter
+      summary: Update an existing character.
+      tags: [Character]
+      requestBody:
+        description: Requested changes to make to the character's base data.
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Character"
+      responses:
+        200:
+          description: The updated character.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Character"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+
+    delete:
+      operationId: deleteCharacter
+      summary: Delete an existing character.
+      description: The team will be permenently deleted and cannot be recovered.
+      tags: [Character]
+      responses:
+        200:
+          description: success
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/notFound"
+
+components:
+  responses:
+    unauthorized:
+      description: Not yet implemented - You are not logged in.
+    forbidden:
+      description: Not yet implemented - You don't have permissions to make this request.
+    notFound:
+      description: The requested target was not found.
+
+  parameters:
+    characterId:
+      name: characterId
+      in: path
+      description: Unique ID of the character.
+      required: true
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+    CharacterBaseData:
+      type: object
+      description: The base data that a character is built from.
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: the name of the character.
+          example: John Doe
+        level:
+          type: integer
+          description: the character's current level.
+          example: 7
+        strain:
+          type: string
+          description: the name of the character's strain, must be an implemented strain to actually affect the character's stats.
+          enum:
+            - sapeen
+            - denja
+        traitsList:
+          type: array
+          items:
+            type: string
+            description: the coded names of each implemented trait the character has.
+        baseAttributeModifiers:
+          type: object
+          description: A map of the character's base attribute bonuses and penalties.
+          properties:
+            body:
+              type: integer
+              description: the starting bonus or penalty to the character's body stat.
+            reflexes:
+              type: integer
+              description: the starting bonus or penalty to the character's reflexes stat.
+            perception:
+              type: integer
+              description: the starting bonus or penalty to the character's perception stat.
+            mind:
+              type: integer
+              description: the starting bonus or penalty to the character's mind stat.
+            any:
+              type: integer
+              description: the number of points remaining to apply to base attributes.
+              
+    Character:
+      type: object
+      description: The character stats, schema is not yet implemented.
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid

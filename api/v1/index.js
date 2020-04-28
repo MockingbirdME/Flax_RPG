@@ -1,11 +1,12 @@
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
+const YAML = require('yamljs');
 
 const router = express.Router();
 
 // Provide very general information about the API.
-router.get("/", (req, res) => {
+router.get("/info", (req, res) => {
   res.json({
     message: "Welcome to Flax RRG's API!",
     apiVersion: 1,
@@ -13,28 +14,15 @@ router.get("/", (req, res) => {
   });
 });
 
-// // Configure SwaggerUI
-// const apiSpec = YAML.load(path.resolve(__dirname, "spec.yml"));
-// router.get("/spec", (req, res, next) => {
-//   // Check the user's permission to read the API spec.
-//   const permission = req.getPermissionTo.custom(
-//     req.user.role,
-//     "readAny",
-//     "api-spec"
-//   );
-// 
-//   // If permission is denied, throw an error.
-//   if (!permission.granted) return next(createError(403));
-// 
-//   // Return the spec.
-//   if (req.accepts("json")) res.json(apiSpec);
-//   else if (req.accepts("application/yaml"))
-//     res.send(YAML.stringify(apiSpec, 4));
-//   else
-//     next(
-//       createError(501, "API Spec not yet available in the requested format.")
-//     );
-// });
+// Configure SwaggerUI
+const apiSpec = YAML.load(path.resolve(__dirname, "spec.yml"));
+router.get("/spec", (req, res, next) => {
+  // Return the spec.
+  if (req.accepts("json")) res.json(apiSpec);
+  else if (req.accepts("application/yaml")) res.send(YAML.stringify(apiSpec, 4));
+  else
+    next(createError(501, "API Spec not yet available in the requested format."));
+});
 
 
 // Route  '/character' and '/characters'

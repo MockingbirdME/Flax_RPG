@@ -9,6 +9,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 const createError = require('http-errors');
 
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+
+const swaggerDoc = YAML.load('./api/v1/spec.yml');
+const swaggerOpts = {customCss: '.servers {display: none}'};
+
 // Parse queries and parameters.
 const PAYLOAD_LIMIT = '5mb';
 app.use(express.json({limit: PAYLOAD_LIMIT}));
@@ -19,6 +25,14 @@ app.use(express.urlencoded({extended: false, limit: PAYLOAD_LIMIT}));
 app.listen(port, () => console.log(`Listening on port ${port} TEST`));
 
 app.use(express.static("client/build", {index: false}));
+
+app.get('/api-docs/swagger.json', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", req.method);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.json(swaggerDoc);
+});
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc, swaggerOpts));
 
 // Connect the API
 app.use('/api/v1', require('./api/v1/index'));
