@@ -133,7 +133,7 @@ class Character {
   
   get traitEntitlements() {
     const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
-    const totalConsumed = this.traits.length;
+    const totalConsumed = this.traitsList.length;
     const heroicAlotments = 1 + Math.floor(this._level / 5) + this.getVariable('extraEntitledHeroicTraits');
     const heroicConsumed = this.traits.filter(trait => trait.keywords.includes('Heroic')).length;
     const epicAlotments = Math.floor(this.level / 25) + this.getVariable('extraEntitledEpicTraits');
@@ -146,7 +146,7 @@ class Character {
   }
   
   get traitsList() {
-    // TODO add the character's strain traits to the traits list. 
+    // Note: Strain traits are not listed here, these are the selected traits.
     return this._traitsList;
   }
   
@@ -154,11 +154,12 @@ class Character {
     return this._traits || [];
   }
   
-  applyTrait(traitName) {
-    const [baseName, option] = traitName.split(':');
-    const trait = Traits[baseName];
+  applyTrait(traitDetails) {
+    if (typeof traitDetails === 'string') traitDetails = {name: trait};
+    const {name, options} = traitDetails;
+    const trait = Traits[name];
     // TODO consider enforcing prerequisits here.
-    if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, option);
+    if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, options);
     if (!this._traits) this._traits = [];
     this._traits.push(trait);
   }
@@ -173,7 +174,6 @@ class Character {
     if (!this._variables[variable]) this._variables[variable] = 0;
     this._variables[variable] += modifier;
   }
-  
   
   // PRIMARY ATTRIBUTES:
   get primaryAttributes() {return this._primaryAttributes;}
@@ -265,6 +265,20 @@ class Character {
   // SKILLS 
   get skills() {
     return this._skills;
+  }
+  
+  setSkill(skill, rank) {
+    if (!this.skills[skill]) throw new Error(`Skill ${skill} doesn't exist.`);
+    this._skills[skill].rank = rank;
+  }
+  
+  setSecondarySkill(baseSkill, secondarySkill, rank) {
+    const skill = this._skills[baseSkill];
+    if (!skill) throw new Error(`Skill ${baseSkill} doesn't exist.`);
+    if (!skill.secondarySkills[secondarySkill]) throw new Error(`${secondarySkill} is not  a secondary  skill of ${baseSkill}.`);
+    
+    if (!skill.secondarySkills[secondarySkill]) skill.secondarySkills[secondarySkill] = {};
+    skill.secondarySkills[secondarySkill].rank = rank;
   }
   
   /**

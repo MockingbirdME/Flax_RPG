@@ -14,47 +14,40 @@ const traitsData = {
         <li>Gain 5 traits of the character's choice following the standard rules for gaining traits.</li>
         </ul>
         `,
-    apply: (character, optionString) => {
+    apply: (character, options) => {
       // Add 10 max stamina.
-      character._variables.staminaMaxAdjustment = character._variables
-        .staminaMaxAdjustment
-        ? (character._variables.staminaMaxAdjustment += 10)
-        : 10;
+      character.updateVariable("staminaMaxAdjustment", 10);
+       
       // Add 3 max wounds.
-      character._variables.woundsMaxAdjustment = character._variables
-        .woundsMaxAdjustment
-        ? (character._variables.woundsMaxAdjustment += 3)
-        : 3;
+      character.updateVariable("woundsMaxAdjustment", 3); 
+      
       // Add 3 action points.
-      character._variables.actionPointsAdjustment = character._variables
-        .actionPointsAdjustment
-        ? (character._variables.actionPointsAdjustment += 3)
-        : 3;
+      character.updateVariable("actionPointsAdjustment", 3); 
+      
       // Add 5 entitled traits.
-      character._variables.extraEntitledTraits = character._variables
-        .extraEntitledTraits
-        ? (character._variables.extraEntitledTraits += 5)
-        : 5;
-      // Add initial skill ranks. TODO do this better:
-      const options = optionString.split(",");
-      for (const index of [0, 3, 6]) {
-        character._skills[options[index]].rank = 1;
-        for (const indexAdjustment of [1, 2]) {
-          if (
-            !character._skills[options[index]].secondarySkills[
-              options[index + indexAdjustment]
-            ]
-          )
-            character._skills[options[index]].secondarySkills[
-              options[index + indexAdjustment]
-            ] = { rank: 0 };
-          character._skills[options[index]].secondarySkills[
-            options[index + indexAdjustment]
-          ].rank += 1;
+      character.updateVariable("extraEntitledTraits", 5); 
+        
+      // Add baseSkills ranks. 
+      for (const skill of options.baseSkills) {
+        const {name: skillName} = skill;
+        character.setSkill(skillName, 1);
+        for (const secondarySkill of skill.secondarySkills) {
+          character.setSecondarySkill(skillName, secondarySkill, 1);
         }
       }
-      character._skills[options[9]].rank = 2;
-
+      
+      // Confirm the chosen expert skill was on the base skill list.
+      if (!options.baseSkills.find(skill => skill.name === options.expertSkill)) throw new Error('Expert Skill option on adventurer trait must be a skill also selected as a base skill.');
+      
+      // Set the selected expert skill to rank 2.
+      character.setSkill(options.expertSkill, 2);
+      
+      // Get the current rank of the selected expert secondary skill.
+      const currentExpertSecondarySkillRank = character.skills[options.expertSkill].secondarySkills[options.expertSecondarySkill].rank || 0;
+      
+      // Set the selected expert secondary skill to one rank higher than it currently is.
+      character.setSecondarySkill(options.expertSkill, options.expertSecondarySkill, currentExpertSecondarySkillRank + 1);
+      
       // TODO gain a language
     }
   },
@@ -74,7 +67,10 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "Each time a character takes this trait they increase their max stamina by one."
+      "Each time a character takes this trait they increase their max stamina by one.",
+    apply: (character, options) => {
+      character.updateVariable("staminaMaxAdjustment", 1); 
+    }
   },
   hardToKillTough: {
     displayName: "Hard to Kill, Tough",
@@ -83,7 +79,10 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Heroic"],
     description:
-      "Each time a character takes this trait they increase their max wounds by one."
+      "Each time a character takes this trait they increase their max wounds by one.",
+    apply: (character, options) => {
+      character.updateVariable("woundsMaxAdjustment", 1); 
+    }
   },
   hardToKillPlotArmor: {
     displayName: "Hard to Kill, Plot Armor",
