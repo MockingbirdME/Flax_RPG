@@ -6,11 +6,11 @@ import TraitsStore from "./traitsStore.js";
 
 export class RootStore {
   constructor() {
-      this.rulesStore = new RulesStore(this);
-      this.combatActionsStore = new CombatActionsStore(this);
-      this.skillChecksStore = new SkillChecksStore(this);
-      this.strainsStore = new StrainsStore(this);
-      this.traitsStore = new TraitsStore(this);
+    this.rulesStore = new RulesStore(this);
+    this.combatActionsStore = new CombatActionsStore(this);
+    this.skillChecksStore = new SkillChecksStore(this);
+    this.strainsStore = new StrainsStore(this);
+    this.traitsStore = new TraitsStore(this);
   }
 }
 
