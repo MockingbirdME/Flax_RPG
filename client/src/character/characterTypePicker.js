@@ -35,27 +35,27 @@ const CharacterTypePicker = props => {
     
   const baseSkillPickers = selectedCharacterType && selectedCharacterType.options.baseSkills 
     ? (
-      <Fragment>
+      <div>
         <h4>Select Base Skills</h4>
         {[...Array(selectedCharacterType.options.baseSkills.count)].map((value, index) => <SkillPicker level="baseSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.baseSkills.secondarySkillsEach} />)}
         
-      </Fragment>
+      </div>
     ) : "";
     
   const expertSkillPickers = selectedCharacterType && selectedCharacterType.options.expertSkills && selectedCharacterType.options.expertSkills.count 
     ? (
-      <Fragment>
+      <div>
         <h4>Select Expert Skills</h4>
         {[...Array(selectedCharacterType.options.expertSkills.count)].map((value, index) => <SkillPicker level="expertSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.expertSkills.secondarySkillsEach} />)}
         
-      </Fragment>
+      </div>
     ) : "";
     
   const optionsToggler = charContext.characters[charId].baseCharData.characterType.name
     ? <p style={{margin: "auto", color: "grey", size: "small"}} onClick={ev => setShowOptions(!showOptions)}>Toggle Skill Picker Display</p> : "";
   
   const skillPickers = showOptions ? (
-    <div style={{paddingLeft: "2rem"}}>
+    <div style={{paddingLeft: "2rem", display: "flex", justifyContent: "space-between", maxWidth: "70rem"}}>
       {baseSkillPickers}
       {expertSkillPickers}
     </div>
@@ -63,7 +63,7 @@ const CharacterTypePicker = props => {
   
   return (
     <div className="" >
-      <h2 style={{display: "flex", justifyContent: "space-between", maxWidth: "45rem"}}>
+      <h2 style={{display: "flex", justifyContent: "space-between", maxWidth: "80rem"}}>
         <span>
           Character Type:
           <select

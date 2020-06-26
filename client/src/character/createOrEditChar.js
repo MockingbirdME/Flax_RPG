@@ -17,7 +17,7 @@ const CreateOrEditChar = props => {
 
   return (
     <div className="character__container">
-      <span style={{display: "flex", justifyContent: "space-between", maxWidth: "60rem"}}>
+      <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem"}}>
         <CharacterNameField /> 
         <CharacterLevelTracker />
       </span>
