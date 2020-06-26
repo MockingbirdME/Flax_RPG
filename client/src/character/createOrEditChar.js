@@ -19,16 +19,13 @@ const CreateOrEditChar = props => {
   return (
     <div className="character__container">
       <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem"}}>
-        <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem", flexDirection: "column"}}>
-          <CharacterNameField /> 
-          <CharacterStrainPicker />
-        </span>
-        <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem", flexDirection: "column"}}>
-          <CharacterLevelTracker />
-          <CharacterAttributeMinMaxPicker />
-        </span>
+        <CharacterNameField /> 
+        <CharacterLevelTracker />
       </span>
-      
+      <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem"}}>
+        <CharacterStrainPicker />
+        <CharacterAttributeMinMaxPicker />
+      </span>
       <CharacterTypePicker />
     </div>
   );

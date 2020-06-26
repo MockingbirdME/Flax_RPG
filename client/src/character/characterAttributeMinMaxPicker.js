@@ -42,7 +42,7 @@ const CharacterAttributeMinMaxPicker = props => {
   const penaltyAttributesPicker = context.characters[charId].baseCharData.minMaxAttributes.bonus 
     ? (
       <div>
-        <h4>Penalty Attributes</h4>
+        <h4 style={{textAlign: "center"}}>Penalty Attributes</h4>
         <select
           style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
           value={context.characters[charId].baseCharData.minMaxAttributes.penalty[0] || ""}
