@@ -6,7 +6,7 @@ export default TraitContext;
 
 export const TraitContextProvider = props => {  
   const [traits, setTraits] = useState({});
-  
+
   const loadStrains = async () => {
     const response = await fetch('/traits');
     const body = await response.json();

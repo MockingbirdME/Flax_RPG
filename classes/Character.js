@@ -155,7 +155,7 @@ class Character {
   }
   
   applyTrait(traitDetails) {
-    if (typeof traitDetails === 'string') traitDetails = {name: trait};
+    if (typeof traitDetails === 'string') traitDetails = {name: traitDetails};
     const {name, options} = traitDetails;
     const trait = Traits[name];
     // TODO consider enforcing prerequisits here.

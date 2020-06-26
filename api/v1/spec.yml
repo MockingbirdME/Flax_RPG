@@ -150,6 +150,31 @@ paths:
           $ref: "#/components/responses/forbidden"
         404:
           $ref: "#/components/responses/notFound"
+          
+  /characters/build:
+    post:
+      operationId: getCharacterFromBaseStatus
+      summary: Build a new character from base stats but don't save it to the DB.
+      tags: [Character]
+      requestBody:
+        description: Information used to build a new character.
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CharacterBaseData"
+      responses:
+        201:
+          description: The details of the build character.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Character"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
 
 components:
   responses:

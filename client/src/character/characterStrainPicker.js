@@ -13,17 +13,25 @@ const CharacterStrainPicker = props => {
   
   if (!charContext.characters[charId]) return <div></div>;
 
-  const changeName = event => {
-    charContext.setCharacterStrain(charId, event.target.value);
+  const changeStrain = event => {
+    const strain = strains[event.target.value];
+    charContext.setCharacterStrain(charId, event.target.value, strain.options);
   };
   
   const options = Object.keys(strains).length 
-    ? Object.keys(strains).map(strainId => (
+    ? [<option disabled hidden style={{display: "none"}} value="" key="default">-- select a strain --</option>].concat(Object.keys(strains).map(strainId => (
       <option key={strainId} value={strainId}>
         {strains[strainId].displayName}
       </option>
-    ))
+    )))
     : [];
+
+  const strainOptions = charContext.characters[charId].baseCharData.strain.strainOptions.length 
+    ? (
+      <div style={{paddingLeft: "2rem"}}>
+        {charContext.characters[charId].baseCharData.strain.strainOptions.map((option, index) => <StrainOption displayName={option.displayName} options={option.options} name={option.name} key={index}/>)}
+      </div>
+    ) : "";
 
   return (
     <div className="">
@@ -31,15 +39,43 @@ const CharacterStrainPicker = props => {
         Strain:
         <select
           style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
-          value={charContext.characters[charId].baseCharData.strain}
-          onChange={ev => changeName(ev)}
+          value={charContext.characters[charId].baseCharData.strain.options[props.name] || ""}
+          onChange={ev => changeStrain(ev)}
         >
-          <option disabled value="" />
           {options}
         </select>
       </h2>
+      {strainOptions}
     </div>
   );
 };
 
 export default CharacterStrainPicker;
+
+
+const StrainOption = props => {
+  const charContext = useContext(CharacterContext);
+  const { charId } = useParams();
+
+  const changeStrainOption = event => {
+    charContext.setCharacterStrainOption(charId, props.name, event.target.value);
+  };
+
+  const options = [<option disabled hidden style={{display: "none"}} value="" key="default">-- select an option --</option>].concat(props.options.map(option => <option value={option.value} key={option.value} >{option.displayName}</option>));
+
+  return (
+    <div className="">
+      <h4>
+        {props.displayName}
+        <select
+          style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
+          value={charContext.characters[charId].baseCharData.strain.options[props.name] || ""}
+          onChange={ev => changeStrainOption(ev)}
+        >
+          <option disabled value="" />
+          {options}
+        </select>
+      </h4>
+    </div>
+  );
+};

@@ -6,7 +6,6 @@ import CharacterContext from "../contexts/character";
 
 const CharacterNameField = props => {
   const context = useContext(CharacterContext);
-  console.log(context);
   const { charId } = useParams();
 
   if (!context.characters[charId]) return <div></div>;
@@ -22,7 +21,7 @@ const CharacterNameField = props => {
         <input
           style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
           placeholder="My Character"
-          value={context.characters[charId].baseCharData.name}
+          value={context.characters[charId].baseCharData.name || ""}
           onChange={ev => changeName(ev)}
         />
       </h2>
