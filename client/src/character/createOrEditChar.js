@@ -4,6 +4,7 @@ import CharacterContext from "../contexts/character";
 import CharacterNameField from "./characterNameField";
 import CharacterLevelTracker from "./characterLevelTracker";
 import CharacterStrainPicker from "./characterStrainPicker";
+import CharacterAttributeMinMaxPicker from "./characterAttributeMinMaxPicker";
 import CharacterTypePicker from "./characterTypePicker";
 
 const CreateOrEditChar = props => {
@@ -18,10 +19,16 @@ const CreateOrEditChar = props => {
   return (
     <div className="character__container">
       <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem"}}>
-        <CharacterNameField /> 
-        <CharacterLevelTracker />
+        <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem", flexDirection: "column"}}>
+          <CharacterNameField /> 
+          <CharacterStrainPicker />
+        </span>
+        <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem", flexDirection: "column"}}>
+          <CharacterLevelTracker />
+          <CharacterAttributeMinMaxPicker />
+        </span>
       </span>
-      <CharacterStrainPicker />
+      
       <CharacterTypePicker />
     </div>
   );

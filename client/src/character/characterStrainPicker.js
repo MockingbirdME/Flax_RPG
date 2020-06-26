@@ -39,7 +39,7 @@ const CharacterStrainPicker = props => {
         Strain:
         <select
           style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
-          value={charContext.characters[charId].baseCharData.strain.options[props.name] || ""}
+          value={charContext.characters[charId].baseCharData.strain.name || ""}
           onChange={ev => changeStrain(ev)}
         >
           {options}
@@ -72,7 +72,6 @@ const StrainOption = props => {
           value={charContext.characters[charId].baseCharData.strain.options[props.name] || ""}
           onChange={ev => changeStrainOption(ev)}
         >
-          <option disabled value="" />
           {options}
         </select>
       </h4>

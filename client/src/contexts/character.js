@@ -14,6 +14,10 @@ export const CharacterContextProvider = props => {
     level: 1,
     strain: {name: "", options: {}, strainOptions: []},
     traitsList: [],
+    minMaxAttributes: {
+      bonus: "",
+      penalty: ["", ""]
+    },
     baseAttributeModifiers: {
       body: 0,
       reflexes: 0,
@@ -55,6 +59,31 @@ export const CharacterContextProvider = props => {
     const character = characters[id];
     character.baseCharData.level = adjustment;
     if (character.baseCharData.level < 1) character.baseCharData.level = 1;
+    setCharacters({...characters, [id]: character});
+    buildCharacter(id, character);
+  };
+  
+  const setCharacterMinMaxAttributes = (id, type, index, attribute) => {
+    if (!characters[id]) this.initializeEmptyCharacter(id);
+    const character = characters[id];
+    
+    if (type === "bonus") {
+      if (!attribute) {
+        if (character.baseCharData.minMaxAttributes.bonus) character.baseCharData.baseAttributeModifiers[character.baseCharData.minMaxAttributes.bonus]--;
+        character.baseCharData.minMaxAttributes.penalty.map(value => {
+          if (value) character.baseCharData.baseAttributeModifiers[value]++;
+          return null;
+        });
+      }
+      character.baseCharData.baseAttributeModifiers[attribute]++;
+      character.baseCharData.minMaxAttributes.bonus = attribute;
+    }
+    else if (index) {
+      if (character.baseCharData.minMaxAttributes.penalty[index]) character.baseCharData.baseAttributeModifiers[character.baseCharData.minMaxAttributes.penalty[index]]++;
+      character.baseCharData.baseAttributeModifiers[attribute]--;
+      character.baseCharData.minMaxAttributes.penalty[index] = attribute;
+    }
+    
     setCharacters({...characters, [id]: character});
     buildCharacter(id, character);
   };
@@ -133,6 +162,7 @@ export const CharacterContextProvider = props => {
     initializeEmptyCharacter,
     setCharacterName,
     setCharacterLevel,
+    setCharacterMinMaxAttributes,
     setCharacterStrain,
     setCharacterStrainOption,
     setCharacterType,
