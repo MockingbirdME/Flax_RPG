@@ -6,6 +6,7 @@ import CharacterLevelTracker from "./characterLevelTracker";
 import CharacterStrainPicker from "./characterStrainPicker";
 import CharacterAttributeMinMaxPicker from "./characterAttributeMinMaxPicker";
 import CharacterTypePicker from "./characterTypePicker";
+import CharacterTraitsPicker from "./characterTraitsPicker";
 
 const CreateOrEditChar = props => {
   const charContext = useContext(CharacterContext);
@@ -22,11 +23,10 @@ const CreateOrEditChar = props => {
         <CharacterNameField /> 
         <CharacterLevelTracker />
       </span>
-      <span style={{display: "flex", justifyContent: "space-between", maxWidth: "73rem"}}>
-        <CharacterStrainPicker />
-        <CharacterAttributeMinMaxPicker />
-      </span>
+      <CharacterStrainPicker />
+      <CharacterAttributeMinMaxPicker />
       <CharacterTypePicker />
+      <CharacterTraitsPicker />
     </div>
   );
 };
