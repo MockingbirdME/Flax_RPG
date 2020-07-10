@@ -132,11 +132,8 @@ class Character {
   }
   
   get traitEntitlements() {
-    console.log("\n\n\n\n*****************************");
-    console.log(this.level, typeof this.level);
-    console.log(this.getVariable('extraEntitledTraits'), typeof this.getVariable('extraEntitledTraits'));
     const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
-    const totalConsumed = this.traitsList.length;
+    const totalConsumed = this.traitsList.filter(trait => Traits[trait.name].type !== "Character Type").length;
     const heroicAlotments = 1 + Math.floor(this._level / 5) + this.getVariable('extraEntitledHeroicTraits');
     const heroicConsumed = this.traits.filter(trait => trait.keywords.includes('Heroic')).length;
     const epicAlotments = Math.floor(this.level / 25) + this.getVariable('extraEntitledEpicTraits');
