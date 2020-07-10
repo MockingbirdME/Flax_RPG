@@ -157,6 +157,17 @@ export const CharacterContextProvider = props => {
     
   };
   
+  const setCharacterTrait = (id, index, trait) => {    
+    if (!characters[id]) this.initializeEmptyCharacter(id);
+    const character = characters[id];
+    
+    
+    character.baseCharData.traitsList[index] = trait;
+    
+    setCharacters({...characters, [id]: character});
+    buildCharacter(id, character);
+  };
+  
   async function buildCharacter(id, character) {
     const callId = uuid();
     lastCallUID[id] = callId;
@@ -196,7 +207,8 @@ export const CharacterContextProvider = props => {
     setCharacterStrain,
     setCharacterStrainOption,
     setCharacterType,
-    setCharacterTypeOption
+    setCharacterTypeOption,
+    setCharacterTrait
   }}>{props.children}</CharacterContext.Provider>;
 };
 

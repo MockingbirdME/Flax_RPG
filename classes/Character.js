@@ -161,10 +161,20 @@ class Character {
     if (typeof traitDetails === 'string') traitDetails = {name: traitDetails};
     const {name, options} = traitDetails;
     const trait = Traits[name];
+    trait.id = name;
     // TODO consider enforcing prerequisits here.
     if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, options);
     if (!this._traits) this._traits = [];
     this._traits.push(trait);
+  }
+  
+  get availableTraits() {
+    const traitKeys = Object.keys(Traits);
+    return traitKeys.map(key => {
+      const trait = Traits[key];
+      if (!trait.isCharacterEligible || !trait.isCharacterEligible(this)) return null;
+      return {traitId: key, options: Array.isArray(trait.isCharacterEligible(this)) ? trait.isCharacterEligible(this) : []};
+    }).filter(trait => trait);
   }
   
   // VARIABLE STORAGE:
@@ -289,8 +299,8 @@ class Character {
    * @return {object}
    */
   toJSON() {
-    const {id, name, strain, level, traitEntitlements, traitsList, traits, primaryAttributes, otherAttributes, skills} = this;
-    return {id, name, strain, level, traitEntitlements, traitsList, traits, primaryAttributes, otherAttributes, skills};
+    const {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills} = this;
+    return {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills};
   }
   
   async save() {

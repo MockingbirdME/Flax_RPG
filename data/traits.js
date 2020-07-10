@@ -72,7 +72,8 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The character gains a bonus die on rolls to resist illness and poisons."
+      "The character gains a bonus die on rolls to resist illness and poisons.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'hardy')
   },
   hardToKillHealthy: {
     displayName: "Hard to Kill, Healthy",
@@ -82,6 +83,7 @@ const traitsData = {
     keywords: ["Simple"],
     description:
       "Each time a character takes this trait they increase their max stamina by one.",
+    isCharacterEligible: character => true,
     apply: (character, options) => {
       character.updateVariable("staminaMaxAdjustment", 1); 
     }
