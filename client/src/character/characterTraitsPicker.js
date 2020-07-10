@@ -17,9 +17,9 @@ const CharacterAttributeMinMaxPicker = props => {
 
 
   return (
-    <div className="" style={{display: "flex", justifyContent: "space-betwee", maxWidth: "40rem"}}>
+    <div className="" style={{display: "flex", justifyContent: "space-between", maxWidth: "40rem"}}>
       <h2>Traits:</h2>
-      <div style={{display: "flex", justifyContent: "space-arround", width: "30rem", alignItems: "center"}}>
+      <div style={{display: "flex", justifyContent: "space-around", width: "30rem", alignItems: "center"}}>
         <h4>Total: {traitEntitlements.total.consumed}/{traitEntitlements.total.allotted}</h4>
         <h4>Heroic: {traitEntitlements.heroic.consumed}/{traitEntitlements.heroic.allotted}</h4>
         <h4>Epic: {traitEntitlements.epic.consumed}/{traitEntitlements.epic.allotted}</h4>
