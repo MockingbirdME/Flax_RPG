@@ -68,7 +68,7 @@ class Character {
     this._name = name;
 
     // Set the character's level.
-    this._level = level;
+    this._level = parseInt(level, 10);
 
     // Store the traits list and apply each trait. 
     this._traitsList = traitsList || [];
@@ -132,6 +132,9 @@ class Character {
   }
   
   get traitEntitlements() {
+    console.log("\n\n\n\n*****************************");
+    console.log(this.level, typeof this.level);
+    console.log(this.getVariable('extraEntitledTraits'), typeof this.getVariable('extraEntitledTraits'));
     const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
     const totalConsumed = this.traitsList.length;
     const heroicAlotments = 1 + Math.floor(this._level / 5) + this.getVariable('extraEntitledHeroicTraits');
