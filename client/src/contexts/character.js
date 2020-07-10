@@ -157,6 +157,36 @@ export const CharacterContextProvider = props => {
     
   };
   
+  async function buildCharacter(id, character) {
+    const callId = uuid();
+    lastCallUID[id] = callId;
+    
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(character.baseCharData)
+    };
+    
+    const response = await fetch('/api/v1/character/build', options);
+    const body = await response.json();
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    if (lastCallUID[id] !== callId) console.log('Ignoring results from older API call');
+    else {
+      
+      if (!characters[id]) this.initializeEmptyCharacter(id);
+      const character = characters[id];
+      
+      console.log(body);
+      character.calculatedStats = body;
+      
+      setCharacters({...characters, [id]: character});
+    }
+  }
+  
   return <CharacterContext.Provider value={{
     characters,
     initializeEmptyCharacter,
@@ -169,27 +199,6 @@ export const CharacterContextProvider = props => {
     setCharacterTypeOption
   }}>{props.children}</CharacterContext.Provider>;
 };
-
-async function buildCharacter(id, character) {
-  const callId = uuid();
-  lastCallUID[id] = callId;
-  
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(character.baseCharData)
-  };
-  
-  const response = await fetch('/api/v1/character/build', options);
-  const body = await response.json();
-  if (response.status !== 200) {
-    throw Error(body.message);
-  }
-  if (lastCallUID[id] !== callId) console.log('Ignoring results from older API call');
-  else console.log(body);
-}
 
 function characterTypeIsComplete(characterType) {
   const {options, requirements} = characterType;
