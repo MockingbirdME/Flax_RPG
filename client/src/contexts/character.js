@@ -125,8 +125,7 @@ export const CharacterContextProvider = props => {
     setCharacters({...characters, [id]: character});
     
     if (characterTypeIsComplete(character.baseCharData.characterType)) {
-      // Add the newly selected character trait as the first item in the character's trait list.
-      character.baseCharData.traitsList.unshift(character.baseCharData.characterType);
+      
       setCharacters({...characters, [id]: character});
       buildCharacter(id, character);
     }
@@ -136,7 +135,7 @@ export const CharacterContextProvider = props => {
   const setCharacterTypeOption = (id, optionCatigory, index, skillName, secondarySkillIndex, secondarySkill) => {    
     if (!characters[id]) this.initializeEmptyCharacter(id);
     const character = characters[id];
-    
+
     const traitOption = character.baseCharData.characterType.options[optionCatigory][index] 
       ? character.baseCharData.characterType.options[optionCatigory][index] 
       : {name: "", secondarySkills: []};
@@ -147,10 +146,8 @@ export const CharacterContextProvider = props => {
     character.baseCharData.characterType.options[optionCatigory][index] = traitOption;
     
     setCharacters({...characters, [id]: character});
-    
     if (characterTypeIsComplete(character.baseCharData.characterType)) {
       // Add the newly selected character trait as the first item in the character's trait list.
-      character.baseCharData.traitsList.unshift(character.baseCharData.characterType);
       setCharacters({...characters, [id]: character});
       buildCharacter(id, character);
     }
@@ -160,7 +157,6 @@ export const CharacterContextProvider = props => {
   const setCharacterTrait = (id, index, trait) => {    
     if (!characters[id]) this.initializeEmptyCharacter(id);
     const character = characters[id];
-    
     
     character.baseCharData.traitsList[index] = trait;
     
@@ -172,12 +168,17 @@ export const CharacterContextProvider = props => {
     const callId = uuid();
     lastCallUID[id] = callId;
     
+    // Use JSON parse/stringify to copy so we don't change the underlying data.
+    const baseCharData = JSON.parse(JSON.stringify(character.baseCharData));
+    
+    if (characterTypeIsComplete(baseCharData.characterType)) baseCharData.traitsList.unshift(character.baseCharData.characterType);
+    
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(character.baseCharData)
+      body: JSON.stringify(baseCharData)
     };
     
     const response = await fetch('/api/v1/character/build', options);
@@ -213,7 +214,9 @@ export const CharacterContextProvider = props => {
 };
 
 function characterTypeIsComplete(characterType) {
-  const {options, requirements} = characterType;
+  const {name, options, requirements} = characterType;
+
+  if (!name) return false;
   if (!requirements) return true;
   
   if (requirements.baseSkills) {

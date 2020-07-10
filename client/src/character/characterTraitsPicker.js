@@ -13,7 +13,7 @@ const CharacterTraitsPicker = props => {
   const character = context.characters[charId];
   
   if (!character || !character.calculatedStats) return <div></div>;
-  console.log(character);
+
   const traitEntitlements = character.calculatedStats.traitEntitlements || {};
   
   const traits = [...Array(traitEntitlements.total.allotted)].map((value, index) => <CharacterTraitPicker key={index} index={index} />);

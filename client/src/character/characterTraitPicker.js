@@ -17,9 +17,8 @@ const CharacterTraitPicker = props => {
   if (!charContext.characters[charId]) return <div></div>;
     
   const selectedTrait = charContext.characters[charId].baseCharData.traitsList[props.index] ? traits[charContext.characters[charId].baseCharData.traitsList[props.index].name] : null;
-console.log(selectedTrait);
+
   const changeSelectedCharacterTrait = event => {
-    console.log(event.target.value);
     const trait = {name: event.target.value, options: traits[event.target.value].options};
     charContext.setCharacterTrait(charId, props.index, trait);
   };
@@ -44,7 +43,7 @@ console.log(selectedTrait);
         </option>;
       }))
     : [];
-  console.log(selectedTrait);
+
   return (
     <div className="" >
       <h3 style={{display: "flex", justifyContent: "space-between", maxWidth: "80rem"}}>
