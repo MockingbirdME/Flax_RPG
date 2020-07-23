@@ -63,7 +63,6 @@ let strainsData = {
         description:
           "the character has natural armor with *armor value* ??? and *resistance (concussive and penetrating)* 1",
         apply: character => {
-          // TODO figure out how to apply armor to armor stack. 
           character.addArmor({armorName: "Natural Armor, Scales", armorValue: 3, resistances: {concussive: 1, penetrating: 1}});
         }
       },
@@ -72,7 +71,8 @@ let strainsData = {
         description:
           "the character's brawling attacks may inflict penetrating damage, doing so reduces the max bonus body damage of the attack to +1.",
         apply: character => {
-          // TODO figure out how to natural weapon to weapon options. 
+          // TODO figure out how to natural weapon to weapon options.
+          character.addTraitAsNote({strainTrait: true, strainName: 'denja', traitName: 'claws'});
         }
       }
     }

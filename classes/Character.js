@@ -235,7 +235,6 @@ class Character {
       else if (!newArmorStats.resistances[resistance]) this.updateVariable("resistances", -previousArmorStats.resistances[resistance], {variableKey: resistance});
       else this.updateVariable("resistances", newArmorStats.resistances[resistance] - previousArmorStats.resistances[resistance], {variableKey: resistance});
     }
-    
   }
   
   removeArmor(armorKey) {
