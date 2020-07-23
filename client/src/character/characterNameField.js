@@ -17,7 +17,7 @@ const CharacterNameField = props => {
   return (
     <div className="">
       <h2>
-        Character Name:
+        Name:
         <input
           style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
           placeholder="My Character"

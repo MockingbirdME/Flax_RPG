@@ -36,8 +36,11 @@ const CharacterTypePicker = props => {
   const baseSkillPickers = selectedCharacterType && selectedCharacterType.options.baseSkills 
     ? (
       <div>
-        <h4>Select Base Skills</h4>
-        {[...Array(selectedCharacterType.options.baseSkills.count)].map((value, index) => <SkillPicker level="baseSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.baseSkills.secondarySkillsEach} />)}
+        <h4 style={{margin: "0 0 0 1rem"}}>Select Base Skills</h4>
+        <ul>
+          {[...Array(selectedCharacterType.options.baseSkills.count)].map((value, index) => <li><SkillPicker level="baseSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.baseSkills.secondarySkillsEach} /></li>)}
+        </ul>
+        
         
       </div>
     ) : "";
@@ -45,9 +48,10 @@ const CharacterTypePicker = props => {
   const expertSkillPickers = selectedCharacterType && selectedCharacterType.options.expertSkills && selectedCharacterType.options.expertSkills.count 
     ? (
       <div>
-        <h4>Select Expert Skills</h4>
-        {[...Array(selectedCharacterType.options.expertSkills.count)].map((value, index) => <SkillPicker level="expertSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.expertSkills.secondarySkillsEach} />)}
-        
+        <h4 style={{margin: "0 0 0 1rem"}}>Select Expert Skills</h4>
+        <ul>
+          {[...Array(selectedCharacterType.options.expertSkills.count)].map((value, index) => <li><SkillPicker level="expertSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.expertSkills.secondarySkillsEach} /></li>)}
+        </ul>
       </div>
     ) : "";
     
@@ -55,7 +59,7 @@ const CharacterTypePicker = props => {
     ? <p style={{margin: "auto", color: "grey", size: "small"}} onClick={ev => setShowOptions(!showOptions)}>Toggle Skill Picker Display</p> : "";
   
   const skillPickers = showOptions ? (
-    <div style={{paddingLeft: "2rem", display: "flex", justifyContent: "space-between", maxWidth: "70rem"}}>
+    <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between", maxWidth: "70rem"}}>
       {baseSkillPickers}
       {expertSkillPickers}
     </div>
@@ -63,7 +67,7 @@ const CharacterTypePicker = props => {
   
   return (
     <div className="" >
-      <h2 style={{display: "flex", justifyContent: "space-between", maxWidth: "80rem"}}>
+      <h2>
         <span>
           Character Type:
           <select

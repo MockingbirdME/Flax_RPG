@@ -53,7 +53,7 @@ const CharacterTypeSkillPicker = props => {
       >
         {primarySkillOptions}
       </select>
-    ) : <p>--- Please select at least one {props.level === "expertSkills" ? "Base" : "Lower Level"} skill ---</p>;
+    ) : "";
   
   const secondarySkills = props.secondaryCount 
     ? (
@@ -63,12 +63,25 @@ const CharacterTypeSkillPicker = props => {
     ) : "";
 
   return (
-    <div className="">
+    <div className="" style={{paddingLeft: "2rem"}}>
       <h4>
-        Primary Skill:
-        {primarySkillSelector}
+        {primarySkillOptions.length > 1
+          ? (
+            "Primary Skill:",
+            primarySkillSelector
+          ) : <p>--- Please select at least one {props.level === "expertSkills" ? "Base" : "Lower Level"} skill ---</p>}
+        
       </h4>
-      {selectedPrimarySkill ? (<Fragment>{`Secondary Skill${props.secondaryCount > 1 ? 's' : ''}:`} {secondarySkills}</Fragment>) : ""}
+      {selectedPrimarySkill 
+        ? (
+          <Fragment>
+            <p>
+              {`Secondary Skill${props.secondaryCount > 1 ? 's' : ''}:`}
+            </p> 
+            {secondarySkills}
+          </Fragment>
+        ) 
+        : ""}
     </div>
   );
 };
@@ -124,16 +137,15 @@ const SecondarySkillPicker = props => {
     
   const selectedSecondarySkill = selectedSkill && selectedSkill.secondarySkills[props.index];
   
-  const secondarySkillSelector = secondarySkillOptions.length > 1
-    ? (
-      <select
-        style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
-        value={selectedSecondarySkill || ""}
-        onChange={ev => selectSecondarySkill(ev)}
-      >
-        {secondarySkillOptions}
-      </select>
-    ) : <p>--- Please select at least one {props.level === "expertSkills" ? "Base" : "Lower Level"} skill ---</p>;
+  const secondarySkillSelector = (
+    <select
+      style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
+      value={selectedSecondarySkill || ""}
+      onChange={ev => selectSecondarySkill(ev)}
+    >
+      {secondarySkillOptions}
+    </select>
+  );
   
   return secondarySkillSelector;
 };

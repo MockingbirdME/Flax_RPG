@@ -66,7 +66,8 @@ export const CharacterContextProvider = props => {
   const setCharacterMinMaxAttributes = (id, type, index, attribute) => {
     if (!characters[id]) this.initializeEmptyCharacter(id);
     const character = characters[id];
-    
+    console.log(id, type, index, attribute);
+    console.log(character.baseCharData);
     if (type === "bonus") {
       if (!attribute) {
         if (character.baseCharData.minMaxAttributes.bonus) character.baseCharData.baseAttributeModifiers[character.baseCharData.minMaxAttributes.bonus]--;
@@ -78,7 +79,7 @@ export const CharacterContextProvider = props => {
       character.baseCharData.baseAttributeModifiers[attribute]++;
       character.baseCharData.minMaxAttributes.bonus = attribute;
     }
-    else if (index) {
+    else if (!isNaN(index)) {
       if (character.baseCharData.minMaxAttributes.penalty[index]) character.baseCharData.baseAttributeModifiers[character.baseCharData.minMaxAttributes.penalty[index]]++;
       character.baseCharData.baseAttributeModifiers[attribute]--;
       character.baseCharData.minMaxAttributes.penalty[index] = attribute;

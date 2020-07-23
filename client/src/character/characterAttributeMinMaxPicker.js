@@ -32,10 +32,11 @@ const CharacterAttributeMinMaxPicker = props => {
   );
   
   const penaltyAttributesOptions = [
-    <option value="body" key="body">+1 Body</option>,
-    <option value="reflexes" key="reflexes">+1 Reflexes</option>,
-    <option value="perception" key="perception">+1 Perception</option>,
-    <option value="mind" key="mind">+1 Mind</option>
+    <option disabled hidden style={{display: "none"}} value={""} key="default">Select one</option>,
+    <option value="body" key="body">-1 Body</option>,
+    <option value="reflexes" key="reflexes">-1 Reflexes</option>,
+    <option value="perception" key="perception">-1 Perception</option>,
+    <option value="mind" key="mind">-1 Mind</option>
   ].filter(option => option.key !== context.characters[charId].baseCharData.minMaxAttributes.bonus);
 
   
