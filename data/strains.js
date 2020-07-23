@@ -69,7 +69,7 @@ let strainsData = {
       claws: {
         displayName: "Natural Weapon, clawed fingers and toes:",
         description:
-          "the character's brawling attacks may inflict penetrating damage, doing so reduces the max bonus body damage of the attack to +1.",
+          "the character's brawling attacks may inflict penetrating damage.",
         apply: character => {
           // TODO figure out how to natural weapon to weapon options.
           character.addTraitAsNote({strainTrait: true, strainName: 'denja', traitName: 'claws'});
