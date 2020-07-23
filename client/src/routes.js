@@ -29,7 +29,7 @@ class Routes extends Component {
                   <Route path="/combat actions" component={CombatActions} />
                   <Route path="/strains" component={Strains} />
                   <Route path="/traits" component={Traits} />
-                  <Route path="/character/sheet" component={CharacterSheet} />
+                  <Route path="/character/sheet/:charId?" component={CharacterSheet} />
                   <Route
                     path="/character/createoredit/:charId?"
                     component={CreateOrEditChar}
