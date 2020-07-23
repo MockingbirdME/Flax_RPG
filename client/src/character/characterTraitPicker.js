@@ -23,7 +23,7 @@ const CharacterTraitPicker = props => {
     charContext.setCharacterTrait(charId, props.index, trait);
   };
   
-  const defaultOptions = [<option disabled hidden style={{display: "none"}} value="" key="default">-- select a character type --</option>];
+  const defaultOptions = [<option disabled hidden style={{display: "none"}} value="" key="default">-- select a trait --</option>];
     
   const {availableTraits} = charContext.characters[charId].calculatedStats;
   

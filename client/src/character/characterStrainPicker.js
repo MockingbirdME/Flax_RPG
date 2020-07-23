@@ -26,7 +26,7 @@ const CharacterStrainPicker = props => {
     )))
     : [];
 
-  const strainOptions = charContext.characters[charId].baseCharData.strain.strainOptions.length 
+  const strainOptions = charContext.characters[charId].baseCharData.strain.strainOptions && charContext.characters[charId].baseCharData.strain.strainOptions.length 
     ? (
       <div style={{paddingLeft: "2rem"}}>
         {charContext.characters[charId].baseCharData.strain.strainOptions.map((option, index) => <StrainOption displayName={option.displayName} options={option.options} name={option.name} key={index}/>)}

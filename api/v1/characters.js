@@ -68,7 +68,6 @@ function buildCharacterFromBaseStatus(req, res, next) {
   console.log("++++++++++++++++++++++++++++++++++++");
   if (!req.body) throw createError(400, "Request body is requried for build character endpoint.");
   console.log(req.body);
-  console.log(typeof req.body);
   const character = new Character(req.body);
   console.log(character);
   res.status(200).json(character);
