@@ -20,7 +20,7 @@ const OTHER_ATTRIBUTES = [
   "defenseBonusRanged",
   "initiative",
   "reach",
-  "resistanceConcussive", // TODO consider adding other resistances 
+  "resistances",
   "size",
   "speed",
   "staminaMax",
@@ -53,9 +53,18 @@ class Character {
 
     // Set initial skills object.
     this._skills = DEFAULT_SKILLS;
+    
+    // Store notes for display.
+    this._notes = [];
 
     // Store variables for use elsewhere.
     this._variables = {};
+    
+    // Store skill check modifiers.
+    this._skillCheckModifiers = {};
+    
+    // Store armor details.
+    this._armor = [];
 
     // TODO validate data for all params.
     
@@ -121,7 +130,8 @@ class Character {
       for (const traitName in strainTraits) {
         if ({}.hasOwnProperty.call(strainTraits, traitName)) {
           const trait = strainTraits[traitName];
-          trait.apply(this);
+          if (trait.hasOwnProperty('apply')) trait.apply(this);
+          else console.log(`trait "${traitName}" has no apply function.`);
         }
       }
     }
@@ -175,15 +185,100 @@ class Character {
   }
   
   // VARIABLE STORAGE:
-  getVariable(variable) {
-    if (this._variables[variable]) return this._variables[variable];
+  getVariable(variable, {variableKey, variableIsObject} = {}) {
+    if (this._variables[variable] && !variableKey) return this._variables[variable];
+    if (this._variables[variable] && variableKey && this._variables[variable][variableKey]) return this._variables[variable][variableKey];
+    if (variableIsObject) return {};
     return 0;
   }
   
-  updateVariable(variable, modifier) {
-    if (!this._variables[variable]) this._variables[variable] = 0;
-    this._variables[variable] += modifier;
+  updateVariable(variable, modifier, {variableKey} = {}) {
+    console.log(variable);
+    console.log(this._variables);
+    if (!this._variables[variable] && variableKey) this._variables[variable] = {};
+    else if (!this._variables[variable]) this._variables[variable] = 0;
+    
+    console.log(this._variables);
+    if (variableKey && !this._variables[variable][variableKey]) this._variables[variable][variableKey] = 0;
+    
+    if (variableKey) this._variables[variable][variableKey] += modifier;
+    else this._variables[variable] += modifier;
   }
+  
+  // SKILL CHECK MODIFIER STORAGE:
+  getSkillCheckModifier(skillCheckName) {
+    if (this._skillCheckModifiers[skillCheckName]) return this._skillCheckModifiers[skillCheckName];
+    return {dieModifier: 0, flatModifier: 0};
+  }
+  
+  updateSkillCheckModifier(skillCheckName, {dieModifier = 0, flatModifier = 0} = {}) {
+    if (!this._skillCheckModifiers[skillCheckName]) this._skillCheckModifiers[skillCheckName] = {dieModifier: 0, flatModifier: 0};
+    this._skillCheckModifiers[skillCheckName].dieModifier += dieModifier;
+    this._skillCheckModifiers[skillCheckName].flatModifier += flatModifier;
+  }
+  
+  // ARMOR:
+  addArmor({armorName, armorValue = 0, resistances = {}} = {}) {
+    // TODO add a piece of armor.
+    const previousArmorStats = this.calculateArmor();
+    this._armor.push({armorName, armorValue, resistances});
+    const newArmorStats = this.calculateArmor();
+    
+    if (previousArmorStats.armorValue !== newArmorStats.armorValue) this.updateVariable(
+      "armorValueAdjustment", 
+      newArmorStats.armorValue - previousArmorStats.armorValue
+    );
+    
+    const allResistanceTypes = Object.keys(Object.assign({}, ...[previousArmorStats.resistances, newArmorStats.resistances]));
+    for (const resistance of allResistanceTypes) {
+      if (!previousArmorStats.resistances[resistance]) this.updateVariable("resistances", newArmorStats.resistances[resistance], {variableKey: resistance});
+      else if (!newArmorStats.resistances[resistance]) this.updateVariable("resistances", -previousArmorStats.resistances[resistance], {variableKey: resistance});
+      else this.updateVariable("resistances", newArmorStats.resistances[resistance] - previousArmorStats.resistances[resistance], {variableKey: resistance});
+    }
+    
+  }
+  
+  removeArmor(armorKey) {
+    // TODO remove a piece of armor.
+  }
+  
+  calculateArmor() {
+    let highestArmorValue = 0;
+    let armorValueBonus = 0;
+    const resistances = {};
+    let requiredTraining = 0;
+    let perceptionPenalty = 0;
+    
+    this.getArmorList().forEach(armorInstance => {
+      const armorValue = armorInstance.armorValue || 0;
+      const resistanceList = armorInstance.resistances || {};
+      if (armorValue > highestArmorValue) {
+        if (highestArmorValue > 0) armorValueBonus++;
+        highestArmorValue = armorValue;
+      }
+      
+      for (const resistance in resistanceList) {
+        if (!resistanceList.hasOwnProperty(resistance)) continue;
+        if (!resistances[resistance]) resistances[resistance] = 0;
+        resistances[resistance] += resistanceList[resistance];
+      }
+      
+      if (armorInstance.requiredTraining) requiredTraining += armorInstance.requiredTraining;
+      if (armorInstance.perceptionPenalty) perceptionPenalty += armorInstance.perceptionPenalty;
+    });
+    
+    return {
+      armorValue: highestArmorValue + armorValueBonus,
+      resistances,
+      requiredTraining,
+      perceptionPenalty
+    };
+  }
+  
+  getArmorList() {
+    return this._armor;
+  }
+  
   
   // PRIMARY ATTRIBUTES:
   get primaryAttributes() {return this._primaryAttributes;}
@@ -245,11 +340,11 @@ class Character {
     return reach;
   }
   
-  get resistanceConcussive() {
-    let resistance = this.getVariable('resistanceConcussiveAdjustment');
-    if (this.body > 0) resistance += this.body;
-    if (this.size > 0) resistance += this.size;
-    return resistance;
+  get resistances() {
+    const resistances = this.getVariable('resistances', {variableIsObject: true});
+    if (this.body > 0) resistances.concussive += this.body;
+    if (this.size > 0) resistances.concussive += this.size;
+    return resistances;
   } 
   
   // TODO consider adding other resistances ()
@@ -291,13 +386,37 @@ class Character {
     skill.secondarySkills[secondarySkill].rank = rank;
   }
   
+  // NOTES 
+  get notes() {
+    return this._notes;
+  }
+  
+  addNote(note) {
+    if (!note.name || !note.description) throw new Error('Note requries a name and description field.');
+    this._notes.push(note);
+    /* eslint-disable-next-line */
+    this._notes.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  }
+  
+  addTraitAsNote({strainTrait, strainName, traitName} = {}) {
+    let trait;
+    if (strainTrait) {
+      trait = Strains[strainName].strainTraits[traitName] || undefined;
+    }
+    else trait = Traits[traitName] || undefined;
+    
+    if (!trait) throw new Error(`Could not find trait with name ${traitName}`);
+    
+    this.addNote({name: trait.displayName, description: trait.description});
+  }
+  
   /**
    * Converts this to a generic object, suitable for storage.
    * @return {object}
    */
   toJSON() {
-    const {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills} = this;
-    return {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills};
+    const {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills, notes} = this;
+    return {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills, notes};
   }
   
   async save() {
