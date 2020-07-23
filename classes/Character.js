@@ -341,6 +341,7 @@ class Character {
   
   get resistances() {
     const resistances = this.getVariable('resistances', {variableIsObject: true});
+    if (!resistances.concussive) resistances.concussive = 0;
     if (this.body > 0) resistances.concussive += this.body;
     if (this.size > 0) resistances.concussive += this.size;
     return resistances;

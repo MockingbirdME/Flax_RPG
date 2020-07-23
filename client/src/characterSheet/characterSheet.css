@@ -17,6 +17,24 @@
 
 .character_sheet__header {
   border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.character_sheet__header__section {
+  min-width: 10rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.character_sheet__header__section h3,
+.character_sheet__header__section h4 {
+    margin-bottom: .25rem;
+  }
+
+
+.character_sheet__header__label {
+  margin-right: 1rem;
 }
 
 .character_sheet__body {
@@ -112,6 +130,11 @@
   text-align: center;
 }
 
+.character_sheet__body__group__item__stat__tracker{
+  display: flex;
+  justify-content: space-around;
+}
+
 .character_sheet__body__group__item__levels > .character_sheet__body__group__item__levels__level {
   display: flex;
   justify-content: space-between;
@@ -120,6 +143,18 @@
 
 .character_sheet__body__group__item__levels > .character_sheet__body__group__item__levels__level > h5, h6 {
   align-self: center;
+}
+
+.character_sheet__body__group__item__levels__level__boxed__stat {
+  -webkit-appearance:none;
+  width:44px;
+  height:24px;
+  background:white;
+  border-radius:2px;
+  border:2px solid #555;
+  margin-left: .5rem;
+  padding: 1px 2px;
+  text-align: center;
 }
 
 .character_sheet__body__group__item__levels input[type='checkbox'] {

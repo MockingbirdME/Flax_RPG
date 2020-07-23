@@ -20,7 +20,7 @@ class AttributeBox extends Component {
           <h5>{this.props.name}</h5>
         </div>
         <div className="character_sheet__attribute_box__stat">
-          <h4 className="character_sheet__background_text">value</h4>
+          <h4>{!isNaN(value) ? value : <span className="character_sheet__background_text">value</span>}</h4>
         </div>
       </div>
     );

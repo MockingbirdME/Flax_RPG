@@ -30,10 +30,8 @@ class Routes extends Component {
                   <Route path="/strains" component={Strains} />
                   <Route path="/traits" component={Traits} />
                   <Route path="/character/sheet/:charId?" component={CharacterSheet} />
-                  <Route
-                    path="/character/createoredit/:charId?"
-                    component={CreateOrEditChar}
-                  />
+                  <Route path="/character/createoredit/:charId?"
+                    component={CreateOrEditChar} />
                   <Route exact path="/" component={Home} />
                 </Switch>
               </div>
