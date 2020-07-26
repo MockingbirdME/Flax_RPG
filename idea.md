@@ -27,15 +27,110 @@ Magic - Have a focus check that's required when a character takes damage from an
 Arcane theme groupings
 
 New ones to add:
-Transference
-Travel
-Knowledge
-Metal (Maybe update steel to be a more specialized version of this)
+Transference:  
+  * drain/imbue essence
+  * augment speed
+  * haste
+  * force push
+  * ???
 
+Travel:
+  * augment speed
+  * move water
+  * move wind
+  * ???
+  * ???
+
+Knowledge
+  * Detect lies
+  * identify magic effect
+  * translate language
+  * identify substance
+  * ???
+
+
+Metal (Maybe update steel to be a more specialized version of this)
+  Idea: Metal affects all metal types but has a penalty die vs iron and two vs steel, iron has one vs steel or other metals, and steel has one vs iron and two vs other metals.
+  * ???
+  * ???
+  * ???
+  * ???
+  * ???
+Bone
+  * strengthen/weaken bones
+  * speed recovery
+  * bone spurs (creates weapons)
+  * fuse bones (slowing or limb incapacitating effect?)
+  * break bone (attack a persons bones directly to cause damage.)
+Dream
+  * alter perception
+  * affect sleep quality
+  * fear
+  * affect short term memory ?
+  * communicate with the sleeping (inhabit dream, mental communication)?
+sleep
+  * sleep
+  * affect sleep quality
+  * cause/ignore fatigue
+  * energize
+  * slow
+
+communication
+  * mental communication
+  * discern script
+  * detect hidden meaning
+  * translate language
+  * beast speech
+
+Nature
+  * beast speech
+  * plant growth
+  * plant movement (makes rough terrain, allows willows to whip at foes, etc.)
+  * shape/splinter wood
+  * purify water
+
+Displacement
+  * relocate
+  * force push
+  * move wind
+  * move water
+  * bend space
+
+Divination
+  * scrying
+  * detect magic/talent
+  * seek target
+  * arcane targeting
+  * augment reflexes
+
+???
+  * ???
+  * ???
+  * ???
+  * ???
+  * ???
+
+???
+  * ???
+  * ???
+  * ???
+  * ???
+  * ???
+
+???
+  * ???
+  * ???
+  * ???
+  * ???
+  * ???
 
 Idea: Have overlapping groups for various concepts
 ex.
-Healing, Nurture, Birth themes all have some healing concepts but with various focuses. 
+Healing, Nurture, Birth themes all have some healing concepts but with various focuses.
+
+Idea: Each power grants a passive ability to the character, potentially requiring a trait to unlock or some minimum skill level. Ex. Resist temperature grants passive damage reduction from temperature based spells? Might be too powerful or make mages to much better than non-mages.
+
+Idea: Each theme has a Unique power, a couple full powers, and a partial power.
 
 
 # Arcane Themes
@@ -50,11 +145,12 @@ additionally all learned mages have access to
 * Reduce Cost
 ### Arcane
 One of the most common arcane themes on Flax for all types of mages, it is taught in nearly every arcane academy and in specialized alchemy schools for both Learned and Dependent mages.
-* sense magic
+* detect magic / talent
 * suppress magic
-* imbue essence
-* detect talent
+* drain/imbue essence
+* detect talent ???? Should this be it's own thing?
 * resist magic
+* identify magic effect
 
 
 ### Healing
@@ -63,12 +159,15 @@ One of the rarest gifts amongst natural and dependent mages healing arts are tau
 * energize
 * sense health
 * speed recovery
+* neutralize toxin
 
 ### Matter
 * affect mass
 * augment body
 * ignore matter
 * shape matter
+* ???
+
 ### Mind
 Mind mages are especially secretive, only the most prestigious academies for learned mages can boast a teacher of this discipline. This theme's powers are also especially rare amongst dependent and learned mages except for Torleni and their kin.
 * augment mind
@@ -88,12 +187,14 @@ Generally considered an unsavory practice perception magic is frowned upon by le
 * augment perception
 * obfuscate
 * selective perception
+* extend senses
 ### Space
 Rarely a specialty of learned mages space magics are often dabbled in for their utility.
 * area of effect
 * enhance spell range, true
 * enhance weapon range
-* relocate
+* extend senses
+* bend space (lets you make two spaces the same space for movement/attack purposes)
 ### Steel
 Solely the purview of those born a member of the arcane house of smiths, steel magic is exceptionally rare and steel mages are very expensive to employ.
 * Enhance Metal
