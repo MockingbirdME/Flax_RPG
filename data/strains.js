@@ -24,31 +24,56 @@ let strainsData = {
       perception: 0,
       mind: 1
     },
+    apply: (character, options = {}) => {
+      character._primaryAttributes.body -= 1;
+      character._primaryAttributes.reflexes -= 1;
+      character._primaryAttributes.mind += 1;
+      character.updateVariable('size', -1);
+      character.updateVariable('speed', 3);
+    },
     strainTraits: {
       airSacks: {
         displayName: "Air Sacks",
         description:
-          "the character can hold their breath for ten minutes before needing to make breath holding or remain conscious checks provided they had the opportunity to fill their air sacks before submerging."
+          "the character can hold their breath for ten minutes before needing to make breath holding or remain conscious checks provided they had the opportunity to fill their air sacks before submerging.",
+        apply: character => {
+          character.addTraitAsNote({strainTrait: true, strainName: 'denja', traitName: 'airSacks'});
+        }
       },
       clawsWebbedFeetTail: {
         displayName: "Claws, Webbed Feet, and Tail",
         description:
-          "the character gains a bonus die on swim and climb skill checks."
+          "the character gains a bonus die on swim and climb skill checks.",
+        apply: character => {
+          character.addTraitAsNote({strainTrait: true, strainName: 'denja', traitName: 'clawsWebbedFeetTail'});
+          character.updateSkillCheckModifier('swim', {dieModifier: 1});
+          character.updateSkillCheckModifier('climb', {dieModifier: 1});
+        }
       },
       glidingMembrain: {
         displayName: "Gliding Membrain",
         description:
-          "the character may glide when falling as an action provided they are not wearing clothing or armor that prevents the membrane running from wrist to ankle from opening and are not encumbered. This action costs one action point and one stamina point and allows the character to move 10 hexes plus up to their rank in the *fly secondary skill (personal movement)* while falling 5 hexes; if the character is still in the air after this action is completed and they have any additional action points left on their turn they must continue to take this action or they will fall the remaining distance. If a character finds themselves falling outside of their turn they may use their reaction to take this action. Gliding can not be done if the character can not move the required 10 hexes, such as if falling down a narrow shaft or well."
+          "the character may glide when falling as an action provided they are not wearing clothing or armor that prevents the membrane running from wrist to ankle from opening and are not encumbered. This action costs one action point and one stamina point and allows the character to move 10 hexes plus up to their rank in the *fly secondary skill (personal movement)* while falling 5 hexes; if the character is still in the air after this action is completed and they have any additional action points left on their turn they must continue to take this action or they will fall the remaining distance. If a character finds themselves falling outside of their turn they may use their reaction to take this action. Gliding can not be done if the character can not move the required 10 hexes, such as if falling down a narrow shaft or well.",
+        apply: character => {
+          character.addTraitAsNote({strainTrait: true, strainName: 'denja', traitName: 'glidingMembrain'});
+        }
       },
       scales: {
         displayName: "Natural Armor, Scales",
         description:
-          "the character has natural armor with *armor value* ???, *body value* 0 and *resistance (concussive and penetrating)* 1"
+          "the character has natural armor with *armor value* ??? and *resistance (concussive and penetrating)* 1",
+        apply: character => {
+          character.addArmor({armorName: "Natural Armor, Scales", armorValue: 3, resistances: {concussive: 1, penetrating: 1}});
+        }
       },
       claws: {
         displayName: "Natural Weapon, clawed fingers and toes:",
         description:
-          "the character's brawling attacks may inflict penetrating damage, doing so reduces the max bonus body damage of the attack to +1."
+          "the character's brawling attacks may inflict penetrating damage.",
+        apply: character => {
+          // TODO figure out how to natural weapon to weapon options.
+          character.addTraitAsNote({strainTrait: true, strainName: 'denja', traitName: 'claws'});
+        }
       }
     }
   },
@@ -120,7 +145,8 @@ let strainsData = {
       mind: 0,
       any: 1
     },
-    apply: (character, options) => {
+    options: [{name: 'bonusAttribute', displayName: "Bonus Attribute", options: [{value: 'body', displayName: 'Body'}, {value: 'reflexes', displayName: 'Reflexes'}, {value: 'perception', displayName: 'Perception'}, {value: 'mind', displayName: 'Mind'}]}],
+    apply: (character, options = {}) => {
       if (options.bonusAttribute)
         character._primaryAttributes[options.bonusAttribute] += 1;
       character.updateVariable('size', 0);

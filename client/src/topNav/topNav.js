@@ -27,8 +27,8 @@ class TopNav extends Component {
     return (
       <div className="topNav">
         <ul className="topNav__list">
-          <NavLink title="Rules" onHover={this.onHover} />
-          <NavLink title="Character Sheet" onHover={this.onHover} />
+          <NavLink title="Rules" target="rules" onHover={this.onHover} />
+          <NavLink title="Character Sheet" target="character/sheet" onHover={this.onHover} />
         </ul>
         <ExtendedNav
           hoverDisplay={this.state.hoverDisplay}

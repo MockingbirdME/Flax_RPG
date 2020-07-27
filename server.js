@@ -1,6 +1,7 @@
 const DOCUMENTATION = require("./documentation.js");
 const CombatActions = require("./data/combat_actions.js");
 const SkillChecks = require("./data/skill_checks.js");
+const Skills = require("./data/skills.js");
 const Strains = require("./data/strains.js");
 const Traits = require("./data/traits.js");
 const express = require("express");
@@ -52,11 +53,17 @@ app.get("/skillchecks", (req, res) => {
   res.send({SkillChecks});
 });
 
+app.get("/skills", (req, res) => {
+  console.log('getting skills');
+  res.send({Skills});
+});
+
 app.get("/strains", (req, res) => {
   res.send({Strains});
 });
 
 app.get("/traits", (req, res) => {
+  console.log('getting traits');
   res.send({Traits});
 });
 

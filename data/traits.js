@@ -9,11 +9,16 @@ const traitsData = {
         <ul>
         <li>Start with 10 stamina and 3 max wounds, and gain 3 actions points per round in combat</li>
         <li>chooses 3 skills to gain rank one (novice) in and for each of them two secondary skills associated with that skill to gain rank one in.</li>
-        <li>chooses one of their skills at rank one to increase to rank two (skilled).</li>
+        <li>chooses one of their skills at rank one to increase to rank two (skilled) and one of it's secondary skills to increase by one rank.</li>
         <li>learn one spoken language as chosen by the GM.</li>
         <li>Gain 5 traits of the character's choice following the standard rules for gaining traits.</li>
         </ul>
         `,
+    options: {
+      baseSkills: {count: 3, secondarySkillsEach: 2},
+      expertSkills: {count: 1, secondarySkillsEach: 1}
+      
+    },
     apply: (character, options) => {
       // Add 10 max stamina.
       character.updateVariable("staminaMaxAdjustment", 10);
@@ -27,6 +32,8 @@ const traitsData = {
       // Add 5 entitled traits.
       character.updateVariable("extraEntitledTraits", 5); 
         
+      if (options.baseSkills.length !== 3) throw new Error('Adventure character type requires 3 base skills');  
+      
       // Add baseSkills ranks. 
       for (const skill of options.baseSkills) {
         const {name: skillName} = skill;
@@ -36,17 +43,24 @@ const traitsData = {
         }
       }
       
+      if (options.expertSkills.length !== 1) throw new Error('Adventure character type requires 1 expert skill');
+      
+      if (options.expertSkills[0].secondarySkills.length !== 1) throw new Error('Adventure character type requires 1 expert secondary skill');
+      
+      const expertSkill = options.expertSkills[0].name;
+      const expertSecondarySkill = options.expertSkills[0].secondarySkills[0];
+      
       // Confirm the chosen expert skill was on the base skill list.
-      if (!options.baseSkills.find(skill => skill.name === options.expertSkill)) throw new Error('Expert Skill option on adventurer trait must be a skill also selected as a base skill.');
+      if (!options.baseSkills.find(skill => skill.name === expertSkill)) throw new Error('Expert Skill option on adventurer trait must be a skill also selected as a base skill.');
       
       // Set the selected expert skill to rank 2.
-      character.setSkill(options.expertSkill, 2);
+      character.setSkill(expertSkill, 2);
       
       // Get the current rank of the selected expert secondary skill.
-      const currentExpertSecondarySkillRank = character.skills[options.expertSkill].secondarySkills[options.expertSecondarySkill].rank || 0;
+      const currentExpertSecondarySkillRank = character.skills[expertSkill].secondarySkills[expertSecondarySkill].rank || 0;
       
       // Set the selected expert secondary skill to one rank higher than it currently is.
-      character.setSecondarySkill(options.expertSkill, options.expertSecondarySkill, currentExpertSecondarySkillRank + 1);
+      character.setSecondarySkill(expertSkill, expertSecondarySkill, currentExpertSecondarySkillRank + 1);
       
       // TODO gain a language
     }
@@ -58,7 +72,8 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The character gains a bonus die on rolls to resist illness and poisons."
+      "The character gains a bonus die on rolls to resist illness and poisons.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'hardy')
   },
   hardToKillHealthy: {
     displayName: "Hard to Kill, Healthy",
@@ -68,6 +83,7 @@ const traitsData = {
     keywords: ["Simple"],
     description:
       "Each time a character takes this trait they increase their max stamina by one.",
+    isCharacterEligible: character => true,
     apply: (character, options) => {
       character.updateVariable("staminaMaxAdjustment", 1); 
     }

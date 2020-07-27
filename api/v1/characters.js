@@ -5,6 +5,8 @@ const Character = require("../../classes/Character");
 
 const router = express.Router();
 
+router.post("/build", buildCharacterFromBaseStatus);
+
 router.get("/:id", loadCharacter);
 router.post("/:id", updateCharacter);
 router.post("/", createCharacter);
@@ -62,5 +64,13 @@ function deleteCharacter(req, res, next) {
     .catch(error => next(createError(error)));
 }
 
+function buildCharacterFromBaseStatus(req, res, next) {
+  console.log("++++++++++++++++++++++++++++++++++++");
+  if (!req.body) throw createError(400, "Request body is requried for build character endpoint.");
+  console.log(req.body);
+  const character = new Character(req.body);
+  console.log(character);
+  res.status(200).json(character);
+}
 
 module.exports = router;
