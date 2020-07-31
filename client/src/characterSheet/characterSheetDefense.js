@@ -48,7 +48,7 @@ const CharacterSheetAttributes = props => {
           <ResourceDisplay 
             name="Defense" 
             current={currentDefense}
-            max={maxDefense} />
+            max={maxDefense} style={{minWidth: "7rem"}}/>
           
           <div className="character_sheet__body__group__item__levels" >
             <div className="character_sheet__body__group__item__levels__level">

@@ -6,9 +6,8 @@ import Attributes from "./characterSheetAttributes";
 
 import Defense from "./characterSheetDefense";
 import Damage from "./characterSheetDamage";
-import AttributeStat from "./attributeStat";
+import Skills from "./characterSheetSkills";
 import CharacterSheetHeader from "./characterSheetHeader";
-import ResourceDisplay from "./resourceDisplay";
 import SkillBox from "./skillBox";
 
 const CharacterSheet = props => {
@@ -29,20 +28,9 @@ const CharacterSheet = props => {
         
         <div className="character_sheet__body__content">
           <Defense otherAttributes={characterStats.otherAttributes} blankSheet={blankSheet} />
-          
-          <Damage />
-      
+          <Damage otherAttributes={characterStats.otherAttributes} />
+          <Skills />
         </div>
-        {
-          // Defense column
-        }
-        
-        {
-          // Stamina column
-        }
-        {
-          // Wounds column
-        }
           
       </div>
       <div className="character_sheet__notes">
