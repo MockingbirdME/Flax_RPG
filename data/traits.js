@@ -19,6 +19,7 @@ const traitsData = {
       expertSkills: {count: 1, secondarySkillsEach: 1}
       
     },
+    isCharacterEligible: character => false,
     apply: (character, options) => {
       // Add 10 max stamina.
       character.updateVariable("staminaMaxAdjustment", 10);
@@ -73,7 +74,8 @@ const traitsData = {
     keywords: ["Simple"],
     description:
       "The character gains a bonus die on rolls to resist illness and poisons.",
-    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'hardy')
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'hardy'),
+    apply: character => character.addTraitAsNote({traitName: 'hardy'})
   },
   hardToKillHealthy: {
     displayName: "Hard to Kill, Healthy",
@@ -96,6 +98,7 @@ const traitsData = {
     keywords: ["Heroic"],
     description:
       "Each time a character takes this trait they increase their max wounds by one.",
+    isCharacterEligible: character => true,
     apply: (character, options) => {
       character.updateVariable("woundsMaxAdjustment", 1); 
     }
@@ -107,7 +110,9 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Epic"],
     description:
-      "Once per scene per instance of this trait the character has they may spend their reaction to suffer no damage from one attack. The controlling player may decide to use this ability after they know the damage the character would take."
+      "Once per scene per instance of this trait the character has they may spend their reaction to suffer no damage from one attack. The controlling player may decide to use this ability after they know the damage the character would take.",
+    isCharacterEligible: character => true,
+    apply: character => character.addTraitAsNote({traitName: 'hardToKillPlotArmor'})
   },
   linguist: {
     displayName: "Linguist",
@@ -124,7 +129,19 @@ const traitsData = {
     requirements: [],
     requirementsDescription: "",
     keywords: ["Simple"],
-    description: "The character gains rank one in a secondary skill."
+    description: "The character gains rank one in a secondary skill.",
+    options: [{
+      skill: "any",
+      maxSkillRank: "any",
+      secondarySkill: "any",
+      maxSecondarySkillRank: 1
+    }],
+    isCharacterEligible: character => true,
+    apply: (character, options) => {
+      const {skillName, secondarySkill} = options;
+      if (!skillName || !secondarySkill) return;
+      character.setSecondarySkill(skillName, secondarySkill, 1);
+    }
   },
   trainingSpecializedSkilled: {
     displayName: "Training, Specialized Skilled",

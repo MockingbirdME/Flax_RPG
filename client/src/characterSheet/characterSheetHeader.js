@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 const CharacterSheetHeader = props =>{
-  console.log(props.name);
   return (
     <div className="character_sheet__header">
       <span className="character_sheet__header__section">

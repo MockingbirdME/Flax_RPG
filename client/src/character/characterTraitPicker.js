@@ -17,8 +17,10 @@ const CharacterTraitPicker = props => {
   if (!charContext.characters[charId]) return <div></div>;
     
   const selectedTrait = charContext.characters[charId].baseCharData.traitsList[props.index] ? traits[charContext.characters[charId].baseCharData.traitsList[props.index].name] : null;
+  console.log(selectedTrait);
 
   const changeSelectedCharacterTrait = event => {
+    console.log(event.target.value);
     const trait = {name: event.target.value, options: traits[event.target.value].options};
     charContext.setCharacterTrait(charId, props.index, trait);
   };
@@ -28,21 +30,26 @@ const CharacterTraitPicker = props => {
   const {availableTraits} = charContext.characters[charId].calculatedStats;
   
   if (selectedTrait && !availableTraits.some(trait => trait.id === selectedTrait.id)) defaultOptions.push(<option value={selectedTrait.id} key={selectedTrait.id}>{selectedTrait.displayName}</option>);
-  
+  console.log(availableTraits);
   const options = Object.keys(traits).length 
     ? defaultOptions.concat(availableTraits
       .filter(eligibleTrait => {
+        console.log(eligibleTrait);
         if (traits[eligibleTrait.traitId].type === "Character Type") return false;
-        if (selectedTrait && traits[eligibleTrait.traitId].id === selectedTrait.id) return false;
+        if (selectedTrait && eligibleTrait.traitId === selectedTrait.id) return false;
+        console.log('going to return it');
         return true;
       })
       .map(eligibleTrait => {
+        console.log(eligibleTrait);
         const {traitId} = eligibleTrait;
         return <option key={traitId} value={traitId}>
           {traits[traitId].displayName}
         </option>;
       }))
     : [];
+    
+  console.log(options);
 
   return (
     <div className="" >

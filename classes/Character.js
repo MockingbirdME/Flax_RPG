@@ -179,8 +179,17 @@ class Character {
     const traitKeys = Object.keys(Traits);
     return traitKeys.map(key => {
       const trait = Traits[key];
+      
+      // Don't return traits the character isn't eligible for.
       if (!trait.isCharacterEligible || !trait.isCharacterEligible(this)) return null;
-      return {traitId: key, options: Array.isArray(trait.isCharacterEligible(this)) ? trait.isCharacterEligible(this) : []};
+      
+      // Don't return heroic traits if the character has no heroic entitlements.
+      if (trait.keywords.includes("Heroic") && !this.traitEntitlements.heroic.allotted) return null;
+      
+      // Don't return epic traits if the character has no epic entitlements.
+      if (trait.keywords.includes("Epic") && !this.traitEntitlements.epic.allotted) return null;
+      
+      return {traitId: key, options: trait.options || []};
     }).filter(trait => trait);
   }
   

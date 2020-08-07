@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 10in;
-  width: 7.5in;
+  /* height: 10in;
+  width: 7.5in; */
+  width: 55rem;
   margin: 0 auto;
 }
 
@@ -53,7 +54,7 @@
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  margin-top: 1rem;
+  margin: .25rem 0;
 }
 
 .character_sheet__attribute_box__title {
@@ -87,8 +88,8 @@
 
 .character_sheet__body__content__outer__container {
   border: 1px solid black;
-  margin: 1rem 0;
-  padding: .5rem;
+  margin: .25rem 0;
+  padding: .25rem;
 }
 
 .character_sheet__body__content__container__column {
@@ -128,15 +129,12 @@
   
 }
 
-.character_sheet__body__group {
+.character_sheet__body__attributes_container {
   display: flex;
   justify-content: space-between;
   width: 27%;
 }
 
-.character_sheet__body__group_attributes {
-  width: 1.1in;
-}
 
 .character_sheet__body__group_wrap {
   flex-wrap: wrap;

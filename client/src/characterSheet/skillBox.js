@@ -4,7 +4,6 @@ import AttributeStat from "./attributeStat";
 import SecondarySkillItem from './secondarySkillItem.js';
 
 const SkillBox = props => {
-  console.log(props);
   const processCamelCase = (text) => text.charAt(0).toUpperCase() + text.slice(1).replace(/([A-Z])/gu, " $1");
   
   // TODO make it so all skills can be displayed and specific skills can be toggled.

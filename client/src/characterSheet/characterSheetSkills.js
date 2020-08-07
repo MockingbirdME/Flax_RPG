@@ -12,7 +12,7 @@ const CharacterSheetSkills = props => {
 
   const skillsToDisplay = expandedSkills.filter(skill => skill.rank > 0 || skill.secondarySkills.length > 0);
   
-  while (skillsToDisplay.length < 6) skillsToDisplay.push({});
+  while (skillsToDisplay.length < 9) skillsToDisplay.push({});
         
   return (
     <div className="character_sheet__body__content__outer__container">
