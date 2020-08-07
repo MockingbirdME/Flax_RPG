@@ -38,7 +38,7 @@ const CharacterTypePicker = props => {
       <div>
         <h4 style={{margin: "0 0 0 1rem"}}>Select Base Skills</h4>
         <ul>
-          {[...Array(selectedCharacterType.options.baseSkills.count)].map((value, index) => <li><SkillPicker level="baseSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.baseSkills.secondarySkillsEach} /></li>)}
+          {[...Array(selectedCharacterType.options.baseSkills.count)].map((value, index) => <li key={index} ><SkillPicker level="baseSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.baseSkills.secondarySkillsEach} /></li>)}
         </ul>
         
         
@@ -50,7 +50,7 @@ const CharacterTypePicker = props => {
       <div>
         <h4 style={{margin: "0 0 0 1rem"}}>Select Expert Skills</h4>
         <ul>
-          {[...Array(selectedCharacterType.options.expertSkills.count)].map((value, index) => <li><SkillPicker level="expertSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.expertSkills.secondarySkillsEach} /></li>)}
+          {[...Array(selectedCharacterType.options.expertSkills.count)].map((value, index) => <li key={index}><SkillPicker level="expertSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.expertSkills.secondarySkillsEach} /></li>)}
         </ul>
       </div>
     ) : "";

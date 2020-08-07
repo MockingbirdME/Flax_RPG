@@ -33,7 +33,7 @@ const traitsData = {
       character.updateVariable("extraEntitledTraits", 5); 
         
       if (options.baseSkills.length !== 3) throw new Error('Adventure character type requires 3 base skills');  
-      
+      console.log(options);
       // Add baseSkills ranks. 
       for (const skill of options.baseSkills) {
         const {name: skillName} = skill;

@@ -3,7 +3,7 @@ import AttributeStat from "./attributeStat";
 import ResourceDisplay from "./resourceDisplay";
 
 
-const CharacterSheetAttributes = props => {
+const CharacterSheetDefense = props => {
   const resistances = props.otherAttributes && props.otherAttributes.resistances 
     ? (
       <div className="character_sheet__body__group__item__levels character_sheet__body__content__container__row character_sheet__body__group_wrap">
@@ -11,7 +11,7 @@ const CharacterSheetAttributes = props => {
           Resistances:
         </h5>
         {Object.keys(props.otherAttributes.resistances).map(key => (
-          <div className="character_sheet__body__group__item__levels__level">
+          <div className="character_sheet__body__group__item__levels__level" key={key}>
             <h6>{key.charAt(0).toUpperCase() + key.slice(1)}</h6>
             <AttributeStat blankSheet={props.blankSheet} stats={props.otherAttributes} target={["resistances", key]} />
           </div>
@@ -79,4 +79,4 @@ const CharacterSheetAttributes = props => {
 };
 
 
-export default CharacterSheetAttributes;
+export default CharacterSheetDefense;

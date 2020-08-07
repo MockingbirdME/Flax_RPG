@@ -18,7 +18,7 @@ const CharacterSheet = props => {
     
   const blankSheet = !charId;  
   const characterStats = (charContext.characters[charId] && charContext.characters[charId].calculatedStats) || {};
-  
+  console.log(charContext.characters[charId]);
 
   return (
     <div className="character_sheet__container">
@@ -29,7 +29,9 @@ const CharacterSheet = props => {
         <div className="character_sheet__body__content">
           <Defense otherAttributes={characterStats.otherAttributes} blankSheet={blankSheet} />
           <Damage otherAttributes={characterStats.otherAttributes} />
-          <Skills />
+          <Skills 
+            skills={characterStats.skills}
+            blankSheet={blankSheet} />
         </div>
           
       </div>

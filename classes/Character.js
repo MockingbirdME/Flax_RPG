@@ -28,13 +28,16 @@ const OTHER_ATTRIBUTES = [
 ];
 
 // Build default skills with all ranks set to zero.
-const DEFAULT_SKILLS = {};
-Object.keys(Skills).forEach(skill => {
-  DEFAULT_SKILLS[skill] = {rank: 0, secondarySkills: {}};
-  Object.keys(Skills[skill].secondarySkills).forEach(secondarySkill => {
-    DEFAULT_SKILLS[skill].secondarySkills[secondarySkill] = {rank: 0};
+const DEFAULT_SKILLS = () => {
+  const defaultSkills = {};
+  Object.keys(Skills).forEach(skill => {
+    defaultSkills[skill] = {rank: 0, secondarySkills: {}};
+    Object.keys(Skills[skill].secondarySkills).forEach(secondarySkill => {
+      defaultSkills[skill].secondarySkills[secondarySkill] = {rank: 0};
+    });
   });
-});
+  return defaultSkills;
+};
 
 
 class Character {
@@ -52,7 +55,7 @@ class Character {
     this._primaryAttributes = PRIMARY_ATTRIBUTES.reduce((acc, attribute) => ({...acc, [attribute]: this._baseAttributeModifiers[attribute] || 0}), {});
 
     // Set initial skills object.
-    this._skills = DEFAULT_SKILLS;
+    this._skills = DEFAULT_SKILLS();
     
     // Store notes for display.
     this._notes = [];
@@ -87,9 +90,6 @@ class Character {
 
     // Apply the character's strain.
     this.strain = strain || 'unknown';
-    
-    // TODO Apply traits. 
-    // this.applyTraits()
   }
   
   get id() {
@@ -373,6 +373,7 @@ class Character {
   }
   
   setSkill(skill, rank) {
+    console.log(`setting skill "${skill}" to rank: ${rank}`);
     if (!this.skills[skill]) throw new Error(`Skill ${skill} doesn't exist.`);
     this._skills[skill].rank = rank;
   }
