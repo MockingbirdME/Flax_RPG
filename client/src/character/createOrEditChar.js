@@ -25,8 +25,11 @@ const CreateOrEditChar = props => {
         <CharacterLevelTracker />
         <CharacterStrainPicker />
         <CharacterAttributeMinMaxPicker />
-        <CharacterTypePicker />
-        <CharacterTraitsPicker />
+        {
+        // 
+        // <CharacterTypePicker />
+        // <CharacterTraitsPicker />
+      }
       </div>
       <div style={{padding: "0 0 0 2rem", borderLeft: "2px solid black"}}>
         <CharacterSheet {...props} />
