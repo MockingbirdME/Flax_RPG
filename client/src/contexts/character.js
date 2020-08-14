@@ -24,7 +24,8 @@ export const CharacterContextProvider = props => {
   
   const initializeEmptyCharacter = (id) => {
     const tempID = id || Object.keys(characters).length;
-    setCharacters({...characters, [tempID]: {}});
+    // setCharacters({...characters, [tempID]: {}});
+    buildCharacterNew(tempID);
   };
   
   const setCharacterName = (id, name) => {
