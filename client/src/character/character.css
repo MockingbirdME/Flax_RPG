@@ -5,3 +5,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.character_type_picker {
+  display: flex;
+}

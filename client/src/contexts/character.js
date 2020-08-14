@@ -56,23 +56,18 @@ export const CharacterContextProvider = props => {
   const setCharacterType = (id, type) => {    
     if (!characters[id]) this.initializeEmptyCharacter(id);
     const character = characters[id];
+    if (!character.traitsList) character.traitsList = [];
+    console.log(character);
     
     // Get the current index of the character's Character Type trait.
-    const currentCharacterTypeIndex = character.baseCharData.traitsList.indexOf(trait => trait.type === "Character Type");
+    const currentCharacterTypeIndex = character.traitsList.indexOf(trait => trait.type === "Character Type");
     
     // If a character trait was found remove it from the character's trait list.
-    if (currentCharacterTypeIndex !== -1) character.baseCharData.traitsList.splice(currentCharacterTypeIndex, 1);
+    if (currentCharacterTypeIndex !== -1) character.traitsList.splice(currentCharacterTypeIndex, 1);
+    
+    character.traitsList.unshift(type);
 
-    character.baseCharData.characterType.name = type.name;
-    character.baseCharData.characterType.requirements = type.options || null;
-    
-    setCharacters({...characters, [id]: character});
-    
-    if (characterTypeIsComplete(character.baseCharData.characterType)) {
-      
-      setCharacters({...characters, [id]: character});
-      buildCharacter(id, character);
-    }
+    buildCharacterNew(id, {...character});
     
   };
   

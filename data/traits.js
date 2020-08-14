@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 const traitsData = {
   adventurer: {
     displayName: "Adventurer",
@@ -14,12 +15,59 @@ const traitsData = {
         <li>Gain 5 traits of the character's choice following the standard rules for gaining traits.</li>
         </ul>
         `,
-    options: {
-      baseSkills: {count: 3, secondarySkillsEach: 2},
-      expertSkills: {count: 1, secondarySkillsEach: 1}
+    options: (character) => {
+      // TODO refactor options to reflect updated options model
+      const options = (character.traits.find(trait => trait.options === 'adventurer') && character.traits.find(trait => trait.options === 'adventurer').options) || {};
+      if (!options.baseSkills) options.baseSkills = [];
+      if (!options.expertSkills) options.expertSkills = [];
       
+      const {skills} = character;
+      const baseSkills = {};
+      const expertSkills = {};
+      
+      for (const skillName in skills) {
+        if (!skills.hasOwnProperty(skillName)) continue;
+        
+        const baseSkillOption = options.baseSkills.find(skillOption => skillOption.name === skillName);
+        
+        const skill = skills[skillName];
+        
+        if (skill.rank !== 0 && !baseSkillOption) continue;
+        
+        baseSkills[skillName] = [];
+        for (const secondarySkill in skill.secondarySkills) {
+          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
+          
+          if (skill.secondarySkills[secondarySkill].rank !== 0 && !baseSkillOption.secondarySkills.includes(secondarySkill)) continue;
+          
+          baseSkills[skillName].push(secondarySkill);
+        }
+      } 
+      
+      for (const skillName in skills) {
+        if (!skills.hasOwnProperty(skillName)) continue;
+        
+        const expertSkillOption = options.expertSkills.find(skillOption => skillOption.name === skillName);
+        
+        const skill = skills[skillName];
+        
+        if (skill.rank !== 1 && !expertSkillOption) continue;
+        
+        expertSkills[skillName] = [];
+        for (const secondarySkill in skill.secondarySkills) {
+          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
+          
+          if (skill.secondarySkills[secondarySkill].rank <= 1 && !expertSkillOption.secondarySkills.includes(secondarySkill)) continue;
+          
+          expertSkills[skillName].push(secondarySkill);
+        }
+      }   
+      console.log("expert skills:");
+      console.log(baseSkills);
+      console.log(expertSkills);
+      return [{selection: "", secondaryPicks: 2, options: baseSkills}, {selection: "", secondaryPicks: 2, options: baseSkills}, {selection: "", secondaryPicks: 1, options: expertSkills}]; 
     },
-    isCharacterEligible: character => false,
+    isCharacterEligible: character => true,
     apply: (character, options) => {
       // Add 10 max stamina.
       character.updateVariable("staminaMaxAdjustment", 10);
@@ -32,8 +80,9 @@ const traitsData = {
       
       // Add 5 entitled traits.
       character.updateVariable("extraEntitledTraits", 5); 
+      
+      if (!options) return;
         
-      if (options.baseSkills.length !== 3) throw new Error('Adventure character type requires 3 base skills');  
       console.log(options);
       // Add baseSkills ranks. 
       for (const skill of options.baseSkills) {
@@ -43,16 +92,12 @@ const traitsData = {
           character.setSecondarySkill(skillName, secondarySkill, 1);
         }
       }
-      
-      if (options.expertSkills.length !== 1) throw new Error('Adventure character type requires 1 expert skill');
-      
-      if (options.expertSkills[0].secondarySkills.length !== 1) throw new Error('Adventure character type requires 1 expert secondary skill');
-      
+
       const expertSkill = options.expertSkills[0].name;
-      const expertSecondarySkill = options.expertSkills[0].secondarySkills[0];
+      const [expertSecondarySkill] = options.expertSkills[0].secondarySkills;
       
-      // Confirm the chosen expert skill was on the base skill list.
-      if (!options.baseSkills.find(skill => skill.name === expertSkill)) throw new Error('Expert Skill option on adventurer trait must be a skill also selected as a base skill.');
+      // Confirm the chosen expert skill rank 1.
+      if (character.skills[expertSkill].rank !== 1) throw new Error('Expert Skill option on adventurer trait must be a skill at rank 1.');
       
       // Set the selected expert skill to rank 2.
       character.setSkill(expertSkill, 2);
@@ -130,12 +175,14 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description: "The character gains rank one in a secondary skill.",
-    options: [{
-      skill: "any",
-      maxSkillRank: "any",
-      secondarySkill: "any",
-      maxSecondarySkillRank: 1
-    }],
+    options: (character) => {
+      return [{
+        skill: "any",
+        maxSkillRank: "any",
+        secondarySkill: "any",
+        maxSecondarySkillRank: 1
+      }]
+    },
     isCharacterEligible: character => true,
     apply: (character, options) => {
       const {skillName, secondarySkill} = options;

@@ -172,7 +172,7 @@ class Character {
     // TODO consider enforcing prerequisits here.
     if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, options);
     if (!this._traits) this._traits = [];
-    this._traits.push(trait);
+    this._traits.push({...trait, options: trait.options(this, options)});
   }
   
   get availableTraits() {
@@ -188,8 +188,8 @@ class Character {
       
       // Don't return epic traits if the character has no epic entitlements.
       if (trait.keywords.includes("Epic") && !this.traitEntitlements.epic.allotted) return null;
-      
-      return {traitId: key, options: trait.options || []};
+
+      return {traitId: key, options: (trait.options && trait.options(this)) || []};
     }).filter(trait => trait);
   }
   

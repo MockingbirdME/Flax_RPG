@@ -6,6 +6,8 @@ import TraitContext from "../contexts/trait";
 
 import SkillPicker from "./characterTypeSkillPicker";
 
+import TraitPicker from "./characterTraitPicker";
+
 
 const CharacterTypePicker = props => {
   const [showOptions, setShowOptions] = useState(true); 
@@ -15,12 +17,14 @@ const CharacterTypePicker = props => {
   const { charId } = useParams();
   
   if (!charContext.characters[charId]) return <div></div>;
-    
-  const selectedCharacterType = charContext.characters[charId].baseCharData.characterType.name ? traits[charContext.characters[charId].baseCharData.characterType.name] : null;
+    console.log(charContext.characters[charId]);
+  const characterTraits = charContext.characters[charId].traits;
 
-  const changeCharacterType = event => {
-    const trait = {name: event.target.value, options: traits[event.target.value].options};
-    charContext.setCharacterType(charId, trait);
+  const selectedCharacterType = (characterTraits && characterTraits.find(trait => trait.type === "Character Type")) || {};
+console.log(selectedCharacterType);
+  const changeCharacterType = value => {
+    console.log(value);
+    charContext.setCharacterType(charId, value);
   };
   
   const options = Object.keys(traits).length 
@@ -33,54 +37,44 @@ const CharacterTypePicker = props => {
       )))
     : [];
     
-  const baseSkillPickers = selectedCharacterType && selectedCharacterType.options.baseSkills 
-    ? (
-      <div>
-        <h4 style={{margin: "0 0 0 1rem"}}>Select Base Skills</h4>
-        <ul>
-          {[...Array(selectedCharacterType.options.baseSkills.count)].map((value, index) => <li key={index} ><SkillPicker level="baseSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.baseSkills.secondarySkillsEach} /></li>)}
-        </ul>
-        
-        
-      </div>
-    ) : "";
+  // const baseSkillPickers = selectedCharacterType && selectedCharacterType.options.baseSkills 
+  //   ? (
+  //     <div>
+  //       <h4 style={{margin: "0 0 0 1rem"}}>Select Base Skills</h4>
+  //       <ul>
+  //         {[...Array(selectedCharacterType.options.baseSkills.count)].map((value, index) => <li key={index} ><SkillPicker level="baseSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.baseSkills.secondarySkillsEach} /></li>)}
+  //       </ul>
+  // 
+  // 
+  //     </div>
+  //   ) : "";
     
-  const expertSkillPickers = selectedCharacterType && selectedCharacterType.options.expertSkills && selectedCharacterType.options.expertSkills.count 
-    ? (
-      <div>
-        <h4 style={{margin: "0 0 0 1rem"}}>Select Expert Skills</h4>
-        <ul>
-          {[...Array(selectedCharacterType.options.expertSkills.count)].map((value, index) => <li key={index}><SkillPicker level="expertSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.expertSkills.secondarySkillsEach} /></li>)}
-        </ul>
-      </div>
-    ) : "";
+  // const expertSkillPickers = selectedCharacterType && selectedCharacterType.options.expertSkills && selectedCharacterType.options.expertSkills.count 
+  //   ? (
+  //     <div>
+  //       <h4 style={{margin: "0 0 0 1rem"}}>Select Expert Skills</h4>
+  //       <ul>
+  //         {[...Array(selectedCharacterType.options.expertSkills.count)].map((value, index) => <li key={index}><SkillPicker level="expertSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.expertSkills.secondarySkillsEach} /></li>)}
+  //       </ul>
+  //     </div>
+  //   ) : "";
     
-  const optionsToggler = charContext.characters[charId].baseCharData.characterType.name
-    ? <p style={{margin: "auto", color: "grey", size: "small"}} onClick={ev => setShowOptions(!showOptions)}>Toggle Skill Picker Display</p> : "";
+  // const optionsToggler = charContext.characters[charId].characterType.name
+  //   ? <p style={{margin: "auto", color: "grey", size: "small"}} onClick={ev => setShowOptions(!showOptions)}>Toggle Skill Picker Display</p> : "";
   
   const skillPickers = showOptions ? (
     <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between", maxWidth: "70rem"}}>
-      {baseSkillPickers}
-      {expertSkillPickers}
+      {/* baseSkillPickers */}
+      {/* expertSkillPickers */}
     </div>
   ) : "";
   
   return (
     <div className="" >
-      <h2>
-        <span>
-          Character Type:
-          <select
-            style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
-            value={charContext.characters[charId].baseCharData.characterType.name || ""}
-            onChange={ev => changeCharacterType(ev)}
-          >
-            {options}
-          </select>
-        </span>
-        {optionsToggler}
+      <h2 className="character_type_picker">
+        Character Type:
+        <TraitPicker options={options} onChange={changeCharacterType} currentValue={selectedCharacterType} />
       </h2>
-      {skillPickers}
     </div>
   );
 };

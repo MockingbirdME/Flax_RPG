@@ -20,14 +20,15 @@ const CreateOrEditChar = props => {
 
   return (
     <div className="character__container">
-      <div style={{display: "flex", justifyContent: "flex-start", maxWidth: "73rem", flexDirection: "column"}}>
+      <div style={{display: "flex", justifyContent: "flex-start", minWidth: "40rem", maxWidth: "73rem", flexDirection: "column"}}>
         <CharacterNameField /> 
         <CharacterLevelTracker />
         <CharacterStrainPicker />
         <CharacterAttributeMinMaxPicker />
+        <CharacterTypePicker />
         {
         // 
-        // <CharacterTypePicker />
+        // 
         // <CharacterTraitsPicker />
       }
       </div>
