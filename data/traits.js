@@ -62,10 +62,11 @@ const traitsData = {
           expertSkills[skillName].push(secondarySkill);
         }
       }   
-      console.log("expert skills:");
-      console.log(baseSkills);
-      console.log(expertSkills);
-      return [{selection: "", secondaryPicks: 2, options: baseSkills}, {selection: "", secondaryPicks: 2, options: baseSkills}, {selection: "", secondaryPicks: 1, options: expertSkills}]; 
+      return [
+        {id: "baseSkillOne", type: "skill", secondaryPicks: 2, options: baseSkills}, 
+        {id: "baseSkillTwo", type: "skill", secondaryPicks: 2, options: baseSkills}, 
+        {id: "expertSkill", type: "skill", secondaryPicks: 1, options: expertSkills}
+      ]; 
     },
     isCharacterEligible: character => true,
     apply: (character, options) => {
@@ -85,28 +86,28 @@ const traitsData = {
         
       console.log(options);
       // Add baseSkills ranks. 
-      for (const skill of options.baseSkills) {
-        const {name: skillName} = skill;
-        character.setSkill(skillName, 1);
-        for (const secondarySkill of skill.secondarySkills) {
-          character.setSecondarySkill(skillName, secondarySkill, 1);
-        }
-      }
-
-      const expertSkill = options.expertSkills[0].name;
-      const [expertSecondarySkill] = options.expertSkills[0].secondarySkills;
-      
-      // Confirm the chosen expert skill rank 1.
-      if (character.skills[expertSkill].rank !== 1) throw new Error('Expert Skill option on adventurer trait must be a skill at rank 1.');
-      
-      // Set the selected expert skill to rank 2.
-      character.setSkill(expertSkill, 2);
-      
-      // Get the current rank of the selected expert secondary skill.
-      const currentExpertSecondarySkillRank = character.skills[expertSkill].secondarySkills[expertSecondarySkill].rank || 0;
-      
-      // Set the selected expert secondary skill to one rank higher than it currently is.
-      character.setSecondarySkill(expertSkill, expertSecondarySkill, currentExpertSecondarySkillRank + 1);
+      // for (const skill of options.baseSkills) {
+      //   const {name: skillName} = skill;
+      //   character.setSkill(skillName, 1);
+      //   for (const secondarySkill of skill.secondarySkills) {
+      //     character.setSecondarySkill(skillName, secondarySkill, 1);
+      //   }
+      // }
+      // 
+      // const expertSkill = options.expertSkills[0].name;
+      // const [expertSecondarySkill] = options.expertSkills[0].secondarySkills;
+      // 
+      // // Confirm the chosen expert skill rank 1.
+      // if (character.skills[expertSkill].rank !== 1) throw new Error('Expert Skill option on adventurer trait must be a skill at rank 1.');
+      // 
+      // // Set the selected expert skill to rank 2.
+      // character.setSkill(expertSkill, 2);
+      // 
+      // // Get the current rank of the selected expert secondary skill.
+      // const currentExpertSecondarySkillRank = character.skills[expertSkill].secondarySkills[expertSecondarySkill].rank || 0;
+      // 
+      // // Set the selected expert secondary skill to one rank higher than it currently is.
+      // character.setSecondarySkill(expertSkill, expertSecondarySkill, currentExpertSecondarySkillRank + 1);
       
       // TODO gain a language
     }

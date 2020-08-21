@@ -84,8 +84,8 @@ class Character {
 
     // Store the traits list and apply each trait. 
     this._traitsList = traitsList || [];
-    for (const traitName of this._traitsList) {
-      this.applyTrait(traitName);
+    for (const traitDetails of this._traitsList) {
+      this.applyTrait(traitDetails);
     }
 
     // Apply the character's strain.
@@ -166,13 +166,13 @@ class Character {
   
   applyTrait(traitDetails) {
     if (typeof traitDetails === 'string') traitDetails = {name: traitDetails};
-    const {name, options} = traitDetails;
-    const trait = Traits[name];
+    const {name, selectedOptions} = traitDetails;
+    const trait = {...Traits[name]};
     trait.id = name;
     // TODO consider enforcing prerequisits here.
-    if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, options);
+    if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, selectedOptions);
     if (!this._traits) this._traits = [];
-    this._traits.push({...trait, options: trait.options(this, options)});
+    this._traits.push({...trait, options: trait.options(this, selectedOptions), selectedOptions});
   }
   
   get availableTraits() {
