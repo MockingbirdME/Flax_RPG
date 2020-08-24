@@ -2,36 +2,65 @@ import React, { useContext } from "react";
 import {useParams} from 'react-router-dom';
 import "./character.css";
 import CharacterContext from "../contexts/character";
-// import CharacterTraitPicker from "./characterTraitPicker";
+import OptionSelector from "./optionSelector";
+import TraitContext from "../contexts/trait";
 
 
 const CharacterTraitsPicker = props => {
   const context = useContext(CharacterContext);
   const { charId } = useParams();
   
-    
+  const traitContext = useContext(TraitContext);
+  const {traits} = traitContext;
+  
   const character = context.characters[charId];
   
-  if (!character || !character.calculatedStats) return <div></div>;
+  if (!character) return <div></div>;
 
-  const traitEntitlements = character.calculatedStats.traitEntitlements || {};
-  console.log(traitEntitlements.total.allotted);
-  // const traits = [...Array(traitEntitlements.total.allotted)].map((value, index) => <CharacterTraitPicker key={index} index={index} />);
+  const changeSelectedTrait = (name, index) => {
+    console.log(name);
+    console.log(index);
+    // TODO Make this actually add/update the trait.
+  };
 
+  const traitEntitlements = character.traitEntitlements || {};
+  
+  // const traits = [...Array(traitEntitlements.total.allotted)].map((value, index) => <OptionSelector key={index} index={index} />);
+  const traitOptions = character.availableTraits.map(trait => trait.traitId).filter(traitId => !traits[traitId] || traits[traitId].type !== "Character Type");
+  
+  const traitsDisplay = Array.from(Array(traitEntitlements.total.allotted || 0))
+    .map((value, index) => {
+      const trait = character.traits[index] || {};
+      if (trait.type === "Character Type") return null;
 
-//   return (
-//     <div>
-//       <div className="" style={{display: "flex", justifyContent: "space-between", maxWidth: "40rem"}}>
-//         <h2>Traits:</h2>
-//         <div style={{display: "flex", justifyContent: "space-around", width: "30rem", alignItems: "center"}}>
-//           <h4>Total: {traitEntitlements.total.consumed}/{traitEntitlements.total.allotted}</h4>
-//           <h4>Heroic: {traitEntitlements.heroic.consumed}/{traitEntitlements.heroic.allotted}</h4>
-//           <h4>Epic: {traitEntitlements.epic.consumed}/{traitEntitlements.epic.allotted}</h4>
-//         </div>
-//       </div>
-//       {traits}
-//     </div>
-//   );
+      const options = traitOptions.filter(traitId => !trait || trait.id !== traitId);
+      if (trait.id) options.unshift(trait.id);
+
+      return <OptionSelector 
+        key={index}
+        id={index}
+        defaultSelectionType={"trait"}
+        options={options}
+        selectedOptions={trait.selectedOptions} 
+        keyType={"trait"}
+        onChange={changeSelectedTrait} 
+        currentValue={trait} />;
+    })
+    .filter(value => value);
+
+  return (
+    <div>
+      <div className="" style={{display: "flex", justifyContent: "space-between", maxWidth: "40rem"}}>
+        <h2>Traits:</h2>
+        <div style={{display: "flex", justifyContent: "space-around", width: "30rem", alignItems: "center"}}>
+          <h4>Total: {traitEntitlements.total.consumed}/{traitEntitlements.total.allotted || 0}</h4>
+          <h4>Heroic: {traitEntitlements.heroic.consumed}/{traitEntitlements.heroic.allotted || 0}</h4>
+          <h4>Epic: {traitEntitlements.epic.consumed}/{traitEntitlements.epic.allotted || 0}</h4>
+        </div>
+      </div>
+      {traitsDisplay}
+    </div>
+  );
 };
 
 export default CharacterTraitsPicker;

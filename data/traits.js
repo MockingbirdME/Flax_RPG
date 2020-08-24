@@ -15,61 +15,95 @@ const traitsData = {
         <li>Gain 5 traits of the character's choice following the standard rules for gaining traits.</li>
         </ul>
         `,
-    options: (character) => {
-      // TODO refactor options to reflect updated options model
-      const options = (character.traits.find(trait => trait.options === 'adventurer') && character.traits.find(trait => trait.options === 'adventurer').options) || {};
-      if (!options.baseSkills) options.baseSkills = [];
-      if (!options.expertSkills) options.expertSkills = [];
+    options: (character, selectedOptions = {}) => {
+      const options = [];
       
       const {skills} = character;
-      const baseSkills = {};
-      const expertSkills = {};
+      const baseSkills = [];
+      const expertSkills = [];
       
       for (const skillName in skills) {
         if (!skills.hasOwnProperty(skillName)) continue;
         
-        const baseSkillOption = options.baseSkills.find(skillOption => skillOption.name === skillName);
+        const selectedBaseSkills = [selectedOptions.baseSkillOne, selectedOptions.baseSkillTwo];
+        
+        const selectedExpertSkill = selectedOptions.expertSkill;
         
         const skill = skills[skillName];
         
-        if (skill.rank !== 0 && !baseSkillOption) continue;
-        
-        baseSkills[skillName] = [];
-        for (const secondarySkill in skill.secondarySkills) {
-          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
-          
-          if (skill.secondarySkills[secondarySkill].rank !== 0 && !baseSkillOption.secondarySkills.includes(secondarySkill)) continue;
-          
-          baseSkills[skillName].push(secondarySkill);
-        }
-      } 
+        if (skill.rank === 0 || selectedBaseSkills.includes(skillName)) baseSkills.push(skillName);
       
-      for (const skillName in skills) {
-        if (!skills.hasOwnProperty(skillName)) continue;
+        if (skill.rank === 1 || skillName === selectedExpertSkill) expertSkills.push(skillName);
+      }  
+            
+      options.push({id: "baseSkillOne", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillTwo)});
+      
+      if (selectedOptions.baseSkillOne) {
+        const skill = skills[selectedOptions.baseSkillOne];
+        const secondaryOptions = [];
         
-        const expertSkillOption = options.expertSkills.find(skillOption => skillOption.name === skillName);
+        const selectedSecondaryOptions = [selectedOptions.baseSkillOneSecondarySkillOne, selectedOptions.baseSkillOneSecondarySkillTwo];
         
-        const skill = skills[skillName];
-        
-        if (skill.rank !== 1 && !expertSkillOption) continue;
-        
-        expertSkills[skillName] = [];
         for (const secondarySkill in skill.secondarySkills) {
           if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
           
-          if (skill.secondarySkills[secondarySkill].rank <= 1 && !expertSkillOption.secondarySkills.includes(secondarySkill)) continue;
+          if (skill.secondarySkills[secondarySkill].rank !== 0 && !selectedSecondaryOptions.includes(secondarySkill)) continue;
           
-          expertSkills[skillName].push(secondarySkill);
+          secondaryOptions.push(secondarySkill);
         }
-      }   
-      return [
-        {id: "baseSkillOne", type: "skill", secondaryPicks: 2, options: baseSkills}, 
-        {id: "baseSkillTwo", type: "skill", secondaryPicks: 2, options: baseSkills}, 
-        {id: "expertSkill", type: "skill", secondaryPicks: 1, options: expertSkills}
-      ]; 
+
+        options.push({id: "baseSkillOneSecondarySkillOne", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
+        
+        options.push({id: "baseSkillOneSecondarySkillTwo", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
+      }
+      
+      options.push({id: "baseSkillTwo", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillOne)});
+      
+      if (selectedOptions.baseSkillTwo) {
+        const skill = skills[selectedOptions.baseSkillTwo];
+        const secondaryOptions = [];
+        
+        const selectedSecondaryOptions = [selectedOptions.baseSkillTwoSecondarySkillOne, selectedOptions.baseSkillTwoSecondarySkillTwo];
+        
+        for (const secondarySkill in skill.secondarySkills) {
+          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
+          
+          if (skill.secondarySkills[secondarySkill].rank !== 0 && !selectedSecondaryOptions.includes(secondarySkill)) continue;
+          
+          secondaryOptions.push(secondarySkill);
+        }
+
+        options.push({id: "baseSkillTwoSecondarySkillOne", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
+        
+        options.push({id: "baseSkillTwoSecondarySkillTwo", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
+      }
+      
+      options.push({id: "expertSkill", type: "skill", options: expertSkills});
+      
+      if (selectedOptions.expertSkill) {
+        const skill = skills[selectedOptions.expertSkill];
+        const secondaryOptions = [];
+        
+        const selectedSecondaryOptions = selectedOptions.expertSecondarySkill;
+        
+        for (const secondarySkill in skill.secondarySkills) {
+          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
+          
+          if (skill.secondarySkills[secondarySkill].rank !== 0 && secondarySkill !== selectedSecondaryOptions) continue;
+          
+          secondaryOptions.push(secondarySkill);
+        }
+
+        options.push({id: "expertSecondarySkill", type: "secondary skill", options: secondaryOptions, parentId: "expertSkill", parentValue: selectedOptions.expertSkill});
+      }
+      
+      return options; 
     },
-    isCharacterEligible: character => true,
-    apply: (character, options) => {
+    isCharacterEligible: character => {
+      if (character.traits.find(trait => trait.type === "Character Type")) return false;
+      return true;
+    },
+    apply: (character, selectedOptions) => {
       // Add 10 max stamina.
       character.updateVariable("staminaMaxAdjustment", 10);
        
@@ -82,33 +116,38 @@ const traitsData = {
       // Add 5 entitled traits.
       character.updateVariable("extraEntitledTraits", 5); 
       
-      if (!options) return;
-        
-      console.log(options);
-      // Add baseSkills ranks. 
-      // for (const skill of options.baseSkills) {
-      //   const {name: skillName} = skill;
-      //   character.setSkill(skillName, 1);
-      //   for (const secondarySkill of skill.secondarySkills) {
-      //     character.setSecondarySkill(skillName, secondarySkill, 1);
-      //   }
-      // }
-      // 
-      // const expertSkill = options.expertSkills[0].name;
-      // const [expertSecondarySkill] = options.expertSkills[0].secondarySkills;
-      // 
-      // // Confirm the chosen expert skill rank 1.
-      // if (character.skills[expertSkill].rank !== 1) throw new Error('Expert Skill option on adventurer trait must be a skill at rank 1.');
-      // 
-      // // Set the selected expert skill to rank 2.
-      // character.setSkill(expertSkill, 2);
-      // 
-      // // Get the current rank of the selected expert secondary skill.
-      // const currentExpertSecondarySkillRank = character.skills[expertSkill].secondarySkills[expertSecondarySkill].rank || 0;
-      // 
-      // // Set the selected expert secondary skill to one rank higher than it currently is.
-      // character.setSecondarySkill(expertSkill, expertSecondarySkill, currentExpertSecondarySkillRank + 1);
+      if (!selectedOptions) return;
       
+      const {baseSkillOne,
+        baseSkillTwo,
+        expertSkill,
+        baseSkillOneSecondarySkillOne,
+        baseSkillOneSecondarySkillTwo,
+        baseSkillTwoSecondarySkillOne,
+        baseSkillTwoSecondarySkillTwo,
+        expertSecondarySkill} = selectedOptions;
+        
+      // TODO validate that all selected options are valid.
+        
+      if (baseSkillOne) {
+        character.setSkill(baseSkillOne, 1);
+        if (baseSkillOneSecondarySkillOne) character.setSecondarySkill(baseSkillOne, baseSkillOneSecondarySkillOne, 1);
+        
+        if (baseSkillOneSecondarySkillTwo) character.setSecondarySkill(baseSkillOne, baseSkillOneSecondarySkillTwo, 1);
+      }
+      if (baseSkillTwo) {
+        character.setSkill(baseSkillTwo, 1);
+        if (baseSkillTwoSecondarySkillOne) character.setSecondarySkill(baseSkillTwo, baseSkillTwoSecondarySkillOne, 1);
+        
+        if (baseSkillTwoSecondarySkillTwo) character.setSecondarySkill(baseSkillTwo, baseSkillTwoSecondarySkillTwo, 1);
+      }
+      if (expertSkill) {
+        character.setSkill(expertSkill, 2);
+        if (expertSecondarySkill) {
+          const currentExpertSecondarySkillRank = character.skills[expertSkill].secondarySkills[expertSecondarySkill].rank || 0;
+          character.setSecondarySkill(expertSkill, baseSkillTwoSecondarySkillOne, currentExpertSecondarySkillRank + 1);
+        }
+      }
       // TODO gain a language
     }
   },

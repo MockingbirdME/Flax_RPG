@@ -8,17 +8,6 @@ export default CharacterContext;
 const lastCallUID = {};
 
 export const CharacterContextProvider = props => {
-  const initialBaseCharData = {
-    id: null,
-    traitsList: [],
-    characterType: {
-      name: "",
-      options: {
-        baseSkills: [],
-        expertSkills: []
-      }
-    }
-  };
   
   const [characters, setCharacters] = useState({});
   
@@ -54,43 +43,23 @@ export const CharacterContextProvider = props => {
     buildCharacterNew(id, character);
   };
   
-  const setCharacterType = (id, type) => {    
-    if (!characters[id]) this.initializeEmptyCharacter(id);
+  const setCharacterType = (id, type) => {
     const character = characters[id];
+
     if (!character.traitsList) character.traitsList = [];
-    console.log(character);
     
-    // Get the current index of the character's Character Type trait.
-    const currentCharacterTypeIndex = character.traitsList.indexOf(trait => trait.type === "Character Type");
-    
-    // If a character trait was found remove it from the character's trait list.
-    if (currentCharacterTypeIndex !== -1) character.traitsList.splice(currentCharacterTypeIndex, 1);
-    
+    // Check all traits for Character Type Traits and remove them from the Traits List.
+    character.traits.forEach(trait => {
+      if (trait.type !== "Character Type") return;
+
+      const traitsListIndex = character.traitsList.findIndex(listedTrait => listedTrait.name === trait.id);
+
+      if (traitsListIndex !== -1) character.traitsList.splice(traitsListIndex, 1);
+    });
+
     character.traitsList.unshift(type);
 
     buildCharacterNew(id, {...character});
-    
-  };
-  
-  const setCharacterTypeOption = (id, optionCatigory, index, skillName, secondarySkillIndex, secondarySkill) => {    
-    if (!characters[id]) this.initializeEmptyCharacter(id);
-    const character = characters[id];
-
-    const traitOption = character.baseCharData.characterType.options[optionCatigory][index] 
-      ? character.baseCharData.characterType.options[optionCatigory][index] 
-      : {name: "", secondarySkills: []};
-    
-    if (skillName) traitOption.name = skillName;
-    if (secondarySkillIndex || secondarySkillIndex === 0) traitOption.secondarySkills[secondarySkillIndex] = secondarySkill || "";
-
-    character.baseCharData.characterType.options[optionCatigory][index] = traitOption;
-    
-    setCharacters({...characters, [id]: character});
-    if (characterTypeIsComplete(character.baseCharData.characterType)) {
-      // Add the newly selected character trait as the first item in the character's trait list.
-      setCharacters({...characters, [id]: character});
-      buildCharacter(id, character);
-    }
     
   };
   
@@ -142,7 +111,7 @@ export const CharacterContextProvider = props => {
   async function buildCharacterNew(id, character = {}) {
     const callId = uuid();
     lastCallUID[id] = callId;
-    
+
     const options = {
       method: 'POST',
       headers: {
@@ -171,7 +140,6 @@ export const CharacterContextProvider = props => {
     setCharacterStrain,
     setCharacterStrainOption,
     setCharacterType,
-    setCharacterTypeOption,
     setCharacterTrait
   }}>{props.children}</CharacterContext.Provider>;
 };

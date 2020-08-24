@@ -16,21 +16,19 @@ const CharacterTypePicker = props => {
   const {traits} = traitContext;
   const { charId } = useParams();
   
-  if (!charContext.characters[charId]) return <div></div>;
+  if (!charContext.characters[charId] || !Object.keys(traits).length) return <div></div>;
 
   const characterTraits = charContext.characters[charId].traits;
 
   const selectedCharacterType = (characterTraits && characterTraits.find(trait => trait.type === "Character Type")) || {};
 
   const changeCharacterType = (name, selectedOptions) => {
-    console.log(name);
-    console.log(selectedOptions);
     charContext.setCharacterType(charId, {name, selectedOptions});
   };
-  
-  const options = Object.keys(traits)
-    .filter(traitId => traits[traitId].type === "Character Type");
-  
+
+  const options = charContext.characters[charId].availableTraits
+    .filter(availableTrait => traits[availableTrait.traitId].type === "Character Type").map(availableTrait => availableTrait.traitId);
+
   return (
     <div className="" >
       <h2 className="character_type_picker">
