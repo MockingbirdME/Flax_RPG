@@ -64,49 +64,12 @@ export const CharacterContextProvider = props => {
   };
   
   const setCharacterTrait = (id, index, trait) => {    
-    if (!characters[id]) this.initializeEmptyCharacter(id);
     const character = characters[id];
+
+    character.traitsList[index] = trait;
     
-    character.baseCharData.traitsList[index] = trait;
-    
-    setCharacters({...characters, [id]: character});
-    buildCharacter(id, character);
+    buildCharacterNew(id, character);
   };
-  
-  async function buildCharacter(id, character) {
-    const callId = uuid();
-    lastCallUID[id] = callId;
-    
-    // Use JSON parse/stringify to copy so we don't change the underlying data.
-    const baseCharData = JSON.parse(JSON.stringify(character.baseCharData));
-    
-    if (characterTypeIsComplete(baseCharData.characterType)) baseCharData.traitsList.unshift(character.baseCharData.characterType);
-    
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(baseCharData)
-    };
-    
-    const response = await fetch('/api/v1/character/build', options);
-    const body = await response.json();
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    if (lastCallUID[id] !== callId) console.log('Ignoring results from older API call');
-    else {
-      
-      if (!characters[id]) this.initializeEmptyCharacter(id);
-      const character = characters[id];
-      
-      console.log(body);
-      character.calculatedStats = body;
-      
-      setCharacters({...characters, [id]: character});
-    }
-  }
   
   async function buildCharacterNew(id, character = {}) {
     const callId = uuid();
@@ -127,6 +90,7 @@ export const CharacterContextProvider = props => {
     }
     if (lastCallUID[id] !== callId) console.log('Ignoring results from older API call');
     else {
+      console.log(body);
       setCharacters({...characters, [id]: body});
     }
   }
@@ -143,22 +107,3 @@ export const CharacterContextProvider = props => {
     setCharacterTrait
   }}>{props.children}</CharacterContext.Provider>;
 };
-
-function characterTypeIsComplete(characterType) {
-  const {name, options, requirements} = characterType;
-
-  if (!name) return false;
-  if (!requirements) return true;
-  
-  if (requirements.baseSkills) {
-    if (requirements.baseSkills.count !== options.baseSkills.length) return false;
-    if (!options.baseSkills.every(skill => skill.secondarySkills.length === requirements.baseSkills.secondarySkillsEach)) return false;
-  }
-  if (requirements.expertSkills) {
-    if (requirements.expertSkills.count !== options.expertSkills.length) return false;
-    if (!options.expertSkills.every(skill => skill.secondarySkills.length === requirements.expertSkills.secondarySkillsEach)) return false;
-  }
-  
-  return true;
-  
-}
