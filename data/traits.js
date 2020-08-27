@@ -215,19 +215,47 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description: "The character gains rank one in a secondary skill.",
-    options: (character) => {
-      return [{
-        skill: "any",
-        maxSkillRank: "any",
-        secondarySkill: "any",
-        maxSecondarySkillRank: 1
-      }]
+    options: (character, selectedOptions = {}) => {
+      const options = [];
+      
+      const {skills} = character;
+      const baseSkills = [];
+      
+      for (const skillName in skills) {
+        if (!skills.hasOwnProperty(skillName)) continue;
+        
+        const selectedBaseSkill = selectedOptions.baseSkill;
+                
+        const skill = skills[skillName];
+
+        if (skillName === selectedBaseSkill || Object.keys(skill.secondarySkills).some(secondarySkill => skill.secondarySkills[secondarySkill].rank === 0)) baseSkills.push(skillName);
+      }  
+            
+      options.push({id: "baseSkill", type: "skill", options: baseSkills});
+      
+      if (selectedOptions.baseSkill) {
+        const skill = skills[selectedOptions.baseSkill];
+        const secondaryOptions = [];
+        
+        const selectedSecondarySkill = selectedOptions.secondarySkill;
+        
+        for (const secondarySkill in skill.secondarySkills) {
+          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
+          
+          if (skill.secondarySkills[secondarySkill].rank === 0 || selectedSecondarySkill === secondarySkill) secondaryOptions.push(secondarySkill);
+        }
+
+        options.push({id: "secondarySkill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
+      }
+      
+      return options; 
     },
     isCharacterEligible: character => true,
-    apply: (character, options) => {
-      const {skillName, secondarySkill} = options;
-      if (!skillName || !secondarySkill) return;
-      character.setSecondarySkill(skillName, secondarySkill, 1);
+    apply: (character, options = {}) => {
+      const {baseSkill, secondarySkill} = options;
+      if (!baseSkill || !secondarySkill) return;
+      // TODO validate that secondary skill is currently rank 0.
+      character.setSecondarySkill(baseSkill, secondarySkill, 1);
     }
   },
   trainingSpecializedSkilled: {
