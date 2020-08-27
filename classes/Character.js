@@ -172,7 +172,8 @@ class Character {
     // TODO consider enforcing prerequisits here.
     if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, selectedOptions);
     if (!this._traits) this._traits = [];
-    this._traits.push({...trait, options: trait.options(this, selectedOptions), selectedOptions});
+    const options = trait.options ? trait.options(this, selectedOptions) : undefined;
+    this._traits.push({...trait, options, selectedOptions});
   }
   
   get availableTraits() {

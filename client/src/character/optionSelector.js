@@ -20,7 +20,7 @@ const OptionSelector = props => {
   if (!charContext.characters[charId]) return <div></div>;
   
   const changeSubOption = (value, optionId) => {
-    const {id, options, selectedOptions} = props.currentValue;
+    const {id, options, selectedOptions = {}} = props.currentValue;
     
     options.forEach(option => {
       if (option.parentId === optionId) delete selectedOptions[option.id];
@@ -63,13 +63,13 @@ const OptionSelector = props => {
     // TODO handle cases of no option.options or non-object, non-array, option.options.
   
     const {options} = option;
-  
+
     const optionsValue = (props.currentValue.selectedOptions && props.currentValue.selectedOptions[option.id]) || {};
     
     const newSelectedValue = typeof optionsValue === "string"
       ? {id: optionsValue}
       : optionsValue;
-    
+
     const parentValue = option.parentValue || null;
   
     return (

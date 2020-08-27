@@ -17,10 +17,8 @@ const CharacterTraitsPicker = props => {
   
   if (!character) return <div></div>;
 
-  const changeSelectedTrait = (name, index) => {
-    console.log(name);
-    console.log(index);
-    // TODO Make this actually add/update the trait.
+  const changeSelectedTrait = (index, name, selectedOptions) => {
+    context.setCharacterTrait(charId, 0, {name, selectedOptions});
   };
 
   const traitEntitlements = character.traitEntitlements || {};
@@ -43,7 +41,7 @@ const CharacterTraitsPicker = props => {
         options={options}
         selectedOptions={trait.selectedOptions} 
         keyType={"trait"}
-        onChange={changeSelectedTrait} 
+        onChange={(name, selectedOptions) => changeSelectedTrait(index, name, selectedOptions)} 
         currentValue={trait} />;
     })
     .filter(value => value);
