@@ -30,22 +30,22 @@ const OptionSelector = props => {
 
   const selectableOptions = selectableOptionKeys.length 
     ? [<option disabled hidden style={{display: "none"}} value="" key="default">-- {props.defaultSelectionType ? `select a ${props.defaultSelectionType.toLowerCase()}` : "select one"} --</option>].concat(selectableOptionKeys
-      .map(key => {
+      .map((key, index) => {
         if (props.keyType === 'trait') {
           const keywords = key.keywords.filter(keyword => keyword !== 'Starting' && keyword !== "Simple").join(', ');
           return (
-            <option key={key.id} value={key.id}>
+            <option key={index} value={key.id}>
               {`${key.displayName}${keywords ? ` - ${keywords}` : ""}`}
             </option>);
         }
           
         if (props.keyType === 'skill') return (
-          <option key={key} value={key}>
+          <option key={index} value={key}>
             {skills[key].displayName}
           </option>);
 
         if (props.keyType === 'secondary skill') return (
-          <option key={key} value={key}>
+          <option key={index} value={key}>
             {skills[props.parentValue].secondarySkills[key].displayName}
           </option>);
               
