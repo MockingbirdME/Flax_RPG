@@ -8,8 +8,6 @@ const Strains = require('../data/strains');
 
 const Skills = require('../data/skills');
 
-const Traits = require('../data/traits');
-
 const Trait = require('./Trait');
 
 
@@ -181,21 +179,6 @@ class Character {
   }
   
   get availableTraits() {
-    // const traitKeys = Object.keys(Traits);
-    // return traitKeys.map(key => {
-    //   const trait = Traits[key];
-    // 
-    //   // Don't return traits the character isn't eligible for.
-    //   if (!trait.isCharacterEligible || !trait.isCharacterEligible(this)) return null;
-    // 
-    //   // Don't return heroic traits if the character has no heroic entitlements.
-    //   if (trait.keywords.includes("Heroic") && !this.traitEntitlements.heroic.allotted) return null;
-    // 
-    //   // Don't return epic traits if the character has no epic entitlements.
-    //   if (trait.keywords.includes("Epic") && !this.traitEntitlements.epic.allotted) return null;
-    // 
-    //   return {traitId: key, options: (trait.options && trait.options(this)) || [], keywords: trait.keywords};
-    // }).filter(trait => trait);
     return Trait.getAllAvailableToCharacter(this);
   }
   
@@ -412,15 +395,17 @@ class Character {
   }
   
   addTraitAsNote({strainTrait, strainName, traitName} = {}) {
-    let trait;
+    // TODO Refactor strain traits so they're not separate. 
     if (strainTrait) {
-      trait = Strains[strainName].strainTraits[traitName] || undefined;
+      const {displayName, description} = Strains[strainName].strainTraits[traitName];
+      return this.addNote({name: displayName, description});
     }
-    else trait = Traits[traitName] || undefined;
     
-    if (!trait) throw new Error(`Could not find trait with name ${traitName}`);
+    const {displayName, description} = Trait.get(traitName);
     
-    this.addNote({name: trait.displayName, description: trait.description});
+    if (!displayName) throw new Error(`Could not find trait with name ${traitName}`);
+    
+    this.addNote({name: displayName, description});
   }
   
   /**
