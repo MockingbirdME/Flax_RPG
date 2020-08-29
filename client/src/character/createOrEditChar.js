@@ -29,7 +29,7 @@ const CreateOrEditChar = props => {
   
   const displayToggle = (
     <span 
-      style={{fontSize: ".75rem", marginLeft: "14rem", color: "blue", textAlign: "end", margin: "1rem 1rem -2rem", zIndex: "1"}}
+      style={{fontSize: ".75rem", color: "blue", textAlign: "end", margin: "1rem 1rem -2rem", zIndex: "1", position: "sticky", top: "2.5rem"}}
       onClick={() => setDisplay(!display)} >
       {display ? "done editing" : "edit"}
     </span>
@@ -41,22 +41,31 @@ const CreateOrEditChar = props => {
       {
         display 
           ? (
-            <div style={{display: "flex", justifyContent: "flex-start", minWidth: "35rem", maxWidth: "73rem", flexDirection: "column"}}>
-              
-              {displayToggle}
-              <CharacterNameField /> 
-              <CharacterLevelTracker />
-              <CharacterStrainPicker />
-              <CharacterAttributeMinMaxPicker />
-              <CharacterTypePicker />
-              <CharacterTraitsPicker />
+            <div className="character__section__container" >
+              <div className="inner">
+                <div className="character__section__container" style={{display: "flex", justifyContent: "flex-start", minWidth: "35rem", maxWidth: "73rem", flexDirection: "column", padding: "0 2rem 0 0", borderRight: "2px solid black"}}>
+                  
+                  {displayToggle}
+                  <CharacterNameField /> 
+                  <CharacterLevelTracker />
+                  <CharacterStrainPicker />
+                  <CharacterAttributeMinMaxPicker />
+                  <CharacterTypePicker />
+                  <CharacterTraitsPicker />
+                </div>
+              </div>
             </div>
+            
           ) : ""
       }
-      
-      <div style={ display ? {padding: "0 0 0 2rem", borderLeft: "2px solid black"} : {}}>
-        <CharacterSheet {...props} />
+      <div className="character__section__container" >
+        <div className="inner">
+          <div >
+            <CharacterSheet {...props} />
+          </div>
+        </div>
       </div>
+      
     </div>
   );
 };

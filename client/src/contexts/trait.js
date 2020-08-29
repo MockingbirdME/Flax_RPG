@@ -1,3 +1,5 @@
+// NOTE: This may no longer be needed, it's not used at the moment anyway.
+
 import React, {useState, useEffect} from "react";
 
 const TraitContext = React.createContext();

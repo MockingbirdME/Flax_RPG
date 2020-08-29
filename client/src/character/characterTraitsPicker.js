@@ -3,16 +3,11 @@ import {useParams} from 'react-router-dom';
 import "./character.css";
 import CharacterContext from "../contexts/character";
 import OptionSelector from "./optionSelector";
-import TraitContext from "../contexts/trait";
-
 
 const CharacterTraitsPicker = props => {
   const context = useContext(CharacterContext);
   const { charId } = useParams();
-  
-  const traitContext = useContext(TraitContext);
-  const {traits} = traitContext;
-  
+    
   const character = context.characters[charId];
   
   if (!character) return <div></div>;
@@ -23,7 +18,7 @@ const CharacterTraitsPicker = props => {
 
   const traitEntitlements = character.traitEntitlements || {};
   
-  const traitOptions = character.availableTraits.map(trait => trait.traitId).filter(traitId => !traits[traitId] || traits[traitId].type !== "Character Type");
+  const traitOptions = character.availableTraits.filter(trait => trait.type !== "Character Type");
   
   const traitsDisplay = Array.from(Array(traitEntitlements.total.allotted || 0))
     .map((value, index) => {
@@ -31,7 +26,7 @@ const CharacterTraitsPicker = props => {
       if (trait.type === "Character Type") return null;
 
       const options = traitOptions.filter(traitId => !trait || trait.id !== traitId);
-      if (trait.id) options.unshift(trait.id);
+      if (trait.id) options.unshift(trait);
 
       return <OptionSelector 
         key={index}

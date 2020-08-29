@@ -2,21 +2,17 @@ import React, { useContext } from "react";
 import {useParams} from 'react-router-dom';
 import "./character.css";
 import CharacterContext from "../contexts/character";
-import TraitContext from "../contexts/trait";
 import SkillContext from "../contexts/skill";
 
 
 const OptionSelector = props => {
   const charContext = useContext(CharacterContext);
   const skillContext = useContext(SkillContext);
-  const traitContext = useContext(TraitContext);
   const {skills} = skillContext;
-  const {traits} = traitContext;
   const { charId } = useParams();
   
   if (
     !charContext.characters[charId]
-    || !Object.keys(traits).length
     || !Object.keys(skills).length
   ) return <div></div>;
   
@@ -36,10 +32,10 @@ const OptionSelector = props => {
     ? [<option disabled hidden style={{display: "none"}} value="" key="default">-- {props.defaultSelectionType ? `select a ${props.defaultSelectionType.toLowerCase()}` : "select one"} --</option>].concat(selectableOptionKeys
       .map(key => {
         if (props.keyType === 'trait') {
-          const keywords = traits[key].keywords.filter(keyword => keyword !== 'Starting' && keyword !== "Simple").join(', ');
+          const keywords = key.keywords.filter(keyword => keyword !== 'Starting' && keyword !== "Simple").join(', ');
           return (
-            <option key={key} value={key}>
-              {`${traits[key].displayName}${keywords ? ` - ${keywords}` : ""}`}
+            <option key={key.id} value={key.id}>
+              {`${key.displayName}${keywords ? ` - ${keywords}` : ""}`}
             </option>);
         }
           

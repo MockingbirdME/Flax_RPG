@@ -10,6 +10,8 @@ const Skills = require('../data/skills');
 
 const Traits = require('../data/traits');
 
+const Trait = require('./Trait');
+
 
 const PRIMARY_ATTRIBUTES = ['body', 'reflexes', 'perception', 'mind'];
 const OTHER_ATTRIBUTES = [
@@ -143,7 +145,7 @@ class Character {
   
   get traitEntitlements() {
     const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
-    const totalConsumed = this.traitsList.filter(trait => Traits[trait.name].type !== "Character Type").length;
+    const totalConsumed = this.traitsList.filter(trait => Trait.get(trait.name).type !== "Character Type").length;
     const heroicAlotments = 1 + Math.floor(this.level / 5) + this.getVariable('extraEntitledHeroicTraits');
     const heroicConsumed = this.traits.filter(trait => trait.keywords.includes('Heroic')).length;
     const epicAlotments = Math.floor(this.level / 25) + this.getVariable('extraEntitledEpicTraits');
@@ -167,31 +169,34 @@ class Character {
   applyTrait(traitDetails) {
     if (typeof traitDetails === 'string') traitDetails = {name: traitDetails};
     const {name, selectedOptions} = traitDetails;
-    const trait = {...Traits[name]};
-    trait.id = name;
+    const trait = Trait.get(name);
+    console.log(trait);
+    
     // TODO consider enforcing prerequisits here.
-    if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, selectedOptions);
+    trait.apply(this, selectedOptions);
+    
     if (!this._traits) this._traits = [];
-    const options = trait.options ? trait.options(this, selectedOptions) : undefined;
-    this._traits.push({...trait, options, selectedOptions});
+    
+    this._traits.push(trait.withOptions(this, selectedOptions));
   }
   
   get availableTraits() {
-    const traitKeys = Object.keys(Traits);
-    return traitKeys.map(key => {
-      const trait = Traits[key];
-      
-      // Don't return traits the character isn't eligible for.
-      if (!trait.isCharacterEligible || !trait.isCharacterEligible(this)) return null;
-      
-      // Don't return heroic traits if the character has no heroic entitlements.
-      if (trait.keywords.includes("Heroic") && !this.traitEntitlements.heroic.allotted) return null;
-      
-      // Don't return epic traits if the character has no epic entitlements.
-      if (trait.keywords.includes("Epic") && !this.traitEntitlements.epic.allotted) return null;
-
-      return {traitId: key, options: (trait.options && trait.options(this)) || [], keywords: trait.keywords};
-    }).filter(trait => trait);
+    // const traitKeys = Object.keys(Traits);
+    // return traitKeys.map(key => {
+    //   const trait = Traits[key];
+    // 
+    //   // Don't return traits the character isn't eligible for.
+    //   if (!trait.isCharacterEligible || !trait.isCharacterEligible(this)) return null;
+    // 
+    //   // Don't return heroic traits if the character has no heroic entitlements.
+    //   if (trait.keywords.includes("Heroic") && !this.traitEntitlements.heroic.allotted) return null;
+    // 
+    //   // Don't return epic traits if the character has no epic entitlements.
+    //   if (trait.keywords.includes("Epic") && !this.traitEntitlements.epic.allotted) return null;
+    // 
+    //   return {traitId: key, options: (trait.options && trait.options(this)) || [], keywords: trait.keywords};
+    // }).filter(trait => trait);
+    return Trait.getAllAvailableToCharacter(this);
   }
   
   // VARIABLE STORAGE:

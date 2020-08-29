@@ -43,7 +43,6 @@ function updateCharacter(req, res, next) {
 
 function createOrUpdateCharacter(req, res, next) {
   if (!req.body) throw createError(400, "Request body is requried for create character endpoint.");
-  // if (req.body.id) throw createError(400, "Invalid field 'id' passed into character creation.");
 
   const character = new Character(req.body);
   console.log(character);
@@ -66,12 +65,10 @@ function deleteCharacter(req, res, next) {
 }
 
 function buildCharacterFromBaseStatus(req, res, next) {
-  console.log("++++++++++++++++++++++++++++++++++++");
   if (!req.body) throw createError(400, "Request body is requried for build character endpoint.");
-  // console.log(req.body);
-  // console.log('====================================');
+  
   const character = new Character(req.body);
-  console.log(character);
+
   res.status(200).json(character);
 }
 

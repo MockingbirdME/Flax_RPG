@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import {useParams} from 'react-router-dom';
 import "./character.css";
 import CharacterContext from "../contexts/character";
-import TraitContext from "../contexts/trait";
 
 import OptionSelector from "./optionSelector";
 
@@ -10,11 +9,9 @@ import OptionSelector from "./optionSelector";
 const CharacterTypePicker = props => {
   const [showOptions, setShowOptions] = useState(true); 
   const charContext = useContext(CharacterContext);
-  const traitContext = useContext(TraitContext);
-  const {traits} = traitContext;
   const { charId } = useParams();
   
-  if (!charContext.characters[charId] || !Object.keys(traits).length) return <div></div>;
+  if (!charContext.characters[charId]) return <div></div>;
 
   const characterTraits = charContext.characters[charId].traits;
 
@@ -25,9 +22,9 @@ const CharacterTypePicker = props => {
   };
 
   const options = charContext.characters[charId].availableTraits
-    .filter(availableTrait => traits[availableTrait.traitId].type === "Character Type").map(availableTrait => availableTrait.traitId);
+    .filter(availableTrait => availableTrait.type === "Character Type");
   
-  if (selectedCharacterType.id) options.unshift(selectedCharacterType.id);
+  if (selectedCharacterType.id) options.unshift(selectedCharacterType);
 
   return (
     <div className="" >

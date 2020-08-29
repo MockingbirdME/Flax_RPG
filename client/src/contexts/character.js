@@ -24,7 +24,7 @@ export const CharacterContextProvider = props => {
     if (response.status !== 200) {
       throw Error(body.message);
     }
-    
+    console.log(body);
     setCharacters({...characters, [id]: body});
     
     return body.id;

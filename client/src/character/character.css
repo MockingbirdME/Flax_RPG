@@ -10,6 +10,11 @@
   }
 }
 
+.character__section__container {
+  overflow: auto;
+  height: 100vh;
+}
+
 .character_editor_section_header {
   margin-bottom: .5rem;
 }
