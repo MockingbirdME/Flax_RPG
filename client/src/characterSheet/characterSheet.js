@@ -17,7 +17,7 @@ const CharacterSheet = props => {
   if (charId && !charContext.characters[charId]) return <div></div>;
     
   const blankSheet = !charId;  
-  const characterStats = (charContext.characters[charId] && charContext.characters[charId].calculatedStats) || {};
+  const characterStats = charContext.characters[charId] || {};
 
 
   return (

@@ -36,7 +36,7 @@ const traitsData = {
         if (skill.rank === 1 || skillName === selectedExpertSkill) expertSkills.push(skillName);
       }  
             
-      options.push({id: "baseSkillOne", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillTwo)});
+      options.push({id: "baseSkillOne", displayName: "Skill", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillTwo)});
       
       if (selectedOptions.baseSkillOne) {
         const skill = skills[selectedOptions.baseSkillOne];
@@ -52,12 +52,12 @@ const traitsData = {
           secondaryOptions.push(secondarySkill);
         }
 
-        options.push({id: "baseSkillOneSecondarySkillOne", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
+        options.push({id: "baseSkillOneSecondarySkillOne", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
         
-        options.push({id: "baseSkillOneSecondarySkillTwo", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
+        options.push({id: "baseSkillOneSecondarySkillTwo", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
       }
       
-      options.push({id: "baseSkillTwo", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillOne)});
+      options.push({id: "baseSkillTwo", displayName: "Skill", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillOne)});
       
       if (selectedOptions.baseSkillTwo) {
         const skill = skills[selectedOptions.baseSkillTwo];
@@ -73,12 +73,12 @@ const traitsData = {
           secondaryOptions.push(secondarySkill);
         }
 
-        options.push({id: "baseSkillTwoSecondarySkillOne", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
+        options.push({id: "baseSkillTwoSecondarySkillOne", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
         
-        options.push({id: "baseSkillTwoSecondarySkillTwo", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
+        options.push({id: "baseSkillTwoSecondarySkillTwo", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
       }
       
-      options.push({id: "expertSkill", type: "skill", options: expertSkills});
+      options.push({id: "expertSkill", displayName: "Expert Skill", type: "skill", options: expertSkills});
       
       if (selectedOptions.expertSkill) {
         const skill = skills[selectedOptions.expertSkill];
@@ -89,12 +89,12 @@ const traitsData = {
         for (const secondarySkill in skill.secondarySkills) {
           if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
           
-          if (skill.secondarySkills[secondarySkill].rank !== 0 && secondarySkill !== selectedSecondaryOptions) continue;
+          if (skill.secondarySkills[secondarySkill].rank > 1 && secondarySkill !== selectedSecondaryOptions) continue;
           
           secondaryOptions.push(secondarySkill);
         }
 
-        options.push({id: "expertSecondarySkill", type: "secondary skill", options: secondaryOptions, parentId: "expertSkill", parentValue: selectedOptions.expertSkill});
+        options.push({id: "expertSecondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "expertSkill", parentValue: selectedOptions.expertSkill});
       }
       
       return options; 
@@ -231,7 +231,7 @@ const traitsData = {
         if (skillName === selectedBaseSkill || Object.keys(skill.secondarySkills).some(secondarySkill => skill.secondarySkills[secondarySkill].rank === 0)) baseSkills.push(skillName);
       }  
             
-      options.push({id: "baseSkill", type: "skill", options: baseSkills});
+      options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
       
       if (selectedOptions.baseSkill) {
         const skill = skills[selectedOptions.baseSkill];
@@ -245,7 +245,7 @@ const traitsData = {
           if (skill.secondarySkills[secondarySkill].rank === 0 || selectedSecondarySkill === secondarySkill) secondaryOptions.push(secondarySkill);
         }
 
-        options.push({id: "secondarySkill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
+        options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
       }
       
       return options; 

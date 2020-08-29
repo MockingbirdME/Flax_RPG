@@ -27,7 +27,7 @@ const CharacterNameField = props => {
 
   return (
     <div className="">
-      <h2>
+      <h2 className="character_editor_section_header">
         Name:
         <input
           style={{ marginLeft: "1rem", fontSize: "1.5rem" }}

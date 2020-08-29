@@ -1,15 +1,12 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, { useContext } from "react";
 import {useParams} from 'react-router-dom';
 import "./character.css";
 import CharacterContext from "../contexts/character";
 import TraitContext from "../contexts/trait";
 import SkillContext from "../contexts/skill";
 
-import SkillPicker from "./characterTypeSkillPicker";
-
 
 const OptionSelector = props => {
-  const [showOptions, setShowOptions] = useState(true); 
   const charContext = useContext(CharacterContext);
   const skillContext = useContext(SkillContext);
   const traitContext = useContext(TraitContext);
@@ -32,12 +29,15 @@ const OptionSelector = props => {
   const selectableOptionKeys = props.options || [];
 
   const selectableOptions = selectableOptionKeys.length 
-    ? [<option disabled hidden style={{display: "none"}} value="" key="default">-- {props.defaultSelectionType ? `select a ${props.defaultSelectionType}` : "select one"} --</option>].concat(selectableOptionKeys
+    ? [<option disabled hidden style={{display: "none"}} value="" key="default">-- {props.defaultSelectionType ? `select a ${props.defaultSelectionType.toLowerCase()}` : "select one"} --</option>].concat(selectableOptionKeys
       .map(key => {
-        if (props.keyType === 'trait') return (
-          <option key={key} value={key}>
-            {traits[key].displayName}
-          </option>);
+        if (props.keyType === 'trait') {
+          const keywords = traits[key].keywords.filter(keyword => keyword !== 'Starting' && keyword !== "Simple").join(', ');
+          return (
+            <option key={key} value={key}>
+              {`${traits[key].displayName}${keywords ? ` - ${keywords}` : ""}`}
+            </option>);
+        }
           
         if (props.keyType === 'skill') return (
           <option key={key} value={key}>
@@ -71,12 +71,12 @@ const OptionSelector = props => {
       : optionsValue;
 
     const parentValue = option.parentValue || null;
-  
+
     return (
       <OptionSelector 
         key={option.id}
         id={option.id}
-        defaultSelectionType={option.type}
+        defaultSelectionType={option.displayName}
         isOption={true}
         options={options}
         parentValue={parentValue}
@@ -87,22 +87,28 @@ const OptionSelector = props => {
     );
   });
   
-  
+  const divStyle = props.isOption 
+    ? {display: "flex", margin: ".5rem 0 0 2rem", justifyContent: "space-between", width: "32rem"}
+    : {display: "flex", margin: ".5rem 0 0 0", justifyContent: "space-between", width: "34rem"};
+  const selectStyle = props.isOption ? {fontSize: "1.5rem", textAlignLast: "center", width: "20rem"} : {fontSize: "1.5rem", textAlignLast: "center", width: "100%"};
+  console.log(props);
+
   return (
     <div >
-      {selectableOptions.length > 1 
-        ? <select
-          style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
-          value={(props.currentValue && props.currentValue.id) || ""}
-          onChange={ev => props.onChange(ev.target.value, props.id)}
-        >
-          {selectableOptions}
-        </select>
-        : <p>No traits available</p>
-      }
-      <div>
-        {subOptionsDisplay}
+      <div style={divStyle}>
+        {props.isOption ? <h4 style={{margin: "0"}}>{props.defaultSelectionType}</h4> : ""}
+        {selectableOptions.length > 1 
+          ? <select
+            style={selectStyle}
+            value={(props.currentValue && props.currentValue.id) || ""}
+            onChange={ev => props.onChange(ev.target.value, props.id)}
+          >
+            {selectableOptions}
+          </select>
+          : <p>No traits available</p>
+        }
       </div>
+      {subOptionsDisplay}
     </div>
   );
 };

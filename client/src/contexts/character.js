@@ -11,26 +11,25 @@ export const CharacterContextProvider = props => {
   
   const [characters, setCharacters] = useState({});
   
-  const initializeEmptyCharacter = (id) => {
-    const tempID = id || Object.keys(characters).length;
-    // setCharacters({...characters, [tempID]: {}});
-    buildCharacterNew(tempID);
+  const initializeEmptyCharacter = async (id) => {
+    id = await buildCharacterNew({id});
+    return id;
   };
   
   const setCharacterName = (id, name) => {
-    buildCharacterNew(id, {...characters[id], name});
+    buildCharacterNew({...characters[id], name});
   };
   
   const setCharacterLevel = (id, level) => {
-    buildCharacterNew(id, {...characters[id], level});
+    buildCharacterNew({...characters[id], level});
   };
   
   const setCharacterBaseAttributeModifiers = (id, baseAttributeModifiers) => {
-    buildCharacterNew(id, {...characters[id], baseAttributeModifiers});
+    buildCharacterNew({...characters[id], baseAttributeModifiers});
   };
   
   const setCharacterStrain = (id, name) => {
-    buildCharacterNew(id, {...characters[id], strain: {name}});
+    buildCharacterNew({...characters[id], strain: {name}});
   };
   
   const setCharacterStrainOption = (id, optionName, optionValue) => {
@@ -40,7 +39,7 @@ export const CharacterContextProvider = props => {
     if (!optionValue) delete character.strain.options[optionName];
     else character.strain.options[optionName] = optionValue;
     
-    buildCharacterNew(id, character);
+    buildCharacterNew(character);
   };
   
   const setCharacterType = (id, type) => {
@@ -59,7 +58,7 @@ export const CharacterContextProvider = props => {
 
     character.traitsList.unshift(type);
 
-    buildCharacterNew(id, {...character});
+    buildCharacterNew({...character});
     
   };
   
@@ -68,10 +67,11 @@ export const CharacterContextProvider = props => {
 
     character.traitsList[index] = trait;
     
-    buildCharacterNew(id, character);
+    buildCharacterNew(character);
   };
   
-  async function buildCharacterNew(id, character = {}) {
+  async function buildCharacterNew(character = {}) {
+    const id = character.id || "tempId";
     const callId = uuid();
     lastCallUID[id] = callId;
 
@@ -91,7 +91,9 @@ export const CharacterContextProvider = props => {
     if (lastCallUID[id] !== callId) console.log('Ignoring results from older API call');
     else {
       console.log(body);
-      setCharacters({...characters, [id]: body});
+      setCharacters({...characters, [character.id]: body});
+      
+      return body.id;
     }
   }
   

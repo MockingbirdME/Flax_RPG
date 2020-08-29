@@ -47,7 +47,7 @@ class Character {
       .then(response => response);
   }
 
-  constructor({id, name, level, strain, traitsList, baseAttributeModifiers}) {
+  constructor({id, name, level = 0, strain, traitsList, baseAttributeModifiers}) {
     if (baseAttributeModifiers && typeof baseAttributeModifiers != 'object') throw createError(400, 'baseAttributeModifiers must be an object or undefined.');
     this._baseAttributeModifiers = baseAttributeModifiers || {};
   
@@ -144,7 +144,7 @@ class Character {
   get traitEntitlements() {
     const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
     const totalConsumed = this.traitsList.filter(trait => Traits[trait.name].type !== "Character Type").length;
-    const heroicAlotments = 1 + Math.floor(this._level / 5) + this.getVariable('extraEntitledHeroicTraits');
+    const heroicAlotments = 1 + Math.floor(this.level / 5) + this.getVariable('extraEntitledHeroicTraits');
     const heroicConsumed = this.traits.filter(trait => trait.keywords.includes('Heroic')).length;
     const epicAlotments = Math.floor(this.level / 25) + this.getVariable('extraEntitledEpicTraits');
     const epicConsumed = this.traits.filter(trait => trait.keywords.includes('Epic')).length;
@@ -190,7 +190,7 @@ class Character {
       // Don't return epic traits if the character has no epic entitlements.
       if (trait.keywords.includes("Epic") && !this.traitEntitlements.epic.allotted) return null;
 
-      return {traitId: key, options: (trait.options && trait.options(this)) || []};
+      return {traitId: key, options: (trait.options && trait.options(this)) || [], keywords: trait.keywords};
     }).filter(trait => trait);
   }
   
@@ -203,12 +203,9 @@ class Character {
   }
   
   updateVariable(variable, modifier, {variableKey} = {}) {
-    console.log(variable);
-    console.log(this._variables);
     if (!this._variables[variable] && variableKey) this._variables[variable] = {};
     else if (!this._variables[variable]) this._variables[variable] = 0;
     
-    console.log(this._variables);
     if (variableKey && !this._variables[variable][variableKey]) this._variables[variable][variableKey] = 0;
     
     if (variableKey) this._variables[variable][variableKey] += modifier;

@@ -1,10 +1,8 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, { useContext, useState } from "react";
 import {useParams} from 'react-router-dom';
 import "./character.css";
 import CharacterContext from "../contexts/character";
 import TraitContext from "../contexts/trait";
-
-import SkillPicker from "./characterTypeSkillPicker";
 
 import OptionSelector from "./optionSelector";
 
@@ -28,18 +26,32 @@ const CharacterTypePicker = props => {
 
   const options = charContext.characters[charId].availableTraits
     .filter(availableTrait => traits[availableTrait.traitId].type === "Character Type").map(availableTrait => availableTrait.traitId);
+  
+  if (selectedCharacterType.id) options.unshift(selectedCharacterType.id);
 
   return (
     <div className="" >
-      <h2 className="character_type_picker">
-        Character Type:
-        <OptionSelector 
-          defaultSelectionType="character type"
-          options={options} 
-          keyType="trait"
-          onChange={changeCharacterType} 
-          currentValue={selectedCharacterType} />
-      </h2>
+      <div className="character_type_picker">
+        <h2 className="character_editor_section_header" >Character Type:</h2>
+        <span 
+          style={{fontSize: ".75rem", marginLeft: "14rem", color: "blue"}}
+          onClick={() => setShowOptions(!showOptions)}>
+          {showOptions ? "hide Options" : "show options"}
+        </span>
+      </div>
+      
+      {
+        showOptions 
+          ? (
+            <OptionSelector 
+              defaultSelectionType="character type"
+              options={options} 
+              keyType="trait"
+              onChange={changeCharacterType} 
+              currentValue={selectedCharacterType} />
+          ) : ""
+      }
+      
     </div>
   );
 };

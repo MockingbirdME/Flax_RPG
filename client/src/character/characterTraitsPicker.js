@@ -18,12 +18,11 @@ const CharacterTraitsPicker = props => {
   if (!character) return <div></div>;
 
   const changeSelectedTrait = (index, name, selectedOptions) => {
-    context.setCharacterTrait(charId, 0, {name, selectedOptions});
+    context.setCharacterTrait(charId, index, {name, selectedOptions});
   };
 
   const traitEntitlements = character.traitEntitlements || {};
   
-  // const traits = [...Array(traitEntitlements.total.allotted)].map((value, index) => <OptionSelector key={index} index={index} />);
   const traitOptions = character.availableTraits.map(trait => trait.traitId).filter(traitId => !traits[traitId] || traits[traitId].type !== "Character Type");
   
   const traitsDisplay = Array.from(Array(traitEntitlements.total.allotted || 0))
@@ -49,7 +48,7 @@ const CharacterTraitsPicker = props => {
   return (
     <div>
       <div className="" style={{display: "flex", justifyContent: "space-between", maxWidth: "40rem"}}>
-        <h2>Traits:</h2>
+        <h2 className="character_editor_section_header" >Traits:</h2>
         <div style={{display: "flex", justifyContent: "space-around", width: "30rem", alignItems: "center"}}>
           <h4>Total: {traitEntitlements.total.consumed}/{traitEntitlements.total.allotted || 0}</h4>
           <h4>Heroic: {traitEntitlements.heroic.consumed}/{traitEntitlements.heroic.allotted || 0}</h4>

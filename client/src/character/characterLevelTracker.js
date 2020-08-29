@@ -28,7 +28,7 @@ const CharacterLevelTacker = props => {
 
   return (
     <div className="">
-      <h2>
+      <h2 className="character_editor_section_header" >
         Level:
         <input
           type="number"

@@ -1,11 +1,20 @@
 
 .character__container {
-  width: 80vw;
-  margin: 0 10vw;
   display: flex;
-  justify-content: space-between;
+  overflow-x: scroll;
+}
+
+@media screen and (min-width: 1500px) {
+  .character__container {
+    justify-content: space-around;
+  }
+}
+
+.character_editor_section_header {
+  margin-bottom: .5rem;
 }
 
 .character_type_picker {
   display: flex;
+  align-items: baseline;
 }

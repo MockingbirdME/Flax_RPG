@@ -56,7 +56,7 @@ const CharacterAttributeMinMaxPicker = props => {
   
   const bonusAttributePicker = (
     <div>
-      <h4>Bonus Attribute (optional)</h4>
+      <h2  className="character_editor_section_header" >Bonus Attribute (optional)</h2>
       <select
         style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
         value={minMaxAttributes.bonus}
