@@ -435,7 +435,7 @@ class Character {
     characterBaseData.strain = this.strain.name;
     characterBaseData.traitsList = this.traitsList;
     characterBaseData.baseAttributeModifiers = this._baseAttributeModifiers;
-    
+
     await characterBaseData.save();
     return this;
   }

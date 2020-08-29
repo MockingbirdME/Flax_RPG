@@ -15,10 +15,8 @@ const CreateOrEditChar = props => {
   const { charId } = props.match.params;
 
   useEffect(() => {
-    console.log('18');
-    console.log(charId);
-    async function generateCharForId(id) {
-      await charContext.initializeEmptyCharacter(charId);
+    async function loadCharacter(id) {
+      await charContext.loadCharacter(charId);
     }
     
     async function makeNewCharAndNavigateToId () {
@@ -26,7 +24,7 @@ const CreateOrEditChar = props => {
       props.history.push(`/character/createOrEdit/${newCharId}`);
     }
     if (!charId) makeNewCharAndNavigateToId();
-    else if (!charContext.characters[charId]) generateCharForId(charId);
+    else if (!charContext.characters[charId]) loadCharacter(charId);
   }, [charId]);
   
   const displayToggle = (

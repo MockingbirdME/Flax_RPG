@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import CharacterContext from "../contexts/character";
 import "./characterSheet.css";
 
@@ -8,7 +8,6 @@ import Defense from "./characterSheetDefense";
 import Damage from "./characterSheetDamage";
 import Skills from "./characterSheetSkills";
 import CharacterSheetHeader from "./characterSheetHeader";
-import SkillBox from "./skillBox";
 
 const CharacterSheet = props => {
   const charContext = useContext(CharacterContext);

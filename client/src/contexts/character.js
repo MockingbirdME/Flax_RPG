@@ -11,6 +11,25 @@ export const CharacterContextProvider = props => {
   
   const [characters, setCharacters] = useState({});
   
+  const loadCharacter = async (id) => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    
+    const response = await fetch(`/api/v1/character/${id}`, options);
+    const body = await response.json();
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    
+    setCharacters({...characters, [id]: body});
+    
+    return body.id;
+  };
+  
   const initializeEmptyCharacter = async (id) => {
     id = await buildCharacterNew({id});
     return id;
@@ -83,7 +102,7 @@ export const CharacterContextProvider = props => {
       body: JSON.stringify(character)
     };
     
-    const response = await fetch('/api/v1/character/build', options);
+    const response = await fetch('/api/v1/character/', options);
     const body = await response.json();
     if (response.status !== 200) {
       throw Error(body.message);
@@ -99,6 +118,7 @@ export const CharacterContextProvider = props => {
   
   return <CharacterContext.Provider value={{
     characters,
+    loadCharacter,
     initializeEmptyCharacter,
     setCharacterName,
     setCharacterLevel,

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { } from "react";
 
-const CharacterSheetHeader = props =>{
+const CharacterSheetHeader = props => {
   return (
     <div className="character_sheet__header">
       <span className="character_sheet__header__section">

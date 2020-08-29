@@ -14,7 +14,11 @@ const OptionSelector = props => {
   const {traits} = traitContext;
   const { charId } = useParams();
   
-  if (!charContext.characters[charId]) return <div></div>;
+  if (
+    !charContext.characters[charId]
+    || !Object.keys(traits).length
+    || !Object.keys(skills).length
+  ) return <div></div>;
   
   const changeSubOption = (value, optionId) => {
     const {id, options, selectedOptions = {}} = props.currentValue;
@@ -91,7 +95,6 @@ const OptionSelector = props => {
     ? {display: "flex", margin: ".5rem 0 0 2rem", justifyContent: "space-between", width: "32rem"}
     : {display: "flex", margin: ".5rem 0 0 0", justifyContent: "space-between", width: "34rem"};
   const selectStyle = props.isOption ? {fontSize: "1.5rem", textAlignLast: "center", width: "20rem"} : {fontSize: "1.5rem", textAlignLast: "center", width: "100%"};
-  console.log(props);
 
   return (
     <div >
