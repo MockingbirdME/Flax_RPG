@@ -145,7 +145,7 @@ const traitsData = {
         character.setSkill(expertSkill, 2);
         if (expertSecondarySkill) {
           const currentExpertSecondarySkillRank = character.skills[expertSkill].secondarySkills[expertSecondarySkill].rank || 0;
-          character.setSecondarySkill(expertSkill, baseSkillTwoSecondarySkillOne, currentExpertSecondarySkillRank + 1);
+          character.setSecondarySkill(expertSkill, expertSecondarySkill, currentExpertSecondarySkillRank + 1);
         }
       }
       // TODO gain a language

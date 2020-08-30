@@ -164,11 +164,9 @@ class Character {
     return this._traits || [];
   }
   
-  applyTrait(traitDetails) {
-    if (typeof traitDetails === 'string') traitDetails = {name: traitDetails};
-    const {name, selectedOptions} = traitDetails;
+  applyTrait({name, selectedOptions}) {
+    // TODO validate that required options are provided.
     const trait = Trait.get(name);
-    console.log(trait);
     
     // TODO consider enforcing prerequisits here.
     trait.apply(this, selectedOptions);
@@ -368,7 +366,6 @@ class Character {
   }
   
   setSkill(skill, rank) {
-    console.log(`setting skill "${skill}" to rank: ${rank}`);
     if (!this.skills[skill]) throw new Error(`Skill ${skill} doesn't exist.`);
     this._skills[skill].rank = rank;
   }
