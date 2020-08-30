@@ -1,4 +1,6 @@
 /* eslint-disable complexity */
+const utils = require('../lib/trait_utils');
+
 const traitsData = {
   adventurer: {
     displayName: "Adventurer",
@@ -19,23 +21,9 @@ const traitsData = {
       const options = [];
       
       const {skills} = character;
-      const baseSkills = [];
-      const expertSkills = [];
-      
-      for (const skillName in skills) {
-        if (!skills.hasOwnProperty(skillName)) continue;
-        
-        const selectedBaseSkills = [selectedOptions.baseSkillOne, selectedOptions.baseSkillTwo];
-        
-        const selectedExpertSkill = selectedOptions.expertSkill;
-        
-        const skill = skills[skillName];
-        
-        if (skill.rank === 0 || selectedBaseSkills.includes(skillName)) baseSkills.push(skillName);
-      
-        if (skill.rank === 1 || skillName === selectedExpertSkill) expertSkills.push(skillName);
-      }  
-            
+      const baseSkills = utils.getSkillList(skills, {requiredRank: 0, include: [selectedOptions.baseSkillOne, selectedOptions.baseSkillTwo]});
+      const expertSkills = utils.getSkillList(skills, {requiredRank: 1});
+    
       options.push({id: "baseSkillOne", displayName: "Skill", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillTwo)});
       
       if (selectedOptions.baseSkillOne) {
@@ -219,17 +207,7 @@ const traitsData = {
       const options = [];
       
       const {skills} = character;
-      const baseSkills = [];
-      
-      for (const skillName in skills) {
-        if (!skills.hasOwnProperty(skillName)) continue;
-        
-        const selectedBaseSkill = selectedOptions.baseSkill;
-                
-        const skill = skills[skillName];
-
-        if (skillName === selectedBaseSkill || Object.keys(skill.secondarySkills).some(secondarySkill => skill.secondarySkills[secondarySkill].rank === 0)) baseSkills.push(skillName);
-      }  
+      const baseSkills = utils.getSkillList(skills, {requiredRank: 0, include: [selectedOptions.baseSkill]});
             
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
       
