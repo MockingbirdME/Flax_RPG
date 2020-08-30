@@ -21,25 +21,14 @@ const traitsData = {
       const options = [];
       
       const {skills} = character;
-      const baseSkills = utils.getSkillList(skills, {requiredRank: 0, include: [selectedOptions.baseSkillOne, selectedOptions.baseSkillTwo]});
-      const expertSkills = utils.getSkillList(skills, {requiredRank: 1});
-    
+      const baseSkills = utils.getSkillList(skills, {hasSecondaryAtRank: 0, neededSecondaryMatches: 2, requiredRank: 0, include: [selectedOptions.baseSkillOne, selectedOptions.baseSkillTwo]});
+      const expertSkills = utils.getSkillList(skills, {hasSecondaryUnderRank: 2, requiredRank: 1, include: [selectedOptions.expertSkill]});
+
       options.push({id: "baseSkillOne", displayName: "Skill", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillTwo)});
       
       if (selectedOptions.baseSkillOne) {
-        const skill = skills[selectedOptions.baseSkillOne];
-        const secondaryOptions = [];
+        const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkillOne].secondarySkills, {requiredRank: 0, include: [selectedOptions.baseSkillOneSecondarySkillOne, selectedOptions.baseSkillOneSecondarySkillTwo]});
         
-        const selectedSecondaryOptions = [selectedOptions.baseSkillOneSecondarySkillOne, selectedOptions.baseSkillOneSecondarySkillTwo];
-        
-        for (const secondarySkill in skill.secondarySkills) {
-          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
-          
-          if (skill.secondarySkills[secondarySkill].rank !== 0 && !selectedSecondaryOptions.includes(secondarySkill)) continue;
-          
-          secondaryOptions.push(secondarySkill);
-        }
-
         options.push({id: "baseSkillOneSecondarySkillOne", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
         
         options.push({id: "baseSkillOneSecondarySkillTwo", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
@@ -48,18 +37,7 @@ const traitsData = {
       options.push({id: "baseSkillTwo", displayName: "Skill", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillOne)});
       
       if (selectedOptions.baseSkillTwo) {
-        const skill = skills[selectedOptions.baseSkillTwo];
-        const secondaryOptions = [];
-        
-        const selectedSecondaryOptions = [selectedOptions.baseSkillTwoSecondarySkillOne, selectedOptions.baseSkillTwoSecondarySkillTwo];
-        
-        for (const secondarySkill in skill.secondarySkills) {
-          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
-          
-          if (skill.secondarySkills[secondarySkill].rank !== 0 && !selectedSecondaryOptions.includes(secondarySkill)) continue;
-          
-          secondaryOptions.push(secondarySkill);
-        }
+        const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkillTwo].secondarySkills, {requiredRank: 0, include: [selectedOptions.baseSkillTwoSecondarySkillOne, selectedOptions.baseSkillTwoSecondarySkillTwo]});
 
         options.push({id: "baseSkillTwoSecondarySkillOne", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
         
@@ -69,19 +47,8 @@ const traitsData = {
       options.push({id: "expertSkill", displayName: "Expert Skill", type: "skill", options: expertSkills});
       
       if (selectedOptions.expertSkill) {
-        const skill = skills[selectedOptions.expertSkill];
-        const secondaryOptions = [];
+        const secondaryOptions = utils.getSkillList(skills[selectedOptions.expertSkill].secondarySkills, {maxRank: 1, include: [selectedOptions.expertSecondarySkill]});
         
-        const selectedSecondaryOptions = selectedOptions.expertSecondarySkill;
-        
-        for (const secondarySkill in skill.secondarySkills) {
-          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
-          
-          if (skill.secondarySkills[secondarySkill].rank > 1 && secondarySkill !== selectedSecondaryOptions) continue;
-          
-          secondaryOptions.push(secondarySkill);
-        }
-
         options.push({id: "expertSecondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "expertSkill", parentValue: selectedOptions.expertSkill});
       }
       
@@ -146,7 +113,7 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The character gains a bonus die on rolls to resist illness and poisons.",
+      "The character gains a bonus die on rolls to resist, or recover from, illness and poisons.",
     isCharacterEligible: character => !character.traits.some(trait => trait.id === 'hardy'),
     apply: character => character.addTraitAsNote({traitName: 'hardy'})
   },
@@ -205,23 +172,14 @@ const traitsData = {
     description: "The character gains rank one in a secondary skill.",
     options: (character, selectedOptions = {}) => {
       const options = [];
-      
       const {skills} = character;
-      const baseSkills = utils.getSkillList(skills, {requiredRank: 0, include: [selectedOptions.baseSkill]});
+      
+      const baseSkills = utils.getSkillList(character.skills, {include: [selectedOptions.baseSkill], hasSecondaryAtRank: 0});
             
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
       
       if (selectedOptions.baseSkill) {
-        const skill = skills[selectedOptions.baseSkill];
-        const secondaryOptions = [];
-        
-        const selectedSecondarySkill = selectedOptions.secondarySkill;
-        
-        for (const secondarySkill in skill.secondarySkills) {
-          if (!skill.secondarySkills.hasOwnProperty(secondarySkill)) continue;
-          
-          if (skill.secondarySkills[secondarySkill].rank === 0 || selectedSecondarySkill === secondarySkill) secondaryOptions.push(secondarySkill);
-        }
+        const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkill].secondarySkills, {requiredRank: 0, include: [selectedOptions.secondarySkill]});
 
         options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
       }
@@ -243,7 +201,30 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The character increases a secondary skill from rank one to rank two."
+      "The character increases a secondary skill from rank one to rank two.",
+    options: (character, selectedOptions = {}) => {
+      const options = [];
+      const {skills} = character;
+      
+      const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], hasSecondaryAtRank: 1});
+            
+      options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
+      
+      if (selectedOptions.baseSkill) {
+        const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkill].secondarySkills, {requiredRank: 1, include: [selectedOptions.secondarySkill]});
+
+        options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
+      }
+      
+      return options; 
+    },
+    isCharacterEligible: character => true,
+    apply: (character, options = {}) => {
+      const {baseSkill, secondarySkill} = options;
+      if (!baseSkill || !secondarySkill) return;
+      // TODO validate that secondary skill is currently rank 0.
+      character.setSecondarySkill(baseSkill, secondarySkill, 2);
+    }
   },
   trainingSpecializedExpert: {
     displayName: "Training, Specialized Expert",
