@@ -47,7 +47,7 @@ class Character {
       .then(response => response);
   }
 
-  constructor({id, name, level = 0, strain, traitsList, baseAttributeModifiers}) {
+  constructor({id, name, level = 0, strain, traitsList = [], baseAttributeModifiers}) {
     if (baseAttributeModifiers && typeof baseAttributeModifiers != 'object') throw createError(400, 'baseAttributeModifiers must be an object or undefined.');
     this._baseAttributeModifiers = baseAttributeModifiers || {};
   
@@ -83,8 +83,7 @@ class Character {
     this._level = parseInt(level, 10);
 
     // Store the traits list and apply each trait. 
-    this._traitsList = traitsList || [];
-    for (const traitDetails of this._traitsList) {
+    for (const traitDetails of traitsList) {
       this.applyTrait(traitDetails);
     }
 
@@ -143,7 +142,7 @@ class Character {
   
   get traitEntitlements() {
     const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
-    const totalConsumed = this.traitsList.filter(trait => Trait.get(trait.name).type !== "Character Type").length;
+    const totalConsumed = this.traits.filter(trait => Trait.get(trait.id).type !== "Character Type").length;
     const heroicAlotments = 1 + Math.floor(this.level / 5) + this.getVariable('extraEntitledHeroicTraits');
     const heroicConsumed = this.traits.filter(trait => trait.keywords.includes('Heroic')).length;
     const epicAlotments = Math.floor(this.level / 25) + this.getVariable('extraEntitledEpicTraits');
@@ -157,7 +156,7 @@ class Character {
   
   get traitsList() {
     // Note: Strain traits are not listed here, these are the selected traits.
-    return this._traitsList;
+    return this.traits.map(trait => ({name: trait.id, selectedOptions: trait.selectedOptions}));
   }
   
   get traits() {
@@ -168,7 +167,9 @@ class Character {
     // TODO validate that required options are provided.
     const trait = Trait.get(name);
     
-    // TODO consider enforcing prerequisits here.
+    // Enforce prerequisits.
+    if (!trait.isCharacterEligible(this)) return;
+    
     trait.apply(this, selectedOptions);
     
     if (!this._traits) this._traits = [];
@@ -282,6 +283,10 @@ class Character {
   get perception() {return this._primaryAttributes.perception;} 
   
   get mind() {return this._primaryAttributes.mind;}
+  
+  modifyAttribute(attribute, modifier) {
+    if (attribute in this._primaryAttributes) this._primaryAttributes[attribute] += modifier;
+  }
   
   // OTHER ATTRIBUTES:
   get otherAttributes() {

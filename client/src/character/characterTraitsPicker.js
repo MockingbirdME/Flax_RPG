@@ -19,7 +19,7 @@ const CharacterTraitsPicker = props => {
   const traitEntitlements = character.traitEntitlements || {};
   
   const traitOptions = character.availableTraits.filter(trait => trait.type !== "Character Type");
-  
+
   const traitsDisplay = Array.from(Array(traitEntitlements.total.allotted || 0))
     .map((value, index) => {
       const trait = character.traits[index] || {};

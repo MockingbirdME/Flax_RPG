@@ -19,12 +19,7 @@ class Trait {
   static getAllAvailableToCharacter(character) {
     return Array.from(traits.keys())
       .map(id => new Trait(traits.get(id)))
-      .filter(trait => {
-        if (!trait._apply) return false;
-        if (trait.isHeroic && !character.traitEntitlements.heroic.allotted) return false;
-        if (trait.isEpic && !character.traitEntitlements.epic.allotted) return false;
-        return trait.isCharacterEligible(character);
-      })
+      .filter(trait => trait.isCharacterEligible(character))
       .map(trait => trait.withOptions(character));
   }
 
@@ -95,6 +90,7 @@ class Trait {
 
   apply(character, options) {
     if (!this._apply) return;
+    
     this._apply(character, options);
   }
   
@@ -104,7 +100,13 @@ class Trait {
   }
   
   isCharacterEligible(character) {
-    if (!this._isCharacterEligible) return true;
+    // if (!this._apply) console.log(`No Apply function for ${this.displayName}`);
+    if (!this._isCharacterEligible) return false;
+    if (!this._apply) return false;
+    if (character.traitEntitlements.total.allotted < character.traits.length) return false;
+    if (this.isHeroic && !character.traitEntitlements.heroic.available) return false;
+    if (this.isEpic && !character.traitEntitlements.epic.available) return false;
+
     return this._isCharacterEligible(character);
   }
   

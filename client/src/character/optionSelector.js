@@ -48,6 +48,11 @@ const OptionSelector = props => {
           <option key={index} value={key}>
             {skills[props.parentValue].secondarySkills[key].displayName}
           </option>);
+          
+        if (props.keyType === 'attribute') return (
+          <option key={index} value={key}>
+            {key.charAt(0).toUpperCase() + key.slice(1)}
+          </option>);
               
         return '';
       }))
@@ -81,6 +86,11 @@ const OptionSelector = props => {
     );
   });
   
+  const selectedDescription = props.currentValue && props.currentValue.description
+    ? <div className="character_option_selector_selected_description" dangerouslySetInnerHTML={{__html: props.currentValue.description}} />
+    
+    : "";
+
   return (
     <div >
       <div className="character_option_selector">
@@ -94,9 +104,16 @@ const OptionSelector = props => {
           >
             {selectableOptions}
           </select>
-          : <p>No traits available</p>
+          : <select
+            className="character_option_selector_selectable"
+            style={{width: props.isOption ? "20rem" : "100%"}}
+            value=""
+          >
+            <option disabled hidden style={{display: "none"}} value="" key="default">-- No Options Available --</option>
+          </select>
         }
       </div>
+      {selectedDescription}
       {subOptionsDisplay}
     </div>
   );

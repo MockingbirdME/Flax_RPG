@@ -186,7 +186,7 @@ const traitsData = {
       
       return options; 
     },
-    isCharacterEligible: character => true,
+    isCharacterEligible: character => utils.getSkillList(character.skills, {hasSecondaryAtRank: 0}).length > 0,
     apply: (character, options = {}) => {
       const {baseSkill, secondarySkill} = options;
       if (!baseSkill || !secondarySkill) return;
@@ -218,11 +218,11 @@ const traitsData = {
       
       return options; 
     },
-    isCharacterEligible: character => true,
+    isCharacterEligible: character => utils.getSkillList(character.skills, {hasSecondaryAtRank: 1}).length > 0,
     apply: (character, options = {}) => {
       const {baseSkill, secondarySkill} = options;
       if (!baseSkill || !secondarySkill) return;
-      // TODO validate that secondary skill is currently rank 0.
+      // TODO validate that secondary skill is currently rank 1.
       character.setSecondarySkill(baseSkill, secondarySkill, 2);
     }
   },
@@ -233,7 +233,36 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Heroic"],
     description:
-      "The character increases a secondary skill from rank two to rank three."
+      "The character increases a secondary skill from rank two to rank three.",
+    options: (character, selectedOptions = {}) => {
+      const options = [];
+      const {skills} = character;
+      
+      const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], hasSecondaryAtRank: 2});
+            
+      options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
+      
+      if (selectedOptions.baseSkill) {
+        const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkill].secondarySkills, {requiredRank: 2, include: [selectedOptions.secondarySkill]});
+
+        options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
+      }
+      
+      return options; 
+    },
+    isCharacterEligible: character => {
+      console.log(character.skills);
+      console.log(utils.getSkillList(character.skills, {hasSecondaryAtRank: 2}));
+      console.log(utils.getSkillList(character.skills, {hasSecondaryAtRank: 2}).length);
+      console.log(utils.getSkillList(character.skills, {hasSecondaryAtRank: 2}).length > 0);
+      return utils.getSkillList(character.skills, {hasSecondaryAtRank: 2}).length > 0
+    },
+    apply: (character, options = {}) => {
+      const {baseSkill, secondarySkill} = options;
+      if (!baseSkill || !secondarySkill) return;
+      // TODO validate that secondary skill is currently rank 2.
+      character.setSecondarySkill(baseSkill, secondarySkill, 3);
+    }
   },
   trainingSpecializedMaster: {
     displayName: "Training, Specialized Master",
@@ -242,18 +271,58 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Epic"],
     description:
-      "The character increases a secondary skill from rank three to rank four."
+      "The character increases a secondary skill from rank three to rank four.",
+    options: (character, selectedOptions = {}) => {
+      const options = [];
+      const {skills} = character;
+      
+      const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], hasSecondaryAtRank: 3});
+            
+      options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
+      
+      if (selectedOptions.baseSkill) {
+        const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkill].secondarySkills, {requiredRank: 3, include: [selectedOptions.secondarySkill]});
+
+        options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
+      }
+      
+      return options; 
+    },
+    isCharacterEligible: character => utils.getSkillList(character.skills, {hasSecondaryAtRank: 3}).length > 0,
+    apply: (character, options = {}) => {
+      const {baseSkill, secondarySkill} = options;
+      if (!baseSkill || !secondarySkill) return;
+      // TODO validate that secondary skill is currently rank 2.
+      character.setSecondarySkill(baseSkill, secondarySkill, 4);
+    }
   },
   trainingNovice: {
     displayName: "Training, Novice",
     type: "General",
     requirements: [
-      "At least two associated secondary skills at rank one or higher."
+      "At least 1 rank in an associated secondary skill."
     ],
     requirementsDescription:
-      "At least two associated secondary skills at rank one or higher.",
+      "At least 1 rank in an associated secondary skill.",
     keywords: ["Simple"],
-    description: "The character gains rank one in a new skill."
+    description: "The character gains rank one in a new skill.",
+    options: (character, selectedOptions = {}) => {
+      const options = [];
+      const {skills} = character;
+      
+      const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], requiredRank: 0, minimumSecondaryRanks: 1});
+            
+      options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
+      
+      return options; 
+    },
+    isCharacterEligible: character => utils.getSkillList(character.skills, {requiredRank: 0, minimumSecondaryRanks: 1}).length > 0,
+    apply: (character, options = {}) => {
+      const {baseSkill} = options;
+      if (!baseSkill) return;
+      // TODO validate that skill is currently rank 0.
+      character.setSkill(baseSkill, 1);
+    }
   },
   trainingSkilled: {
     displayName: "Training, Skilled",
@@ -264,7 +333,24 @@ const traitsData = {
     requirementsDescription:
       "At least three total ranks in associated secondary skills.",
     keywords: ["Heroic"],
-    description: "The character increases a skill from rank one to rank two."
+    description: "The character increases a skill from rank one to rank two.",
+    options: (character, selectedOptions = {}) => {
+      const options = [];
+      const {skills} = character;
+      
+      const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], requiredRank: 1, minimumSecondaryRanks: 3});
+            
+      options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
+      
+      return options; 
+    },
+    isCharacterEligible: character => utils.getSkillList(character.skills, {requiredRank: 1, minimumSecondaryRanks: 3}).length > 0,
+    apply: (character, options = {}) => {
+      const {baseSkill} = options;
+      if (!baseSkill) return;
+      // TODO validate that skill is currently rank 1.
+      character.setSkill(baseSkill, 2);
+    }
   },
   trainingExpert: {
     displayName: "Training, Expert",
@@ -273,7 +359,24 @@ const traitsData = {
     requirementsDescription:
       "At least five total ranks in associated secondary skills.",
     keywords: ["Epic"],
-    description: "The character increases a skill from rank two to rank three."
+    description: "The character increases a skill from rank two to rank three.",
+    options: (character, selectedOptions = {}) => {
+      const options = [];
+      const {skills} = character;
+      
+      const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], requiredRank: 2, minimumSecondaryRanks: 5});
+            
+      options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
+      
+      return options; 
+    },
+    isCharacterEligible: character => utils.getSkillList(character.skills, {requiredRank: 2, minimumSecondaryRanks: 5}).length > 0,
+    apply: (character, options = {}) => {
+      const {baseSkill} = options;
+      if (!baseSkill) return;
+      // TODO validate that skill is currently rank 1.
+      character.setSkill(baseSkill, 3);
+    }
   },
   heroicAttribute: {
     displayName: "Heroic Attribute",
@@ -282,7 +385,25 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Epic"],
     description:
-      "One of the character's primary attribute's is increased by one. This can not increase any trait to higher than 3 plus the strains racial adjustment to that attribute."
+      "One of the character's primary attribute's is increased by one. This can not increase any trait to higher than 3 plus the strains racial adjustment to that attribute.",
+    options: (character, selectedOptions = {}) => {
+      const options = [];
+      const {primaryAttributes} = character;
+
+      const eligibleAttributes = Object.keys(primaryAttributes).filter(attributeName => primaryAttributes[attributeName] < 3 || attributeName === selectedOptions.primaryAttribute);
+            
+      options.push({id: "primaryAttribute", displayName: "Attribute", type: "attribute", options: eligibleAttributes});
+
+      return options; 
+    },
+    isCharacterEligible: character => Object.keys(character.primaryAttributes).filter(attributeName => character.primaryAttributes[attributeName] < 3).length > 0,
+    apply: (character, options = {}) => {
+      const {primaryAttribute} = options;
+
+      if (!primaryAttribute) return;
+      // TODO validate that options are valid choices.
+      character.modifyAttribute(primaryAttribute, +1);
+    }
   },
   arcaneFont: {
     displayName: "Arcane Font",
