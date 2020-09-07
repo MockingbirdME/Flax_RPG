@@ -108,6 +108,7 @@ const OptionSelector = props => {
             className="character_option_selector_selectable"
             style={{width: props.isOption ? "20rem" : "100%"}}
             value=""
+            readOnly={true}
           >
             <option disabled hidden style={{display: "none"}} value="" key="default">-- No Options Available --</option>
           </select>
