@@ -189,14 +189,22 @@ class Character {
     return 0;
   }
   
-  updateVariable(variable, modifier, {variableKey} = {}) {
+  updateVariable(variable, value, {variableKey, variableType = 'int'} = {}) {
+    
+    // Set base value of variable to empty object or type's default value. 
     if (!this._variables[variable] && variableKey) this._variables[variable] = {};
-    else if (!this._variables[variable]) this._variables[variable] = 0;
+    else if (!this._variables[variable] && variableType === 'array') this._variables[variable] = [];
+    else if (!this._variables[variable] && variableType === 'int') this._variables[variable] = 0;
     
-    if (variableKey && !this._variables[variable][variableKey]) this._variables[variable][variableKey] = 0;
+    // If variableKey doesn't exist, set it to the types default value.
+    if (variableKey && !this._variables[variable][variableKey] && variableType === 'int') this._variables[variable][variableKey] = 0;
+    if (variableKey && !this._variables[variable][variableKey] && variableType === 'array') this._variables[variable][variableKey] = [];
     
-    if (variableKey) this._variables[variable][variableKey] += modifier;
-    else this._variables[variable] += modifier;
+    // Update the targeted value with the passed value.
+    if (variableKey && variableType === "int") this._variables[variable][variableKey] += value;
+    else if (variableKey && variableType === "array") this._variables[variable][variableKey].push(value);
+    else if (variableType === "int") this._variables[variable] += value;
+    else if (variableType === "array") this._variables[variable].push(value);
   }
   
   // SKILL CHECK MODIFIER STORAGE:
@@ -408,6 +416,16 @@ class Character {
     if (!displayName) throw new Error(`Could not find trait with name ${traitName}`);
     
     this.addNote({name: displayName, description});
+  }
+  
+  replaceNote({name, description} = {}) {
+    if (!name || !description) throw new Error('Note requries a name and description field.');
+    
+    const targetIndex = this._notes.findIndex(note => note.name === name);
+    
+    if (targetIndex === -1) throw new Error(`Can not replace note (${name}) that doesn't exist`);
+    
+    this._notes[targetIndex] = {name, description};
   }
   
   /**
