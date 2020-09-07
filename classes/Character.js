@@ -24,7 +24,9 @@ const OTHER_ATTRIBUTES = [
   "size",
   "speed",
   "staminaMax",
-  "woundsMax"
+  "woundsMax",
+  "actions",
+  "reactions"
 ];
 
 // Build default skills with all ranks set to zero.
@@ -163,7 +165,7 @@ class Character {
     return this._traits || [];
   }
   
-  applyTrait({name, selectedOptions}) {
+  applyTrait({name, selectedOptions} = {}) {
     // TODO validate that required options are provided.
     const trait = Trait.get(name);
     
@@ -182,29 +184,29 @@ class Character {
   }
   
   // VARIABLE STORAGE:
-  getVariable(variable, {variableKey, variableIsObject} = {}) {
-    if (this._variables[variable] && !variableKey) return this._variables[variable];
-    if (this._variables[variable] && variableKey && this._variables[variable][variableKey]) return this._variables[variable][variableKey];
+  getVariable(variable, {key, variableIsObject} = {}) {
+    if (this._variables[variable] && !key) return this._variables[variable];
+    if (this._variables[variable] && key && this._variables[variable][key]) return this._variables[variable][key];
     if (variableIsObject) return {};
     return 0;
   }
   
-  updateVariable(variable, value, {variableKey, variableType = 'int'} = {}) {
+  updateVariable(variable, value, {key, type = 'int'} = {}) {
     
     // Set base value of variable to empty object or type's default value. 
-    if (!this._variables[variable] && variableKey) this._variables[variable] = {};
-    else if (!this._variables[variable] && variableType === 'array') this._variables[variable] = [];
-    else if (!this._variables[variable] && variableType === 'int') this._variables[variable] = 0;
+    if (!this._variables[variable] && key) this._variables[variable] = {};
+    else if (!this._variables[variable] && type === 'array') this._variables[variable] = [];
+    else if (!this._variables[variable] && type === 'int') this._variables[variable] = 0;
     
-    // If variableKey doesn't exist, set it to the types default value.
-    if (variableKey && !this._variables[variable][variableKey] && variableType === 'int') this._variables[variable][variableKey] = 0;
-    if (variableKey && !this._variables[variable][variableKey] && variableType === 'array') this._variables[variable][variableKey] = [];
+    // If key doesn't exist, set it to the types default value.
+    if (key && !this._variables[variable][key] && type === 'int') this._variables[variable][key] = 0;
+    if (key && !this._variables[variable][key] && type === 'array') this._variables[variable][key] = [];
     
     // Update the targeted value with the passed value.
-    if (variableKey && variableType === "int") this._variables[variable][variableKey] += value;
-    else if (variableKey && variableType === "array") this._variables[variable][variableKey].push(value);
-    else if (variableType === "int") this._variables[variable] += value;
-    else if (variableType === "array") this._variables[variable].push(value);
+    if (key && type === "int") this._variables[variable][key] += value;
+    else if (key && type === "array") this._variables[variable][key].push(value);
+    else if (type === "int") this._variables[variable] += value;
+    else if (type === "array") this._variables[variable].push(value);
   }
   
   // SKILL CHECK MODIFIER STORAGE:
@@ -233,9 +235,9 @@ class Character {
     
     const allResistanceTypes = Object.keys(Object.assign({}, ...[previousArmorStats.resistances, newArmorStats.resistances]));
     for (const resistance of allResistanceTypes) {
-      if (!previousArmorStats.resistances[resistance]) this.updateVariable("resistances", newArmorStats.resistances[resistance], {variableKey: resistance});
-      else if (!newArmorStats.resistances[resistance]) this.updateVariable("resistances", -previousArmorStats.resistances[resistance], {variableKey: resistance});
-      else this.updateVariable("resistances", newArmorStats.resistances[resistance] - previousArmorStats.resistances[resistance], {variableKey: resistance});
+      if (!previousArmorStats.resistances[resistance]) this.updateVariable("resistances", newArmorStats.resistances[resistance], {key: resistance});
+      else if (!newArmorStats.resistances[resistance]) this.updateVariable("resistances", -previousArmorStats.resistances[resistance], {key: resistance});
+      else this.updateVariable("resistances", newArmorStats.resistances[resistance] - previousArmorStats.resistances[resistance], {key: resistance});
     }
   }
   
@@ -371,6 +373,14 @@ class Character {
   
   get woundsMax() {
     return this.getVariable('woundsMaxAdjustment');
+  }
+  
+  get actionPoints() {
+    return this.getVariable('actionPointsAdjustment');
+  }
+  
+  get reactionPoints() {
+    return this.getVariable('reactionPointsAdjustment');
   }
   
   // SKILLS 
