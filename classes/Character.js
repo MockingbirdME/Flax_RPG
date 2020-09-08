@@ -189,11 +189,13 @@ class Character {
     if (this._variables[variable] && !key) return this._variables[variable];
     if (this._variables[variable] && key && this._variables[variable][key]) return this._variables[variable][key];
     if (variableIsObject) return {};
+    if (typeof variable === 'string') return '';
     return 0;
   }
   
+  /* eslint-disable complexity */
   updateVariable(variable, value, {key, type = 'int'} = {}) {
-    
+    console.log(`${variable}, ${key}, ${type}, ${value}`);
     // Set base value of variable to empty object or type's default value. 
     if (!this._variables[variable] && key) this._variables[variable] = {};
     else if (!this._variables[variable] && type === 'array') this._variables[variable] = [];
@@ -206,9 +208,12 @@ class Character {
     // Update the targeted value with the passed value.
     if (key && type === "int") this._variables[variable][key] += value;
     else if (key && type === "array") this._variables[variable][key].push(value);
+    else if (key && type === "string") this._variables[variable][key] = value;
     else if (type === "int") this._variables[variable] += value;
     else if (type === "array") this._variables[variable].push(value);
+    else if (type === "string") this._variables[variable] = value;
   }
+  /* eslint-enable complexity */
   
   // SKILL CHECK MODIFIER STORAGE:
   getSkillCheckModifier(skillCheckName) {

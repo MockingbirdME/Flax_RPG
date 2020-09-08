@@ -704,7 +704,7 @@ const traitsData = {
       "The character may act on rounds when they are surprised, if their initiative would be before all non-surprised enemies they act after the enemy with the highest initiative.",
     isCharacterEligible: character => character.traits.some(trait => trait.id === 'dangerSenseImproved') && !character.traits.some(trait => trait.id === 'dangerSenseHeroic'),
     apply: character => {
-      character.replaceNote({name: 'Danger Sense', description: "When conscious and unrestrained, you are never flat footed, still benifit from your melee, ranged, and mental defense bonuses and can act when surprised (if you would go before a non surprised character set your initiative to one less than  that  character's initiative). "});
+      character.replaceNote({name: 'Danger Sense', description: "When conscious and unrestrained, you are never flat footed, still benifit from your melee, ranged, and mental defense bonuses and can act when surprised (if you would go before a non surprised character set your initiative to one less than  that  character's initiative)."});
     }
   },
   dualWeilder: {
@@ -714,7 +714,12 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The character can make the off-hand attack combat action with weapons that have the *light* or *balanced* and the *one-handed* or *hand-and-a-half* traits."
+      "The character can make the off-hand attack combat action with weapons that have the *light* or *balanced* and the *one-handed* or *hand-and-a-half* traits.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'dualWeilder'),
+    apply: character => {
+      // TODO consider if this needs to set some variable once skill checks/combat actions are implemented for a character.
+      character.addNote({name: 'Dual Weilder', description: "You can make off-hand attacks with weapons that have either the light or balanced trait as well as the one-handed or hand-and-a-half traits."});
+    }
   },
   dualWeilderHeavy: {
     displayName: "Dual Weilder, Heavy",
@@ -723,7 +728,12 @@ const traitsData = {
     requirementsDescription: "Dual Weilder",
     keywords: ["Simple"],
     description:
-      "The character can wield any weapon without the *two-handed* trait in their off hand and make off handed attacks with them."
+      "The character can wield any weapon without the *two-handed* trait in their off hand and make off handed attacks with them.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'dualWeilder') && !character.traits.some(trait => trait.id === 'dualWeilderHeavy'),
+    apply: character => {
+      // TODO consider if this needs to set some variable once skill checks/combat actions are implemented for a character.
+      character.replaceNote({name: 'Dual Weilder', description: "You can make off-hand attacks with weapons so long as they do not have the two-handed trait."});
+    }
   },
   duelist: {
     displayName: "Duelist",
@@ -732,7 +742,15 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The character may spend one action point on their turn to choose one character within this trait's range of 10 hexes to be their dueling opponent. The character may spend their reaction to add one penalty die to an attack's skill check against them made by their dueling opponent provided the attack was made from within range and no other character is within melee range of them. A character ceases to be a dueling opponent if another character is made a dueling opponent or if they leave the character's sight for a full round."
+      "The character may spend one action point on their turn to choose one character within this trait's range of 10 hexes to be their dueling opponent. The character may spend their reaction to add one penalty die to an attack's skill check against them made by their dueling opponent provided the attack was made from within range and no other character is within melee range of them. A character ceases to be a dueling opponent if another character is made a dueling opponent or if they leave the character's sight for a full round.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'duelist'),
+    apply: character => {
+      character.updateVariable('duelist', 10, {key: 'range'});
+      character.updateVariable('duelist', 'an attack skill check', {key: 'skillChecks', type: 'string'});
+      character.updateVariable('duelist', ', provided no other characters are within your melee range', {key: 'condition', type: 'string'});
+      character.updateVariable('duelist', '', {key: 'bonus', type: 'string'});
+      character.addNote({name: 'Duelist', description: utils.duelistDescription(character)});
+    }
   },
   duelistDefensive: {
     displayName: "Duelist, Defensive",
@@ -741,7 +759,12 @@ const traitsData = {
     requirementsDescription: "Duelist",
     keywords: ["Simple"],
     description:
-      "When the character spends their reaction to add a penalty die to their dueling opponent they now add one penalty die to all eligible attacks from their opponent until the character's next turn."
+      "When the character spends their reaction to add a penalty die to their dueling opponent they now add one penalty die to all eligible attacks from their opponent until the character's next turn.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'duelist') && !character.traits.some(trait => trait.id === 'duelistDefensive'),
+    apply: character => {
+      character.updateVariable('duelist', 'any attack skill checks', {key: 'skillChecks', type: 'string'});
+      character.replaceNote({name: 'Duelist', description: utils.duelistDescription(character)});
+    }
   },
   duelistDistance: {
     displayName: "Duelist, Distance",
@@ -749,7 +772,12 @@ const traitsData = {
     requirements: ["Duelist"],
     requirementsDescription: "Duelist",
     keywords: ["Simple"],
-    description: "The range for Duelist's effects is increased to 30 hexes."
+    description: "The range for Duelist's effects is increased by 20 hexes.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'duelist'),
+    apply: character => {
+      character.updateVariable('duelist', 20, {key: 'range'});
+      character.replaceNote({name: 'Duelist', description: utils.duelistDescription(character)});
+    }
   },
   duelistMelee: {
     displayName: "Duelist, Melee",
@@ -758,7 +786,12 @@ const traitsData = {
     requirementsDescription: "Duelist",
     keywords: ["Simple"],
     description:
-      "The character no longer requires that no other character is within melee range of them to use their reaction to gain benefits from duelist traits."
+      "The character no longer requires that no other character is within melee range of them to use their reaction to gain benefits from duelist traits.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'duelist'),
+    apply: character => {
+      character.updateVariable('duelist', '', {key: 'condition', type: 'string'});
+      character.replaceNote({name: 'Duelist', description: utils.duelistDescription(character)});
+    }
   },
   duelistHeroic: {
     displayName: "Duelist, Heroic",
@@ -767,7 +800,12 @@ const traitsData = {
     requirementsDescription: "Two Dualist Traits",
     keywords: ["Heroic"],
     description:
-      "When the character spends their reaction to grant a penalty die to one or more attacks by their dueling opponent they gain one bonus die on their next eligible attack against their dueling opponent before the end of their next turn."
+      "When the character spends their reaction to grant a penalty die to one or more attacks by their dueling opponent they gain one bonus die on their next eligible attack against their dueling opponent before the end of their next turn.",
+    isCharacterEligible: character => character.traits.filter(trait => trait.id.includes('duelist')).length > 1,
+    apply: character => {
+      character.updateVariable('duelist', ', if at least one attack skill check is affected in this way you gain a bonus die to your first attack skill check against your dueling opponent before the end of your next turn', {key: 'bonus', type: 'string'});
+      character.replaceNote({name: 'Duelist', description: utils.duelistDescription(character)});
+    }
   },
   fastReflexes: {
     displayName: "Fast Reflexes",
