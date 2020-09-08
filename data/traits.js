@@ -528,7 +528,7 @@ const traitsData = {
       character.updateVariable("ambush", 3, {key: "damage"});
       character.updateVariable("ambush", "melee", {key: "attackType", type: "array"});
       character.updateVariable("ambush", "flat-footed", {key: "targetRequirement", type: "array"});
-      character.addNote({name: 'ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
+      character.addNote({name: 'Ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
     }
   },
   ambusherSneakAttack: {
@@ -542,7 +542,7 @@ const traitsData = {
     isCharacterEligible: character => character.traits.some(trait => trait.id === 'ambusherBackstab') && !character.traits.some(trait => trait.id === 'ambusherSneakAttack'),
     apply: character => {
       character.updateVariable("ambush", "surprised", {key: "targetRequirement", type: "array"});
-      character.replaceNote({name: 'ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
+      character.replaceNote({name: 'Ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
     }
   },
   ambusherStealthy: {
@@ -556,7 +556,7 @@ const traitsData = {
     isCharacterEligible: character => character.traits.some(trait => trait.id === 'ambusherSneakAttack') && !character.traits.some(trait => trait.id === 'ambusherStealthy'),
     apply: character => {
       character.updateVariable("ambush", "unaware you pose a threat", {key: "targetRequirement", type: "array"});
-      character.replaceNote({name: 'ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
+      character.replaceNote({name: 'Ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
     }
   },
   ambusherFlanking: {
@@ -570,7 +570,7 @@ const traitsData = {
     isCharacterEligible: character => character.traits.some(trait => trait.id === 'ambusherStealthy') && !character.traits.some(trait => trait.id === 'ambusherFlanking'),
     apply: character => {
       character.updateVariable("ambush", "are being flanked by the character", {key: "targetRequirement", type: "array"});
-      character.replaceNote({name: 'ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
+      character.replaceNote({name: 'Ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
     }
   },
   amusherRanged: {
@@ -584,7 +584,7 @@ const traitsData = {
     isCharacterEligible: character => character.traits.some(trait => trait.id === 'ambusherBackstab') && !character.traits.some(trait => trait.id === 'amusherRanged'),
     apply: character => {
       character.updateVariable("ambush", "ranged (at close range)", {key: "attackType", type: "array"});
-      character.replaceNote({name: 'ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
+      character.replaceNote({name: 'Ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
     }
   },
   ambusherSniper: {
@@ -598,7 +598,7 @@ const traitsData = {
     isCharacterEligible: character => character.traits.some(trait => trait.id === 'amusherRanged') && !character.traits.some(trait => trait.id === 'ambusherSniper'),
     apply: character => {
       character.updateVariable("ambush", "ranged (at any range)", {key: "attackType", type: "array"});
-      character.replaceNote({name: 'ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
+      character.replaceNote({name: 'Ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
     }
   },
   ambusherSkilled: {
@@ -612,7 +612,7 @@ const traitsData = {
     isCharacterEligible: character => character.traits.some(trait => trait.id === 'ambusherBackstab'),
     apply: character => {
       character.updateVariable("ambush", 1, {key: "damage"});
-      character.replaceNote({name: 'ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
+      character.replaceNote({name: 'Ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
     }
   },
   ambusherAssassin: {
@@ -626,7 +626,7 @@ const traitsData = {
     isCharacterEligible: character => character.traits.some(trait => trait.id === 'ambusherSneakAttack'),
     apply: character => {
       character.updateVariable("ambush", 3, {key: "damage"});
-      character.replaceNote({name: 'ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
+      character.replaceNote({name: 'Ambusher', description: `The character inflicts ${character.getVariable('ambush', {key: 'damage'})} extra damage when making ${character.getVariable('ambush', {key: 'attackType'}).join(' or ')} attacks against opponents who are ${character.getVariable('ambush', {key: 'targetRequirement'}).join(' or ')}, limit once per target per round.`});
     }
   },
   combatReflexes: {
@@ -634,9 +634,26 @@ const traitsData = {
     type: "Combat",
     requirements: [],
     requirementsDescription: "",
-    keywords: ["Simple"],
+    keywords: ["Heroic"],
     description:
-      "The character gains a second reaction each turn, this reaction can only be used to make a free attack."
+      "The character gains a second reaction each turn, this reaction can only be used to make a free attack.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'combatReflexes'),
+    apply: character => {
+      character.updateVariable("reactionPointsAdjustment", 1);
+      character.addNote({name: 'Combat Reflexes', description: `The additional reaction(s) made avaiable by combat reflexes traits can only be used to make free attacks.`});
+    }
+  },
+  combatReflexesAdvanced: {
+    displayName: "Combat Reflexes, Advanced",
+    type: "Combat",
+    requirements: ["Combat Reflexes"],
+    requirementsDescription: "Combat Reflexes",
+    keywords: ["Simple"],
+    description: "Gain an additional reaction point each turn, a character can not have more reaction points than action points.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'combatReflexes') && character.actionPoints > character.reactionPoints,
+    apply: character => {
+      character.updateVariable("reactionPointsAdjustment", 1);
+    }
   },
   combatReflexesImproved: {
     displayName: "Combat Reflexes, Improved",
@@ -645,15 +662,11 @@ const traitsData = {
     requirementsDescription: "Combat Reflexes",
     keywords: ["Simple"],
     description:
-      "The additional reaction gained from *combat reflexes* can now be used for any reaction."
-  },
-  combatReflexesHeroic: {
-    displayName: "Combat Reflexes, Heroic",
-    type: "Combat",
-    requirements: ["Combat Reflexes, Improved"],
-    requirementsDescription: "Improved Combat Reflexes",
-    keywords: ["Heroic"],
-    description: "Gain a third reaction each turn."
+      "The additional reaction gained from *combat reflexes* can now be used for any reaction.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'combatReflexes') && !character.traits.some(trait => trait.id === 'combatReflexesImproved'),
+    apply: character => {
+      character.deleteNote('Combat Reflexes');
+    }
   },
   dangerSense: {
     displayName: "Danger Sense",
@@ -662,7 +675,11 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The character is never *flat footed* when conscious and unrestrained."
+      "The character is never *flat footed* when conscious and unrestrained.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'dangerSense'),
+    apply: character => {
+      character.addNote({name: 'Danger Sense', description: "When conscious and unrestrained, you are never flat footed. "});
+    }
   },
   dangerSenseImproved: {
     displayName: "Danger Sense, Improved",
@@ -671,7 +688,11 @@ const traitsData = {
     requirementsDescription: "Danger Sense",
     keywords: ["Heroic"],
     description:
-      "The character still benefits from their melee, ranged, and magic defense bonuses when *surprised*, conscious, and unrestrained."
+      "The character still benefits from their melee, ranged, and mental defense bonuses when *surprised*, conscious, and unrestrained.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'dangerSense') && !character.traits.some(trait => trait.id === 'dangerSenseImproved'),
+    apply: character => {
+      character.replaceNote({name: 'Danger Sense', description: "When conscious and unrestrained, you are never flat footed and still benifit from your melee, ranged, and mental defense bonuses when surprised."});
+    }
   },
   dangerSenseHeroic: {
     displayName: "Danger Sense, Heroic",
@@ -680,7 +701,11 @@ const traitsData = {
     requirementsDescription: "Improved Danger Sense",
     keywords: ["Heroic"],
     description:
-      "The character may act on rounds when they are surprised, if their initiative would be before all non-surprised enemies they act after the enemy with the highest initiative."
+      "The character may act on rounds when they are surprised, if their initiative would be before all non-surprised enemies they act after the enemy with the highest initiative.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'dangerSenseImproved') && !character.traits.some(trait => trait.id === 'dangerSenseHeroic'),
+    apply: character => {
+      character.replaceNote({name: 'Danger Sense', description: "When conscious and unrestrained, you are never flat footed, still benifit from your melee, ranged, and mental defense bonuses and can act when surprised (if you would go before a non surprised character set your initiative to one less than  that  character's initiative). "});
+    }
   },
   dualWeilder: {
     displayName: "Dual Weilder",

@@ -1,12 +1,11 @@
-const util = require('util');
 const rawTraitsData = require("../data/traits");
 /**
- * List of all subscriptions available.
+ * List of all available traits.
  * @type {Map<string, object>}
  */
 const traits = new Map();
 
-// Load all subscriptions from disk.
+// Load all traits.
 Object.keys(rawTraitsData).forEach(id => {
   traits.set(id, { ...rawTraitsData[id], id });
 });
