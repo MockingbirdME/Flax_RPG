@@ -8,6 +8,7 @@ const Strains = require('../data/strains');
 
 const Skills = require('../data/skills');
 
+const Notes = require('./Notes');
 const Trait = require('./Trait');
 
 
@@ -25,8 +26,8 @@ const OTHER_ATTRIBUTES = [
   "speed",
   "staminaMax",
   "woundsMax",
-  "actions",
-  "reactions"
+  "actionPoints",
+  "reactionPoints"
 ];
 
 // Build default skills with all ranks set to zero.
@@ -60,7 +61,7 @@ class Character {
     this._skills = DEFAULT_SKILLS();
     
     // Store notes for display.
-    this._notes = [];
+    this._notes = new Notes();
 
     // Store variables for use elsewhere.
     this._variables = {};
@@ -407,11 +408,8 @@ class Character {
     return this._notes;
   }
   
-  addNote(note) {
-    if (!note.name || !note.description) throw new Error('Note requries a name and description field.');
-    this._notes.push(note);
-    /* eslint-disable-next-line */
-    this._notes.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  addNote({name, description} = {}) {
+    this._notes.add({name, description});
   }
   
   addTraitAsNote({strainTrait, strainName, traitName} = {}) {
@@ -429,13 +427,11 @@ class Character {
   }
   
   replaceNote({name, description} = {}) {
-    if (!name || !description) throw new Error('Note requries a name and description field.');
-    
-    const targetIndex = this._notes.findIndex(note => note.name === name);
-    
-    if (targetIndex === -1) throw new Error(`Can not replace note (${name}) that doesn't exist`);
-    
-    this._notes[targetIndex] = {name, description};
+    this._notes.replace({name, description});
+  }
+  
+  deleteNote(name) {
+    this._notes.delete(name);
   }
   
   /**
@@ -461,7 +457,7 @@ class Character {
   }
 
   /**
-   * Overrides the default util.inspect behavior to use {@link User#toJSON} instead.
+   * Overrides the default util.inspect behavior to use {@link Character#toJSON} instead.
    */
   [util.inspect.custom]() {
     return this.toJSON();
