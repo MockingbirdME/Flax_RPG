@@ -814,7 +814,11 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "For each time a character has this trait they gain a +1 bonus to their initiative."
+      "For each time a character has this trait they gain a +1 bonus to their initiative.",
+    isCharacterEligible: character => true,
+    apply: character => {
+      character.updateVariable('initiativeAdjustment', 1);
+    }
   },
   fueledByPain: {
     displayName: "Fueled by Pain",
@@ -823,7 +827,12 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Heroic"],
     description:
-      "If a character suffers one or more wounds after fully resolving the damage they regain all missing stamina and all non-magic actions they take on their next turn have a stamina cost of 0."
+      "If a character suffers one or more wounds after fully resolving the damage they regain all missing stamina and all non-magic actions they take on their next turn have a stamina cost of 0.",
+    isCharacterEligible: character => true,
+    apply: character => {
+      // TODO once damage is added to character have this automatically trigger.
+      character.addTraitAsNote({traitName: 'fueledByPain'});
+    }
   },
   mobileCombatant: {
     displayName: "Mobile Combatant",
