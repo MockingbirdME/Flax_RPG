@@ -773,7 +773,7 @@ const traitsData = {
     requirementsDescription: "Duelist",
     keywords: ["Simple"],
     description: "The range for Duelist's effects is increased by 20 hexes.",
-    isCharacterEligible: character => character.traits.some(trait => trait.id === 'duelist'),
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'duelist') && !character.traits.some(trait => trait.id === 'duelistDistance'),
     apply: character => {
       character.updateVariable('duelist', 20, {key: 'range'});
       character.replaceNote({name: 'Duelist', description: utils.duelistDescription(character)});
@@ -787,7 +787,7 @@ const traitsData = {
     keywords: ["Simple"],
     description:
       "The character no longer requires that no other character is within melee range of them to use their reaction to gain benefits from duelist traits.",
-    isCharacterEligible: character => character.traits.some(trait => trait.id === 'duelist'),
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'duelist') && !character.traits.some(trait => trait.id === 'duelistMelee'),
     apply: character => {
       character.updateVariable('duelist', '', {key: 'condition', type: 'string'});
       character.replaceNote({name: 'Duelist', description: utils.duelistDescription(character)});
@@ -839,9 +839,13 @@ const traitsData = {
     type: "Combat",
     requirements: [],
     requirementsDescription: "",
-    keywords: ["Simple"],
+    keywords: ["Heroic"],
     description:
-      "The character gains a mobile combat defense bonus against free attacks provided they have not taken the disengage action this turn, this bonus is equal to their melee defense bonus."
+      "The character gains a mobile combat defense bonus against free attacks provided they have not taken the disengage action this turn, this bonus is equal to their melee defense bonus.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'mobileCombatant'),
+    apply: character => {
+      character.addNote({name: 'Mobile Combatant', description: `As long as you haven't taken the disengage action this turn increase your defense by ${character.defenseBonusMelee > 0 ? character.defenseBonusMelee : 1} against free attacks you provoked by moving.`});
+    }
   },
   mobileCombatantImproved: {
     displayName: "Mobile Combatant, Improved",
@@ -850,7 +854,11 @@ const traitsData = {
     requirementsDescription: "Mobile Combatant",
     keywords: ["Simple"],
     description:
-      "The character gains their mobile combatant defense bonus to free attacks even if they've taken the disengage action this turn."
+      "The character gains their mobile combatant defense bonus to free attacks even if they've taken the disengage action this turn.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'mobileCombatant') && !character.traits.some(trait => trait.id === 'mobileCombatantImproved'),
+    apply: character => {
+      character.replaceNote({name: 'Mobile Combatant', description: `Increase your defense by ${character.defenseBonusMelee > 0 ? character.defenseBonusMelee : 1} against free attacks you provoked by moving.`});
+    }
   },
   mobileCombatantHeroic: {
     displayName: "Mobile Combatant, Heroic",
@@ -858,7 +866,11 @@ const traitsData = {
     requirements: ["Mobile Combatant, Improved"],
     requirementsDescription: "Improved Mobile Combatant",
     keywords: ["Heroic"],
-    description: "The character no longer provokes free attacks."
+    description: "The character no longer provokes free attacks.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'mobileCombatantImproved') && !character.traits.some(trait => trait.id === 'mobileCombatantHeroic'),
+    apply: character => {
+      character.replaceNote({name: 'Mobile Combatant', description: 'You do not provoke free attacks when moving.'});
+    }
   },
   multiAttack: {
     displayName: "Multi-Attack",
