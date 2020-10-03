@@ -37,7 +37,6 @@ const CreateOrEditChar = props => {
 
   return (
     <div className="character__container">
-      {display ? "" : displayToggle}
       {
         display 
           ? (
@@ -45,7 +44,6 @@ const CreateOrEditChar = props => {
               <div className="inner">
                 <div className="character__section__container" style={{display: "flex", justifyContent: "flex-start", minWidth: "35rem", maxWidth: "73rem", flexDirection: "column", padding: "0 2rem 0 0", borderRight: "2px solid black"}}>
                   
-                  {displayToggle}
                   <CharacterNameField /> 
                   <CharacterLevelTracker />
                   <CharacterStrainPicker />
