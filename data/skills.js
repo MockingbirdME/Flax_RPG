@@ -239,11 +239,45 @@ let skillsData = {
     description:
       "How well a character fights with a sword, axe, or fists. Melee combat skill is most often used when fighting in close quarters but also has a place in many sporting activities.",
     secondarySkills: {
-      bash: {},
-      attackType: {
-        displayName: "Attack Type",
-        description:
-          "many melee actions have a specific benefit from having ranks in the secondary skill of the same name."
+      bash: {
+        displayName: "Bash",
+        description: 
+          "Expertise with the Bash melee attack option."
+      },
+      bullRush: {
+        displayName: "Bull Rush",
+        description: 
+          "Expertise with the Bull Rush melee attack option."
+      },
+      brawing: {
+        displayName: "Brawling",
+        description: 
+          "Expertise with the Brawling melee attack option."
+      },
+      disarm: {
+        displayName: "Disarm",
+        description: 
+          "Expertise with the Disarm melee attack option."
+      },
+      distractingAttack: {
+        displayName: "Distracting Attack",
+        description: 
+          "Expertise with the Distracting Attack melee attack option."
+      },
+      flurryOfBlows: {
+        displayName: "Flurry of Blows",
+        description: 
+          "Expertise with the Flurry of Blows melee attack option."
+      },
+      offHandAttack: {
+        displayName: "Off-Hand Attack",
+        description: 
+          "Expertise with the Off-Hand Attack melee attack option."
+      },
+      powerAttack: {
+        displayName: "Power Attack",
+        description: 
+          "Expertise with the Power Attack melee attack option."
       }
     }
   },
