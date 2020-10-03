@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Character = sequelize.define('Character', {
     name: DataTypes.STRING,
     level: DataTypes.INTEGER,
-    strain: DataTypes.STRING,
+    strain: DataTypes.JSON,
     traitsList: DataTypes.JSON,
     baseAttributeModifiers: DataTypes.JSON
   }, {});
