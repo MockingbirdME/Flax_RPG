@@ -109,7 +109,6 @@ export const CharacterContextProvider = props => {
     }
     if (lastCallUID[id] !== callId) console.log('Ignoring results from older API call');
     else {
-      console.log(body);
       setCharacters({...characters, [character.id]: body});
       
       return body.id;

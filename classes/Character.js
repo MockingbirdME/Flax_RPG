@@ -11,8 +11,6 @@ const Skills = require('../data/skills');
 const Notes = require('./Notes');
 const Trait = require('./Trait');
 
-
-const PRIMARY_ATTRIBUTES = ['body', 'reflexes', 'perception', 'mind'];
 const OTHER_ATTRIBUTES = [
   "armorValue",
   "defenseMax",
@@ -50,12 +48,16 @@ class Character {
       .then(response => response);
   }
 
-  constructor({id, name, level = 0, strain, traitsList = [], baseAttributeModifiers}) {
+  constructor({id, name, level = 0, strain, traitsList = [], baseAttributeModifiers = {}}) {
+    
     if (baseAttributeModifiers && typeof baseAttributeModifiers != 'object') throw createError(400, 'baseAttributeModifiers must be an object or undefined.');
-    this._baseAttributeModifiers = baseAttributeModifiers || {};
-  
-    // Initialize all primary attributes based on the passed baseAttributeModifiers.
-    this._primaryAttributes = PRIMARY_ATTRIBUTES.reduce((acc, attribute) => ({...acc, [attribute]: this._baseAttributeModifiers[attribute] || 0}), {});
+    
+    this.baseAttributeModifiers = baseAttributeModifiers;
+
+    // Set initial primaryAttributes object.
+    this._primaryAttributes = {};
+    
+    this.applyBaseAttributeModifiers();
 
     // Set initial skills object.
     this._skills = DEFAULT_SKILLS();
@@ -105,6 +107,24 @@ class Character {
   set name(name) {
     // TODO validate param.
     this._name = name;
+  }
+  
+  get baseAttributeModifiers() {
+    
+    return this._baseAttributeModifiers;
+  }
+
+  set baseAttributeModifiers(baseAttributeModifiers) {
+    // TODO validate param.
+    if (!baseAttributeModifiers.penalty) baseAttributeModifiers.penalty = [];
+    this._baseAttributeModifiers = baseAttributeModifiers;
+  }
+  
+  applyBaseAttributeModifiers() {
+    if (this.baseAttributeModifiers.bonus) this.modifyAttribute(this.baseAttributeModifiers.bonus, 1);
+    for (const attribute of this.baseAttributeModifiers.penalty) {
+      this.modifyAttribute(attribute, -1);
+    }
   }
   
   get strain() {
@@ -195,7 +215,6 @@ class Character {
   
   /* eslint-disable complexity */
   updateVariable(variable, value, {key, type = 'int'} = {}) {
-    console.log(`${variable}, ${key}, ${type}, ${value}`);
     // Set base value of variable to empty object or type's default value. 
     if (!this._variables[variable] && key) this._variables[variable] = {};
     else if (!this._variables[variable] && type === 'array') this._variables[variable] = [];
@@ -290,18 +309,22 @@ class Character {
   
   
   // PRIMARY ATTRIBUTES:
-  get primaryAttributes() {return this._primaryAttributes;}
+  get primaryAttributes() {
+    const {body, reflexes, perception, mind} = this;
+    return {body, reflexes, perception, mind};
+  }
   
-  get body() {return this._primaryAttributes.body;} 
+  get body() {return this._primaryAttributes.body || 0;} 
   
-  get reflexes() {return this._primaryAttributes.reflexes;} 
+  get reflexes() {return this._primaryAttributes.reflexes || 0;} 
   
-  get perception() {return this._primaryAttributes.perception;} 
+  get perception() {return this._primaryAttributes.perception || 0;} 
   
-  get mind() {return this._primaryAttributes.mind;}
+  get mind() {return this._primaryAttributes.mind || 0;}
   
   modifyAttribute(attribute, modifier) {
     if (attribute in this._primaryAttributes) this._primaryAttributes[attribute] += modifier;
+    else this._primaryAttributes[attribute] = modifier;
   }
   
   // OTHER ATTRIBUTES:
@@ -319,13 +342,13 @@ class Character {
   
   get defenseMax() {
     let defenseMax = this.getVariable('defenseMaxAdjustment');
-    defenseMax += 8 + this.perception + this._skills.personalDefense.rank;
+    defenseMax += 8 + this.reflexes + this.perception + this._skills.personalDefense.rank;
     return defenseMax;
   }
   
   get defenseBonusMelee() {
     let defenseBonusMelee = this.getVariable('defenseBonusMeleeAdjustment');
-    defenseBonusMelee += this.reflexes + this._skills.meleeCombat.rank;
+    defenseBonusMelee += this._skills.meleeCombat.rank;
     return defenseBonusMelee;
   }
   
@@ -337,7 +360,7 @@ class Character {
   
   get defenseBonusRanged() {
     let defenseBonusRanged = this.getVariable('defenseBonusRangedAdjustment');
-    defenseBonusRanged += this.reflexes + this._skills.awareness.rank - this.size;
+    defenseBonusRanged += this._skills.awareness.rank - this.size;
     return defenseBonusRanged;
   }
   
@@ -444,8 +467,8 @@ class Character {
    * @return {object}
    */
   toJSON() {
-    const {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills, notes} = this;
-    return {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills, notes};
+    const {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, baseAttributeModifiers, primaryAttributes, otherAttributes, skills, notes} = this;
+    return {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, baseAttributeModifiers, primaryAttributes, otherAttributes, skills, notes};
   }
   
   async save() {
@@ -453,7 +476,7 @@ class Character {
     
     characterBaseData.name = this.name;
     characterBaseData.level = this.level;
-    characterBaseData.strain = this.strain.name;
+    characterBaseData.strain = this.strain;
     characterBaseData.traitsList = this.traitsList;
     characterBaseData.baseAttributeModifiers = this._baseAttributeModifiers;
 
