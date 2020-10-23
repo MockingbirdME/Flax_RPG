@@ -19,26 +19,32 @@ const CharacterTraitsPicker = props => {
   const traitEntitlements = character.traitEntitlements || {};
   
   const traitOptions = character.availableTraits.filter(trait => trait.type !== "Character Type");
+  
+  const hasCharacterType = character.traits.some(trait => trait.type === "Character Type");
 
-  const traitsDisplay = Array.from(Array(traitEntitlements.total.allotted || 0))
-    .map((value, index) => {
-      const trait = character.traits[index] || {};
-      if (trait.type === "Character Type") return null;
+  const allotedTraits = traitEntitlements.total.allotted || 0;
+  
+  const traitsDisplay = allotedTraits > 0
+    ? Array.from(Array(hasCharacterType ? allotedTraits + 1 : allotedTraits))
+      .map((value, index) => {
+        const trait = character.traits[index] || {};
+        if (trait.type === "Character Type") return null;
 
-      const options = traitOptions.filter(traitId => !trait || trait.id !== traitId);
-      if (trait.id) options.unshift(trait);
+        const options = traitOptions.filter(traitId => !trait || trait.id !== traitId);
+        if (trait.id) options.unshift(trait);
 
-      return <OptionSelector 
-        key={index}
-        id={index}
-        defaultSelectionType={"trait"}
-        options={options}
-        selectedOptions={trait.selectedOptions} 
-        keyType={"trait"}
-        onChange={(name, selectedOptions) => changeSelectedTrait(index, name, selectedOptions)} 
-        currentValue={trait} />;
-    })
-    .filter(value => value);
+        return <OptionSelector 
+          key={index}
+          id={index}
+          defaultSelectionType={"trait"}
+          options={options}
+          selectedOptions={trait.selectedOptions} 
+          keyType={"trait"}
+          onChange={(name, selectedOptions) => changeSelectedTrait(index, name, selectedOptions)} 
+          currentValue={trait} />;
+      })
+      .filter(value => value)
+    : "";
 
   return (
     <div>
