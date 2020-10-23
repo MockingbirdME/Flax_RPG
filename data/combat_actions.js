@@ -207,7 +207,7 @@ const combatActionsData = {
         type: "Defensive",
         actionPointCost: 1,
         staminaCost: 0,
-        description: "The character does their best to catch their breath and reposition themselves. They regain 2 plus the product of one plus their ranks in the *endurance primary skill* and thir rank in the *stamina secondary skill (endurance)* stamina."
+        description: "The character does their best to catch their breath and reposition themselves. They regain 2 plus the sum  of their ranks in the *endurance primary skill* and thir rank in the *stamina secondary skill (endurance)* stamina."
     },
     DelayTurn: {
         displayName: "Delay Turn",
