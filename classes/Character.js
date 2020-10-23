@@ -87,13 +87,13 @@ class Character {
     // Set the character's level.
     this._level = parseInt(level, 10);
 
+    // Apply the character's strain.
+    this.strain = strain || 'unknown';
+    
     // Store the traits list and apply each trait. 
     for (const traitDetails of traitsList) {
       this.applyTrait(traitDetails);
     }
-
-    // Apply the character's strain.
-    this.strain = strain || 'unknown';
   }
   
   get id() {
