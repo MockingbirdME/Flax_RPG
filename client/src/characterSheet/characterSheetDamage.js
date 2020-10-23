@@ -11,9 +11,11 @@ const CharacterSheetStaminaAndWounds = props => {
   const currentWounds = (props.otherAttributes && props.otherAttributes.woundsCurrent) || 0;
   const maxWounds = (props.otherAttributes && props.otherAttributes.woundsMax) || 1;
 
-  const resistancesList = Object.keys(props.otherAttributes.resistances);
+
+  const {resistances} = props.otherAttributes || {}
+  const resistancesList = Object.keys(resistances || {});
   
-  const resistances = (
+  const resistancesDisplay = (
     <div className="" style={{flexGrow: 1}} >
       <h5 className="character_sheet__body__resource_name">
         Resistances:
@@ -56,7 +58,7 @@ const CharacterSheetStaminaAndWounds = props => {
             </div>
           </div>
         </div>
-        {resistances}
+        {resistancesDisplay}
       </div>
     </div>
     
