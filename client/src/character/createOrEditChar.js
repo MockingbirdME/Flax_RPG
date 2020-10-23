@@ -29,21 +29,22 @@ const CreateOrEditChar = props => {
   
   const displayToggle = (
     <span 
-      style={{fontSize: ".75rem", color: "blue", textAlign: "end", margin: "1rem 1rem -2rem", zIndex: "1", position: "sticky", top: "2.5rem"}}
+      style={{border: "1px solid blue", color: "blue", fontSize: ".75rem", padding: ".25rem"}}
       onClick={() => setDisplay(!display)} >
-      {display ? "done editing" : "edit"}
+      {display ? "X" : "edit"}
     </span>
+    
   );
 
   return (
-    <div className="character__container">
+    <div className="character__container" style={display ? {display: "flex"} : {}}>
       {
         display 
           ? (
             <div className="character__section__container" >
               <div className="inner">
-                <div className="character__section__container" style={{display: "flex", justifyContent: "flex-start", minWidth: "35rem", maxWidth: "73rem", flexDirection: "column", padding: "0 2rem 0 0", borderRight: "2px solid black"}}>
-                  
+                <div className="character__section__container" style={{display: "flex", justifyContent: "flex-start", minWidth: "35rem", maxWidth: "73rem", flexDirection: "column", padding: "0 3rem 0 0", borderRight: "2px solid black"}}>
+                  <div style={{margin: "1rem -2.5rem -2rem 0", position: "sticky", top: ".5rem", textAlign: "end", zIndex: "1"}} >{displayToggle}</div>
                   <CharacterNameField /> 
                   <CharacterLevelTracker />
                   <CharacterStrainPicker />
@@ -54,9 +55,10 @@ const CreateOrEditChar = props => {
               </div>
             </div>
             
-          ) : ""
+          ) : <div style={{margin: "0rem 0rem -1rem 1rem", position: "sticky", top: "1rem"}} >{displayToggle}</div>
       }
       <div className="character__section__container" >
+        
         <div className="inner">
           <div >
             <CharacterSheet {...props} />

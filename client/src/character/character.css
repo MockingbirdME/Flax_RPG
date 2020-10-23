@@ -1,6 +1,5 @@
 
 .character__container {
-  display: flex;
   overflow-x: scroll;
 }
 
