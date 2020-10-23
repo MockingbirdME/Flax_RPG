@@ -164,11 +164,11 @@ class Character {
   }
   
   get traitEntitlements() {
-    const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
+    const totalAlotments = this.level + (this.getVariable('extraEntitledTraits') || 0);
     const totalConsumed = this.traits.filter(trait => Trait.get(trait.id).type !== "Character Type").length;
-    const heroicAlotments = 1 + Math.floor(this.level / 5) + this.getVariable('extraEntitledHeroicTraits');
+    const heroicAlotments = 1 + Math.floor(this.level / 5) + (this.getVariable('extraEntitledHeroicTraits') || 0);
     const heroicConsumed = this.traits.filter(trait => trait.keywords.includes('Heroic')).length;
-    const epicAlotments = Math.floor(this.level / 25) + this.getVariable('extraEntitledEpicTraits');
+    const epicAlotments = Math.floor(this.level / 25) + (this.getVariable('extraEntitledEpicTraits') || 0);
     const epicConsumed = this.traits.filter(trait => trait.keywords.includes('Epic')).length;
     return {
       total: {allotted: totalAlotments, consumed: totalConsumed, available: totalAlotments - totalConsumed}, 
