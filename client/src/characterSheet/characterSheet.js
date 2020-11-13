@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import CharacterContext from "../contexts/character";
 import "./characterSheet.css";
 
@@ -8,7 +8,6 @@ import Defense from "./characterSheetDefense";
 import Damage from "./characterSheetDamage";
 import Skills from "./characterSheetSkills";
 import CharacterSheetHeader from "./characterSheetHeader";
-import SkillBox from "./skillBox";
 
 const CharacterSheet = props => {
   const charContext = useContext(CharacterContext);
@@ -17,8 +16,8 @@ const CharacterSheet = props => {
   if (charId && !charContext.characters[charId]) return <div></div>;
     
   const blankSheet = !charId;  
-  const characterStats = (charContext.characters[charId] && charContext.characters[charId].calculatedStats) || {};
-  console.log(charContext.characters[charId]);
+  const characterStats = charContext.characters[charId] || {};
+
 
   return (
     <div className="character_sheet__container">

@@ -8,10 +8,9 @@ const Strains = require('../data/strains');
 
 const Skills = require('../data/skills');
 
-const Traits = require('../data/traits');
+const Notes = require('./Notes');
+const Trait = require('./Trait');
 
-
-const PRIMARY_ATTRIBUTES = ['body', 'reflexes', 'perception', 'mind'];
 const OTHER_ATTRIBUTES = [
   "armorValue",
   "defenseMax",
@@ -24,7 +23,9 @@ const OTHER_ATTRIBUTES = [
   "size",
   "speed",
   "staminaMax",
-  "woundsMax"
+  "woundsMax",
+  "actionPoints",
+  "reactionPoints"
 ];
 
 // Build default skills with all ranks set to zero.
@@ -47,18 +48,22 @@ class Character {
       .then(response => response);
   }
 
-  constructor({id, name, level, strain, traitsList, baseAttributeModifiers}) {
+  constructor({id, name, level = 0, strain, traitsList = [], baseAttributeModifiers = {}}) {
+    
     if (baseAttributeModifiers && typeof baseAttributeModifiers != 'object') throw createError(400, 'baseAttributeModifiers must be an object or undefined.');
-    this._baseAttributeModifiers = baseAttributeModifiers || {};
-  
-    // Initialize all primary attributes based on the passed baseAttributeModifiers.
-    this._primaryAttributes = PRIMARY_ATTRIBUTES.reduce((acc, attribute) => ({...acc, [attribute]: this._baseAttributeModifiers[attribute] || 0}), {});
+    
+    this.baseAttributeModifiers = baseAttributeModifiers;
+
+    // Set initial primaryAttributes object.
+    this._primaryAttributes = {};
+    
+    this.applyBaseAttributeModifiers();
 
     // Set initial skills object.
     this._skills = DEFAULT_SKILLS();
     
     // Store notes for display.
-    this._notes = [];
+    this._notes = new Notes();
 
     // Store variables for use elsewhere.
     this._variables = {};
@@ -82,14 +87,13 @@ class Character {
     // Set the character's level.
     this._level = parseInt(level, 10);
 
-    // Store the traits list and apply each trait. 
-    this._traitsList = traitsList || [];
-    for (const traitName of this._traitsList) {
-      this.applyTrait(traitName);
-    }
-
     // Apply the character's strain.
     this.strain = strain || 'unknown';
+    
+    // Store the traits list and apply each trait. 
+    for (const traitDetails of traitsList) {
+      this.applyTrait(traitDetails);
+    }
   }
   
   get id() {
@@ -103,6 +107,24 @@ class Character {
   set name(name) {
     // TODO validate param.
     this._name = name;
+  }
+  
+  get baseAttributeModifiers() {
+    
+    return this._baseAttributeModifiers;
+  }
+
+  set baseAttributeModifiers(baseAttributeModifiers) {
+    // TODO validate param.
+    if (!baseAttributeModifiers.penalty) baseAttributeModifiers.penalty = [];
+    this._baseAttributeModifiers = baseAttributeModifiers;
+  }
+  
+  applyBaseAttributeModifiers() {
+    if (this.baseAttributeModifiers.bonus) this.modifyAttribute(this.baseAttributeModifiers.bonus, 1);
+    for (const attribute of this.baseAttributeModifiers.penalty) {
+      this.modifyAttribute(attribute, -1);
+    }
   }
   
   get strain() {
@@ -142,11 +164,11 @@ class Character {
   }
   
   get traitEntitlements() {
-    const totalAlotments = this.level + this.getVariable('extraEntitledTraits');
-    const totalConsumed = this.traitsList.filter(trait => Traits[trait.name].type !== "Character Type").length;
-    const heroicAlotments = 1 + Math.floor(this._level / 5) + this.getVariable('extraEntitledHeroicTraits');
+    const totalAlotments = this.level + (this.getVariable('extraEntitledTraits') || 0);
+    const totalConsumed = this.traits.filter(trait => Trait.get(trait.id).type !== "Character Type").length;
+    const heroicAlotments = 1 + Math.floor(this.level / 5) + (this.getVariable('extraEntitledHeroicTraits') || 0);
     const heroicConsumed = this.traits.filter(trait => trait.keywords.includes('Heroic')).length;
-    const epicAlotments = Math.floor(this.level / 25) + this.getVariable('extraEntitledEpicTraits');
+    const epicAlotments = Math.floor(this.level / 25) + (this.getVariable('extraEntitledEpicTraits') || 0);
     const epicConsumed = this.traits.filter(trait => trait.keywords.includes('Epic')).length;
     return {
       total: {allotted: totalAlotments, consumed: totalConsumed, available: totalAlotments - totalConsumed}, 
@@ -157,62 +179,60 @@ class Character {
   
   get traitsList() {
     // Note: Strain traits are not listed here, these are the selected traits.
-    return this._traitsList;
+    return this.traits.map(trait => ({name: trait.id, selectedOptions: trait.selectedOptions}));
   }
   
   get traits() {
     return this._traits || [];
   }
   
-  applyTrait(traitDetails) {
-    if (typeof traitDetails === 'string') traitDetails = {name: traitDetails};
-    const {name, options} = traitDetails;
-    const trait = Traits[name];
-    trait.id = name;
-    // TODO consider enforcing prerequisits here.
-    if ({}.hasOwnProperty.call(trait, 'apply')) trait.apply(this, options);
+  applyTrait({name, selectedOptions} = {}) {
+    // TODO validate that required options are provided.
+    const trait = Trait.get(name);
+    
+    // Enforce prerequisits.
+    if (!trait.isCharacterEligible(this)) return;
+    
+    trait.apply(this, selectedOptions);
+    
     if (!this._traits) this._traits = [];
-    this._traits.push(trait);
+    
+    this._traits.push(trait.withOptions(this, selectedOptions));
   }
   
   get availableTraits() {
-    const traitKeys = Object.keys(Traits);
-    return traitKeys.map(key => {
-      const trait = Traits[key];
-      
-      // Don't return traits the character isn't eligible for.
-      if (!trait.isCharacterEligible || !trait.isCharacterEligible(this)) return null;
-      
-      // Don't return heroic traits if the character has no heroic entitlements.
-      if (trait.keywords.includes("Heroic") && !this.traitEntitlements.heroic.allotted) return null;
-      
-      // Don't return epic traits if the character has no epic entitlements.
-      if (trait.keywords.includes("Epic") && !this.traitEntitlements.epic.allotted) return null;
-      
-      return {traitId: key, options: trait.options || []};
-    }).filter(trait => trait);
+    return Trait.getAllAvailableToCharacter(this);
   }
   
   // VARIABLE STORAGE:
-  getVariable(variable, {variableKey, variableIsObject} = {}) {
-    if (this._variables[variable] && !variableKey) return this._variables[variable];
-    if (this._variables[variable] && variableKey && this._variables[variable][variableKey]) return this._variables[variable][variableKey];
+  getVariable(variable, {key, variableIsObject} = {}) {
+    if (this._variables[variable] && !key) return this._variables[variable];
+    if (this._variables[variable] && key && this._variables[variable][key]) return this._variables[variable][key];
     if (variableIsObject) return {};
+    if (typeof variable === 'string') return '';
     return 0;
   }
   
-  updateVariable(variable, modifier, {variableKey} = {}) {
-    console.log(variable);
-    console.log(this._variables);
-    if (!this._variables[variable] && variableKey) this._variables[variable] = {};
-    else if (!this._variables[variable]) this._variables[variable] = 0;
+  /* eslint-disable complexity */
+  updateVariable(variable, value, {key, type = 'int'} = {}) {
+    // Set base value of variable to empty object or type's default value. 
+    if (!this._variables[variable] && key) this._variables[variable] = {};
+    else if (!this._variables[variable] && type === 'array') this._variables[variable] = [];
+    else if (!this._variables[variable] && type === 'int') this._variables[variable] = 0;
     
-    console.log(this._variables);
-    if (variableKey && !this._variables[variable][variableKey]) this._variables[variable][variableKey] = 0;
+    // If key doesn't exist, set it to the types default value.
+    if (key && !this._variables[variable][key] && type === 'int') this._variables[variable][key] = 0;
+    if (key && !this._variables[variable][key] && type === 'array') this._variables[variable][key] = [];
     
-    if (variableKey) this._variables[variable][variableKey] += modifier;
-    else this._variables[variable] += modifier;
+    // Update the targeted value with the passed value.
+    if (key && type === "int") this._variables[variable][key] += value;
+    else if (key && type === "array") this._variables[variable][key].push(value);
+    else if (key && type === "string") this._variables[variable][key] = value;
+    else if (type === "int") this._variables[variable] += value;
+    else if (type === "array") this._variables[variable].push(value);
+    else if (type === "string") this._variables[variable] = value;
   }
+  /* eslint-enable complexity */
   
   // SKILL CHECK MODIFIER STORAGE:
   getSkillCheckModifier(skillCheckName) {
@@ -240,9 +260,9 @@ class Character {
     
     const allResistanceTypes = Object.keys(Object.assign({}, ...[previousArmorStats.resistances, newArmorStats.resistances]));
     for (const resistance of allResistanceTypes) {
-      if (!previousArmorStats.resistances[resistance]) this.updateVariable("resistances", newArmorStats.resistances[resistance], {variableKey: resistance});
-      else if (!newArmorStats.resistances[resistance]) this.updateVariable("resistances", -previousArmorStats.resistances[resistance], {variableKey: resistance});
-      else this.updateVariable("resistances", newArmorStats.resistances[resistance] - previousArmorStats.resistances[resistance], {variableKey: resistance});
+      if (!previousArmorStats.resistances[resistance]) this.updateVariable("resistances", newArmorStats.resistances[resistance], {key: resistance});
+      else if (!newArmorStats.resistances[resistance]) this.updateVariable("resistances", -previousArmorStats.resistances[resistance], {key: resistance});
+      else this.updateVariable("resistances", newArmorStats.resistances[resistance] - previousArmorStats.resistances[resistance], {key: resistance});
     }
   }
   
@@ -289,15 +309,23 @@ class Character {
   
   
   // PRIMARY ATTRIBUTES:
-  get primaryAttributes() {return this._primaryAttributes;}
+  get primaryAttributes() {
+    const {body, reflexes, perception, mind} = this;
+    return {body, reflexes, perception, mind};
+  }
   
-  get body() {return this._primaryAttributes.body;} 
+  get body() {return this._primaryAttributes.body || 0;} 
   
-  get reflexes() {return this._primaryAttributes.reflexes;} 
+  get reflexes() {return this._primaryAttributes.reflexes || 0;} 
   
-  get perception() {return this._primaryAttributes.perception;} 
+  get perception() {return this._primaryAttributes.perception || 0;} 
   
-  get mind() {return this._primaryAttributes.mind;}
+  get mind() {return this._primaryAttributes.mind || 0;}
+  
+  modifyAttribute(attribute, modifier) {
+    if (attribute in this._primaryAttributes) this._primaryAttributes[attribute] += modifier;
+    else this._primaryAttributes[attribute] = modifier;
+  }
   
   // OTHER ATTRIBUTES:
   get otherAttributes() {
@@ -314,13 +342,13 @@ class Character {
   
   get defenseMax() {
     let defenseMax = this.getVariable('defenseMaxAdjustment');
-    defenseMax += 8 + this.perception + this._skills.personalDefense.rank;
+    defenseMax += 8 + this.reflexes + this.perception + this._skills.personalDefense.rank;
     return defenseMax;
   }
   
   get defenseBonusMelee() {
     let defenseBonusMelee = this.getVariable('defenseBonusMeleeAdjustment');
-    defenseBonusMelee += this.reflexes + this._skills.meleeCombat.rank;
+    defenseBonusMelee += this._skills.meleeCombat.rank;
     return defenseBonusMelee;
   }
   
@@ -332,7 +360,7 @@ class Character {
   
   get defenseBonusRanged() {
     let defenseBonusRanged = this.getVariable('defenseBonusRangedAdjustment');
-    defenseBonusRanged += this.reflexes + this._skills.awareness.rank - this.size;
+    defenseBonusRanged += this._skills.awareness.rank - this.size;
     return defenseBonusRanged;
   }
   
@@ -343,7 +371,7 @@ class Character {
   }
   
   get reach() {
-    let reach = this.getVariable('reachAdjustment');
+    let reach = this.getVariable('reachAdjustment') || 0;
     if (this.size > 0) reach += this.size;
     return reach;
   }
@@ -359,11 +387,11 @@ class Character {
   // TODO consider adding other resistances ()
   
   get size() {
-    return this.getVariable('sizeAdjustment');
+    return this.getVariable('sizeAdjustment') || 0;
   }
   
   get speed() {
-    let speed = this.getVariable('speedAdjustment');
+    let speed = this.getVariable('speed');
     speed += this._skills.personalMovement.rank;
     return speed;
   }
@@ -376,13 +404,20 @@ class Character {
     return this.getVariable('woundsMaxAdjustment');
   }
   
+  get actionPoints() {
+    return this.getVariable('actionPointsAdjustment');
+  }
+  
+  get reactionPoints() {
+    return this.getVariable('reactionPointsAdjustment');
+  }
+  
   // SKILLS 
   get skills() {
     return this._skills;
   }
   
   setSkill(skill, rank) {
-    console.log(`setting skill "${skill}" to rank: ${rank}`);
     if (!this.skills[skill]) throw new Error(`Skill ${skill} doesn't exist.`);
     this._skills[skill].rank = rank;
   }
@@ -401,23 +436,30 @@ class Character {
     return this._notes;
   }
   
-  addNote(note) {
-    if (!note.name || !note.description) throw new Error('Note requries a name and description field.');
-    this._notes.push(note);
-    /* eslint-disable-next-line */
-    this._notes.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  addNote({name, description} = {}) {
+    this._notes.add({name, description});
   }
   
   addTraitAsNote({strainTrait, strainName, traitName} = {}) {
-    let trait;
+    // TODO Refactor strain traits so they're not separate. 
     if (strainTrait) {
-      trait = Strains[strainName].strainTraits[traitName] || undefined;
+      const {displayName, description} = Strains[strainName].strainTraits[traitName];
+      return this.addNote({name: displayName, description});
     }
-    else trait = Traits[traitName] || undefined;
     
-    if (!trait) throw new Error(`Could not find trait with name ${traitName}`);
+    const {displayName, description} = Trait.get(traitName);
     
-    this.addNote({name: trait.displayName, description: trait.description});
+    if (!displayName) throw new Error(`Could not find trait with name ${traitName}`);
+    
+    this.addNote({name: displayName, description});
+  }
+  
+  replaceNote({name, description} = {}) {
+    this._notes.replace({name, description});
+  }
+  
+  deleteNote(name) {
+    this._notes.delete(name);
   }
   
   /**
@@ -425,8 +467,8 @@ class Character {
    * @return {object}
    */
   toJSON() {
-    const {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills, notes} = this;
-    return {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, primaryAttributes, otherAttributes, skills, notes};
+    const {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, baseAttributeModifiers, primaryAttributes, otherAttributes, skills, notes} = this;
+    return {id, name, strain, level, traitEntitlements, traitsList, traits, availableTraits, baseAttributeModifiers, primaryAttributes, otherAttributes, skills, notes};
   }
   
   async save() {
@@ -434,16 +476,16 @@ class Character {
     
     characterBaseData.name = this.name;
     characterBaseData.level = this.level;
-    characterBaseData.strain = this.strain.name;
+    characterBaseData.strain = this.strain;
     characterBaseData.traitsList = this.traitsList;
     characterBaseData.baseAttributeModifiers = this._baseAttributeModifiers;
-    
+
     await characterBaseData.save();
     return this;
   }
 
   /**
-   * Overrides the default util.inspect behavior to use {@link User#toJSON} instead.
+   * Overrides the default util.inspect behavior to use {@link Character#toJSON} instead.
    */
   [util.inspect.custom]() {
     return this.toJSON();

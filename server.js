@@ -54,7 +54,6 @@ app.get("/skillchecks", (req, res) => {
 });
 
 app.get("/skills", (req, res) => {
-  console.log('getting skills');
   res.send({Skills});
 });
 
@@ -63,7 +62,6 @@ app.get("/strains", (req, res) => {
 });
 
 app.get("/traits", (req, res) => {
-  console.log('getting traits');
   res.send({Traits});
 });
 

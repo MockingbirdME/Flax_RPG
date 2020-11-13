@@ -2,6 +2,8 @@
     background: #1c1d1e;
     color: white;
     margin-top: 0;
+    position: sticky;
+    top: 0;
 }
 
 @media print {

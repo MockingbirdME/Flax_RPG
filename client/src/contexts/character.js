@@ -8,227 +8,123 @@ export default CharacterContext;
 const lastCallUID = {};
 
 export const CharacterContextProvider = props => {
-  const initialBaseCharData = {
-    id: null,
-    name: null,
-    level: 1,
-    strain: {name: "", options: {}, strainOptions: []},
-    traitsList: [],
-    minMaxAttributes: {
-      bonus: "",
-      penalty: ["", ""]
-    },
-    baseAttributeModifiers: {
-      body: 0,
-      reflexes: 0,
-      perception: 0,
-      mind: 0,
-      any: 0
-    },
-    characterType: {
-      name: "",
-      options: {
-        baseSkills: [],
-        expertSkills: []
-      }
-    }
-  };
   
   const [characters, setCharacters] = useState({});
   
-  const initializeEmptyCharacter = (id) => {
-    const tempID = id || Object.keys(characters).length;
-    const newCharacter = {
-      baseCharData: { ...initialBaseCharData },
-      constructedCharData: {}
+  const loadCharacter = async (id) => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     };
-    setCharacters({...characters, [tempID]: newCharacter});
-    return tempID;
+    
+    const response = await fetch(`/api/v1/character/${id}`, options);
+    const body = await response.json();
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    console.log(body);
+    setCharacters({...characters, [id]: body});
+    
+    return body.id;
+  };
+  
+  const initializeEmptyCharacter = async (id) => {
+    id = await buildCharacterNew({id});
+    return id;
   };
   
   const setCharacterName = (id, name) => {
-    if (!characters[id]) this.initializeEmptyCharacter(id);
-    const character = characters[id];
-    character.baseCharData.name = name;
-    setCharacters({...characters, [id]: character});
-    buildCharacter(id, character);
+    buildCharacterNew({...characters[id], name});
   };
   
-  const setCharacterLevel = (id, adjustment) => {
-    if (!characters[id]) this.initializeEmptyCharacter(id);
-    const character = characters[id];
-    character.baseCharData.level = adjustment;
-    if (character.baseCharData.level < 1) character.baseCharData.level = 1;
-    setCharacters({...characters, [id]: character});
-    buildCharacter(id, character);
+  const setCharacterLevel = (id, level) => {
+    buildCharacterNew({...characters[id], level});
   };
   
-  const setCharacterMinMaxAttributes = (id, type, index, attribute) => {
-    if (!characters[id]) this.initializeEmptyCharacter(id);
-    const character = characters[id];
-    console.log(id, type, index, attribute);
-    console.log(character.baseCharData);
-    if (type === "bonus") {
-      if (!attribute) {
-        if (character.baseCharData.minMaxAttributes.bonus) character.baseCharData.baseAttributeModifiers[character.baseCharData.minMaxAttributes.bonus]--;
-        character.baseCharData.minMaxAttributes.penalty.map(value => {
-          if (value) character.baseCharData.baseAttributeModifiers[value]++;
-          return null;
-        });
-      }
-      character.baseCharData.baseAttributeModifiers[attribute]++;
-      character.baseCharData.minMaxAttributes.bonus = attribute;
-    }
-    else if (!isNaN(index)) {
-      if (character.baseCharData.minMaxAttributes.penalty[index]) character.baseCharData.baseAttributeModifiers[character.baseCharData.minMaxAttributes.penalty[index]]++;
-      character.baseCharData.baseAttributeModifiers[attribute]--;
-      character.baseCharData.minMaxAttributes.penalty[index] = attribute;
-    }
-    
-    setCharacters({...characters, [id]: character});
-    buildCharacter(id, character);
+  const setCharacterBaseAttributeModifiers = (id, baseAttributeModifiers) => {
+    buildCharacterNew({...characters[id], baseAttributeModifiers});
   };
   
-  const setCharacterStrain = (id, strainName, strainOptions) => {
-    if (!characters[id]) this.initializeEmptyCharacter(id);
-    const character = characters[id];
-    character.baseCharData.strain.name = strainName;
-    character.baseCharData.strain.strainOptions = strainOptions;
-    
-    setCharacters({...characters, [id]: character});
-    buildCharacter(id, character);
+  const setCharacterStrain = (id, name) => {
+    buildCharacterNew({...characters[id], strain: {name}});
   };
   
   const setCharacterStrainOption = (id, optionName, optionValue) => {
-    if (!characters[id]) this.initializeEmptyCharacter(id);
     const character = characters[id];
+    if (!character.strain.options) character.strain.options = {};
+  
+    if (!optionValue) delete character.strain.options[optionName];
+    else character.strain.options[optionName] = optionValue;
     
-    if (!optionValue) delete character.baseCharData.strain.options[optionName];
-    else character.baseCharData.strain.options[optionName] = optionValue;
-    
-    setCharacters({...characters, [id]: character});
-    buildCharacter(id, character);
+    buildCharacterNew(character);
   };
   
-  const setCharacterType = (id, type) => {    
-    if (!characters[id]) this.initializeEmptyCharacter(id);
-    const character = characters[id];
-    
-    // Get the current index of the character's Character Type trait.
-    const currentCharacterTypeIndex = character.baseCharData.traitsList.indexOf(trait => trait.type === "Character Type");
-    
-    // If a character trait was found remove it from the character's trait list.
-    if (currentCharacterTypeIndex !== -1) character.baseCharData.traitsList.splice(currentCharacterTypeIndex, 1);
-
-    character.baseCharData.characterType.name = type.name;
-    character.baseCharData.characterType.requirements = type.options || null;
-    
-    setCharacters({...characters, [id]: character});
-    
-    if (characterTypeIsComplete(character.baseCharData.characterType)) {
-      
-      setCharacters({...characters, [id]: character});
-      buildCharacter(id, character);
-    }
-    
-  };
-  
-  const setCharacterTypeOption = (id, optionCatigory, index, skillName, secondarySkillIndex, secondarySkill) => {    
-    if (!characters[id]) this.initializeEmptyCharacter(id);
+  const setCharacterType = (id, type) => {
     const character = characters[id];
 
-    const traitOption = character.baseCharData.characterType.options[optionCatigory][index] 
-      ? character.baseCharData.characterType.options[optionCatigory][index] 
-      : {name: "", secondarySkills: []};
+    if (!character.traitsList) character.traitsList = [];
     
-    if (skillName) traitOption.name = skillName;
-    if (secondarySkillIndex || secondarySkillIndex === 0) traitOption.secondarySkills[secondarySkillIndex] = secondarySkill || "";
+    // Check all traits for Character Type Traits and remove them from the Traits List.
+    character.traits.forEach(trait => {
+      if (trait.type !== "Character Type") return;
 
-    character.baseCharData.characterType.options[optionCatigory][index] = traitOption;
-    
-    setCharacters({...characters, [id]: character});
-    if (characterTypeIsComplete(character.baseCharData.characterType)) {
-      // Add the newly selected character trait as the first item in the character's trait list.
-      setCharacters({...characters, [id]: character});
-      buildCharacter(id, character);
-    }
+      const traitsListIndex = character.traitsList.findIndex(listedTrait => listedTrait.name === trait.id);
+
+      if (traitsListIndex !== -1) character.traitsList.splice(traitsListIndex, 1);
+    });
+
+    character.traitsList.unshift(type);
+
+    buildCharacterNew({...character});
     
   };
   
   const setCharacterTrait = (id, index, trait) => {    
-    if (!characters[id]) this.initializeEmptyCharacter(id);
     const character = characters[id];
+
+    character.traitsList[index] = trait;
     
-    character.baseCharData.traitsList[index] = trait;
-    
-    setCharacters({...characters, [id]: character});
-    buildCharacter(id, character);
+    buildCharacterNew(character);
   };
   
-  async function buildCharacter(id, character) {
+  async function buildCharacterNew(character = {}) {
+    const id = character.id || "tempId";
     const callId = uuid();
     lastCallUID[id] = callId;
-    
-    // Use JSON parse/stringify to copy so we don't change the underlying data.
-    const baseCharData = JSON.parse(JSON.stringify(character.baseCharData));
-    
-    if (characterTypeIsComplete(baseCharData.characterType)) baseCharData.traitsList.unshift(character.baseCharData.characterType);
-    
+
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(baseCharData)
+      body: JSON.stringify(character)
     };
     
-    const response = await fetch('/api/v1/character/build', options);
+    const response = await fetch('/api/v1/character/', options);
     const body = await response.json();
     if (response.status !== 200) {
       throw Error(body.message);
     }
     if (lastCallUID[id] !== callId) console.log('Ignoring results from older API call');
     else {
+      setCharacters({...characters, [character.id]: body});
       
-      if (!characters[id]) this.initializeEmptyCharacter(id);
-      const character = characters[id];
-      
-      console.log(body);
-      character.calculatedStats = body;
-      
-      setCharacters({...characters, [id]: character});
+      return body.id;
     }
   }
   
   return <CharacterContext.Provider value={{
     characters,
+    loadCharacter,
     initializeEmptyCharacter,
     setCharacterName,
     setCharacterLevel,
-    setCharacterMinMaxAttributes,
+    setCharacterBaseAttributeModifiers,
     setCharacterStrain,
     setCharacterStrainOption,
     setCharacterType,
-    setCharacterTypeOption,
     setCharacterTrait
   }}>{props.children}</CharacterContext.Provider>;
 };
-
-function characterTypeIsComplete(characterType) {
-  const {name, options, requirements} = characterType;
-
-  if (!name) return false;
-  if (!requirements) return true;
-  
-  if (requirements.baseSkills) {
-    if (requirements.baseSkills.count !== options.baseSkills.length) return false;
-    if (!options.baseSkills.every(skill => skill.secondarySkills.length === requirements.baseSkills.secondarySkillsEach)) return false;
-  }
-  if (requirements.expertSkills) {
-    if (requirements.expertSkills.count !== options.expertSkills.length) return false;
-    if (!options.expertSkills.every(skill => skill.secondarySkills.length === requirements.expertSkills.secondarySkillsEach)) return false;
-  }
-  
-  return true;
-  
-}

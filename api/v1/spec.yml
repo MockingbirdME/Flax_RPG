@@ -67,8 +67,8 @@ paths:
 
   /characters:
     post:
-      operationId: createCharacter
-      summary: Create a new character
+      operationId: createOrUpdateCharacter
+      summary: Create a new character or update an existing one.
       tags: [Character]
       requestBody:
         description: Information used to build a new character.

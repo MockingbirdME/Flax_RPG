@@ -1,7 +1,7 @@
 import React, { } from "react";
 
 const AttributeStat = props => {
-  const {blankSheet, stats, target = []} = props;
+  const {blankSheet, stats, target = [], style = {}} = props;
 
   if (blankSheet) return <input type="text" />;
   
@@ -18,7 +18,7 @@ const AttributeStat = props => {
   
   
   return (
-    <span className="character_sheet__body__group__item__levels__level__boxed__stat">{value}
+    <span className="character_sheet__body__group__item__levels__level__boxed__stat" style={style}>{value}
     </span>
   );
 };

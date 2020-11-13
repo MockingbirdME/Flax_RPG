@@ -148,7 +148,7 @@ let strainsData = {
     options: [{name: 'bonusAttribute', displayName: "Bonus Attribute", options: [{value: 'body', displayName: 'Body'}, {value: 'reflexes', displayName: 'Reflexes'}, {value: 'perception', displayName: 'Perception'}, {value: 'mind', displayName: 'Mind'}]}],
     apply: (character, options = {}) => {
       if (options.bonusAttribute)
-        character._primaryAttributes[options.bonusAttribute] += 1;
+        character.modifyAttribute(options.bonusAttribute, 1);
       character.updateVariable('size', 0);
       character.updateVariable('speed', 4);
     },

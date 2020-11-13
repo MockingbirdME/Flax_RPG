@@ -1,21 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {useParams} from 'react-router-dom';
 import "./character.css";
 import CharacterContext from "../contexts/character";
 import StrainContext from "../contexts/strain";
 
-
 const CharacterStrainPicker = props => {
+  const [strain, setStrain] = useState("");
   const charContext = useContext(CharacterContext);
   const strainContext = useContext(StrainContext);
   const {strains} = strainContext;
   const { charId } = useParams();
   
+  
   if (!charContext.characters[charId]) return <div></div>;
+    
+  const {strain: {name: strainName} = {}} = charContext.characters[charId];
+  if (!strain && strainName && strainName !== "unknown") setStrain(strainName);
 
-  const changeStrain = event => {
-    const strain = strains[event.target.value];
-    charContext.setCharacterStrain(charId, event.target.value, strain.options);
+  const changeStrain = value => {
+    setStrain(value);
+    charContext.setCharacterStrain(charId, value, strains[value].options);
   };
   
   const options = Object.keys(strains).length 
@@ -26,21 +30,21 @@ const CharacterStrainPicker = props => {
     )))
     : [];
 
-  const strainOptions = charContext.characters[charId].baseCharData.strain.strainOptions && charContext.characters[charId].baseCharData.strain.strainOptions.length 
+  const strainOptions = strain && strains[strain] && strains[strain].options
     ? (
       <div style={{paddingLeft: "2rem"}}>
-        {charContext.characters[charId].baseCharData.strain.strainOptions.map((option, index) => <StrainOption displayName={option.displayName} options={option.options} name={option.name} key={index}/>)}
+        {strains[strain].options.map((option, index) => <StrainOption displayName={option.displayName} options={option.options} name={option.name} key={index}/>)}
       </div>
     ) : "";
 
   return (
     <div className="">
-      <h2>
+      <h2 className="character_editor_section_header" >
         Strain:
         <select
           style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
-          value={charContext.characters[charId].baseCharData.strain.name || ""}
-          onChange={ev => changeStrain(ev)}
+          value={strain}
+          onChange={ev => changeStrain(ev.target.value)}
         >
           {options}
         </select>
@@ -56,12 +60,13 @@ export default CharacterStrainPicker;
 const StrainOption = props => {
   const charContext = useContext(CharacterContext);
   const { charId } = useParams();
+  const {strain: {options = {}} = {}} = charContext.characters[charId];
 
-  const changeStrainOption = event => {
-    charContext.setCharacterStrainOption(charId, props.name, event.target.value);
+  const changeStrainOption = value => {
+    charContext.setCharacterStrainOption(charId, props.name, value);
   };
 
-  const options = [<option disabled hidden style={{display: "none"}} value="" key="default">-- select an option --</option>].concat(props.options.map(option => <option value={option.value} key={option.value} >{option.displayName}</option>));
+  const selectionOptions = [<option disabled hidden style={{display: "none"}} value="" key="default">-- select an option --</option>].concat(props.options.map(option => <option value={option.value} key={option.value} >{option.displayName}</option>));
 
   return (
     <div className="">
@@ -69,10 +74,10 @@ const StrainOption = props => {
         {props.displayName}
         <select
           style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
-          value={charContext.characters[charId].baseCharData.strain.options[props.name] || ""}
-          onChange={ev => changeStrainOption(ev)}
+          value={options[props.name] || ""}
+          onChange={ev => changeStrainOption(ev.target.value)}
         >
-          {options}
+          {selectionOptions}
         </select>
       </h4>
     </div>

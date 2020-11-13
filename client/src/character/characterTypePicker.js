@@ -1,86 +1,54 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, { useContext, useState } from "react";
 import {useParams} from 'react-router-dom';
 import "./character.css";
 import CharacterContext from "../contexts/character";
-import TraitContext from "../contexts/trait";
 
-import SkillPicker from "./characterTypeSkillPicker";
+import OptionSelector from "./optionSelector";
 
 
 const CharacterTypePicker = props => {
   const [showOptions, setShowOptions] = useState(true); 
   const charContext = useContext(CharacterContext);
-  const traitContext = useContext(TraitContext);
-  const {traits} = traitContext;
   const { charId } = useParams();
   
   if (!charContext.characters[charId]) return <div></div>;
-    
-  const selectedCharacterType = charContext.characters[charId].baseCharData.characterType.name ? traits[charContext.characters[charId].baseCharData.characterType.name] : null;
 
-  const changeCharacterType = event => {
-    const trait = {name: event.target.value, options: traits[event.target.value].options};
-    charContext.setCharacterType(charId, trait);
+  const characterTraits = charContext.characters[charId].traits;
+
+  const selectedCharacterType = (characterTraits && characterTraits.find(trait => trait.type === "Character Type")) || {};
+
+  const changeCharacterType = (name, selectedOptions) => {
+    charContext.setCharacterType(charId, {name, selectedOptions});
   };
+
+  const options = charContext.characters[charId].availableTraits
+    .filter(availableTrait => availableTrait.type === "Character Type");
   
-  const options = Object.keys(traits).length 
-    ? [<option disabled hidden style={{display: "none"}} value="" key="default">-- select a character type --</option>].concat(Object.keys(traits)
-      .filter(traitId => traits[traitId].type === "Character Type")
-      .map(traitId => (
-        <option key={traitId} value={traitId}>
-          {traits[traitId].displayName}
-        </option>
-      )))
-    : [];
-    
-  const baseSkillPickers = selectedCharacterType && selectedCharacterType.options.baseSkills 
-    ? (
-      <div>
-        <h4 style={{margin: "0 0 0 1rem"}}>Select Base Skills</h4>
-        <ul>
-          {[...Array(selectedCharacterType.options.baseSkills.count)].map((value, index) => <li key={index} ><SkillPicker level="baseSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.baseSkills.secondarySkillsEach} /></li>)}
-        </ul>
-        
-        
-      </div>
-    ) : "";
-    
-  const expertSkillPickers = selectedCharacterType && selectedCharacterType.options.expertSkills && selectedCharacterType.options.expertSkills.count 
-    ? (
-      <div>
-        <h4 style={{margin: "0 0 0 1rem"}}>Select Expert Skills</h4>
-        <ul>
-          {[...Array(selectedCharacterType.options.expertSkills.count)].map((value, index) => <li key={index}><SkillPicker level="expertSkills" key={index} index={index} secondaryCount={selectedCharacterType.options.expertSkills.secondarySkillsEach} /></li>)}
-        </ul>
-      </div>
-    ) : "";
-    
-  const optionsToggler = charContext.characters[charId].baseCharData.characterType.name
-    ? <p style={{margin: "auto", color: "grey", size: "small"}} onClick={ev => setShowOptions(!showOptions)}>Toggle Skill Picker Display</p> : "";
-  
-  const skillPickers = showOptions ? (
-    <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between", maxWidth: "70rem"}}>
-      {baseSkillPickers}
-      {expertSkillPickers}
-    </div>
-  ) : "";
-  
+  if (selectedCharacterType.id) options.unshift(selectedCharacterType);
+
   return (
     <div className="" >
-      <h2>
-        <span>
-          Character Type:
-          <select
-            style={{ marginLeft: "1rem", fontSize: "1.5rem" }}
-            value={charContext.characters[charId].baseCharData.characterType.name || ""}
-            onChange={ev => changeCharacterType(ev)}
-          >
-            {options}
-          </select>
+      <div className="character_type_picker">
+        <h2 className="character_editor_section_header" >Character Type:</h2>
+        <span 
+          style={{fontSize: ".75rem", marginLeft: "14rem", color: "blue"}}
+          onClick={() => setShowOptions(!showOptions)}>
+          {showOptions ? "hide Options" : "show options"}
         </span>
-        {optionsToggler}
-      </h2>
-      {skillPickers}
+      </div>
+      
+      {
+        showOptions 
+          ? (
+            <OptionSelector 
+              defaultSelectionType="character type"
+              options={options} 
+              keyType="trait"
+              onChange={changeCharacterType} 
+              currentValue={selectedCharacterType} />
+          ) : ""
+      }
+      
     </div>
   );
 };

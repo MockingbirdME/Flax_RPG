@@ -14,7 +14,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       strain: {
-        type: Sequelize.STRING
+        type: Sequelize.JSON
       },
       traitsList: {
         type: Sequelize.JSON

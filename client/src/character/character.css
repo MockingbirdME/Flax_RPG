@@ -1,7 +1,42 @@
 
 .character__container {
-  width: 80vw;
-  margin: 0 10vw;
+  overflow-x: scroll;
+}
+
+@media screen and (min-width: 1500px) {
+  .character__container {
+    justify-content: space-around;
+  }
+}
+
+.character__section__container {
+  overflow: auto;
+  height: 100vh;
+}
+
+.character_editor_section_header {
+  margin-bottom: .5rem;
+}
+
+.character_type_picker {
+  display: flex;
+  align-items: baseline;
+}
+
+.character_option_selector {
   display: flex;
   justify-content: space-between;
+  margin: .5rem 0 0 2rem;
+  width: 32rem;
+}
+
+.character_option_selector_selectable {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.character_option_selector_selected_description {
+  font-size: 1rem;
+  margin: .5rem 0 0 2rem;
+  width: 32rem;
 }

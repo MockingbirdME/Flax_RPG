@@ -9,7 +9,7 @@ router.post("/build", buildCharacterFromBaseStatus);
 
 router.get("/:id", loadCharacter);
 router.post("/:id", updateCharacter);
-router.post("/", createCharacter);
+router.post("/", createOrUpdateCharacter);
 router.delete("/:id", deleteCharacter);
 
 
@@ -41,13 +41,13 @@ function updateCharacter(req, res, next) {
     .catch(error => next(createError(error)));
 }
 
-function createCharacter(req, res, next) {
+function createOrUpdateCharacter(req, res, next) {
   if (!req.body) throw createError(400, "Request body is requried for create character endpoint.");
-  if (req.body.id) throw createError(400, "Invalid field 'id' passed into character creation.");
 
   const character = new Character(req.body);
+  console.log(character);
   character.save()
-    .then(character => res.status(201).json(character));
+    .then(character => res.status(200).json(character));
 }
 
 function deleteCharacter(req, res, next) {
@@ -65,11 +65,10 @@ function deleteCharacter(req, res, next) {
 }
 
 function buildCharacterFromBaseStatus(req, res, next) {
-  console.log("++++++++++++++++++++++++++++++++++++");
   if (!req.body) throw createError(400, "Request body is requried for build character endpoint.");
-  console.log(req.body);
+  
   const character = new Character(req.body);
-  console.log(character);
+
   res.status(200).json(character);
 }
 
