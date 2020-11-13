@@ -879,7 +879,11 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Heroic"],
     description:
-      "The first time the character would receive a penalty die to an attack skill check as a result of their multi-attack penalty reduce that penalty by one."
+      "The first time the character would receive a penalty die to an attack skill check as a result of their multi-attack penalty reduce that penalty by one.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'multiAttack'),
+    apply: character => {
+      character.addNote({name: 'Multi-Attack', description: `The first time the character would receive a penalty die to an attack skill check as a result of their multi-attack penalty reduce that penalty by one.`});
+    }
   },
   quickDraw: {
     displayName: "Quick Draw",
@@ -888,7 +892,11 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The first *ready/stow item* action the character takes each turn has an action point cost of 0."
+      "The first *ready/stow item* action the character takes each turn has an action point cost of 0.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'quickDraw'),
+    apply: character => {
+      character.addNote({name: 'Quick Draw', description: `The first *ready/stow item* action the character takes each turn has an action point cost of 0.`});
+    }
   },
   quickDrawHeroic: {
     displayName: "Quick Draw, Heroic",
@@ -897,7 +905,11 @@ const traitsData = {
     requirementsDescription: "Improved Quick Draw",
     keywords: ["Heroic"],
     description:
-      "The character may ready or stow the weapon used in any weapon attack they make."
+      "The character may ready or stow the weapon used in any weapon attack they make.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'quickDraw') && !character.traits.some(trait => trait.id === 'quickDrawHeroic'),
+    apply: character => {
+      character.addNote({name: 'Quick Draw, Heroic', description: `The character may ready or stow the weapon used in any weapon attack they make.`});
+    }
   },
   recklessAttacker: {
     displayName: "Reckless Attacker",
@@ -906,7 +918,11 @@ const traitsData = {
     requirementsDescription: "",
     keywords: ["Simple"],
     description:
-      "The character may choose to spend one stamina before making a basic or brawling attack on their turn, if they do they gain a a bonus die to the melee attack skill check related to this attack. If a character uses this ability one or more times on their turn all melee attacks made against them until the begining of their next turn gain a a bonus die on their skill checks."
+      "The character may choose to spend one stamina before making a basic or brawling attack on their turn, if they do they gain a a bonus die to the melee attack skill check related to this attack. If a character uses this ability one or more times on their turn all melee attacks made against them until the begining of their next turn gain a bonus die on their skill checks.",
+    isCharacterEligible: character => !character.traits.some(trait => trait.id === 'recklessAttacker'),
+    apply: character => {
+      character.addNote({name: 'Reckless Attacker', description: `The character may choose to spend one stamina before making a basic or brawling attack on their turn, if they do they gain a a bonus die to the melee attack skill check related to this attack. If a character uses this ability one or more times on their turn all melee attacks made against them until the begining of their next turn gain a bonus die on their skill checks.`});
+    }
   },
   recklessAttackerImproved: {
     displayName: "Reckless Attacker, Improved",
@@ -915,7 +931,11 @@ const traitsData = {
     requirementsDescription: "Reckless Attacker",
     keywords: ["Heroic"],
     description:
-      "The character may choose to trigger their reckless attack trait on any melee attack action, not just basic and brawing attacks."
+      "The character may choose to trigger their reckless attack trait on any melee attack action, not just basic and brawing attacks.",
+    isCharacterEligible: character => character.traits.some(trait => trait.id === 'recklessAttacker') && !character.traits.some(trait => trait.id === 'recklessAttackerImproved'),
+    apply: character => {
+      character.addNote({name: 'Reckless Attacker, Improved', description: `The character may choose to trigger their reckless attack trait on any melee attack action, not just basic and brawing attacks.`});
+    }
   }
 };
 

@@ -99,7 +99,7 @@ class Trait {
   }
   
   isCharacterEligible(character, options) {
-    // if (!this._apply) console.log(`No Apply function for ${this.displayName}`);
+    if (!this._apply) console.log(`No Apply function for ${this.displayName}`);
     if (!this._isCharacterEligible) return false;
     if (!this._apply) return false;
     if (character.traitEntitlements.total.allotted < character.traits.length && !options.ignoreAllotment) return false;
