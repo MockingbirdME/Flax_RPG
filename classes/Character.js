@@ -391,7 +391,7 @@ class Character {
   }
   
   get speed() {
-    let speed = this.getVariable('speedAdjustment');
+    let speed = this.getVariable('speed');
     speed += this._skills.personalMovement.rank;
     return speed;
   }
