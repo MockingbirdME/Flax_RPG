@@ -371,7 +371,7 @@ class Character {
   }
   
   get reach() {
-    let reach = this.getVariable('reachAdjustment');
+    let reach = this.getVariable('reachAdjustment') || 0;
     if (this.size > 0) reach += this.size;
     return reach;
   }
@@ -387,7 +387,7 @@ class Character {
   // TODO consider adding other resistances ()
   
   get size() {
-    return this.getVariable('sizeAdjustment');
+    return this.getVariable('sizeAdjustment') || 0;
   }
   
   get speed() {
