@@ -13,8 +13,8 @@ const CharacterSheetAttributes = props => {
         <AttributeBox name="mind" value={props.primaryAttributes && props.primaryAttributes.mind} modifier={true} />
         <AttributeBox name="speed" value={props.otherAttributes && props.otherAttributes.speed} />
         <AttributeBox name="initiative" value={props.otherAttributes && props.otherAttributes.initiative} />
-        <AttributeBox name="size" value={props.otherAttributes && props.otherAttributes.size} modifier={true} />
-        <AttributeBox name="reach" value={props.otherAttributes && props.otherAttributes.reach} modifier={true} />
+        <AttributeBox name="size" value={props.otherAttributes && props.otherAttributes.size} />
+        <AttributeBox name="reach" value={props.otherAttributes && props.otherAttributes.reach} />
       </div>
     </div>
   );
