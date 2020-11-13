@@ -10,7 +10,9 @@ const CharacterSheetSkills = props => {
   const expandedSkills = Object.keys(skills)
     .map(skill => ({...skills[skill], name: processCamelCase(skill)})) || [];
 
-  const skillsToDisplay = expandedSkills.filter(skill => skill.rank > 0 || Object.keys(skill.secondarySkills).some(secondarySkill => skill.secondarySkills[secondarySkill].rank > 0));
+  const skillsToDisplay = expandedSkills
+    .filter(skill => skill.rank > 0 || Object.keys(skill.secondarySkills)
+      .some(secondarySkill => skill.secondarySkills[secondarySkill].rank > 0));
   
   while (skillsToDisplay.length < 9) skillsToDisplay.push({});
         
