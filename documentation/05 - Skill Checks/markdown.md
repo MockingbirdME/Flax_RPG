@@ -1,4 +1,4 @@
-When a character may wishes to attempt an action where success is not certain and failure is not guaranteed, or when a character’s degree of success or failure matters, the GM may call for a skill check.
+When a character wishes to attempt an action where success is not certain and failure is not guaranteed, or when a character’s degree of success or failure matters, the GM may call for a skill check.
 
 ## Making a Skill Check
 To perform a skill check requires a number of steps as follows:
@@ -19,9 +19,9 @@ To perform a skill check requires a number of steps as follows:
 * 18+ - Extremely difficult
 
 ## Skill Check Results
-* Less than difficulty - failure, the action simply fails but nothing else goes wrong.
-* Equal to difficulty -  near success, the action was not a complete success but brought the character closer to success than they were before performing the action.
+* Less than difficulty - failure, the action fails possibly with additional consequences.
+* Equal to difficulty -  near success, the action was not a complete success rather it either succeeded with additional consequences or brought the character closer to their goal than they were before performing the action.
 * Equal to difficulty plus required successes - complete success, the action is successful.
-* Greater than difficulty plus required successes - the action gains an additional success for each point by which the result exceeds the difficulty.
+* Greater than difficulty plus required successes - the action gains a bonus for each additional success (point by which the result exceeds the difficulty).
 
 ## Common Skill Checks
