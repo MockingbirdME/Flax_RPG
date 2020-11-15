@@ -1,29 +1,25 @@
-module.exports = exports = {
-  env: {
-    es6: true,
-    mocha: true,
-    node: true
+module.exports = {
+  "env": {
+    "es6": true,
+    "mocha": true,
+    "node": true
   },
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: "module",
-    ecmaFeatures: {
-      jsx: true
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
   },
-  ecmaFeatures: {
-    // env=es6 doesn't include modules, which we are using
-    modules: true
-  },
 
-  extends: ["eslint:recommended", "react-app"],
+  "extends": ["eslint:recommended"],
 
-  rules: {
-    ////////// Possible Errors //////////
+  "rules": {
+    // //////// Possible Errors //////////
 
     "for-direction": 2, // enforce “for” loop update clause moving the counter in the right direction
     "getter-return": 2, // enforce return statements in getters
-    "no-async-promise-executor": 2, // disallow using an async function as a Promise executor
+    // "n o-async-promise-executor": 2, // disallow using an async function as a Promise executor
     "no-await-in-loop": 2, // disallow await inside of loops
     "no-compare-neg-zero": 2, // disallow comparing against -0
     "no-cond-assign": 2, // disallow assignment operators in conditional expressions
@@ -62,15 +58,15 @@ module.exports = exports = {
 
     "accessor-pairs": 2, // enforce getter and setter pairs in objects
     "array-callback-return": 2, // enforce return statements in callbacks of array methods
-    "block-scoped-var": 2, // enforce the use of variables within the scope they are defined
+    // "b lock-scoped-var": 2, // enforce the use of variables within the scope they are defined
     "class-methods-use-this": 0, // enforce that class methods utilize this
-    complexity: 2, // enforce a maximum cyclomatic complexity allowed in a program
+    "complexity": 2, // enforce a maximum cyclomatic complexity allowed in a program
     "consistent-return": 0, // require return statements to either always or never specify values
-    curly: 0, // enforce consistent brace style for all control statements
+    "curly": 0, // enforce consistent brace style for all control statements
     "default-case": 2, // require default cases in switch statements
     "dot-location": 0, // enforce consistent newlines before and after dots
     "dot-notation": 2, // enforce dot notation whenever possible
-    eqeqeq: 2, // require the use of === and !==
+    "eqeqeq": 2, // require the use of === and !==
     "guard-for-in": 2, // require for-in loops to include an if statement
     "max-classes-per-file": 2, // enforce a maximum number of classes per file
     "no-alert": 2, // disallow the use of alert, confirm, and prompt
@@ -128,16 +124,16 @@ module.exports = exports = {
     "no-with": 2, // disallow with statements
     "prefer-named-capture-group": 2, // enforce using named capture group in regular expression
     "prefer-promise-reject-errors": 2, // require using Error objects as Promise rejection reasons
-    radix: 2, // enforce the consistent use of the radix argument when using parseInt()
+    "radix": 2, // enforce the consistent use of the radix argument when using parseInt()
     "require-await": 0, // disallow async functions which have no await expression
     "require-unicode-regexp": 2, // enforce the use of u flag on RegExp
     "vars-on-top": 2, // require var declarations be placed at the top of their containing scope
     "wrap-iife": 2, // require parentheses around immediate function invocations
-    yoda: 2, // require or disallow “Yoda” conditions
+    "yoda": 2, // require or disallow “Yoda” conditions
 
     ////////// Strict Mode //////////
 
-    strict: 0, // controls location of Use Strict Directives
+    "strict": 0, // controls location of Use Strict Directives
 
     ////////// Variables //////////
     "init-declarations": 0, // require or disallow initialization in variable declarations
@@ -183,7 +179,7 @@ module.exports = exports = {
     "array-element-newline": 0, // enforce line breaks after each array element
     "block-spacing": 0, // disallow or enforce spaces inside of blocks after opening block and before closing block
     "brace-style": 0, // enforce consistent brace style for blocks
-    camelcase: [2, {allow: ['include_docs']}], // enforce camelcase naming convention
+    "camelcase": [2, {"allow": ['include_docs']}], // enforce camelcase naming convention
     "capitalized-comments": 1, // enforce or disallow capitalization of the first letter of a comment
     "comma-dangle": 2, // require or disallow trailing commas
     "comma-spacing": 2, // enforce consistent spacing before and after commas
@@ -200,7 +196,7 @@ module.exports = exports = {
     "id-length": 0, // enforce minimum and maximum identifier lengths
     "id-match": 2, // require identifiers to match a specified regular expression
     "implicit-arrow-linebreak": 2, // enforce the location of arrow function bodies
-    indent: [2, 2], // enforce consistent indentation
+    "indent": [2, 2], // enforce consistent indentation
     "jsx-quotes": 2, // enforce the consistent use of either double or single quotes in JSX attributes
     "key-spacing": 2, // enforce consistent spacing between keys and values in object literal properties
     "keyword-spacing": 2, // enforce consistent spacing before and after keywords
@@ -228,7 +224,7 @@ module.exports = exports = {
     "no-lonely-if": 2, // disallow if statements as the only statement in else blocks
     "no-mixed-operators": 2, // disallow mixed binary operators
     "no-mixed-spaces-and-tabs": 2, // disallow mixed spaces and tabs for indentation
-    "no-multi-assign": 2, // disallow use of chained assignment expressions
+    "no-multi-assign": 0, // disallow use of chained assignment expressions
     "no-multiple-empty-lines": 2, // disallow multiple empty lines
     "no-negated-condition": 0, // disallow negated conditions
     "no-nested-ternary": 2, // disallow nested ternary expressions
@@ -253,8 +249,8 @@ module.exports = exports = {
     "padding-line-between-statements": 2, // require or disallow padding lines between statements
     "prefer-object-spread": 2, // disallow using Object.assign with an object literal as the first argument and prefer the use of object spread instead.
     "quote-props": 0, // require quotes around object literal property names
-    quotes: 0, // enforce the consistent use of either backticks, double, or single quotes
-    semi: 2, // require or disallow semicolons instead of ASI
+    "quotes": 0, // enforce the consistent use of either backticks, double, or single quotes
+    "semi": 2, // require or disallow semicolons instead of ASI
     "semi-spacing": 2, // enforce consistent spacing before and after semicolons
     "semi-style": 2, // enforce location of semicolons
     "sort-keys": 0, // require object keys to be sorted
