@@ -128,8 +128,8 @@ const traitsData = {
     keywords: ["Simple"],
     description:
       "Each time a character takes this trait they increase their max stamina by one.",
-    isCharacterEligible: character => true,
-    apply: (character, options) => {
+    isCharacterEligible: () => true,
+    apply: (character) => {
       character.updateVariable("staminaMaxAdjustment", 1);
     }
   },
@@ -141,8 +141,8 @@ const traitsData = {
     keywords: ["Heroic"],
     description:
       "Each time a character takes this trait they increase their max wounds by one.",
-    isCharacterEligible: character => true,
-    apply: (character, options) => {
+    isCharacterEligible: () => true,
+    apply: (character) => {
       character.updateVariable("woundsMaxAdjustment", 1);
     }
   },
@@ -154,7 +154,7 @@ const traitsData = {
     keywords: ["Epic"],
     description:
       "Once per scene per instance of this trait the character has they may spend their reaction to suffer no damage from one attack. The controlling player may decide to use this ability after they know the damage the character would take.",
-    isCharacterEligible: character => true,
+    isCharacterEligible: () => true,
     apply: character => character.addTraitAsNote({traitName: 'hardToKillPlotArmor'})
   },
   linguist: {
@@ -296,9 +296,7 @@ const traitsData = {
   trainingNovice: {
     displayName: "Training, Novice",
     type: "General",
-    requirements: [
-      "At least 1 rank in an associated secondary skill."
-    ],
+    requirements: ["At least 1 rank in an associated secondary skill."],
     requirementsDescription:
       "At least 1 rank in an associated secondary skill.",
     keywords: ["Simple"],
@@ -324,9 +322,7 @@ const traitsData = {
   trainingSkilled: {
     displayName: "Training, Skilled",
     type: "General",
-    requirements: [
-      "At least three total ranks in associated secondary skills."
-    ],
+    requirements: ["At least three total ranks in associated secondary skills."],
     requirementsDescription:
       "At least three total ranks in associated secondary skills.",
     keywords: ["Heroic"],
@@ -830,7 +826,7 @@ const traitsData = {
     keywords: ["Simple"],
     description:
       "For each time a character has this trait they gain a +1 bonus to their initiative.",
-    isCharacterEligible: character => true,
+    isCharacterEligible: () => true,
     apply: character => {
       character.updateVariable('initiativeAdjustment', 1);
     }
@@ -843,7 +839,7 @@ const traitsData = {
     keywords: ["Heroic"],
     description:
       "If a character suffers one or more wounds after fully resolving the damage they regain all missing stamina and all non-magic actions they take on their next turn have a stamina cost of 0.",
-    isCharacterEligible: character => true,
+    isCharacterEligible: () => true,
     apply: character => {
       // TODO once damage is added to character have this automatically trigger.
       character.addTraitAsNote({traitName: 'fueledByPain'});
