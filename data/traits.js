@@ -19,40 +19,40 @@ const traitsData = {
         `,
     options: (character, selectedOptions = {}) => {
       const options = [];
-      
+
       const {skills} = character;
       const baseSkills = utils.getSkillList(skills, {hasSecondaryAtRank: 0, neededSecondaryMatches: 2, requiredRank: 0, include: [selectedOptions.baseSkillOne, selectedOptions.baseSkillTwo]});
       const expertSkills = utils.getSkillList(skills, {hasSecondaryUnderRank: 2, requiredRank: 1, include: [selectedOptions.expertSkill]});
 
       options.push({id: "baseSkillOne", displayName: "Skill", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillTwo)});
-      
+
       if (selectedOptions.baseSkillOne) {
         const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkillOne].secondarySkills, {requiredRank: 0, include: [selectedOptions.baseSkillOneSecondarySkillOne, selectedOptions.baseSkillOneSecondarySkillTwo]});
-        
+
         options.push({id: "baseSkillOneSecondarySkillOne", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
-        
+
         options.push({id: "baseSkillOneSecondarySkillTwo", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillOne", parentValue: selectedOptions.baseSkillOne});
       }
-      
+
       options.push({id: "baseSkillTwo", displayName: "Skill", type: "skill", options: baseSkills.filter(skill => skill !== selectedOptions.baseSkillOne)});
-      
+
       if (selectedOptions.baseSkillTwo) {
         const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkillTwo].secondarySkills, {requiredRank: 0, include: [selectedOptions.baseSkillTwoSecondarySkillOne, selectedOptions.baseSkillTwoSecondarySkillTwo]});
 
         options.push({id: "baseSkillTwoSecondarySkillOne", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillTwo), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
-        
+
         options.push({id: "baseSkillTwoSecondarySkillTwo", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions.filter(option => option !== selectedOptions.baseSkillOneSecondarySkillOne), parentId: "baseSkillTwo", parentValue: selectedOptions.baseSkillTwo});
       }
-      
+
       options.push({id: "expertSkill", displayName: "Expert Skill", type: "skill", options: expertSkills});
-      
+
       if (selectedOptions.expertSkill) {
         const secondaryOptions = utils.getSkillList(skills[selectedOptions.expertSkill].secondarySkills, {maxRank: 1, include: [selectedOptions.expertSecondarySkill]});
-        
+
         options.push({id: "expertSecondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "expertSkill", parentValue: selectedOptions.expertSkill});
       }
-      
-      return options; 
+
+      return options;
     },
     isCharacterEligible: character => {
       if (character.traits.find(trait => trait.type === "Character Type")) return false;
@@ -61,21 +61,21 @@ const traitsData = {
     apply: (character, selectedOptions) => {
       // Add 10 max stamina.
       character.updateVariable("staminaMaxAdjustment", 10);
-       
+
       // Add 3 max wounds.
-      character.updateVariable("woundsMaxAdjustment", 3); 
-      
+      character.updateVariable("woundsMaxAdjustment", 3);
+
       // Add 3 action points.
       character.updateVariable("actionPointsAdjustment", 3);
-      
+
       // Add 1 reaction points.
-      character.updateVariable("reactionPointsAdjustment", 1); 
-      
+      character.updateVariable("reactionPointsAdjustment", 1);
+
       // Add 5 entitled traits.
-      character.updateVariable("extraEntitledTraits", 5); 
-      
+      character.updateVariable("extraEntitledTraits", 5);
+
       if (!selectedOptions) return;
-      
+
       const {baseSkillOne,
         baseSkillTwo,
         expertSkill,
@@ -84,19 +84,19 @@ const traitsData = {
         baseSkillTwoSecondarySkillOne,
         baseSkillTwoSecondarySkillTwo,
         expertSecondarySkill} = selectedOptions;
-        
+
       // TODO validate that all selected options are valid.
-        
+
       if (baseSkillOne) {
         character.setSkill(baseSkillOne, 1);
         if (baseSkillOneSecondarySkillOne) character.setSecondarySkill(baseSkillOne, baseSkillOneSecondarySkillOne, 1);
-        
+
         if (baseSkillOneSecondarySkillTwo) character.setSecondarySkill(baseSkillOne, baseSkillOneSecondarySkillTwo, 1);
       }
       if (baseSkillTwo) {
         character.setSkill(baseSkillTwo, 1);
         if (baseSkillTwoSecondarySkillOne) character.setSecondarySkill(baseSkillTwo, baseSkillTwoSecondarySkillOne, 1);
-        
+
         if (baseSkillTwoSecondarySkillTwo) character.setSecondarySkill(baseSkillTwo, baseSkillTwoSecondarySkillTwo, 1);
       }
       if (expertSkill) {
@@ -130,7 +130,7 @@ const traitsData = {
       "Each time a character takes this trait they increase their max stamina by one.",
     isCharacterEligible: character => true,
     apply: (character, options) => {
-      character.updateVariable("staminaMaxAdjustment", 1); 
+      character.updateVariable("staminaMaxAdjustment", 1);
     }
   },
   hardToKillTough: {
@@ -143,7 +143,7 @@ const traitsData = {
       "Each time a character takes this trait they increase their max wounds by one.",
     isCharacterEligible: character => true,
     apply: (character, options) => {
-      character.updateVariable("woundsMaxAdjustment", 1); 
+      character.updateVariable("woundsMaxAdjustment", 1);
     }
   },
   hardToKillPlotArmor: {
@@ -176,18 +176,18 @@ const traitsData = {
     options: (character, selectedOptions = {}) => {
       const options = [];
       const {skills} = character;
-      
+
       const baseSkills = utils.getSkillList(character.skills, {include: [selectedOptions.baseSkill], hasSecondaryAtRank: 0});
-            
+
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
-      
+
       if (selectedOptions.baseSkill) {
         const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkill].secondarySkills, {requiredRank: 0, include: [selectedOptions.secondarySkill]});
 
         options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
       }
-      
-      return options; 
+
+      return options;
     },
     isCharacterEligible: character => utils.getSkillList(character.skills, {hasSecondaryAtRank: 0}).length > 0,
     apply: (character, options = {}) => {
@@ -208,18 +208,18 @@ const traitsData = {
     options: (character, selectedOptions = {}) => {
       const options = [];
       const {skills} = character;
-      
+
       const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], hasSecondaryAtRank: 1});
-            
+
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
-      
+
       if (selectedOptions.baseSkill) {
         const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkill].secondarySkills, {requiredRank: 1, include: [selectedOptions.secondarySkill]});
 
         options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
       }
-      
-      return options; 
+
+      return options;
     },
     isCharacterEligible: character => utils.getSkillList(character.skills, {hasSecondaryAtRank: 1}).length > 0,
     apply: (character, options = {}) => {
@@ -240,18 +240,18 @@ const traitsData = {
     options: (character, selectedOptions = {}) => {
       const options = [];
       const {skills} = character;
-      
+
       const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], hasSecondaryAtRank: 2});
-            
+
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
-      
+
       if (selectedOptions.baseSkill) {
         const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkill].secondarySkills, {requiredRank: 2, include: [selectedOptions.secondarySkill]});
 
         options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
       }
-      
-      return options; 
+
+      return options;
     },
     isCharacterEligible: character => utils.getSkillList(character.skills, {hasSecondaryAtRank: 2}).length > 0,
     apply: (character, options = {}) => {
@@ -272,18 +272,18 @@ const traitsData = {
     options: (character, selectedOptions = {}) => {
       const options = [];
       const {skills} = character;
-      
+
       const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], hasSecondaryAtRank: 3});
-            
+
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
-      
+
       if (selectedOptions.baseSkill) {
         const secondaryOptions = utils.getSkillList(skills[selectedOptions.baseSkill].secondarySkills, {requiredRank: 3, include: [selectedOptions.secondarySkill]});
 
         options.push({id: "secondarySkill", displayName: "Secondary Skill", type: "secondary skill", options: secondaryOptions, parentId: "baseSkill", parentValue: selectedOptions.baseSkill});
       }
-      
-      return options; 
+
+      return options;
     },
     isCharacterEligible: character => utils.getSkillList(character.skills, {hasSecondaryAtRank: 3}).length > 0,
     apply: (character, options = {}) => {
@@ -306,12 +306,12 @@ const traitsData = {
     options: (character, selectedOptions = {}) => {
       const options = [];
       const {skills} = character;
-      
+
       const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], requiredRank: 0, minimumSecondaryRanks: 1});
-            
+
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
-      
-      return options; 
+
+      return options;
     },
     isCharacterEligible: character => utils.getSkillList(character.skills, {requiredRank: 0, minimumSecondaryRanks: 1}).length > 0,
     apply: (character, options = {}) => {
@@ -334,12 +334,12 @@ const traitsData = {
     options: (character, selectedOptions = {}) => {
       const options = [];
       const {skills} = character;
-      
+
       const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], requiredRank: 1, minimumSecondaryRanks: 3});
-            
+
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
-      
-      return options; 
+
+      return options;
     },
     isCharacterEligible: character => utils.getSkillList(character.skills, {requiredRank: 1, minimumSecondaryRanks: 3}).length > 0,
     apply: (character, options = {}) => {
@@ -360,12 +360,12 @@ const traitsData = {
     options: (character, selectedOptions = {}) => {
       const options = [];
       const {skills} = character;
-      
+
       const baseSkills = utils.getSkillList(skills, {include: [selectedOptions.baseSkill], requiredRank: 2, minimumSecondaryRanks: 5});
-            
+
       options.push({id: "baseSkill", displayName: "Skill", type: "skill", options: baseSkills});
-      
-      return options; 
+
+      return options;
     },
     isCharacterEligible: character => utils.getSkillList(character.skills, {requiredRank: 2, minimumSecondaryRanks: 5}).length > 0,
     apply: (character, options = {}) => {
@@ -388,10 +388,10 @@ const traitsData = {
       const {primaryAttributes} = character;
 
       const eligibleAttributes = Object.keys(primaryAttributes).filter(attributeName => primaryAttributes[attributeName] < 3 || attributeName === selectedOptions.primaryAttribute);
-            
+
       options.push({id: "primaryAttribute", displayName: "Attribute", type: "attribute", options: eligibleAttributes});
 
-      return options; 
+      return options;
     },
     isCharacterEligible: character => Object.keys(character.primaryAttributes).filter(attributeName => character.primaryAttributes[attributeName] < 3).length > 0,
     apply: (character, options = {}) => {
@@ -411,15 +411,6 @@ const traitsData = {
     description:
       "Before making a skill check for casting a spell, gathering arcane energy, or crafting arcane energy the caster may choose to add their body, along with their mind, to the skill check; if they do so they lose stamina equal to twice their body stat, if positive, before making the affected skill check."
   },
-  cantripCasterPowerful: {
-    displayName: "Cantrip Caster, Powerful",
-    type: "Mage",
-    requirements: ["Dependent Mage", "Learned Mage", "Natural Mage"],
-    requirementsDescription: "Dependent Mage, Learned Mage, or Natural Mage.",
-    keywords: ["Heroic"],
-    description:
-      "This trait may be taken any number of times, increase the max arcane cost of the character's cantrips by the number of instances of this trait they have."
-  },
   cantripCasterSpeedy: {
     displayName: "Cantrip Caster, Speedy",
     type: "Mage",
@@ -436,13 +427,24 @@ const traitsData = {
     requirementsDescription: "No other mage traits",
     keywords: ["Heroic"],
     description: `The character is a dependent mage gaining the following benefits:
-          <ul>
-          <li>They can know up to one cantrip and up to two spells.</li>
-          <li>They gains access to a number of arcane power secondary skills equal to one plus their rank in the magical aptitude secondary skill, if the character later increases their rank in the magical aptitude primary skill they may recalculate the number of arcane power secondary skills they have access to; these secondary skills can not have a rank of more than one greater than their rank in the magical aptitude primary skill.</li>
-          <li>They suffers one penalty die to all skill checks to cast spells, gather, or shape arcane energy if they have no arcane essence in their system.</li>
-          <li>They cannot make skill checks to cast spells, gather, or shape arcane energy if they have not consumed arcane essence in the last 24 hours.</li>
-          <li>They cannot cast cantrips if they have not consumed arcane essence in the last span of days.</li>
-          <li>They can burn the arcane essence in their system to reduce one instance of arcane dues they suffer by half.</li></ul>`
+        <ul>
+        <li>They can know up to two spells.</li>
+        <li>When they gain their first rank in an arcane theme they gain access to a single arcane power associated with that theme<li>
+        <li>They gain access to any cantrips or passive abilities associated with powers they have access to and themes they have at least one rank in.<li>
+        <li>They can have ranks in no more than one plus their ranks in magical aptitude arcane arcane theme secondary skills.</li>
+        <li>They suffers one penalty die to all skill checks to cast spells, gather, or shape arcane energy if they have not consumed arcane essence in the last 8 hours.</li>
+        <li>They cannot make skill checks to cast spells, gather, or shape arcane energy if they have not consumed arcane essence in the last 24 hours.</li>
+        <li>They cannot cast cantrips if they have not consumed arcane essence in the last span of days.</li>
+        </ul>`
+  },
+  dependentMageExpandedPowers: {
+    displayName: "Dependent Mage, Expanded Powers",
+    type: "Mage",
+    requirements: ["Dependent Mage"],
+    requirementsDescription: "Dependent Mage",
+    keywords: ["Simple"],
+    description:
+      "The character chooses one arcane theme secondary skill that they have at least one rank in, they gain access to one additional power associated with that theme."
   },
   expandedSpellList: {
     displayName: "Expanded Spell List",
@@ -451,22 +453,22 @@ const traitsData = {
     requirementsDescription: "Dependent Mage, Learned Mage, or Natural Mage.",
     keywords: ["Simple"],
     description:
-      "This trait may be taken any number of times, each time it is taken the character increases the number of spells or cantrips they know by one."
+      "This trait may be taken any number of times, each time it is taken the character increases the number of spells they know by one."
   },
   learnedMage: {
     displayName: "Learned Mage",
     type: "Mage",
-    requirements: [
-      "No other mage traits, at least rank one in both the discipline and magical aptitude skills."
-    ],
+    requirements: ["No other mage traits, at least rank one in both the discipline and magical aptitude skills."],
     requirementsDescription:
       "No other mage traits, at least rank one in both the discipline and magical aptitude skills.",
     keywords: ["Simple"],
     description: `The character is a learned mage gaining the following benefits:
-            <ul>
-          <li>They can know up to one cantrip and up to two spells.</li>
-          <li>They gains access to two arcane theme secondary skills, those skills cannot be above rank one and cannot be increased beyond rank one.</li>
-          <li>They gain access to learned mage specific arcane effects.</li></ul>`
+        <ul>
+        <li>They can know up to two spells.</li>
+        <li>They gains access to two arcane theme secondary skills, those skills cannot be above rank one and cannot be increased beyond rank one.</li>
+        <li>They gain access to any cantrip associated with any arcane theme or power they have access to.<li>
+        <li>They gain access to learned mage specific arcane effects.</li>
+        </ul>`
   },
   learnedMageAdvancedLearning: {
     displayName: "Learned Mage, Advanced Learning",
@@ -484,7 +486,16 @@ const traitsData = {
     requirementsDescription: "Learned Mage",
     keywords: ["Heroic"],
     description:
-      "The character gains access to one arcane theme secondary skill that skill cannot be above rank zero and cannot be increased beyond rank zero."
+      "The character gains access to one arcane theme secondary skill that skill cannot be above rank one and cannot be increased beyond rank one."
+  },
+  learnedMageInternalizedLearning: {
+    displayName: "Learned Mage, Internalized Learning",
+    type: "Mage",
+    requirements: ["Learned Mage"],
+    requirementsDescription: "Learned Mage",
+    keywords: ["Heroic"],
+    description:
+      "The character chooses one arcane theme secondary skill they have access to, they gain access to any passive abilities associated with that theme or any of its powers."
   },
   naturalMage: {
     displayName: "Natural Mage",
@@ -493,9 +504,13 @@ const traitsData = {
     requirementsDescription: "No other mage traits",
     keywords: ["Heroic"],
     description: `The character is a natural mage gaining the following benefits:
-        <ul>
-          <li>They can know up to one cantrip and up to two spells.</li>
-          <li>They gains access to one arcane theme secondary skill, this skill is treated as being two ranks higher than it actually is when determining the result of arcane effects.</li></ul>`
+      <ul>
+      <li>They can know up to two spells.</li>
+      <li>They choose one arcane theme secondary skill to be be their primary arcane theme.</li>
+      <li>They gain access to their primary arcane theme secondary skill and treat this secondary skill as being two ranks higher than it actually is.</li>
+      <li>They gain access to any cantrips associated with their primary arcane theme or any of its powers</li>
+      <li>They gain access to any passive abilities associated with any arcane theme or power they have access to.<li>
+      </ul>`
   },
   naturalMageExpandedPowers: {
     displayName: "Natural Mage, Expanded Powers",
@@ -504,7 +519,7 @@ const traitsData = {
     requirementsDescription: "Natural Mage",
     keywords: ["Simple"],
     description:
-      "The character chooses one arcane power secondary skill to gain access to, that skill cannot be above rank one and cannot have its rank increased beyond one."
+      "The character chooses one arcane theme secondary skill that has at least one power available to it the caster already has access to, they gain access to that arcane theme, that secondary skill cannot be above rank one and cannot have its rank increased beyond one."
   },
   sneakySpellCaster: {
     displayName: "Sneaky Spell Caster",
