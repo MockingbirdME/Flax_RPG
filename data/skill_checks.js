@@ -10,10 +10,10 @@ const primaryAttributesData = {
       "when there's something the character may not notice they should be asked to make this check to see if they become aware of it.",
     difficulty:
       "5+ various phenomena or the stealth check total of a sneaking/hiding character.",
-    requiredSuccesses: "N/A",
+    requiredSuccesses: "varies based on what it is they might be noticing.",
     failure:
       "the character fails to notice any signs of whatever they may have noticed, if they failed to notice danger they are surprised and flat footed when it acts.",
-    nearSuccess: "N/A",
+    nearSuccess: "the character notices some clue that might lead them to the item or alert them of the danger that triggered this check.",
     completeSuccess:
       "the character is aware of whatever caused the check to be made, if the check was made for some kind of danger they become aware of it at the last possible moment and are surprised when it acts.",
     additionalSuccesses:
@@ -49,14 +49,14 @@ const primaryAttributesData = {
     difficulty:
       "8-20+ depending on the animal in question, this should take into account the animal's temperment and social inteligence.",
     requiredSuccesses:
-      "5-10 reduced by the character's rank in the secondary skill depending on the temperment of the animal.",
+      "5-10 reduced by the character's rank in the secondary skill depending on the current state of the animal (full and comfortable would be lower while defending its young would be very high).",
     failure: "the character upsets the animal, it either flees or attacks.",
     nearSuccess:
-      "the animal remains nutral towards the character, any further attempts to befriend it have the required successes reduced by one plus the character's rank in the secondary skill",
+      "the animal's attitude towards the character is not changed, any further attempts to befriend it have the required successes reduced by one plus the character's rank in the secondary skill",
     completeSuccess:
-      "the animal has become friendly towards the character and will remain so for one hour.",
+      "the animal's desposition shifts a little friendlier towards the character and will remain so for one hour.",
     additionalSuccesses:
-      "increse the duration for how long the animal will remain friendly for by an hour per additional success. An animal that has been friendly towards the character for a number of days equal to the initial required successes to befriend it has become tamed, no further skill checks required to ensure it stays friendly to the character."
+      "increse the disposition change the animal experiences based on the number of additional successes. An animal that has been friendly towards the character for a number of days equal to the initial required successes to befriend it has become tamed, no further skill checks required to ensure it stays friendly to the character."
   },
   castSpellDependentMage: {
     displayName: "Cast Spell, Dependent Mage",
@@ -135,7 +135,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the character ascends a number of hexes equal to one plus the character's secondary skill rank.",
     additionalSuccesses:
-      "each additional success rolled increases the distance the character climbs by one hex.",
+      "each additional success rolled increases the distance the character climbs by one hex."
   },
   craft: {
     displayName: "Craft",
@@ -149,7 +149,7 @@ const primaryAttributesData = {
     failure: "",
     nearSuccess: "",
     completeSuccess: "",
-    additionalSuccesses: "",
+    additionalSuccesses: ""
   },
   gatherArcaneEnergy: {
     displayName: "Gather Arcane Energy",
@@ -167,7 +167,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the character gathers arcane cost of arcane energy equal to their secondary skill rank.",
     additionalSuccesses:
-      "each additional success increases the the arcane cost of energy gathered by one.",
+      "each additional success increases the the arcane cost of energy gathered by one."
   },
   gatherInformation: {
     displayName: "Gather Information",
@@ -181,7 +181,7 @@ const primaryAttributesData = {
     failure: "",
     nearSuccess: "",
     completeSuccess: "",
-    additionalSuccesses: "",
+    additionalSuccesses: ""
   },
   hideSneak: {
     displayName: "Hide/Sneak",
@@ -199,7 +199,7 @@ const primaryAttributesData = {
     nearSuccess: "N/A",
     completeSuccess: "the character is not noticed.",
     additionalSuccesses:
-      "the character does not need to make a stealth check for one additional round to stay hidden provided their situation does not change (they don't take another action that might draw attention to themselves and no other character draws attention to them).",
+      "the character does not need to make a stealth check for one additional round to stay hidden provided their situation does not change (they don't take another action that might draw attention to themselves and no other character draws attention to them)."
   },
   holdBreath: {
     displayName: "Hold Breath",
@@ -217,7 +217,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the character holds their breath for 1 plus their secondary skill rank turns, reduced by one turn each time they suffer 5 for more stamina damage or spend more than 3 stamina in one turn.",
     additionalSuccesses:
-      "each additional success increases the number of rounds the character can hold their breath for.",
+      "each additional success increases the number of rounds the character can hold their breath for."
   },
   investigateArea: {
     displayName: "Investigate Area",
@@ -238,7 +238,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the easiest to find clue was discovered by the character. Add the character's secondary skill rank as extra successes for finding additional clues.",
     additionalSuccesses:
-      "the number of additional successes will determine how many additional clues are found.",
+      "the number of additional successes will determine how many additional clues are found."
   },
   jump: {
     displayName: "Jump",
@@ -252,7 +252,7 @@ const primaryAttributesData = {
     failure: "",
     nearSuccess: "",
     completeSuccess: "",
-    additionalSuccesses: "",
+    additionalSuccesses: ""
   },
   keepWatch: {
     displayName: "Keep Watch",
@@ -266,7 +266,7 @@ const primaryAttributesData = {
     failure: "",
     nearSuccess: "",
     completeSuccess: "",
-    additionalSuccesses: "",
+    additionalSuccesses: ""
   },
   magicAttack: {
     displayName: "Magic Attack",
@@ -285,7 +285,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the target is affected by the spell, apply the effects of the manifested spell.",
     additionalSuccesses:
-      "the target suffers additional effects based on the spell.",
+      "the target suffers additional effects based on the spell."
   },
   meleeAttack: {
     displayName: "Melee Attack",
@@ -303,7 +303,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the target is hit, apply the effects of a hit with the attack/weapon.",
     additionalSuccesses:
-      "the target suffers additional effects based on the attack/weapon.",
+      "the target suffers additional effects based on the attack/weapon."
   },
   pickLocks: {
     displayName: "Pick Locks",
@@ -323,7 +323,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the character succsefully picks the lock after 10 rounds.",
     additionalSuccesses:
-      "reduce the number of rounds it took the character to pick the lock by one.",
+      "reduce the number of rounds it took the character to pick the lock by one."
   },
   remainConscious: {
     displayName: "Remain Conscious",
@@ -341,7 +341,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the character remains conscious and doesn't need to check again for a number of rounds equal to their secondary skill rank.",
     additionalSuccesses:
-      "each additional success increases the number of rounds before the character needs to check again.",
+      "each additional success increases the number of rounds before the character needs to check again."
   },
   rangedAttack: {
     displayName: "Ranged Attack",
@@ -360,7 +360,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the target is hit, apply the effects of a hit with the attack/weapon.",
     additionalSuccesses:
-      "the target suffers additional effects based on the attack/weapon.",
+      "the target suffers additional effects based on the attack/weapon."
   },
   repair: {
     displayName: "Repair",
@@ -374,7 +374,7 @@ const primaryAttributesData = {
     failure: "",
     nearSuccess: "",
     completeSuccess: "",
-    additionalSuccesses: "",
+    additionalSuccesses: ""
   },
   searchArea: {
     displayName: "Search Area",
@@ -396,7 +396,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the easiest to find item/characters was discovered by the character. Add the character's secondary skill rank as extra successes for finding additional items/characters.",
     additionalSuccesses:
-      "the number of additional successes will determine how many additional items/characters are found.",
+      "the number of additional successes will determine how many additional items/characters are found."
   },
   senseMotive: {
     displayName: "Sense Motive",
@@ -410,7 +410,7 @@ const primaryAttributesData = {
     failure: "",
     nearSuccess: "",
     completeSuccess: "",
-    additionalSuccesses: "",
+    additionalSuccesses: ""
   },
   slightOfHand: {
     displayName: "Slight of Hand",
@@ -432,7 +432,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the character achieves their desired result and characters other than the target who were paying attention may make an alertness skill check with a difficulty equal to the sum of this skill check's difficulty and requried successes to see if they noticed the slight of hand.",
     additionalSuccesses:
-      "increase the difficulty of the prompted alertness check by one for each additional success.",
+      "increase the difficulty of the prompted alertness check by one for each additional success."
   },
   sprint: {
     displayName: "Sprint",
@@ -452,7 +452,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the character increases their movement by one, plus their secondary skill rank.",
     additionalSuccesses:
-      "increases the character's movement by one per additional success.",
+      "increases the character's movement by one per additional success."
   },
   swim: {
     displayName: "Swim",
@@ -474,7 +474,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the character moves up to one plus their rank in the secondary skill hexes.",
     additionalSuccesses:
-      "increase the distance the character swims by up to one hex.",
+      "increase the distance the character swims by up to one hex."
   },
   trainCommandAnimal: {
     displayName: "Train/Command Animal",
@@ -496,7 +496,7 @@ const primaryAttributesData = {
     completeSuccess:
       "the animal has become familiar with the command and no skill check is required to get them to perform it for one day.",
     additionalSuccesses:
-      "increse the duration for how long the animal will retain the trained command for by a day per additional success. An animal that has been trained in a command for a number of days equal to the initial required successes to befriend it has become permenently trained and no further command skill checks are required unless there's specific circumstances that would cause the animal to not obey, like issuing the 'sic' command at a person the animal is friendly with, or the 'come' command while the animal is currently being given treats.",
+      "increse the duration for how long the animal will retain the trained command for by a day per additional success. An animal that has been trained in a command for a number of days equal to the initial required successes to befriend it has become permenently trained and no further command skill checks are required unless there's specific circumstances that would cause the animal to not obey, like issuing the 'sic' command at a person the animal is friendly with, or the 'come' command while the animal is currently being given treats."
   },
   tumble: {
     displayName: "Tumble",
@@ -514,8 +514,8 @@ const primaryAttributesData = {
     completeSuccess:
       "the character gains one plus their rank in the secondary skill damage resistance to the falling damage; if the character suffers no damage they may end the fall/tumble kneeling instead of prone.",
     additionalSuccesses:
-      "the character increases their damage resistance to the fall damage by one per additional success; if the character suffers no damage they may end the fall/tumble standing instead of prone.",
-  },
+      "the character increases their damage resistance to the fall damage by one per additional success; if the character suffers no damage they may end the fall/tumble standing instead of prone."
+  }
 };
 
 module.exports = primaryAttributesData;
